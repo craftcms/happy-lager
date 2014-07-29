@@ -1,0 +1,9 @@
+*.idea/*
+*.log
+*.DS_Store
+*Thumbs.db
+*.sass-cache/
+*config.codekit
+craft/app/
+craft/storage/
+craft/config/license.key
