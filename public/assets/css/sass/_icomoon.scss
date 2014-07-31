@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'happylager';
+	src:url('../fonts/happylager.eot?-v8rntv');
+	src:url('../fonts/happylager.eot?#iefix-v8rntv') format('embedded-opentype'),
+		url('../fonts/happylager.woff?-v8rntv') format('woff'),
+		url('../fonts/happylager.ttf?-v8rntv') format('truetype'),
+		url('../fonts/happylager.svg?-v8rntv#happylager') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@mixin icon {
+	font-family: 'happylager';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Enable Ligatures ================ */
+	-webkit-font-feature-settings: "liga";
+	-moz-font-feature-settings: "liga=1";
+	-moz-font-feature-settings: "liga";
+	-ms-font-feature-settings: "liga" 1;
+	-o-font-feature-settings: "liga";
+	font-feature-settings: "liga";
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+[data-icon]:before {
+	@include icon;
+	content: attr(data-icon);
+}

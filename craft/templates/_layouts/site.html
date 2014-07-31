@@ -1,0 +1,84 @@
+{#
+
+The site layout template
+--------------------------------------------------------------------------------
+
+This layout template extends the _layouts/base.html layout, and defines the main
+site layout: the header, footer, and main content area.
+
+It’s never accessed directly. Instead it is extended by all of our main site
+templates.
+
+This template defines one block region, `main`, which should be extended by
+child templates to define the main contents for the page.
+
+-#}
+
+{% extends "_layouts/base" %}
+
+{# Define the site navigation #}
+{% set nav = {
+	about:    { title: "The Brewery", desc: "About Us" },
+	services: { title: "How It’s Made", desc: "Services" },
+	work:     { title: "What’s On Tap", desc: "Our Work" },
+	news:     { title: "Brew News", desc: "The Latest" }
+} %}
+
+{# Set the `bodyClass` variable to the entry's section handle if there is one,
+   or the first URI segment (this is used by the parent template) #}
+{% set bodyClass = entry is defined ? entry.section.handle : craft.request.firstSegment %}
+
+{# Set the `title` variable to the nav item that matches the first segment #}
+{% if nav[bodyClass] is defined %}
+	{% set title %}{% if title is defined %}{{ title }} - {% endif %}{{ nav[bodyClass].title }}{% endset %}
+{% endif %}
+
+
+{% block body %}
+
+	<div id="bar">
+		<div class="container">
+			<div id="social">
+				<a href="https://dribbble.com/" data-icon="dribbble" title="Happy Lager on Dribbble"></a>
+				<a href="https://twitter.com/" data-icon="twitter" title="Happy Lager on Twitter"></a>
+				<a href="https://www.facebook.com/" data-icon="facebook" title="Happy Lager on Facebook"></a>
+			</div>
+			<a href="{{ url('clients') }}">Client Login</a>
+			<div id="search">
+				<input type="search" placeholder="Search">
+			</div>
+		</div>
+	</div>
+
+	<header id="header">
+		<div class="container">
+			<h1><a href="{{ siteUrl }}"><img src="/assets/images/happylager.svg" width="300" height="125" alt="Happy Lager - Enjoying Every Bit - Since 2006"></a></h1>
+			<nav>
+				<ul>
+					{% for slug, item in nav %}
+						<li>
+							<a href="{{ url(slug) }}" {% if craft.request.firstSegment == slug %}class="sel"{% endif %}>
+								<strong>{{ item.title }}</strong>
+								<span>-</span>
+								<em>{{ item.desc }}</em>
+							</a>
+						</li>
+					{% endfor %}
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<main id="main" role="main">
+		{% block main %}{% endblock %}
+	</main>
+
+	<footer id="footer">
+		<div class="container">
+			<img src="/assets/images/hl.svg" width="76" height="76" alt="H.L.">
+			<p class="copyright">© Copyright Happy Lager {{ now|date('Y') }}</p>
+			<a class="contact" href="mailto:hi@happylager.dev">Pull up a barstool</a>
+		</div>
+	</footer>
+
+{% endblock %}

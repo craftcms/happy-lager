@@ -1,0 +1,70 @@
+{#
+
+The base layout template
+--------------------------------------------------------------------------------
+
+This template defines the base HTML structure for our site: the DTD, the
+`<html>`, `<head>`, `<title>`, and `<body>` tags, plus some `<meta>` tags and a
+`<link rel="stylesheet">` tag that includes our main CSS file.
+
+This is the only place in our templates where we'll ever need to define that
+stuff. All other templates will extend this one.
+
+This template is never accessed directly; instead it is extended by two child
+templates:
+
+  * `_layouts/base.html`: A sub-layout, which in turn is extended by all the
+                          main site templates.
+
+  * `offline.html`:       The template that we serve when the site is offline
+
+Any templates that extend this template can optionally set a `title` variable,
+which will be output within the `<title>` tag, before the site name:
+
+    <title>{% if title is defined %}{{ title }} - {% endif %}{{ siteName }}</title>
+
+They can also optionally set a `bodyClass` variable, which will be output
+within the `<body>` tag's `class=` attribute.
+
+    <body {% if bodyClass is defined %}class="{{ bodyClass }}"{% endif %}>
+
+This template also defines 3 `block` regions, which child templates are free to
+override:
+
+  * `head`: This block wraps the entire default contents of our `<head>` tag.
+            If a child template wishes to add more to the head, they can do so
+            like this:
+
+                {% block head %}
+                    {{ parent() }}
+                    <!-- additional stuff -->
+                {% endblock %}
+
+            Calling `{{ parent() }}` will output the contents of the `head`
+            block that are already defined in this template.
+
+  * `body`: This block is placed directly after the opening `<body>` tag.
+            Child templates can use this to define the main body contents.
+
+  * `foot`: This block is placed directly before the closing `</body>` tag.
+            Child templates can use this to include Javascirpt files, etc.
+
+-#}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+	{% block head %}
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="utf-8">
+	<title>{% if title is defined %}{{ title }} - {% endif %}{{ siteName }}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="{{ siteUrl }}assets/fonts/stylesheet.css">
+	<link rel="stylesheet" type="text/css" href="{{ siteUrl }}assets/css/happylager.css">
+	{% endblock %}
+</head>
+<body {% if bodyClass is defined %}class="{{ bodyClass }}"{% endif %}>
+	{% block body %}{% endblock %}
+	{% block foot %}{% endblock %}
+</body>
+</html>

@@ -8,5 +8,5 @@
  */
 
 return array(
-
+	'devMode' => true,
 );
