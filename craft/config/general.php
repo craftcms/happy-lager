@@ -8,5 +8,12 @@
  */
 
 return array(
-	'devMode' => true,
+	'*' => array(
+		'devMode' => true,
+	),
+
+	// Give CodeKit a custom site URL
+	'.local' => array(
+		'siteUrl' => "http://{$_SERVER['SERVER_NAME']}/",
+	)
 );
