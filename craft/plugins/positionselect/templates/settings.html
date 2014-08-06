@@ -1,0 +1,19 @@
+{% import "_includes/forms" as forms %}
+
+{% set input %}
+	{% for option in allOptions %}
+		<div class="positionselectoption">
+			<span class="positionselecticon-{{ option }}"></span>
+
+			{{ forms.lightswitch({
+				 on: (option in settings.options),
+				 small: true,
+				 name: 'options['~option~']'
+			}) }}
+		</div>
+	{% endfor %}
+{% endset %}
+
+{{ forms.field({
+	label: "Options"|t
+}, input) }}
