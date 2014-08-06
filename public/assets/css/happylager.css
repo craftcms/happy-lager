@@ -281,7 +281,7 @@ strong {
 
 /* main */
 #main h3 {
-  margin: 50px 0 35px;
+  margin-bottom: 1.6em;
   font-family: montserratbold, sans-serif;
   text-transform: uppercase;
   font-size: 18px;
@@ -289,9 +289,13 @@ strong {
   text-align: center; }
 #main p {
   margin: 1.6em 0; }
+  #main p:first-child {
+    margin-top: 0; }
+  #main p:last-child {
+    margin-bottom: 0; }
 #main ul,
 #main ol {
-  margin: 35px 0 35px 50px; }
+  margin: 2.2em 0 2.2em 3.2em; }
   #main ul li,
   #main ol li {
     margin: 10px 0; }
@@ -301,12 +305,10 @@ strong {
   list-style-type: decimal; }
 #main .fullimage {
   height: 320px;
-  background: no-repeat 50% 50%;
-  background-size: 100%; }
+  background: no-repeat 50% 50%; }
   #main .fullimage.tall {
     height: 480px; }
 #main .fullquote {
-  padding: 55px 0;
   color: #fff;
   background: #446c77;
   text-align: center; }
@@ -360,16 +362,18 @@ strong {
     margin: 10px 0;
     font-style: italic; }
 #main article .container {
-  max-width: 800px; }
+  max-width: 800px;
+  padding: 3.2em 0; }
   #main article .container .block {
     box-sizing: border-box;
     /* block positions */ }
     #main article .container .block.text {
-      margin: 50px auto; }
+      margin: 1.6em auto; }
     #main article .container .block.heading + .block.text {
-      margin-top: 35px; }
+      margin-top: 2.2em; }
+    #main article .container .block.pullquote, #main article .container .block.quote, #main article .container .block.image {
+      margin: 2.2em 0; }
     #main article .container .block.pullquote, #main article .container .block.quote {
-      margin: 50px 0;
       border: solid #222;
       border-width: 3px 0;
       padding: 66px 10px; }
@@ -396,7 +400,7 @@ strong {
       width: 440px; }
     #main article .container .block.drop-left, #main article .container .block.drop-right {
       box-sizing: content-box;
-      margin-top: 11.2em;
+      margin-top: 11.2em !important;
       border: 3.2em solid transparent;
       shape-outside: inset(0) border-box;
       shape-margin: 0; }
@@ -408,6 +412,7 @@ strong {
       margin-left: 0;
       border-right-width: 0; }
     #main article .container .block.center {
+      margin: 3.2em 0;
       clear: both;
       margin-left: -80px;
       margin-right: -80px; }
@@ -417,14 +422,21 @@ strong {
       margin-right: 0; }
     #main article .container .block.left + .block.right + .block, #main article .container .block.right + .block.left + .block {
       clear: both; }
+    #main article .container .block:first-child {
+      margin-top: 0; }
+    #main article .container .block:last-child {
+      margin-bottom: 0; }
   #main article .container .authorinfo {
-    margin: 50px 0;
+    margin: 3.2em 0;
     border: solid #222;
     border-width: 3px 0;
     padding: 1.6em 0; }
     #main article .container .authorinfo .author {
       font-style: italic; }
 
+@media screen and (min-width: 1441px) {
+  #main .fullimage {
+    background-size: 100%; } }
 /* footer */
 #footer {
   background: #6b6a6a;
