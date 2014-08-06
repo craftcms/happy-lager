@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.29)
 # Database: happylager
-# Generation Time: 2014-08-06 22:16:04 +0000
+# Generation Time: 2014-08-06 22:19:39 +0000
 # ************************************************************
 
 
@@ -179,35 +179,6 @@ CREATE TABLE `craft_assettransformindex` (
   KEY `craft_assettransformindex_sourceId_fileId_location_idx` (`sourceId`,`fileId`,`location`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-LOCK TABLES `craft_assettransformindex` WRITE;
-/*!40000 ALTER TABLE `craft_assettransformindex` DISABLE KEYS */;
-
-INSERT INTO `craft_assettransformindex` (`id`, `fileId`, `location`, `sourceId`, `fileExists`, `inProgress`, `dateIndexed`, `dateCreated`, `dateUpdated`, `uid`)
-VALUES
-	(25,6,'_1440xAUTO_crop_center-center',1,1,0,'2014-07-31 23:42:57','2014-07-31 23:42:57','2014-07-31 23:42:58','96f78f3a-829d-472b-bc11-8f68c6c061d1'),
-	(26,7,'_440xAUTO_crop_center-center',1,1,0,'2014-07-31 23:42:58','2014-07-31 23:42:58','2014-07-31 23:42:58','5b3aedf6-25f4-48cf-97fb-4b8a87bcfd9e'),
-	(27,8,'_1440xAUTO_crop_center-center',1,1,0,'2014-07-31 23:42:58','2014-07-31 23:42:58','2014-07-31 23:42:58','df017dc5-07d2-4b93-a9ab-38f13eeff2e0'),
-	(28,23,'_1440xAUTO_crop_center-center',1,1,0,'2014-07-31 23:43:21','2014-07-31 23:43:21','2014-07-31 23:43:22','49d71e3e-7a06-41ba-8fa1-5ff829e839ab'),
-	(29,28,'_440xAUTO_crop_center-center',1,1,0,'2014-07-31 23:43:21','2014-07-31 23:43:21','2014-07-31 23:43:22','ed567d28-1e39-49ae-bf7a-4ad1c09e1bec'),
-	(30,40,'_440xAUTO_crop_center-center',1,1,0,'2014-07-31 23:43:21','2014-07-31 23:43:21','2014-07-31 23:43:22','0274a1cf-c0e3-4101-b4f5-5cce603069bc'),
-	(31,29,'_960xAUTO_crop_center-center',1,1,0,'2014-07-31 23:43:21','2014-07-31 23:43:21','2014-07-31 23:43:22','b2f9fe2d-2996-4dbf-a3ab-a39b85c804e1'),
-	(32,42,'_1440xAUTO_crop_center-center',1,1,0,'2014-07-31 23:43:22','2014-07-31 23:43:22','2014-07-31 23:43:23','cd1db3a5-92eb-4dd9-9e00-baa8c328f660'),
-	(33,43,'_960xAUTO_crop_center-center',1,1,0,'2014-07-31 23:43:22','2014-07-31 23:43:22','2014-07-31 23:43:23','40f3df60-9bce-42a1-838a-310bbe601898'),
-	(34,44,'_1440xAUTO_crop_center-center',1,1,0,'2014-07-31 23:43:22','2014-07-31 23:43:22','2014-07-31 23:43:23','4ec34f4f-5274-40c8-8ec9-676e95b6adc9'),
-	(35,40,'_960xAUTO_crop_center-center',1,1,0,'2014-07-31 23:51:38','2014-07-31 23:51:38','2014-07-31 23:51:38','f9457260-24b2-4678-ac53-decb10b15fd3'),
-	(36,40,'_1440xAUTO_crop_center-center',1,1,0,'2014-07-31 23:51:49','2014-07-31 23:51:49','2014-07-31 23:51:49','73c55cd3-e01d-4b66-b29c-40ad96b5af30'),
-	(37,7,'_960xAUTO_crop_center-center',1,1,0,'2014-08-01 01:37:53','2014-08-01 01:37:53','2014-08-01 01:37:53','2719de83-35b8-4e2d-a1e3-0b5109a8b8e0'),
-	(38,7,'_1440xAUTO_crop_center-center',1,1,0,'2014-08-01 01:38:45','2014-08-01 01:38:45','2014-08-01 01:38:45','77dfbfbe-b968-46eb-a421-3ac6035a2df0'),
-	(39,8,'_440xAUTO_crop_center-center',1,1,0,'2014-08-01 01:39:09','2014-08-01 01:39:09','2014-08-01 01:39:10','0d5c01c5-9cae-414f-a5db-8322df1a4eb3'),
-	(40,8,'_960xAUTO_crop_center-center',1,1,0,'2014-08-01 01:39:16','2014-08-01 01:39:16','2014-08-01 01:39:17','2be7c0d7-55df-4cca-a5f0-5e6c7451b149'),
-	(41,44,'_440xAUTO_crop_center-center',1,1,0,'2014-08-01 01:40:48','2014-08-01 01:40:48','2014-08-01 01:40:49','69c38efb-e175-467e-816f-7a30c2cce842'),
-	(42,44,'_960xAUTO_crop_center-center',1,1,0,'2014-08-01 01:41:01','2014-08-01 01:41:01','2014-08-01 01:41:03','7152a872-5191-4c7a-b2aa-c7881f9d1d63'),
-	(44,60,'_960xAUTO_crop_center-center',1,1,0,'2014-08-06 21:32:54','2014-08-06 21:32:54','2014-08-06 21:32:54','aa8af0b1-f79e-431a-bc7e-3c666f62eb64'),
-	(45,72,'_440xAUTO_crop_center-center',1,1,0,'2014-08-06 21:33:57','2014-08-06 21:33:57','2014-08-06 21:33:57','9e31d2cd-d346-4165-88cc-c740db32a19f'),
-	(46,59,'_1440xAUTO_crop_center-center',1,1,0,'2014-08-06 22:11:32','2014-08-06 22:11:32','2014-08-06 22:11:34','f33a85bf-9526-4903-95d4-1687bf52d961');
-
-/*!40000 ALTER TABLE `craft_assettransformindex` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table craft_assettransforms
