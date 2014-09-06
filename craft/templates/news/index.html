@@ -6,4 +6,24 @@
 		<h1>{{ title }}</h1>
 	</header>
 
+	<div class="container">
+
+		{% paginate craft.entries.section('news').limit(3) as entries %}
+
+			{% for entry in entries %}
+				<article {% if loop.first and craft.request.pageNum == 1 %}class="featured"{% endif %}>
+					<h3>{{ entry.getLink() }}</h3>
+					<span class="author">{{ entry.author.name }}</span>
+
+					{% set block = entry.articleBody.type('text').first() %}
+					{% if block %}
+						<p>{{ block.text|striptags|replace("\n", ' ')|split(' ')|slice(0, 50)|join(' ') }}…</p>
+					{% endif %}
+				</article>
+			{% endfor %}
+
+		{% endpaginate %}
+
+	</div>
+
 {% endblock %}
