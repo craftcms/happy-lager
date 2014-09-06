@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.29)
 # Database: happylager
-# Generation Time: 2014-08-06 22:19:39 +0000
+# Generation Time: 2014-09-06 20:07:15 +0000
 # ************************************************************
 
 
@@ -167,6 +167,8 @@ DROP TABLE IF EXISTS `craft_assettransformindex`;
 CREATE TABLE `craft_assettransformindex` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fileId` int(11) NOT NULL,
+  `filename` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `format` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `location` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `sourceId` int(11) DEFAULT NULL,
   `fileExists` tinyint(1) DEFAULT NULL,
@@ -194,6 +196,7 @@ CREATE TABLE `craft_assettransforms` (
   `position` enum('top-left','top-center','top-right','center-left','center-center','center-right','bottom-left','bottom-center','bottom-right') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'center-center',
   `height` int(10) DEFAULT NULL,
   `width` int(10) DEFAULT NULL,
+  `format` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `quality` int(10) DEFAULT NULL,
   `dimensionChangeTime` datetime DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
@@ -678,7 +681,7 @@ LOCK TABLES `craft_entrytypes` WRITE;
 
 INSERT INTO `craft_entrytypes` (`id`, `sectionId`, `fieldLayoutId`, `name`, `handle`, `hasTitleField`, `titleLabel`, `titleFormat`, `sortOrder`, `dateCreated`, `dateUpdated`, `uid`)
 VALUES
-	(1,1,3,'Homepage','homepage',1,'Title',NULL,NULL,'2014-07-29 18:21:35','2014-07-29 18:21:35','1f72a359-0ce9-4415-82dc-88dc833073c3'),
+	(1,1,3,'Homepage','homepage',0,NULL,'{section.name|raw}',NULL,'2014-07-29 18:21:35','2014-09-06 20:06:08','1f72a359-0ce9-4415-82dc-88dc833073c3'),
 	(2,2,69,'News','news',1,'Title',NULL,NULL,'2014-07-29 18:21:35','2014-07-30 22:48:05','eba60966-6218-4985-b901-fff1e5f97a49');
 
 /*!40000 ALTER TABLE `craft_entrytypes` ENABLE KEYS */;
@@ -989,7 +992,7 @@ LOCK TABLES `craft_info` WRITE;
 
 INSERT INTO `craft_info` (`id`, `version`, `build`, `schemaVersion`, `releaseDate`, `edition`, `siteName`, `siteUrl`, `timezone`, `on`, `maintenance`, `track`, `dateCreated`, `dateUpdated`, `uid`)
 VALUES
-	(1,'2.1',2566,'2.1.1','2014-07-23 20:05:17',2,'Happylager','http://happylager.dev','UTC',1,0,'stable','2014-07-29 18:21:29','2014-07-30 21:00:01','3ebb42f0-5296-4d41-b31e-4dc4882dd453');
+	(1,'2.2',2581,'2.2.0','2014-09-04 21:04:11',2,'Happylager','http://happylager.dev','UTC',1,0,'stable','2014-07-29 18:21:29','2014-09-06 20:06:08','3ebb42f0-5296-4d41-b31e-4dc4882dd453');
 
 /*!40000 ALTER TABLE `craft_info` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -1290,7 +1293,13 @@ VALUES
 	(41,NULL,'m140603_000003_version_toggling','2014-07-29 18:21:30','2014-07-29 18:21:30','2014-07-29 18:21:30','90c64b76-6093-455b-b9f2-a9c5955b5b2c'),
 	(42,NULL,'m140603_000004_tokens','2014-07-29 18:21:30','2014-07-29 18:21:30','2014-07-29 18:21:30','2cc09903-1d63-4061-a791-47355badc5ea'),
 	(43,NULL,'m140603_000005_asset_sources','2014-07-29 18:21:30','2014-07-29 18:21:30','2014-07-29 18:21:30','41786f40-2d85-4051-ab00-c8323fa79044'),
-	(44,NULL,'m140716_000001_allow_temp_source_transforms_again','2014-07-29 18:21:30','2014-07-29 18:21:30','2014-07-29 18:21:30','bbf36cc2-afd7-458b-9a0d-cfe65c9403e2');
+	(44,NULL,'m140716_000001_allow_temp_source_transforms_again','2014-07-29 18:21:30','2014-07-29 18:21:30','2014-07-29 18:21:30','bbf36cc2-afd7-458b-9a0d-cfe65c9403e2'),
+	(45,NULL,'m140731_000001_resave_elements_with_assets_in_temp_sources','2014-09-06 20:05:32','2014-09-06 20:05:32','2014-09-06 20:05:32','7eba17bb-c239-4d5e-86ac-e970162f8b5b'),
+	(46,NULL,'m140730_000001_add_filename_and_format_to_transformindex','2014-09-06 20:06:08','2014-09-06 20:06:08','2014-09-06 20:06:08','55a021a4-4baa-43df-897c-42e92493cff2'),
+	(47,NULL,'m140815_000001_add_format_to_transforms','2014-09-06 20:06:08','2014-09-06 20:06:08','2014-09-06 20:06:08','4e95b2fc-27b6-4789-b4ae-8aa60692b601'),
+	(48,NULL,'m140822_000001_allow_more_than_128_items_per_field','2014-09-06 20:06:08','2014-09-06 20:06:08','2014-09-06 20:06:08','e4a57d85-2dea-47f6-a0e2-2e355110273b'),
+	(49,NULL,'m140829_000001_single_title_formats','2014-09-06 20:06:08','2014-09-06 20:06:08','2014-09-06 20:06:08','9ca412af-42a7-494f-aa2c-473e948b083f'),
+	(50,NULL,'m140831_000001_extended_cache_keys','2014-09-06 20:06:08','2014-09-06 20:06:08','2014-09-06 20:06:08','f3ada99e-8bb1-45fa-b118-f3e9589f2400');
 
 /*!40000 ALTER TABLE `craft_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -1314,15 +1323,6 @@ CREATE TABLE `craft_plugins` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-LOCK TABLES `craft_plugins` WRITE;
-/*!40000 ALTER TABLE `craft_plugins` DISABLE KEYS */;
-
-INSERT INTO `craft_plugins` (`id`, `class`, `version`, `enabled`, `settings`, `installDate`, `dateCreated`, `dateUpdated`, `uid`)
-VALUES
-	(1,'PositionSelect','1.0',1,NULL,'2014-07-30 20:59:46','2014-07-30 20:59:46','2014-07-30 20:59:46','9432456f-d4a4-4c33-b3e1-3aeb3e410de0');
-
-/*!40000 ALTER TABLE `craft_plugins` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table craft_rackspaceaccess
@@ -1356,7 +1356,7 @@ CREATE TABLE `craft_relations` (
   `sourceId` int(11) NOT NULL,
   `sourceLocale` char(12) COLLATE utf8_unicode_ci DEFAULT NULL,
   `targetId` int(11) NOT NULL,
-  `sortOrder` tinyint(4) DEFAULT NULL,
+  `sortOrder` smallint(6) DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
@@ -1803,7 +1803,8 @@ VALUES
 	(3,1,'ec38baa000ec4bb621f796901d7e4e6ef771a8a0czozNjoiZjU4MTA0ZDItMTNhNi00MWNmLWIxZTgtZmY5M2JiM2JhMzdjIjs=','2014-07-31 21:09:36','2014-07-31 21:09:36','b41ebee2-2197-41c6-82ab-fae3bb829a8f'),
 	(4,1,'ca095d004a3ceccc0c3106bfb141ed03a24874c8czozNjoiZTYwYjFmZDQtOGUwNy00ZDBjLWE3MTItOGZmMzU3NTI5OGUyIjs=','2014-08-01 01:36:24','2014-08-01 01:36:24','3e69f2b4-4be0-4a25-825b-dbf2550a81d2'),
 	(5,1,'5ea10695ac0f8b4d952ecf4f2a51f924532ebc7fczozNjoiNTcwMWM5NjUtOTRkNC00OTQyLTkzNTItOTA5ZWQwZTllM2I3Ijs=','2014-08-06 20:23:14','2014-08-06 20:23:14','01f1b793-9cc1-40c0-a926-15255b641242'),
-	(6,1,'2a82b2b300f854091590d79afd3435a1f7a40a89czozNjoiNDFhYWY1MGItNWE3NC00NTBiLTg2NDktZmEwNDBhNGZhOTM2Ijs=','2014-08-06 21:54:11','2014-08-06 21:54:11','57509de1-6073-40fe-8c18-1ea01ba36ff5');
+	(6,1,'2a82b2b300f854091590d79afd3435a1f7a40a89czozNjoiNDFhYWY1MGItNWE3NC00NTBiLTg2NDktZmEwNDBhNGZhOTM2Ijs=','2014-08-06 21:54:11','2014-08-06 21:54:11','57509de1-6073-40fe-8c18-1ea01ba36ff5'),
+	(7,1,'7d8798846f1669d80cd3306e31368e24983a25b4czozNjoiNzBiYWZjOTYtOTllYy00ZDIyLWExY2UtOGIzMWI2MTI4NjZmIjs=','2014-09-06 20:05:43','2014-09-06 20:05:43','2aa99bb6-d1c8-4f2a-acf4-6f5d3f4ac0cb');
 
 /*!40000 ALTER TABLE `craft_sessions` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -2024,7 +2025,7 @@ DROP TABLE IF EXISTS `craft_templatecaches`;
 
 CREATE TABLE `craft_templatecaches` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cacheKey` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
+  `cacheKey` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `locale` char(12) COLLATE utf8_unicode_ci NOT NULL,
   `path` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `expiryDate` datetime NOT NULL,
@@ -2258,7 +2259,7 @@ LOCK TABLES `craft_users` WRITE;
 
 INSERT INTO `craft_users` (`id`, `username`, `photo`, `firstName`, `lastName`, `email`, `password`, `preferredLocale`, `admin`, `client`, `status`, `lastLoginDate`, `lastLoginAttemptIPAddress`, `invalidLoginWindowStart`, `invalidLoginCount`, `lastInvalidLoginDate`, `lockoutDate`, `verificationCode`, `verificationCodeIssuedDate`, `unverifiedEmail`, `passwordResetRequired`, `lastPasswordChangeDate`, `dateCreated`, `dateUpdated`, `uid`)
 VALUES
-	(1,'admin',NULL,NULL,NULL,'admin@happylager.dev','$2a$13$5j8bSRoKQZipjtIg6FXWR.kGRR3UfCL.QeMIt2yTRH1.hCNHLQKtq',NULL,1,0,'active','2014-08-06 21:54:11','127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2014-07-29 18:21:32','2014-07-29 18:21:32','2014-08-06 21:54:11','953aedcd-73c8-4677-b0c5-4241e8fbb14c'),
+	(1,'admin',NULL,NULL,NULL,'admin@happylager.dev','$2a$13$5j8bSRoKQZipjtIg6FXWR.kGRR3UfCL.QeMIt2yTRH1.hCNHLQKtq',NULL,1,0,'active','2014-09-06 20:05:43','127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2014-07-29 18:21:32','2014-07-29 18:21:32','2014-09-06 20:05:43','953aedcd-73c8-4677-b0c5-4241e8fbb14c'),
 	(56,'jabbott',NULL,'Jonathan','Abbott','jabbott@happylager.dev',NULL,NULL,0,0,'active',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,'2014-07-31 23:26:07','2014-07-31 23:26:56','5572f7b0-cc41-4171-91c1-51ed7b02ac76');
 
 /*!40000 ALTER TABLE `craft_users` ENABLE KEYS */;
