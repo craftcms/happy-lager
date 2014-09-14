@@ -1,0 +1,105 @@
+// Flex parent container
+.flex {
+  @include clearfix;
+  position: relative;
+  clear: both;
+  padding: $gutter/2+px $gutter+px;
+  padding: $gutter/$base/2+rem $gutter/$base+rem;
+  display: block;
+  max-width: $max-width+px;
+  max-width: $max-width/$base+rem;
+  margin: 0 auto;
+
+  // Grid class objects
+  @for $i from 1 through $sm-column-count {
+    .g1-flex#{$i} {
+      @if $i != 3 {
+        float: left;
+      }
+      @include sm-grid($i);
+
+      &.push{
+        float: right;
+      }
+    }
+  }
+  .g1-hide, .g2-hide {
+    display: none;
+  }
+  .g1-show {
+    display: block;
+  }
+  // Adjust padding for nested items
+  .flex-nested {
+
+    &:first-child,
+    &.g1-flex4:last-child {
+      padding-left: 0;
+    }
+  }
+
+  @media all and (min-width: $mq2/$base+em) {
+    // Grid class objects for med screens
+    @for $i from 1 through $med-column-count {
+      .g2-flex#{$i} {
+        @if $i != $med-column-count {
+          float: left;
+        }
+        @include med-grid($i);
+
+        &.push{
+          float: right;
+        }
+      }
+    }
+    .g2-show {
+      display: block;
+    }
+    .g2-hide {
+      display: none;
+    }
+    // Adjust padding for nested items
+    .flex-nested {
+      &:last-child {
+        padding-right: 0;
+      }
+      &.g1-flex4:last-child {
+        padding-left: $gutter+px;
+        padding-left: $gutter/$base+rem;
+      }
+      &.g1-flex4:first-child {
+        padding-left: 0;
+      }
+    }
+  }
+  @media all and (min-width: $mq3/$base+em) {
+    // Grid class objects for large screens
+    @for $i from 1 through $lg-column-count {
+      .g3-flex#{$i} {
+        @if $i != $lg-column-count {
+          float: left;
+        }
+        @include lg-grid($i);
+
+        &.push{
+          float: right;
+        }
+      }
+    }
+    .g3-show {
+      display: block;
+    }
+    .g3-hide {
+      display: none;
+    }
+    .g3-offset1 {
+      margin-left: 8.4%;
+    }
+    .g3-offset2 {
+      margin-left: 16.8%;
+    }
+    .g3-offset3 {
+      margin-left: 24.2%;
+    }
+  }
+}

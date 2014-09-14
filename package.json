@@ -1,0 +1,14 @@
+{
+    "name": "HappyLager",
+    "version": "0.0.1",
+    "private": true,
+    "devDependencies": {
+        "grunt": "latest",
+        "grunt-contrib-sass": "latest",
+        "grunt-contrib-jshint": "latest",
+        "grunt-contrib-concat": "latest",
+        "grunt-contrib-uglify": "0.3.2",
+        "grunt-contrib-watch": "latest",
+        "grunt-imageoptim": "latest"
+    }
+}

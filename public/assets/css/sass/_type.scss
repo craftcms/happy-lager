@@ -1,0 +1,199 @@
+html {
+  font-size: 83%;
+}
+body {
+  font-family: $font-primary;
+  font-weight: 400;
+  line-height: 1.3;
+  color: $color-1;
+}
+strong {
+  font-family: $font-tertiary;
+}
+em {
+  font-style: italic;
+}
+.center {
+  text-align: center;
+}
+// Print headings font sizes
+@each $font-size in $font-size-list {
+  $i: index($font-size-list, $font-size);
+  .#{nth($font-heading-class-list, $i)} {
+    @include font-size(nth($font-size-list, $i));
+  }
+}
+h1,h2,h3,h4,h5,h6 {
+  font-family: $font-secondary;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+h1 {
+
+  &.alt {
+    border: 3px solid $color-1;
+    padding: 6px 20px;
+    display: inline-block;
+    margin-bottom: 30px;
+  }
+}
+h2 {
+
+}
+h3 {
+
+  font-weight: $font-weight-black;
+}
+h4 {
+  margin-bottom: 0;
+
+  font-weight: $font-weight-bold;
+}
+p, ul {
+
+    &.small {
+      @include font-size(12);
+    &.push {
+      float: right;
+    }
+  }
+}
+ul {
+
+  &.horz-list {
+    @include clearfix;
+    font-weight: 400;
+    list-style-type: none;
+
+    li {
+      float: left;
+    }
+    li a {
+      display: block;
+      float: left;
+    }
+  }
+  li {
+    &.push {
+      float: right;
+      margin-right: 0;
+    }
+  }
+  &.alt {
+    font-family: $font-secondary;
+    li:first-child a {
+      width: 50px;
+    }
+    a {
+      color: white;
+      color: rgba(255,255,255,.6);
+      @include font-size(30);
+      padding: 5px 15px;
+
+      &:hover {
+        cursor: pointer;
+      }
+      &.active {
+        color: white;
+
+        &.ss-businessuser {
+
+          &:after {
+            color: white;
+          }
+        }
+      }
+    }
+    li.active a {
+      color: white;
+    }
+  }
+}
+[role="main"] {
+  p, ul, dl {
+    line-height: 1.6;
+    margin-bottom: 24px;
+    margin-bottom: 24/$base+rem;
+
+    &.alt {
+      font-weight: 400;
+      margin-bottom: 10px;
+      margin-bottom: 10/$base+rem;
+    }
+  }
+  dl {
+    margin-top: 10px;
+
+    dt {
+      font-family: $font-primary;
+    }
+  }
+  ul {
+    list-style-type: none;
+  }
+  li {
+    margin-bottom: 8px;
+    margin-bottom: 8/$base+rem;
+  }
+  ul.bullets {
+    margin-left: ($gutter*3)+px;
+    padding-right: ($gutter*2)+px;
+    list-style-type: disc;
+    margin-top: 0;
+    li {
+      margin-bottom: 4px;
+    }
+  }
+  p.intro {
+    line-height: 1.35;
+    font-family: $font-secondary;
+    text-align: center;
+    margin-top: $gutter+px;
+    margin-bottom: $gutter*5+px;
+  }
+  p.alt2 {
+    color: white;
+    text-shadow: 0 1px 0 rgba(0,0,0,.2);
+  }
+  p.more-link {
+    text-transform: uppercase;
+    @include font-size(12);
+    font-family: $font-secondary;
+  }
+}
+
+@media all and (min-width: $mq2/$base+em) {
+  html {
+    font-size: 94%;
+  }
+  // Print headings font sizes
+  @each $med-font-size in $med-font-size-list {
+    $i: index($med-font-size-list, $med-font-size);
+    .#{nth($font-heading-class-list, $i)} {
+      @include font-size(nth($med-font-size-list, $i));
+    }
+  }
+}
+@media all and (min-width: $mq3/$base+em) {
+  html {
+    font-size: 100%;
+  }
+  // Print headings font sizes
+  @each $lg-font-size in $lg-font-size-list {
+    $i: index($lg-font-size-list, $lg-font-size);
+    .#{nth($font-heading-class-list, $i)} {
+      @include font-size(nth($lg-font-size-list, $i));
+    }
+  }
+}
+.subfont {
+  font-family: $font-tertiary;
+}
+.reverse {
+  color: white;
+}
+.caps {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
