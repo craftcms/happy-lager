@@ -12,16 +12,27 @@
 	<section class="info-hero alt">
 		<div class="flex">
 			<div class="g1-flex4 g2-flex6 g3-flex8 g3-offset2">
-				<h1 class="delta reverse center subfont">We set out with a simple goal: Create the design and products that we would like to See.</h1>
-				<p class="epsilon center reverse">We are a group of highly effective, passionate people ready to take your product to the next level. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae taque earum hic tenetur a sapiente delectus ut aut reiciendis.</p>
+				{% if entry.infoHeroTopText %}
+				<h1 class="delta reverse center subfont">{{ entry.infoHeroTopText }}</h1>
+				{% endif %}
+
+				{% if entry.infoHeroBottomText %}
+				<p class="epsilon center reverse">{{ entry.infoHeroBottomText }}</p>
+				{% endif %}
+
 			</div>
 		</div>
 	</section>
 	<section class="alt">
 		<div class="flex">
 			<div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
-				<h1 class="beta center">How we think</h1>
-				<p class="delta center subfont caps">The philosophy of Happy Lager is One Third Working Hard and Two Thirds Happy Accidents.</p>
+				{% if entry.firstSectionHeader %}
+				<h1 class="beta center">{{ entry.firstSectionHeader }}</h1>
+				{% endif %}
+
+				{% if entry.firstSectionSubheader %}
+				<p class="delta center subfont caps">{{ entry.firstSectionSubheader }}</p>
+				{% endif %}
 			</div>
 		</div>
 
@@ -33,10 +44,14 @@
 		<div class="flex">
 			<div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
 				<div class="g1-flex4 g2-flex6 g3-flex6 flex-nested">
-					<p class="">Serendipity is a core part of how we work. Et iusto odio dignissimos ducimus qui blanditii raesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis. </p>
+					{% if entry.firstSectionBodyLeft %}
+					{{ entry.firstSectionBodyLeft }}
+					{% endif %}
 				</div>
 				<div class="g1-flex4 g2-flex6 g3-flex6 flex-nested push">
-					<p class="">Deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit. Luptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in.</p>
+					{% if entry.firstSectionBodyRight %}
+					{{ entry.firstSectionBodyRight }}
+					{% endif %}
 				</div>
 			</div>
 		</div>
@@ -47,9 +62,13 @@
 		</div>
 		<div class="flex">
 			<div class="g1-flex4 g2-flex6 g3-flex8 g3-offset2">
-				<h1 class="beta center">Our Story</h1>
-				<p class="delta center subfont caps">It all begins in a living room with a six pack
-and A Clamshell iBook.</p>
+				{% if entry.secondSectionHeader %}
+				<h1 class="beta center">{{ entry.secondSectionHeader }}</h1>
+				{% endif %}
+
+				{% if entry.secondSectionSubheader %}
+				<p class="delta center subfont caps">{{ entry.secondSectionSubheader }}</p>
+				{% endif %}
 			</div>
 		</div>
 		<div class="flex">
@@ -59,9 +78,9 @@ and A Clamshell iBook.</p>
 		</div>
 		<div class="flex">
 			<div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
-				<p> <img class="img-right" src="/assets/site/macbook-table.jpg" alt="macbook sitting on a table" /> Small beginnings is the starting point of every hero’s story. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis.
-
-</p>
+				{% if entry.secondSectionBody %}
+				{{ entry.secondSectionBody }}
+				{% endif %}
 			</div>
 		</div>
 		<div class="flex">
@@ -72,30 +91,53 @@ and A Clamshell iBook.</p>
 
 		<div class="flex">
 			<div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
-				<h1 class="beta center">Our People</h1>
+				{% if entry.thirdSectionHeader %}
+				<h1 class="beta center">{{ entry.thirdSectionHeader }}</h1>
+				{% endif %}
 			</div>
 		</div>
 
 		<div class="flex">
 			<div class="g1-flex4 g2-flex2 g3-flex4">
-				<img src="/assets/site/staff-robin.jpg" alt="pic of Robin Richards" />
+				{% set person1Image = entry.personnel1Image.first() %}
+				{% if person1Image %}
+				<img src="{{ person1Image.getUrl('small') }}" alt="{{ person1Image.title }}" />
+				{% endif %}
 				<dl>
-					<dt>Robin Richards</dt>
-					<dd>President and Co-Founder</dd>
+					{% if entry.personnel1Name %}
+					<dt>{{ entry.personnel1Name }}</dt>
+					{% endif %}
+					{% if entry.personnel1Name %}
+					<dd>{{ entry.personnel1Title }}</dd>
+					{% endif %}
 				</dl>
 			</div>
 			<div class="g1-flex4 g2-flex2 g3-flex4">
-				<img src="/assets/site/staff-christopher.jpg" alt="pic of Christopher Robinson" />
+				{% set person2Image = entry.personnel2Image.first() %}
+				{% if person2Image %}
+				<img src="{{ person2Image.getUrl('small') }}" alt="{{ person2Image.title }}" />
+				{% endif %}
 				<dl>
-					<dt>Christopher Robinson</dt>
-					<dd>CEO and Co-Founder</dd>
+					{% if entry.personnel2Name %}
+					<dt>{{ entry.personnel2Name }}</dt>
+					{% endif %}
+					{% if entry.personnel2Name %}
+					<dd>{{ entry.personnel2Title }}</dd>
+					{% endif %}
 				</dl>
 			</div>
 			<div class="g1-flex4 g2-flex2 g3-flex4">
-				<img src="/assets/site/staff-jonathan.jpg" alt="pic of Jonathan Abbot" />
+				{% set person3Image = entry.personnel3Image.first() %}
+				{% if person3Image %}
+				<img src="{{ person3Image.getUrl('small') }}" alt="{{ person3Image.title }}" />
+				{% endif %}
 				<dl>
-					<dt>Jonathan Abbot</dt>
-					<dd>Creative Director</dd>
+					{% if entry.personnel3Name %}
+					<dt>{{ entry.personnel3Name }}</dt>
+					{% endif %}
+					{% if entry.personnel3Name %}
+					<dd>{{ entry.personnel3Title }}</dd>
+					{% endif %}
 				</dl>
 			</div>
 		</div>
@@ -103,25 +145,41 @@ and A Clamshell iBook.</p>
 	<section class="alt2">
 		<div class="flex">
 			<div class="g1-flex4 g2-flex6 g3-flex5">
-				<h1 class="gamma subfont alt">Chicago Office</h1>
-				<p class="delta subfont caps address">2701 West Thomas St<br>
-Chicago, Il 60622</p>
+				{% if entry.contactSectionHeader %}
+				<h1 class="gamma subfont alt">{{ entry.contactSectionHeader }}</h1>
+				{% endif %}
+				{% if entry.contactSectionAddress %}
+				<p class="delta subfont caps address">{{ entry.contactSectionAddress }}</p>
+				{% endif %}
 				<ul>
-					<li class="phone">Main Office: 312.900.2356</li>
-					<li class="phone">Creative Lab: 312.985.4500</li>
-					<li class="phone">Happy Lager Pub: 312.229.1122</li>
+					{% if entry.contactSectionPhone1 %}
+					<li class="phone">{{ entry.contactSectionPhone1 }}</li>
+					{% endif %}
+					{% if entry.contactSectionPhone2 %}
+					<li class="phone">{{ entry.contactSectionPhone2 }}</li>
+					{% endif %}
+					{% if entry.contactSectionPhone3 %}
+					<li class="phone">{{ entry.contactSectionPhone3 }}</li>
+					{% endif %}
 				</ul>
 				<ul class="horz-list">
+					{% if entry.contactSectionEmail %}
 					<li>
-						<a href="" class="subfont caps email-us-btn">Email Us</a>
+						<a href="mailto:{{ entry.contactSectionEmail }}" class="subfont caps email-us-btn">Email Us</a>
 					</li>
+					{% endif %}
+					{% if entry.contactSectionMapLink %}
 					<li>
-						<a href="" class="subfont caps map-btn">Map</a>
+						<a href="{{ entry.contactSectionMapLink }}" class="subfont caps map-btn">Map</a>
 					</li>
+					{% endif %}
 				</ul>
 			</div>
 			<div class="g1-flex4 g2-flex6 g3-flex7">
-				<img src="/assets/site/contact-building.jpg" alt="building"/>
+				{% set contactImage = entry.contactSectionImage.first() %}
+				{% if contactImage %}
+				<img src="{{ contactImage.getUrl('medium') }}" alt="{{ contactImage.title }}" />
+				{% endif %}
 			</div>
 		</div>
 	</section>

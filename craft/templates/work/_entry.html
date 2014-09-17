@@ -1,0 +1,122 @@
+{#
+ # Work entry template
+ # -------------------
+ #
+ # This template gets loaded whenever a Work entry’s URL is
+ # requested. That’s because the Work section’s Template setting is
+ # set to “work/_entry”, the path to this template.
+ #}
+
+
+{% extends "_layouts/site" %}
+
+{% set title = entry.title %}
+
+{% block main %}
+
+  <article>
+    <header>
+      <h1>{{ entry.title }}</h1>
+
+      {% set image = entry.featuredImage.first() %}
+      {% if image %}
+        <div class="fullimage" style="background-image: url('{{ image.getUrl({ width: 1440 }) }}');"></div>
+      {% endif %}
+
+      {% if entry.heading %}
+        <h2>{{ entry.heading }}</h2>
+      {% endif %}
+
+      {% if entry.subheading %}
+        <h3>{{ entry.subheading }}</h3>
+      {% endif %}
+    </header>
+
+    <div class="container">
+      {% for block in entry.articleBody %}
+
+        {% switch block.type %}
+
+          {% case "heading" %}
+
+            <div class="block heading">
+              <h3>{{ block.heading }}</h3>
+            </div>
+
+          {% case "text" %}
+
+            <div class="block text">
+              {{ block.text }}
+            </div>
+
+          {% case "pullQuote" %}
+
+            <div class="block pullquote {{ block.position }}">
+              <p>{{ block.pullQuote }}</p>
+            </div>
+
+          {% case "image" %}
+
+            {% set image = block.image.first() %}
+            {% if image %}
+              {% if block.position == 'full' %}
+                </div>
+                <div class="fullimage tall" style="background-image: url('{{ image.getUrl({ width: 1440 }) }}');"></div>
+                <div class="container">
+              {% else %}
+                {% if block.position == 'center' %}
+                  {% do image.setTransform({ width: 960 }) %}
+                {% else %}
+                  {% do image.setTransform({ width: 440 }) %}
+                {% endif %}
+
+                <div class="block image {{ block.position }}">
+                  <img src="{{ image.url }}" alt="{{ image.title }}">
+                </div>
+              {% endif %}
+            {% endif %}
+
+          {% case "quote" %}
+
+            {% if block.position == 'full' %}
+              </div>
+              <div class="fullquote">
+                <div class="container">
+            {% else %}
+              <div class="block quote {{ block.position }}">
+            {% endif %}
+
+            <blockquote>
+              <p>{{ block.quote }}</p>
+
+              {% if block.attribution %}
+                <footer>– <cite>{{ block.attribution }}</footer>
+              {% endif %}
+            </blockquote>
+
+            {% if block.position == 'full' %}
+                </div>
+              </div>
+              <div class="container">
+            {% else %}
+              </div>
+            {% endif %}
+
+        {% endswitch %}
+
+      {% endfor %}
+
+      <footer class="authorinfo">
+        <span class="author">{{ entry.author.name }}</span>
+      </footer>
+    </div>
+
+  </article>
+
+{% endblock %}
+
+
+{% block foot %}
+  {{ parent() }}
+  <script type="text/javascript" src="/assets/lib/shapes-polyfill.min.js"></script>
+{% endblock %}

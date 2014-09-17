@@ -10,7 +10,7 @@
 
 			{% set image = entry.featuredImage.first() %}
 			{% if image %}
-				<div class="fullimage" style="background-image: url('{{ image.getUrl({ width: 1440 }) }}');"></div>
+				<div class="fullimage" style="background-image: url('{{ image.getUrl('workThumb') }}');"></div>
 			{% endif %}
 
 			{% if entry.heading %}
