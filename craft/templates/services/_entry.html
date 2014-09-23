@@ -1,0 +1,53 @@
+{#
+ # Services entry template
+ # -------------------
+ #
+ # This template gets loaded whenever a Work entry’s URL is
+ # requested. That’s because the Work section’s Template setting is
+ # set to “services/_entry”, the path to this template.
+ #}
+
+{% extends "_layouts/site" %}
+
+{% block main %}
+  {% set currentUrl = craft.request.getUrl() %}
+  {% for entry in craft.entries.section('Services').find() %}
+  <nav class="subnav">
+    <div class="flex">
+      <div class="g1-flex4 g2-flex6 g3-flex12">
+        <ul>
+          <li class="epsilon alt">
+            <a href="{{ entry.url }}" class="{% if entry.url == currentUrl %}current{% endif %} subfont caps">
+              {{ entry.title }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  {% endfor %}
+
+  <header class="alt">
+    <div class="flex">
+      <div class="g1-flex4 g2-flex6 g3-flex12">
+        <h1 class="alpha center reverse">{{ entry.title }}</h1>
+      </div>
+    </div>
+  </header>
+
+
+    <div class="container">
+      {% for block in entry.articleBody %}
+
+
+      {% endfor %}
+    </div>
+
+
+{% endblock %}
+
+
+{% block foot %}
+  {{ parent() }}
+  <script type="text/javascript" src="/assets/lib/shapes-polyfill.min.js"></script>
+{% endblock %}

@@ -10,4 +10,16 @@
 		</div>
 	</header>
 
+	{% for entry in craft.entries.section('Work').find() %}
+	<div class="flex">
+		<div class="g1-flex4 g2-flex6 g3-flex12">
+			<p class="delta alt">
+				<a href="{{ entry.url }}">
+					{{ entry.title }}
+				</a>
+			</p>
+		</div>
+	</div>
+	{% endfor %}
+
 {% endblock %}

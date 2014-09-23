@@ -34,6 +34,8 @@ $mq4: 1100; // Large screen breakpoint
 // colors
 $color-1: #222;
 $color-2: #f8f8f8;
+$color-3: #d3d3d3;
+$color-4: #cf6a34;
 $bgColor: #f8f8f9;
 $yellow: #fbd334;
 $lightGray: #d3d3d3;
@@ -356,9 +358,27 @@ $navSpacing: 50px;
 
 			&:not(:first-child) { margin-left: $navSpacing; }
 			&:nth-child(3) { margin-left: $navSpacing * 2 + 300; }
-			a { display: block; padding: 50px 0;
+			a {
+        display: block;
+        padding: 48px 0;
+        position: relative;
+
 				&:before { display: block; @include icon; color: $yellow; font-size: 45px; line-height: 50px; }
-				&.sel { background: url(../images/nav-sel.svg) no-repeat 50% 96%; }
+				&.sel {
+
+          &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            background: url(../images/nav-sel.svg) no-repeat left 100%;
+            bottom: 10px;
+            width: 14px;
+            height: 14px;
+            left: 50%;
+            margin-left: -7px;
+            height: 10px;
+          }
+        }
 
 				&[href$='about']:before { content: 'brewery'; }
 				&[href$='services']:before { content: 'beaker'; }
@@ -393,6 +413,12 @@ $navSpacing: 50px;
 
 	.fullquote { color: #fff; background: #446c77; text-align: center;
 		.container { max-width: 960px; }
+
+    body.work & {
+      background: #17133c;
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
 	}
 
 	header {
@@ -421,49 +447,58 @@ $navSpacing: 50px;
 			footer { margin: 10px 0; font-style: italic; }
 		}
 
-		.container { max-width: 800px; padding: 3.2em 0;
-
-			.block { box-sizing: border-box;
-				&.text { margin: 1.6em auto; }
-				&.heading + .block.text { margin-top: 2.2em; }
-
-				&.pullquote,
-				&.quote,
-				&.image { margin: 2.2em 0; }
-
-				&.pullquote,
-				&.quote { border: solid #222; border-width: 3px 0; padding: 66px 10px; }
-
-				&.pullquote p { margin: 0; @include subheadingText; text-align: center; }
-
-				&.image img { display: block; }
-
-				/* block positions */
-				&.left,
-				&.drop-left { float: left; margin-top: 0; margin-left: -80px; margin-right: 80px; width: 440px; }
-
-				&.right,
-				&.drop-right { float: right; margin-top: 0; margin-right: -80px; margin-left: 80px; width: 440px; }
-
-				&.drop-left,
-				&.drop-right { box-sizing: content-box; margin-top: 11.2em !important; border: 3.2em solid transparent; shape-outside: inset(0) border-box; shape-margin: 0; }
-				&.drop-left { margin-right: 0; border-left-width: 0; border-right-width: 80px; }
-				&.drop-right { margin-left: 0; border-right-width: 0; }
-
-				&.center { margin: 3.2em 0; clear: both; margin-left: -80px; margin-right: -80px; }
-
-				&.left + .block.right { margin-left: 0; }
-				&.right + .block.left { margin-right: 0; }
-				&.left + .block.right + .block,
-				&.right + .block.left + .block { clear: both; }
-
-				@include noMargins;
-			}
-
-			.authorinfo { margin: 3.2em 0; border: solid #222; border-width: 3px 0; padding: 1.6em 0;
-				.author { font-style: italic; }
-			}
+		.container {
+      max-width: 800px;
+      padding: 3.2em 0;
 		}
+    .block { box-sizing: border-box;
+      &.text { margin: 1.6em auto; }
+      &.heading + .block.text { margin-top: 2.2em; }
+      &.heading {
+        body.work & {
+
+          &:nth-child(2) {
+            clear: both;
+          }
+        }
+      }
+
+      &.pullquote,
+      &.quote,
+      &.image { margin: 2.2em 0; }
+
+      &.pullquote,
+      &.quote { border: solid #222; border-width: 3px 0; padding: 66px 10px; }
+
+      &.pullquote p { margin: 0; @include subheadingText; text-align: center; }
+
+      &.image img { display: block; }
+
+      /* block positions */
+      &.left,
+      &.drop-left { float: left; margin-top: 0; margin-left: -80px; margin-right: 80px; width: 440px; }
+
+      &.right,
+      &.drop-right { float: right; margin-top: 0; margin-right: -80px; margin-left: 80px; width: 440px; }
+
+      &.drop-left,
+      &.drop-right { box-sizing: content-box; margin-top: 11.2em !important; border: 3.2em solid transparent; shape-outside: inset(0) border-box; shape-margin: 0; }
+      &.drop-left { margin-right: 0; border-left-width: 0; border-right-width: 80px; }
+      &.drop-right { margin-left: 0; border-right-width: 0; }
+
+      &.center { margin: 3.2em 0; clear: both; margin-left: -80px; margin-right: -80px; }
+
+      &.left + .block.right { margin-left: 0; }
+      &.right + .block.left { margin-right: 0; }
+      &.left + .block.right + .block,
+      &.right + .block.left + .block { clear: both; }
+
+      @include noMargins;
+    }
+
+    .authorinfo { margin: 3.2em 0; border: solid #222; border-width: 3px 0; padding: 1.6em 0;
+      .author { font-style: italic; }
+    }
 	}
 	section.alt,
 	header.alt {
@@ -474,6 +509,11 @@ $navSpacing: 50px;
 			margin-bottom: 0;
 		}
 	}
+  header.alt2 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 5px;
+  }
 	section.alt2 {
 		padding-top: 50px;
 		padding-bottom: 50px;
@@ -513,6 +553,25 @@ $navSpacing: 50px;
 	.map-btn {
 		margin-right: 0px;
 	}
+  .subnav {
+    background: $color-3;
+
+    ul {
+      margin-top: 0;
+      list-style-type: none;
+
+      li {
+        display: inline-block;
+      }
+      a {
+        color: $color-1;
+
+        &.current {
+          color: $color-4;
+        }
+      }
+    }
+  }
 }
 
 @media screen and (min-width: 1441px) {

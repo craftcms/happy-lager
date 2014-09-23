@@ -10,106 +10,121 @@
 
 {% extends "_layouts/site" %}
 
-{% set title = entry.title %}
-
 {% block main %}
 
   <article>
-    <header>
-      <h1>{{ entry.title }}</h1>
-
-      {% set image = entry.featuredImage.first() %}
-      {% if image %}
-        <div class="fullimage" style="background-image: url('{{ image.getUrl({ width: 1440 }) }}');"></div>
-      {% endif %}
-
-      {% if entry.heading %}
-        <h2>{{ entry.heading }}</h2>
-      {% endif %}
-
-      {% if entry.subheading %}
-        <h3>{{ entry.subheading }}</h3>
-      {% endif %}
+    <header class="alt2">
+      <div class="flex">
+        <div class="g1-flex4 g2-flex6 g3-flex12">
+          <h1 class="alpha center reverse">{{ entry.title }}</h1>
+        </div>
+      </div>
     </header>
 
-    <div class="container">
-      {% for block in entry.articleBody %}
+    <section>
+      {% set image = entry.featuredImage.first() %}
+      {% if image %}
+        <img src="{{ image.getUrl({width: 2000}) }}" alt="image.title"/>
+      {% endif %}
+    </section>
 
-        {% switch block.type %}
+    <section class="alt">
+      {% if entry.heading %}
+        <div class="flex">
+          <div class="g1-flex4 g2-flex6 g3-flex8 g3-offset2">
+            <h2 class="delta center subfont">{{ entry.heading }}</h2>
+          </div>
+        </div>
+        <div class="flex">
+          <div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
+            <hr class="horz-rule">
+          </div>
+        </div>
+      {% endif %}
 
-          {% case "heading" %}
+        <div class="flex">
+          <div class="g1-flex4 g2-flex6 g3-flex12">
+            {% for block in entry.articleBody %}
 
-            <div class="block heading">
-              <h3>{{ block.heading }}</h3>
-            </div>
+                {% switch block.type %}
 
-          {% case "text" %}
+                  {% case "heading" %}
 
-            <div class="block text">
-              {{ block.text }}
-            </div>
+                    <div class="block heading">
+                      <h3>{{ block.heading }}</h3>
+                    </div>
 
-          {% case "pullQuote" %}
+                  {% case "text" %}
 
-            <div class="block pullquote {{ block.position }}">
-              <p>{{ block.pullQuote }}</p>
-            </div>
+                    <div class="block text">
+                      {{ block.text }}
+                    </div>
 
-          {% case "image" %}
+                  {% case "pullQuote" %}
 
-            {% set image = block.image.first() %}
-            {% if image %}
-              {% if block.position == 'full' %}
-                </div>
-                <div class="fullimage tall" style="background-image: url('{{ image.getUrl({ width: 1440 }) }}');"></div>
-                <div class="container">
-              {% else %}
-                {% if block.position == 'center' %}
-                  {% do image.setTransform({ width: 960 }) %}
-                {% else %}
-                  {% do image.setTransform({ width: 440 }) %}
-                {% endif %}
+                    <div class="block pullquote {{ block.position }}">
+                      <p>{{ block.pullQuote }}</p>
+                    </div>
 
-                <div class="block image {{ block.position }}">
-                  <img src="{{ image.url }}" alt="{{ image.title }}">
-                </div>
-              {% endif %}
-            {% endif %}
+                  {% case "image" %}
 
-          {% case "quote" %}
+                    {% set image = block.image.first() %}
+                    {% if image %}
+                      {% if block.position == 'full' %}
+                          </div>
+                        </div>
+                          <div class="fullimage tall" style="background-image: url('{{ image.getUrl({ width: 1440 }) }}');"></div>
+                        <div class="flex">
+                          <div class="g1-flex4 g2-flex6 g3-flex12">
+                      {% else %}
+                        {% if block.position == 'center' %}
+                          {% do image.setTransform({ width: 960 }) %}
+                        {% else %}
+                          {% do image.setTransform({ width: 440 }) %}
+                        {% endif %}
 
-            {% if block.position == 'full' %}
-              </div>
-              <div class="fullquote">
-                <div class="container">
-            {% else %}
-              <div class="block quote {{ block.position }}">
-            {% endif %}
+                        <div class="block image {{ block.position }}">
+                          <img src="{{ image.url }}" alt="{{ image.title }}">
+                        </div>
+                      {% endif %}
+                    {% endif %}
 
-            <blockquote>
-              <p>{{ block.quote }}</p>
+                  {% case "quote" %}
 
-              {% if block.attribution %}
-                <footer>– <cite>{{ block.attribution }}</footer>
-              {% endif %}
-            </blockquote>
+                    {% if block.position == 'full' %}
+                        </div>
+                      </div>
+                        <div class="fullquote">
+                      <div class="flex">
+                        <div class="g1-flex4 g2-flex6 g3-flex12">
+                    {% else %}
+                      <div class="block quote {{ block.position }}">
+                    {% endif %}
 
-            {% if block.position == 'full' %}
-                </div>
-              </div>
-              <div class="container">
-            {% else %}
-              </div>
-            {% endif %}
+                    <blockquote>
+                      <p>{{ block.quote }}</p>
 
-        {% endswitch %}
+                      {% if block.attribution %}
+                        <footer>– <cite>{{ block.attribution }}</footer>
+                      {% endif %}
+                    </blockquote>
 
-      {% endfor %}
+                    {% if block.position == 'full' %}
+                        </div>
+                      </div>
+                      </div>
+                      <div class="flex">
+                        <div class="g1-flex4 g2-flex6 g3-flex12">
+                    {% else %}
+                      </div>
+                    {% endif %}
 
-      <footer class="authorinfo">
-        <span class="author">{{ entry.author.name }}</span>
-      </footer>
-    </div>
+                {% endswitch %}
+
+              {% endfor %}
+        </div>
+      </div>
+    </section>
 
   </article>
 

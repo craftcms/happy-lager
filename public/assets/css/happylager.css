@@ -734,7 +734,8 @@ strong {
         margin-left: 400px; }
       #header nav li a {
         display: block;
-        padding: 50px 0; }
+        padding: 48px 0;
+        position: relative; }
         #header nav li a:before {
           display: block;
           font-family: 'happylager';
@@ -757,8 +758,17 @@ strong {
           color: #fbd334;
           font-size: 45px;
           line-height: 50px; }
-        #header nav li a.sel {
-          background: url(../images/nav-sel.svg) no-repeat 50% 96%; }
+        #header nav li a.sel:after {
+          content: '';
+          display: block;
+          position: absolute;
+          background: url(../images/nav-sel.svg) no-repeat left 100%;
+          bottom: 10px;
+          width: 14px;
+          height: 14px;
+          left: 50%;
+          margin-left: -7px;
+          height: 10px; }
         #header nav li a[href$='about']:before {
           content: 'brewery'; }
         #header nav li a[href$='services']:before {
@@ -816,6 +826,10 @@ strong {
   text-align: center; }
   #main .fullquote .container {
     max-width: 960px; }
+  body.work #main .fullquote {
+    background: #17133c;
+    padding-top: 80px;
+    padding-bottom: 80px; }
 #main header {
   text-align: center;
   background-position: 50% 50% !important; }
@@ -850,75 +864,77 @@ strong {
 #main article .container {
   max-width: 800px;
   padding: 3.2em 0; }
-  #main article .container .block {
-    box-sizing: border-box;
-    /* block positions */ }
-    #main article .container .block.text {
-      margin: 1.6em auto; }
-    #main article .container .block.heading + .block.text {
-      margin-top: 2.2em; }
-    #main article .container .block.pullquote, #main article .container .block.quote, #main article .container .block.image {
-      margin: 2.2em 0; }
-    #main article .container .block.pullquote, #main article .container .block.quote {
-      border: solid #222;
-      border-width: 3px 0;
-      padding: 66px 10px; }
-    #main article .container .block.pullquote p {
-      margin: 0;
-      font-family: montserratbold, sans-serif;
-      text-transform: uppercase;
-      font-size: 18px;
-      letter-spacing: 0.05em;
-      text-align: center; }
-    #main article .container .block.image img {
-      display: block; }
-    #main article .container .block.left, #main article .container .block.drop-left {
-      float: left;
-      margin-top: 0;
-      margin-left: -80px;
-      margin-right: 80px;
-      width: 440px; }
-    #main article .container .block.right, #main article .container .block.drop-right {
-      float: right;
-      margin-top: 0;
-      margin-right: -80px;
-      margin-left: 80px;
-      width: 440px; }
-    #main article .container .block.drop-left, #main article .container .block.drop-right {
-      box-sizing: content-box;
-      margin-top: 11.2em !important;
-      border: 3.2em solid transparent;
-      shape-outside: inset(0) border-box;
-      shape-margin: 0; }
-    #main article .container .block.drop-left {
-      margin-right: 0;
-      border-left-width: 0;
-      border-right-width: 80px; }
-    #main article .container .block.drop-right {
-      margin-left: 0;
-      border-right-width: 0; }
-    #main article .container .block.center {
-      margin: 3.2em 0;
-      clear: both;
-      margin-left: -80px;
-      margin-right: -80px; }
-    #main article .container .block.left + .block.right {
-      margin-left: 0; }
-    #main article .container .block.right + .block.left {
-      margin-right: 0; }
-    #main article .container .block.left + .block.right + .block, #main article .container .block.right + .block.left + .block {
-      clear: both; }
-    #main article .container .block:first-child {
-      margin-top: 0; }
-    #main article .container .block:last-child {
-      margin-bottom: 0; }
-  #main article .container .authorinfo {
-    margin: 3.2em 0;
+#main article .block {
+  box-sizing: border-box;
+  /* block positions */ }
+  #main article .block.text {
+    margin: 1.6em auto; }
+  #main article .block.heading + .block.text {
+    margin-top: 2.2em; }
+  body.work #main article .block.heading:nth-child(2) {
+    clear: both; }
+  #main article .block.pullquote, #main article .block.quote, #main article .block.image {
+    margin: 2.2em 0; }
+  #main article .block.pullquote, #main article .block.quote {
     border: solid #222;
     border-width: 3px 0;
-    padding: 1.6em 0; }
-    #main article .container .authorinfo .author {
-      font-style: italic; }
+    padding: 66px 10px; }
+  #main article .block.pullquote p {
+    margin: 0;
+    font-family: montserratbold, sans-serif;
+    text-transform: uppercase;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    text-align: center; }
+  #main article .block.image img {
+    display: block; }
+  #main article .block.left, #main article .block.drop-left {
+    float: left;
+    margin-top: 0;
+    margin-left: -80px;
+    margin-right: 80px;
+    width: 440px; }
+  #main article .block.right, #main article .block.drop-right {
+    float: right;
+    margin-top: 0;
+    margin-right: -80px;
+    margin-left: 80px;
+    width: 440px; }
+  #main article .block.drop-left, #main article .block.drop-right {
+    box-sizing: content-box;
+    margin-top: 11.2em !important;
+    border: 3.2em solid transparent;
+    shape-outside: inset(0) border-box;
+    shape-margin: 0; }
+  #main article .block.drop-left {
+    margin-right: 0;
+    border-left-width: 0;
+    border-right-width: 80px; }
+  #main article .block.drop-right {
+    margin-left: 0;
+    border-right-width: 0; }
+  #main article .block.center {
+    margin: 3.2em 0;
+    clear: both;
+    margin-left: -80px;
+    margin-right: -80px; }
+  #main article .block.left + .block.right {
+    margin-left: 0; }
+  #main article .block.right + .block.left {
+    margin-right: 0; }
+  #main article .block.left + .block.right + .block, #main article .block.right + .block.left + .block {
+    clear: both; }
+  #main article .block:first-child {
+    margin-top: 0; }
+  #main article .block:last-child {
+    margin-bottom: 0; }
+#main article .authorinfo {
+  margin: 3.2em 0;
+  border: solid #222;
+  border-width: 3px 0;
+  padding: 1.6em 0; }
+  #main article .authorinfo .author {
+    font-style: italic; }
 #main section.alt,
 #main header.alt {
   padding-top: 50px;
@@ -926,6 +942,10 @@ strong {
   #main section.alt p:last-of-type,
   #main header.alt p:last-of-type {
     margin-bottom: 0; }
+#main header.alt2 {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 5px; }
 #main section.alt2 {
   padding-top: 50px;
   padding-bottom: 50px;
@@ -962,6 +982,17 @@ strong {
     transform: rotate(-90deg); }
 #main .map-btn {
   margin-right: 0px; }
+#main .subnav {
+  background: lightgrey; }
+  #main .subnav ul {
+    margin-top: 0;
+    list-style-type: none; }
+    #main .subnav ul li {
+      display: inline-block; }
+    #main .subnav ul a {
+      color: #222222; }
+      #main .subnav ul a.current {
+        color: #cf6a34; }
 
 @media screen and (min-width: 1441px) {
   #main .fullimage {
