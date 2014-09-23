@@ -524,6 +524,24 @@ figure, .img-wrap {
       display: inline-block;
       text-align: center; }
 
+a.btn,
+button.btn {
+  color: #222222;
+  border: 3px solid #222222;
+  background: transparent;
+  padding: 17px 30px 14px 32px;
+  text-align: center;
+  line-height: 1;
+  font-family: "montserratbold", clean, sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 16px;
+  font-size: 1rem;
+  position: relative;
+  overflow: hidden;
+  display: inline-block; }
+
 video {
   width: 100%;
   height: auto; }
@@ -829,7 +847,9 @@ strong {
   body.work #main .fullquote {
     background: #17133c;
     padding-top: 80px;
-    padding-bottom: 80px; }
+    padding-bottom: 80px;
+    margin-top: 60px;
+    margin-bottom: 60px; }
 #main header {
   text-align: center;
   background-position: 50% 50% !important; }
@@ -869,10 +889,11 @@ strong {
   /* block positions */ }
   #main article .block.text {
     margin: 1.6em auto; }
+    body.work #main article .block.text {
+      width: 83.33333%;
+      margin-left: 8.4%; }
   #main article .block.heading + .block.text {
     margin-top: 2.2em; }
-  body.work #main article .block.heading:nth-child(2) {
-    clear: both; }
   #main article .block.pullquote, #main article .block.quote, #main article .block.image {
     margin: 2.2em 0; }
   #main article .block.pullquote, #main article .block.quote {
@@ -918,6 +939,13 @@ strong {
     clear: both;
     margin-left: -80px;
     margin-right: -80px; }
+    #main article .block.center.image {
+      margin-left: 0;
+      margin-right: 0; }
+      #main article .block.center.image img {
+        width: 100%;
+        max-width: 640px;
+        margin: 0 auto; }
   #main article .block.left + .block.right {
     margin-left: 0; }
   #main article .block.right + .block.left {
