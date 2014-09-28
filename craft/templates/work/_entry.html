@@ -13,7 +13,11 @@
 {% block main %}
 
   <article>
-    <header class="alt2">
+    <header class="alt2"
+      {% if entry.backgroundColor %}
+      style="background:{{ entry.backgroundColor }};"
+      {% endif %}
+    >
       <div class="flex">
         <div class="g1-flex4 g2-flex6 g3-flex12">
           <h1 class="alpha center reverse">{{ entry.title }}</h1>
@@ -94,7 +98,11 @@
                     {% if block.position == 'full' %}
                         </div>
                       </div>
-                        <div class="fullquote">
+                        <div class="fullquote"
+                          {% if entry.backgroundColor %}
+                          style="background-color:{{ entry.backgroundColor }};"
+                          {% endif %}
+                        >
                       <div class="flex">
                         <div class="g1-flex4 g2-flex6 g3-flex12">
                     {% else %}
