@@ -177,11 +177,11 @@ $barHeight: 30px;
   height: 0;
   border-top: none;
   border-bottom: 3px solid $color-1;
-	margin-top: 30px;
-  margin-bottom: 30px;
+	margin-top: 60px;
+  margin-bottom: 60px;
 
   @media all and (min-width: $mq3/$base+em) {
-    margin-bottom: 30px;
+    margin-bottom: 60px;
   }
 
   &.alt {

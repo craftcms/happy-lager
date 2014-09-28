@@ -18,25 +18,18 @@
     {% endif %}
   </section>
 
-  <section class="alt">
-    <div class="flex">
-      <div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
-        {% if entry.heading %}
-        <h2 class="beta center">{{ entry.heading }}</h2>
-        {% endif %}
+  <div class="container">
+    <section>
+      {% if entry.heading %}
+      <h2 class="beta center">{{ entry.heading }}</h2>
+      {% endif %}
 
-        {% if entry.subheading %}
-        <h3 class="delta center subfont">{{ entry.subheading }}</h3>
-        {% endif %}
-      </div>
-    </div>
-    <div class="flex">
-      <div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
-        <hr class="horz-rule">
-      </div>
-    </div>
+      {% if entry.subheading %}
+      <h3 class="delta center subfont">{{ entry.subheading }}</h3>
+      {% endif %}
 
-    <div class="container">
+
+      <hr class="horz-rule">
 
       {% for block in entry.articleBody %}
 
@@ -115,9 +108,6 @@
 
       {% endfor %}
 
-      <footer class="authorinfo">
-        <span class="author">{{ entry.author.name }}</span>
-      </footer>
     </div>
   </section>
 </article>
