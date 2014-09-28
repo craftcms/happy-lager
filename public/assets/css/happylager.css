@@ -845,7 +845,6 @@ strong {
   #main .fullquote .container {
     max-width: 960px; }
   body.work #main .fullquote {
-    background: #17133c;
     padding-top: 80px;
     padding-bottom: 80px;
     margin-top: 60px;
@@ -889,9 +888,6 @@ strong {
   /* block positions */ }
   #main article .block.text {
     margin: 1.6em auto; }
-    body.work #main article .block.text {
-      width: 83.33333%;
-      margin-left: 8.4%; }
   #main article .block.heading + .block.text {
     margin-top: 2.2em; }
   #main article .block.pullquote, #main article .block.quote, #main article .block.image {
