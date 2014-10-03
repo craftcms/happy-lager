@@ -453,7 +453,10 @@ $navSpacing: 50px;
 			letter-spacing: 6px;
 		}
 
-		& + .flex { margin-top: 60px; border-top: 3px solid #222; }
+		& + .flex {
+      margin-top: 60px;
+      // border-top: 3px solid #222;
+    }
 	}
 
 	article {
@@ -590,6 +593,127 @@ $navSpacing: 50px;
           color: $color-4;
         }
       }
+    }
+  }
+}
+#main article.news-entry {
+  @include clearfix;
+  margin-bottom: 40px;
+
+  figure {
+    width: 280px;
+    float: left;
+  }
+  .summary-wrap {
+    float: right;
+    width: 700px;
+
+    h3 {
+      text-align: left;
+      margin-bottom: 10px;
+
+      a {
+        color: $color-1;
+        font-weight: 400;
+      }
+    }
+    .author {
+      color: $color-4;
+      font-style: italic;
+      padding-right: 10px;
+      padding-bottom: 20px;
+      display: inline-block;
+    }
+    .separator {
+      padding-right: 10px;
+    }
+    .more-link {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: $font-tertiary;
+      color: $color-1;
+      padding-right: 30px;
+      display: inline-block;
+      position: relative;
+
+      &:after {
+        display: block;
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 50%;
+        margin-top: -11px;
+        background: url($asset_path+'icon-arrow.svg') no-repeat right center;
+        background-size: 20px 20px;
+        @include rotate(-90deg);
+      }
+    }
+  }
+  &.featured {
+    margin-bottom: 60px;
+
+    figure {
+      width: 570px;
+    }
+    .summary-wrap {
+      width: 400px;
+    }
+  }
+}
+#main .pagination {
+  margin-bottom: 50px;
+  display: block;
+  text-align: center;
+
+  ul {
+    display: inline-block;
+    text-align: center;
+    margin-top: 0;
+  }
+  li {
+    display: inline-block;
+    text-align: center;
+    font-family: $font-tertiary;
+    padding: 5px;
+
+    &.current {
+      color: $color-4;
+      border-bottom: 2px solid $color-4;
+    }
+
+    a {
+      color: $color-1;
+    }
+  }
+  .pag-prev-link,
+  .pag-next-link {
+    width: 20px;
+    height: auto;
+    font-size: 0;
+    position: relative;
+    display: block;
+
+    &:after {
+      display: block;
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: 0;
+      top: 50%;
+      margin-top: -13px;
+      background: url($asset_path+'icon-arrow.svg') no-repeat right center;
+      background-size: 20px 20px;
+      @include rotate(-90deg);
+    }
+  }
+  .pag-prev-link {
+
+    &:after {
+      left: -5px;
+      @include rotate(90deg);
     }
   }
 }
