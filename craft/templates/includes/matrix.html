@@ -11,12 +11,14 @@
     </div>
   </header>
 
+  {% if entry.type == 'work' %}
   <section>
     {% set image = entry.featuredImage.first() %}
     {% if image %}
       <img src="{{ image.getUrl({width: 2000}) }}" alt="image.title"/>
     {% endif %}
   </section>
+  {% endif %}
 
   <div class="container">
     <section>

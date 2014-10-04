@@ -11,23 +11,26 @@
 
 {% block main %}
   {% set currentUrl = craft.request.getUrl() %}
-  {% for entry in craft.entries.section('Services').find() %}
-  <nav class="subnav">
-    <div class="flex">
-      <div class="g1-flex4 g2-flex6 g3-flex12">
-        <ul>
-          <li class="epsilon alt">
-            <a href="{{ entry.url }}" class="{% if entry.url == currentUrl %}current{% endif %} subfont caps">
-              {{ entry.title }}
-            </a>
-          </li>
-        </ul>
+  {% set lastSegment = craft.request.getFirstSegment() %}
+  {% if lastSegment != 'services' %}
+    {% for entry in craft.entries.section('Services').find() %}
+    <nav class="subnav">
+      <div class="flex">
+        <div class="g1-flex4 g2-flex6 g3-flex12">
+          <ul>
+            <li class="epsilon alt">
+              <a href="{{ entry.url }}" class="{% if entry.url == currentUrl %}current{% endif %} subfont caps">
+                {{ entry.title }}
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
-  {% endfor %}
+    </nav>
+    {% endfor %}
+  {% endif %}
 
-  <header class="alt">
+  <header class="alt2">
     <div class="flex">
       <div class="g1-flex4 g2-flex6 g3-flex12">
         <h1 class="alpha center reverse">{{ entry.title }}</h1>
@@ -35,13 +38,41 @@
     </div>
   </header>
 
+  {% if lastSegment == 'services' %}
+    <section class="alt">
+      <div class="flex">
+        <div class="g1-flex4 g2-flex6 g3-flex8 g3-offset2">
+          {% if entry.indexHeading %}
+            {{ entry.indexHeading }}
+          {% endif %}
+        </div>
+      </div>
+    </section>
 
-    <div class="container">
+    <section>
+      <div class="flex">
+        {% for entry in craft.entries.section('Services').type('servicesDetail').order('postDate desc').find() %}
+          <div class="g1-flex4 g2-flex6 g3-flex4">
+            <a href="{{ entry.url }}" class="services-entry-wrap">
+              {% set image = entry.featuredImage.first() %}
+              {% if image %}
+                <img src="{{ image.getUrl('thumb') }}" alt="image.title"/>
+              {% endif %}
+              <h3 class="center">{{ entry.title }}</h3>
+              {% if entry.shortDescription %}
+                {{ entry.shortDescription }}
+              {% endif %}
+            </a>
+          </div>
+      {% endfor %}
+    </div>
+    {% else %}
       {% for block in entry.articleBody %}
 
 
       {% endfor %}
-    </div>
+    {% endif %}
+  </section>
 
 
 {% endblock %}

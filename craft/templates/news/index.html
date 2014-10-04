@@ -2,7 +2,7 @@
 
 {% block main %}
 
-	<header class="alt">
+	<header class="alt2">
 		<div class="flex">
 			<div class="g1-flex4 g2-flex6 g3-flex12">
 				<h1 class="alpha center reverse">{{ title }}</h1>
@@ -28,7 +28,13 @@
 						</figure>
           {% endif %}
 					<div class="summary-wrap">
-						<h3>{{ entry.getLink() }}</h3>
+						<h3>
+						{% if entry.type == 'link' %}
+						<a href="{{ entry.urlLink }}">{{ entry.title }}</a>
+						{% else %}
+						{{ entry.getLink() }}
+						{% endif %}
+						</h3>
 						{% if loop.first and craft.request.pageNum == 1 %}<a href="" class="author">{{ entry.author.name }}</a>{% endif %}
 
 						{% if entry.shortDescription %}

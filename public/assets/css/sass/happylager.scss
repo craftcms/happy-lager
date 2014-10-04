@@ -309,7 +309,7 @@ video {
 
 body { background: $bgColor; font-family: Georgia, serif; color: #222; font-size: 16px; line-height: 1.6; }
 
-strong { font-weight: bold; }
+strong { font-weight: bold; font-family: inherit }
 
 /* layout */
 .container { position: relative; width: 960px; margin-left: auto; margin-right: auto; box-sizing: border-box;
@@ -718,6 +718,40 @@ $navSpacing: 50px;
   }
 }
 
+#main .services-entry-wrap {
+  max-width: 280px;
+  display: block;
+  background: white;
+  height: 356px;
+  margin-bottom: 64px;
+  border-bottom: 5px solid $color-4;
+  position: relative;
+
+  &:after {
+    display: block;
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 50%;
+    bottom: 17px;
+    margin-left: -10px;
+    background: url($asset_path+'icon-arrow-alt.svg') no-repeat right center;
+    background-size: 20px 20px;
+  }
+
+  h3 {
+    color: $color-1;
+    margin-top: 17px;
+    margin-bottom: 0;
+    @include font-size(15);
+  }
+  p {
+    color: $color-1;
+    text-align: center;
+    padding: 10px 32px;
+  }
+}
 @media screen and (min-width: 1441px) {
 	#main .fullimage { background-size: 100%; }
 }
