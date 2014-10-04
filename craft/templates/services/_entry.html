@@ -11,7 +11,7 @@
 
 {% block main %}
   {% set currentUrl = craft.request.getUrl() %}
-  {% set lastSegment = craft.request.getFirstSegment() %}
+  {% set lastSegment = craft.request.getLastSegment() %}
   {% if lastSegment != 'services' %}
     {% for entry in craft.entries.section('Services').find() %}
     <nav class="subnav">
