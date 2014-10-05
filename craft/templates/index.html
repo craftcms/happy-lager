@@ -1,1 +1,24 @@
 {% extends "_layouts/site" %}
+
+{% block main %}
+
+  <section>
+    <div class="flex">
+      {% for entry in craft.entries.section('Work').limit(3).find() %}
+        <div class="g1-flex4 g2-flex6 g3-flex4">
+          <a href="{{ entry.url }}" class="services-entry-wrap">
+            {% set image = entry.featuredThumb.first() %}
+            {% if image %}
+              <img src="{{ image.getUrl('thumb') }}" alt="image.title"/>
+            {% endif %}
+            <h3 class="center">{{ entry.title }}</h3>
+            {% if entry.shortDescription %}
+              {{ entry.shortDescription }}
+            {% endif %}
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+{% endblock %}

@@ -290,8 +290,8 @@ ul.alt {
   padding: 10px 20px;
   padding: 0.625rem 1.25rem;
   display: block;
-  max-width: 1100px;
-  max-width: 68.75rem;
+  max-width: 1024px;
+  max-width: 64rem;
   margin: 0 auto; }
   .flex:after {
     content: "";
@@ -745,7 +745,7 @@ strong {
         display: block; } }
     #header nav li {
       float: left;
-      width: 140px;
+      width: 120px;
       text-align: center; }
       #header nav li:not(:first-child) {
         margin-left: 50px; }
@@ -1030,7 +1030,7 @@ strong {
     float: left; }
   #main article.news-entry .summary-wrap {
     float: right;
-    width: 700px; }
+    width: 645px; }
     #main article.news-entry .summary-wrap h3 {
       text-align: left;
       margin-bottom: 10px; }
@@ -1074,7 +1074,7 @@ strong {
     #main article.news-entry.featured figure {
       width: 570px; }
     #main article.news-entry.featured .summary-wrap {
-      width: 400px; }
+      width: 345px; }
 
 #main .pagination {
   margin-bottom: 50px;
@@ -1155,6 +1155,43 @@ strong {
     color: #222222;
     text-align: center;
     padding: 10px 32px; }
+
+.icon-beer,
+.icon-beaker,
+.icon-news,
+.icon-beercan {
+  position: relative; }
+  .icon-beer:before,
+  .icon-beaker:before,
+  .icon-news:before,
+  .icon-beercan:before {
+    position: absolute;
+    content: '';
+    display: block;
+    left: 0;
+    top: 0;
+    width: 23px;
+    height: 31px;
+    background: url("../images/icon-beer.png") no-repeat left top;
+    background-size: 23px 31px; }
+
+.icon-beaker:before {
+  width: 26px;
+  height: 28px;
+  background-image: url("../images/icon-beaker.png");
+  background-size: 26px 28px; }
+
+.icon-news:before {
+  width: 29px;
+  height: 29px;
+  background-image: url("../images/icon-news.png");
+  background-size: 29px 29px; }
+
+.icon-beercan:before {
+  width: 16px;
+  height: 30px;
+  background-image: url("../images/icon-beercan.png");
+  background-size: 16px 30px; }
 
 @media screen and (min-width: 1441px) {
   #main .fullimage {

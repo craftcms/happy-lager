@@ -20,7 +20,7 @@ $font-weight-black: 900;
 
 // grid
 $gutter: 20;
-$max-width: 1100; // Max grid wrap width
+$max-width: 1024; // Max grid wrap width
 $sm-column-count: 3;
 $med-column-count: 6;
 $lg-column-count: 12;
@@ -346,7 +346,7 @@ strong { font-weight: bold; font-family: inherit }
 
 /* header */
 $logoHeight: 125px;
-$navWidth: 140px;
+$navWidth: 120px;
 $navSpacing: 50px;
 
 #header {
@@ -606,7 +606,7 @@ $navSpacing: 50px;
   }
   .summary-wrap {
     float: right;
-    width: 700px;
+    width: 645px;
 
     h3 {
       text-align: left;
@@ -658,7 +658,7 @@ $navSpacing: 50px;
       width: 570px;
     }
     .summary-wrap {
-      width: 400px;
+      width: 345px;
     }
   }
 }
@@ -750,6 +750,51 @@ $navSpacing: 50px;
     color: $color-1;
     text-align: center;
     padding: 10px 32px;
+  }
+}
+.icon-beer,
+.icon-beaker,
+.icon-news,
+.icon-beercan {
+  position: relative;
+
+  &:before {
+    position: absolute;
+    content: '';
+    display: block;
+    left: 0;
+    top: 0;
+    width: 23px;
+    height: 31px;
+    background: url($asset_path+'icon-beer.png') no-repeat left top;
+    background-size: 23px 31px;
+  }
+}
+.icon-beaker {
+
+  &:before {
+    width: 26px;
+    height: 28px;
+    background-image: url($asset_path+'icon-beaker.png');
+    background-size: 26px 28px;
+  }
+}
+.icon-news {
+
+  &:before {
+    width: 29px;
+    height: 29px;
+    background-image: url($asset_path+'icon-news.png');
+    background-size: 29px 29px;
+  }
+}
+.icon-beercan {
+
+  &:before {
+    width: 16px;
+    height: 30px;
+    background-image: url($asset_path+'icon-beercan.png');
+    background-size: 16px 30px;
   }
 }
 @media screen and (min-width: 1441px) {
