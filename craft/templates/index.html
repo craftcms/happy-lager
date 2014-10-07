@@ -65,13 +65,38 @@ tap of ideas, wit and creativity.</p>
     </div>
   </section>
 
+  <section id="testimonials" style="background-image: url(/assets/images/testimonials-background.jpg);">
+    <div class="flex">
+
+      {% for block in entry.testimonial %}
+      <div class="g1-flex4 g2-flex6 g3-flex4 bubble">
+        <blockquote>{{ block.quote }}</blockquote>
+        {% set photo = block.photo.first() %}
+        {% if photo %}
+        <img class="" src="{{ photo.url }}" alt="{{ photo.title }}">
+        {% endif %}
+        <p><cite class="gamma reverse">{{ block.cite }}</cite></p>
+      </div>
+      {% endfor %}
+
+    </div>
+  </section>
 
   <section id="best-buddies">
     <div class="flex">
       <div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
           <hr class="horz-rule alt3">
           <a class="button-w-icon alt2 icon-beercan" href="/about">Our best Drinking Buddies</a>
-          <img class="">
+          <ul class="logos">
+            {% set logos = entry.logo %}
+            {% if logos %}
+              {% for logo in logos %}
+                <li>
+                  <img src="{{ logo.getUrl() }}" alt="logo.title"/>
+                </li>
+              {% endfor %}
+            {% endif %}
+          </ul>
       </div>
     </div>
     <div class="flex">

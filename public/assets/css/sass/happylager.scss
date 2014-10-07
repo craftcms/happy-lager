@@ -228,6 +228,15 @@ $barHeight: 30px;
       margin-bottom: 120px;
     }
   }
+  &.alt3 {
+    @extend .alt;
+    border-color: $yellow;
+
+    &:after {
+      margin-left: -280px;
+      width: 560px;
+    }
+  }
 }
 
 // images
@@ -944,6 +953,15 @@ $navSpacing: 50px;
       border-right: 3px solid $color-1;
     }
   }
+  &.alt2 {
+    padding-left: 70px;
+    @extend .alt;
+    width: 500px;
+
+    &:after {
+      width: 50px;
+    }
+  }
 }
 .view-more,
 .hero-cta {
@@ -1021,6 +1039,123 @@ $navSpacing: 50px;
   }
 
 }
+#best-buddies {
+  padding-top: 60px;
+  position: relative;
+
+  &:before {
+    width: 100%;
+    height: 145px;
+    content: '';
+    position: absolute;
+    background: white;
+    display: block;
+    bottom: 0;
+    left: 0;
+  }
+  ul.logos {
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 40px;
+
+    li {
+      display: inline-block;
+      text-align: center;
+      width: 19.5%;
+    }
+  }
+
+  h1 {
+    letter-spacing: 4px;
+    position: relative;
+    margin-bottom: 40px;
+
+    &:after {
+      width: 38px;
+      height: 1px;
+      content: '';
+      position: absolute;
+      background: $yellow;
+      display: block;
+      top: 90px;
+      left: 50%;
+      margin-left: -19px;
+    }
+
+    &:before {
+      width: 100%;
+      height: 200px;
+      content: '';
+      position: absolute;
+      border: 4px solid $yellow;
+      display: block;
+      top: -20px;
+    }
+  }
+  h2 {
+    color: $yellow;
+    margin-bottom: 78px;
+  }
+}
+
+#testimonials {
+  border-top: 5px solid $color-4;
+  padding-top: 100px;
+  padding-bottom: 60px;
+
+  .bubble {
+    height: 415px;
+    position: relative;
+
+    &:after {
+      position: absolute;
+      content: '\201D';
+      font-size: 60px;
+      line-height: 1.2;
+      font-family: $font-secondary;
+      width: 30px;
+      height: 30px;
+      background: $color-4;
+      display: block;
+      top: 5px;
+      right: 20px;
+      padding-left: 10px;
+      padding-bottom: 5px;
+      color: darken($color-4, 15%);
+    }
+
+    &:before {
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 415px;
+      background: url($asset_path+'quote-bubble.png') no-repeat left top;
+      display: block;
+      top: 0;
+      left: 15px;
+    }
+    img {
+      display: block;
+      width: 84px;
+      margin: 10px auto;
+    }
+    blockquote {
+      color: white;
+      padding: 40px 40px 10px 40px;
+      font-style: italic;
+    }
+    p {
+      text-align: center;
+      margin: 0 30px;
+    }
+    cite {
+      font-family: $font-secondary;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+  }
+}
+
 @media screen and (min-width: 1441px) {
 	#main .fullimage { background-size: 100%; }
 }
