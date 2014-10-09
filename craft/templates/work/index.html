@@ -2,7 +2,7 @@
 
 {% block main %}
 
-	<header class="alt">
+	<header class="alt2">
 		<div class="flex">
 			<div class="g1-flex4 g2-flex6 g3-flex12">
 				<h1 class="alpha center reverse">{{ title }}</h1>
@@ -10,16 +10,66 @@
 		</div>
 	</header>
 
-	{% for entry in craft.entries.section('Work').find() %}
-	<div class="flex">
-		<div class="g1-flex4 g2-flex6 g3-flex12">
-			<p class="delta alt">
-				<a href="{{ entry.url }}">
-					{{ entry.title }}
-				</a>
-			</p>
+	<section class="alt">
+		<div class="flex">
+			<div class="g1-flex4 g2-flex6 g3-flex8 g3-offset2">
+				<h1 class="delta center subfont">every digital product has a story to tell.
+It’s our job to find it and tell it well.</h1>
+
+				<p class="epsilon center">While we were not meaning to rhyme, this statement holds true. The end goal is to connect with humans, and we use the basic principles of story to do just that. Browse our work, enjoy the visuals and discover what it takes to create something great.</p>
+
+			</div>
 		</div>
+	</section>
+
+		{% set entries = craft.entries.section('Work').limit(1) %}
+			{% for entry in entries %}
+				<article class="work-entry work-entry-feature">
+					{% set asset = entry.featuredImage.last() %}{% if asset %}
+					<img src="{{ asset.getUrl({width:2000}) }}" alt="{{ asset.title }}" width="2000">
+					{% endif %}
+					<div class="summary-wrap">
+						{% if entry.heading %}
+						<h2 class="center reverse beta">{{ entry.heading }}</h2>
+						{% endif %}
+
+						{% if entry.subheading %}
+						<h3 class="delta center subfont reverse"><a href="{{ entry.urlLink }}">{{ entry.subheading }}</a></h3>
+						{% endif %}
+
+						{% for block in entry.articleBody %}
+
+							{% if block.text %}
+								<div class="block text">
+									{{ block.text }}
+								</div>
+							{% endif %}
+						{% endfor %}
+						<p class="center"><a href="{{ entry.url }}" class="more-link">Full Story</a></p>
+					</div>
+				</article>
+			{% endfor %}
+
+	<div class="flex">
+		{% set entries = craft.entries.section('Work').offset(1) %}
+			{% for entry in entries %}
+				<article class="work-entry">
+						<figure>
+							<a href="{{ entry.url }}">
+								{% set asset = entry.featuredImage.last() %}{% if asset %}
+								<img src="{{ asset.getUrl({width:616}) }}" alt="{{ asset.title }}" width="616" height="204">
+								{% endif %}
+							</a>
+						</figure>
+					<div class="summary-wrap">
+						<h3><a href="{{ entry.urlLink }}">{{ entry.title }}</a></h3>
+						{% if entry.shortDescription %}
+							{{ entry.shortDescription }}
+						{% endif %}
+							<p><a href="{{ entry.url }}" class="more-link"></a></p>
+					</div>
+				</article>
+			{% endfor %}
 	</div>
-	{% endfor %}
 
 {% endblock %}
