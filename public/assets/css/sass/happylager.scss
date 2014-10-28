@@ -281,6 +281,15 @@ figure, .img-wrap {
     }
   }
 }
+
+a {
+  color: $color-4;
+}
+
+a:hover {
+  color: $color-1;
+}
+
 // buttons
 a.btn,
 button.btn {

@@ -17,6 +17,13 @@
   <section>
     <div class="flex">
       <div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
+        <footer>
+          <p class="services center"><span class="caps">Services:</span> 
+          {% for service in entry.servicesPerformed %}
+            <a href="{{ service.url }}">{{ service.title }}</a>{% if not loop.last %}, {% endif %}
+          {% endfor %}
+          </p>
+        </footer>
         <hr class="horz-rule">
         <p class="center"><img src="/assets/images/social-sprite.png"></p>
         <hr class="horz-rule">
