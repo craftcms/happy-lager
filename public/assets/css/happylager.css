@@ -57,6 +57,7 @@ select {
   src: url("../fonts/happylager.eot?#iefix-v8rntv") format("embedded-opentype"), url("../fonts/happylager.woff?-v8rntv") format("woff"), url("../fonts/happylager.ttf?-v8rntv") format("truetype"), url("../fonts/happylager.svg?-v8rntv#happylager") format("svg");
   font-weight: normal;
   font-style: normal; }
+
 [data-icon]:before {
   font-family: 'happylager';
   speak: none;
@@ -84,7 +85,7 @@ body {
   font-family: "montserratregular", serif;
   font-weight: 400;
   line-height: 1.3;
-  color: #222; }
+  color: #222222; }
 
 strong {
   font-family: "montserratbold", clean, sans-serif; }
@@ -126,7 +127,7 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 1px; }
 
 h1.alt, h1.horz-rule.alt3, h1.button-w-icon.alt2 {
-  border: 3px solid #222;
+  border: 3px solid #222222;
   padding: 6px 20px;
   display: inline-block;
   margin-bottom: 30px; }
@@ -281,6 +282,17 @@ ul.alt, ul.horz-rule.alt3, ul.button-w-icon.alt2 {
 .caps {
   text-transform: uppercase;
   letter-spacing: 1px; }
+
+.services-title {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: "montserratbold", clean, sans-serif;
+  color: #222222;
+  line-height: 2;
+  margin-right: 20px; }
+
+.services a:last-of-type {
+  margin-right: 0; }
 
 .flex {
   *zoom: 1;
@@ -474,7 +486,7 @@ ul.alt, ul.horz-rule.alt3, ul.button-w-icon.alt2 {
   border: 0;
   height: 0;
   border-top: none;
-  border-bottom: 3px solid #222;
+  border-bottom: 3px solid #222222;
   margin-top: 60px;
   margin-bottom: 60px;
   position: relative; }
@@ -560,12 +572,12 @@ a {
   color: #cf6a34; }
 
 a:hover {
-  color: #222; }
+  color: #222222; }
 
 a.btn,
 button.btn {
-  color: #222;
-  border: 3px solid #222;
+  color: #222222;
+  border: 3px solid #222222;
   background: transparent;
   padding: 17px 30px 14px 32px;
   text-align: center;
@@ -655,8 +667,8 @@ strong {
 #bar {
   position: relative;
   height: 30px;
-  border-bottom: 3px solid #d3d3d3;
-  background: #222;
+  border-bottom: 3px solid lightgrey;
+  background: #222222;
   font-family: montserratregular, sans-serif;
   font-size: 10px;
   letter-spacing: 0.1em;
@@ -767,7 +779,7 @@ strong {
 /* header */
 #header {
   position: relative;
-  border-bottom: 4px solid #d3d3d3; }
+  border-bottom: 4px solid lightgrey; }
   #header .flex {
     padding-bottom: 0 !important; }
   #header .flex > * {
@@ -852,7 +864,7 @@ strong {
           letter-spacing: 0.1em;
           text-transform: uppercase;
           line-height: 20px;
-          color: #d3d3d3; }
+          color: lightgrey; }
           #header nav li a em:before {
             content: '[ '; }
           #header nav li a em:after {
@@ -1027,7 +1039,7 @@ strong {
 #main .email-us-btn,
 #main .map-btn {
   padding: 6px 30px 6px 0;
-  color: #222;
+  color: #222222;
   position: relative;
   margin-right: 40px; }
   #main .email-us-btn:after,
@@ -1050,14 +1062,14 @@ strong {
 #main .map-btn {
   margin-right: 0px; }
 #main .subnav {
-  background: #d3d3d3; }
+  background: lightgrey; }
   #main .subnav ul {
     margin-top: 0;
     list-style-type: none; }
     #main .subnav ul li {
       display: inline-block; }
     #main .subnav ul a {
-      color: #222; }
+      color: #222222; }
       #main .subnav ul a.current {
         color: #cf6a34; }
 
@@ -1078,7 +1090,7 @@ strong {
       text-align: left;
       margin-bottom: 10px; }
       #main article.news-entry .summary-wrap h3 a {
-        color: #222;
+        color: #222222;
         font-weight: 400; }
     #main article.news-entry .summary-wrap .author {
       color: #cf6a34;
@@ -1092,7 +1104,7 @@ strong {
       text-transform: uppercase;
       letter-spacing: 1px;
       font-family: "montserratbold", clean, sans-serif;
-      color: #222;
+      color: #222222;
       padding-right: 30px;
       display: inline-block;
       position: relative; }
@@ -1135,13 +1147,13 @@ strong {
       text-align: left;
       margin-bottom: 10px; }
       #main article.work-entry .summary-wrap h3 a {
-        color: #222;
+        color: #222222;
         font-weight: 400; }
     #main article.work-entry .summary-wrap .more-link {
       text-transform: uppercase;
       letter-spacing: 1px;
       font-family: "montserratbold", clean, sans-serif;
-      color: #222;
+      color: #222222;
       padding-right: 20px;
       display: inline-block;
       position: relative;
@@ -1224,7 +1236,7 @@ strong {
       color: #cf6a34;
       border-bottom: 2px solid #cf6a34; }
     #main .pagination li a {
-      color: #222; }
+      color: #222222; }
   #main .pagination .pag-prev-link,
   #main .pagination .pag-next-link {
     width: 20px;
@@ -1277,13 +1289,13 @@ strong {
     background: url("../images/icon-arrow-alt.svg") no-repeat right center;
     background-size: 20px 20px; }
   #main .services-entry-wrap h3 {
-    color: #222;
+    color: #222222;
     margin-top: 17px;
     margin-bottom: 0;
     font-size: 15px;
     font-size: 0.9375rem; }
   #main .services-entry-wrap p {
-    color: #222;
+    color: #222222;
     text-align: center;
     padding: 10px 32px; }
 
@@ -1397,8 +1409,8 @@ strong {
     left: 0;
     top: 0; }
   .button-w-icon.alt, .button-w-icon.horz-rule.alt3, .button-w-icon.alt2 {
-    border-color: #222;
-    color: #222;
+    border-color: #222222;
+    color: #222222;
     text-align: center;
     width: 320px;
     position: absolute;
@@ -1421,7 +1433,7 @@ strong {
       background-color: #e1dfdf;
       left: 0;
       top: 0;
-      border-right: 3px solid #222; }
+      border-right: 3px solid #222222; }
   .button-w-icon.alt2 {
     padding-left: 70px;
     width: 500px; }
@@ -1648,5 +1660,3 @@ strong {
         font-size: 24px;
         line-height: 14px;
         vertical-align: middle; }
-
-/*# sourceMappingURL=happylager.css.map */
