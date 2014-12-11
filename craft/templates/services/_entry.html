@@ -13,32 +13,33 @@
   {% set currentUrl = craft.request.getUrl() %}
   {% set lastSegment = craft.request.getLastSegment() %}
   {% if lastSegment != 'services' %}
-    {% for entry in craft.entries.section('Services').find() %}
     <nav class="subnav">
       <div class="flex">
         <div class="g1-flex4 g2-flex6 g3-flex12">
           <ul>
-            <li class="epsilon alt">
+            {% for entry in craft.entries.section('Services').type('servicesDetail').find() %}
+            <li>
               <a href="{{ entry.url }}" class="{% if entry.url == currentUrl %}current{% endif %} subfont caps">
                 {{ entry.title }}
               </a>
             </li>
+            {% endfor %}
           </ul>
         </div>
       </div>
     </nav>
-    {% endfor %}
   {% endif %}
 
-  <header class="alt2">
-    <div class="flex">
-      <div class="g1-flex4 g2-flex6 g3-flex12">
-        <h1 class="alpha center reverse">{{ entry.title }}</h1>
-      </div>
-    </div>
-  </header>
-
   {% if lastSegment == 'services' %}
+
+    <header class="alt2">
+      <div class="flex">
+        <div class="g1-flex4 g2-flex6 g3-flex12">
+          <h1 class="alpha center reverse">{{ entry.title }}</h1>
+        </div>
+      </div>
+    </header>
+
     <section class="alt">
       <div class="flex">
         <div class="g1-flex4 g2-flex6 g3-flex8 g3-offset2">
@@ -67,12 +68,60 @@
       {% endfor %}
     </div>
     {% else %}
-      {% for block in entry.articleBody %}
+      {% include "includes/matrix" %}
 
-
-      {% endfor %}
     {% endif %}
   </section>
+
+  {% if lastSegment != 'services' %}
+  <section class="service-points">
+    {% for block in entry.servicesBody %}
+    <div class="flex">
+      <div class="service-point">
+        <div class="g1-flex4 g2-flex3 g3-flex4">
+          <h4>{{ block.heading }}</h4>
+          {{ block.text }}
+        </div>
+        <div class="g1-flex4 g2-flex3 g3-flex8">
+          {% set photo = block.image.first() %}
+          {% if photo %}
+          <img class="" src="{{ photo.url }}" alt="{{ photo.title }}">
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+
+  <section class="services-work-entry">
+      {% set entries = craft.entries.section('Work').limit(1).offset(2) %}
+      {% for entry in entries %}
+      {% set asset = entry.featuredImage.first() %}{% if asset %}
+      <div style="background-image: url('{{ asset.url }}')">
+      {% endif %}
+      <div class="flex">
+        <div class="g1-flex4 g2-flex3 g3-flex6">
+            <a href="{{ entry.url }}">
+              {% set asset = entry.featuredImage.last() %}{% if asset %}
+              <img src="{{ asset.url }}" alt="{{ asset.title }}" width="616" height="204">
+              {% endif %}
+            </a>
+        </div>
+        <div class="g1-flex4 g2-flex3 g3-flex6">
+          <div class="summary-wrap">
+            <h2 class="callout-border"><a href="{{ entry.url }}">{{ entry.title }}</a></h2>
+            <h3><a href="{{ entry.url }}">{{ entry.heading }}</a></h3>
+            {% if entry.subheading %}
+            <p>{{ entry.subheading }}</p>
+            {% endif %}
+            <p><a href="{{ entry.url }}" class="view-more hero-cta">View More</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+  {% endif %}
 
 
 {% endblock %}

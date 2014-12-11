@@ -934,19 +934,32 @@ strong {
 #main article .container {
   max-width: 800px;
   padding: 3.2em 0; }
+  body.services #main article .container {
+    max-width: 1024px; }
 #main article .block {
   box-sizing: border-box;
   /* block positions */ }
   #main article .block.text {
     margin: 1.6em auto; }
+  body.services #main article .block.heading h3 {
+    margin-bottom: 10px; }
+  body.services #main article .block.heading:nth-of-type h3 {
+    margin-bottom: 10px; }
   #main article .block.heading + .block.text {
     margin-top: 2.2em; }
+    body.services #main article .block.heading + .block.text {
+      margin-top: 0;
+      max-width: 700px;
+      text-align: center; }
   #main article .block.pullquote, #main article .block.quote, #main article .block.image {
     margin: 2.2em 0; }
   #main article .block.pullquote, #main article .block.quote {
     border: solid #222;
     border-width: 3px 0;
     padding: 66px 10px; }
+    body.services #main article .block.pullquote, body.services #main article .block.quote {
+      border-width: 0 0;
+      padding: 0; }
   #main article .block.pullquote p {
     margin: 0;
     font-family: montserratbold, sans-serif;
@@ -1062,14 +1075,24 @@ strong {
 #main .map-btn {
   margin-right: 0px; }
 #main .subnav {
-  background: lightgrey; }
+  background: lightgrey;
+  margin-bottom: 2px; }
   #main .subnav ul {
     margin-top: 0;
-    list-style-type: none; }
+    margin-bottom: 0;
+    list-style-type: none;
+    display: block;
+    text-align: center; }
     #main .subnav ul li {
-      display: inline-block; }
+      display: inline-block;
+      text-align: center;
+      line-height: 1; }
     #main .subnav ul a {
-      color: #222222; }
+      color: #222222;
+      display: block;
+      letter-spacing: 2px;
+      font-size: 14px;
+      padding: 2px 15px; }
       #main .subnav ul a.current {
         color: #cf6a34; }
 
@@ -1268,6 +1291,75 @@ strong {
     -ms-transform: rotate(90deg);
     -o-transform: rotate(90deg);
     transform: rotate(90deg); }
+
+#main .service-points {
+  margin-bottom: 40px; }
+  #main .service-points > .flex:nth-of-type(2) .service-point:after {
+    content: '02'; }
+  #main .service-points > .flex:nth-of-type(3) .service-point:after {
+    content: '03'; }
+
+#main .services-work-entry {
+  overflow: hidden; }
+  #main .services-work-entry .flex {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important; }
+  #main .services-work-entry .summary-wrap {
+    position: relative; }
+    #main .services-work-entry .summary-wrap > * {
+      position: relative;
+      z-index: 2;
+      color: white; }
+    #main .services-work-entry .summary-wrap h2.callout-border {
+      padding-top: 40px; }
+    #main .services-work-entry .summary-wrap h2.callout-border a {
+      color: white;
+      padding: 5px 10px;
+      border: 3px solid white;
+      display: inline-block;
+      font-family: "montserratregular", serif; }
+      #main .services-work-entry .summary-wrap h2.callout-border a:hover {
+        color: white; }
+    #main .services-work-entry .summary-wrap h3 {
+      text-align: left; }
+      #main .services-work-entry .summary-wrap h3 a:hover {
+        color: white; }
+    #main .services-work-entry .summary-wrap a.hero-cta:hover {
+      color: #f8f8f8; }
+    #main .services-work-entry .summary-wrap:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: -40px;
+      width: 100%;
+      padding-right: 40px;
+      padding-bottom: 300px;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7); }
+
+#main .service-point {
+  overflow: hidden;
+  margin-bottom: 40px; }
+  #main .service-point:after {
+    content: '01';
+    line-height: 2;
+    font-size: 22px;
+    font-family: "montserratregular", serif;
+    position: absolute;
+    text-align: center;
+    right: 55px;
+    top: 25px;
+    display: block;
+    width: 52px;
+    height: 42px;
+    border: 3px solid #222222; }
+  #main .service-point p {
+    padding-right: 30px; }
+  #main .service-point h4 {
+    font-family: "montserratregular", serif;
+    padding-right: 30px;
+    margin-bottom: 10px; }
 
 #main .services-entry-wrap {
   max-width: 280px;

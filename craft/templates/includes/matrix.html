@@ -30,8 +30,9 @@
       <h3 class="delta center subfont">{{ entry.subheading }}</h3>
       {% endif %}
 
-
-      <hr class="horz-rule">
+      {% if entry.type != 'servicesDetail' %}
+        <hr class="horz-rule">
+      {% endif %}
 
       {% for block in entry.articleBody %}
 
