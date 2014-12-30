@@ -652,7 +652,7 @@ strong {
 /* layout */
 .container {
   position: relative;
-  width: 960px;
+  max-width: 770px;
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box; }
@@ -932,7 +932,7 @@ strong {
     margin: 10px 0;
     font-style: italic; }
 #main article .container {
-  max-width: 800px;
+  max-width: 764px;
   padding: 3.2em 0; }
   body.services #main article .container {
     max-width: 1024px; }
@@ -1179,17 +1179,16 @@ strong {
       color: #222222;
       padding-right: 20px;
       display: inline-block;
-      position: relative;
-      font-size: 0; }
+      position: relative; }
       #main article.work-entry .summary-wrap .more-link:after {
         display: block;
         content: '';
         position: absolute;
         width: 20px;
         height: 20px;
-        right: 0;
+        right: -6px;
         top: 0;
-        margin-top: -11px;
+        margin-top: 2px;
         background: url("../images/icon-arrow.svg") no-repeat right center;
         background-size: 20px 20px;
         -webkit-transform: rotate(-90deg);

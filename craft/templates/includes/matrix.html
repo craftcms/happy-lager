@@ -13,7 +13,7 @@
 
   {% if entry.type == 'work' %}
   <section>
-    {% set image = entry.featuredImage.first() %}
+    {% set image = entry.featuredImage.last() %}
     {% if image %}
       <img src="{{ image.getUrl({width: 2000}) }}" alt="image.title"/>
     {% endif %}

@@ -366,7 +366,13 @@ body { background: $bgColor; font-family: Georgia, serif; color: #222; font-size
 strong { font-weight: bold; font-family: inherit }
 
 /* layout */
-.container { position: relative; width: 960px; margin-left: auto; margin-right: auto; box-sizing: border-box;
+.container {
+  position: relative;
+  max-width: 770px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+
 	&:after { @include clearafter; }
 }
 
@@ -527,7 +533,7 @@ $navSpacing: 50px;
 		}
 
 		.container {
-      max-width: 800px;
+      max-width: 764px;
       padding: 3.2em 0;
 
       body.services & {
@@ -792,7 +798,6 @@ $navSpacing: 50px;
       padding-right: 20px;
       display: inline-block;
       position: relative;
-      font-size: 0;
 
       &:after {
         display: block;
@@ -800,9 +805,9 @@ $navSpacing: 50px;
         position: absolute;
         width: 20px;
         height: 20px;
-        right: 0;
+        right: -6px;
         top: 0;
-        margin-top: -11px;
+        margin-top: 2px;
         background: url($asset_path+'icon-arrow.svg') no-repeat right center;
         background-size: 20px 20px;
         @include rotate(-90deg);
