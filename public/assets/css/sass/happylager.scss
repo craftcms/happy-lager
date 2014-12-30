@@ -588,7 +588,7 @@ $navSpacing: 50px;
 
       /* block positions */
       &.left,
-      &.drop-left { float: left; margin-top: 0; margin-left: -80px; margin-right: 80px; width: 440px; }
+      &.drop-left { float: left; margin-top: 0; margin-left: -80px; margin-right: 20px; width: 440px; }
 
       &.right,
       &.drop-right { float: right; margin-top: 0; margin-right: -80px; margin-left: 80px; width: 440px; }
