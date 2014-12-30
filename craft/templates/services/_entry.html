@@ -96,13 +96,13 @@
   <section class="services-work-entry">
       {% set entries = craft.entries.section('Work').limit(1).offset(2) %}
       {% for entry in entries %}
-      {% set asset = entry.featuredImage.first() %}{% if asset %}
+      {% set asset = entry.featuredImage.last() %}{% if asset %}
       <div style="background-image: url('{{ asset.url }}')">
       {% endif %}
       <div class="flex">
         <div class="g1-flex4 g2-flex3 g3-flex6">
             <a href="{{ entry.url }}">
-              {% set asset = entry.featuredImage.last() %}{% if asset %}
+              {% set asset = entry.featuredImage.first() %}{% if asset %}
               <img src="{{ asset.url }}" alt="{{ asset.title }}" width="616" height="204">
               {% endif %}
             </a>
