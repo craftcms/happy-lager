@@ -1281,6 +1281,8 @@ $navSpacing: 50px;
   margin-bottom: 64px;
   border-bottom: 5px solid lighten($color-4, 10%);
   position: relative;
+  margin-left: auto;
+  margin-right: auto;
 
   &:after {
     display: block;
@@ -1451,8 +1453,9 @@ $navSpacing: 50px;
   letter-spacing: 2px;
   font-family: $font-tertiary;
   border: 3px solid white;
-  padding: 10px 15px;
+  padding: 7px 15px;
   padding-left: 80px;
+  display: block;
 
   &:before {
     z-index: 1;
@@ -1506,6 +1509,9 @@ $navSpacing: 50px;
   }
   &:hover, &:focus {
     color: $color-3;
+  }
+  @media all and (min-width: $mq1/$base+em) {
+    display: inline-block;
   }
 }
 .view-more,

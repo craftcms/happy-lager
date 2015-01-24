@@ -1406,7 +1406,9 @@ strong {
   height: 356px;
   margin-bottom: 64px;
   border-bottom: 5px solid #d9885d;
-  position: relative; }
+  position: relative;
+  margin-left: auto;
+  margin-right: auto; }
   #main .services-entry-wrap:after {
     display: block;
     content: '';
@@ -1556,8 +1558,9 @@ strong {
   letter-spacing: 2px;
   font-family: "montserratbold", clean, sans-serif;
   border: 3px solid white;
-  padding: 10px 15px;
-  padding-left: 80px; }
+  padding: 7px 15px;
+  padding-left: 80px;
+  display: block; }
   .button-w-icon:before {
     z-index: 1;
     left: 17px;
@@ -1604,6 +1607,9 @@ strong {
       width: 50px; }
   .button-w-icon:hover, .button-w-icon:focus {
     color: lightgrey; }
+  @media all and (min-width: 37.5em) {
+    .button-w-icon {
+      display: inline-block; } }
 
 .view-more,
 .hero-cta {
