@@ -964,12 +964,38 @@ $navSpacing: 50px;
   margin-bottom: 40px;
 
   figure {
-    width: 280px;
-    float: left;
+
+    @media all and (min-width: $mq2/$base+em) {
+      display: inline-block;
+      padding-right: 20px;
+      float: left;
+    }
+
+    @media all and (min-width: $mq4/$base+em) {
+      width: 280px;
+    }
+    a img {
+      display: block;
+      margin: auto;
+
+      @media all and (min-width: $mq1/$base+em) {
+        display: inline-block;
+        float: left;
+      }
+    }
   }
   .summary-wrap {
-    float: right;
-    width: 645px;
+
+    @media all and (min-width: $mq2/$base+em) {
+      display: inline-block;
+      width: 58%;
+      float: right;
+      vertical-align: top;
+    }
+
+    @media all and (min-width: $mq4/$base+em) {
+      width: 645px;
+    }
 
     h3 {
       text-align: left;
@@ -1018,10 +1044,33 @@ $navSpacing: 50px;
     margin-bottom: 60px;
 
     figure {
-      width: 570px;
+
+      @media all and (min-width: $mq2/$base+em) {
+        width: 100%;
+      }
+
+      @media all and (min-width: $mq3/$base+em) {
+        width: 570px;
+        float: none;
+      }
+      a img {
+
+        @media all and (min-width: $mq2/$base+em) {
+          width: 100%;
+        }
+
+      }
     }
     .summary-wrap {
-      width: 345px;
+
+      @media all and (min-width: $mq2/$base+em) {
+        width: 100%;
+        float: none;
+      }
+      @media all and (min-width: $mq3/$base+em) {
+        width: 345px;
+        float: none;
+      }
     }
   }
 }
