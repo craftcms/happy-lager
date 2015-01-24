@@ -569,9 +569,13 @@ figure, .img-wrap {
       text-align: center; }
 
 a {
-  color: #cf6a34; }
+  color: #cf6a34;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out; }
 
-a:hover {
+a:hover, a:focus {
   color: #222222; }
 
 a.btn,
@@ -1498,7 +1502,7 @@ strong {
   position: relative;
   z-index: 2;
   background: rgba(207, 106, 52, 0.8); }
-  @media all and (min-width: 68.75em) {
+  @media all and (min-width: 81.25em) {
     #on-tap {
       margin-top: -368px; } }
   #on-tap:before {
@@ -1567,6 +1571,8 @@ strong {
     width: 500px; }
     .button-w-icon.alt2:after {
       width: 50px; }
+  .button-w-icon:hover, .button-w-icon:focus {
+    color: lightgrey; }
 
 .view-more,
 .hero-cta {
@@ -1597,6 +1603,10 @@ strong {
     -ms-transform: rotate(-90deg);
     -o-transform: rotate(-90deg);
     transform: rotate(-90deg); }
+  .view-more:hover, .view-more:focus,
+  .hero-cta:hover,
+  .hero-cta:focus {
+    color: lightgrey; }
 
 .hero-cta {
   font-size: 16px;
@@ -1697,8 +1707,14 @@ strong {
   padding-top: 100px;
   padding-bottom: 60px; }
   #testimonials .bubble {
-    height: 415px;
-    position: relative; }
+    position: relative;
+    margin-bottom: 40px;
+    border-top: 3px solid #cf6a34; }
+    @media all and (min-width: 64.0625em) {
+      #testimonials .bubble {
+        height: 415px;
+        margin-bottom: 0px;
+        border: none; } }
     #testimonials .bubble:after {
       position: absolute;
       content: '\201D';
@@ -1709,20 +1725,28 @@ strong {
       height: 30px;
       background: #cf6a34;
       display: block;
-      top: 5px;
-      right: 20px;
+      top: 0;
+      left: 0;
       padding-left: 10px;
       padding-bottom: 5px;
       color: #944a23; }
+      @media all and (min-width: 64.0625em) {
+        #testimonials .bubble:after {
+          top: 5px;
+          left: auto;
+          right: 20px; } }
     #testimonials .bubble:before {
       position: absolute;
       content: '';
       width: 100%;
       height: 415px;
       background: url("../images/quote-bubble.png") no-repeat left top;
-      display: block;
+      display: none;
       top: 0;
       left: 15px; }
+      @media all and (min-width: 64.0625em) {
+        #testimonials .bubble:before {
+          display: block; } }
     #testimonials .bubble img {
       display: block;
       width: 84px;
@@ -1730,7 +1754,11 @@ strong {
     #testimonials .bubble blockquote {
       color: white;
       padding: 40px 40px 10px 40px;
-      font-style: italic; }
+      font-style: italic;
+      text-align: center; }
+      @media all and (min-width: 64.0625em) {
+        #testimonials .bubble blockquote {
+          text-align: left; } }
     #testimonials .bubble p {
       text-align: center;
       margin: 0 30px; }

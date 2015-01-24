@@ -29,6 +29,7 @@ $mq1: 600; // Mid range breakpoint
 $mq2: 767; // Med screen breakpoint
 $mq3: 1025; // Large screen breakpoint
 $mq4: 1100; // Large screen breakpoint
+$mq5: 1300; // extra Large screen breakpoint
 
 
 // colors
@@ -287,9 +288,10 @@ figure, .img-wrap {
 
 a {
   color: $color-4;
+  @include transition(all, .2s);
 }
 
-a:hover {
+a:hover, a:focus {
   color: $color-1;
 }
 
@@ -636,7 +638,7 @@ $navSpacing: 50px;
 /* main */
 #main {
   overflow-x: hidden;
-  
+
 	h3 {
     margin-bottom: 1.6em;
     @include subheadingText;
@@ -1392,7 +1394,7 @@ $navSpacing: 50px;
   z-index: 2;
   background: rgba($color-4, .8);
 
-  @media all and (min-width: $mq4/$base+em) {
+  @media all and (min-width: $mq5/$base+em) {
     margin-top: -368px;
   }
 
@@ -1470,6 +1472,9 @@ $navSpacing: 50px;
       width: 50px;
     }
   }
+  &:hover, &:focus {
+    color: $color-3;
+  }
 }
 .view-more,
 .hero-cta {
@@ -1496,6 +1501,9 @@ $navSpacing: 50px;
     background: url($asset_path+'icon-arrow-white.svg') no-repeat right center;
     background-size: 20px 20px;
     @include rotate(-90deg);
+  }
+  &:hover, &:focus {
+    color: $color-3;
   }
 
 }
@@ -1612,8 +1620,15 @@ $navSpacing: 50px;
   padding-bottom: 60px;
 
   .bubble {
-    height: 415px;
     position: relative;
+    margin-bottom: 40px;
+    border-top: 3px solid $color-4;
+
+    @media all and (min-width: $mq3/$base+em) {
+      height: 415px;
+      margin-bottom: 0px;
+      border: none;
+    }
 
     &:after {
       position: absolute;
@@ -1625,11 +1640,17 @@ $navSpacing: 50px;
       height: 30px;
       background: $color-4;
       display: block;
-      top: 5px;
-      right: 20px;
+      top: 0;
+      left: 0;
       padding-left: 10px;
       padding-bottom: 5px;
       color: darken($color-4, 15%);
+
+      @media all and (min-width: $mq3/$base+em) {
+        top: 5px;
+        left: auto;
+        right: 20px;
+      }
     }
 
     &:before {
@@ -1638,9 +1659,13 @@ $navSpacing: 50px;
       width: 100%;
       height: 415px;
       background: url($asset_path+'quote-bubble.png') no-repeat left top;
-      display: block;
+      display: none;
       top: 0;
       left: 15px;
+
+      @media all and (min-width: $mq3/$base+em) {
+        display: block;
+      }
     }
     img {
       display: block;
@@ -1651,6 +1676,11 @@ $navSpacing: 50px;
       color: white;
       padding: 40px 40px 10px 40px;
       font-style: italic;
+      text-align: center;
+
+      @media all and (min-width: $mq3/$base+em) {
+        text-align: left;
+      }
     }
     p {
       text-align: center;

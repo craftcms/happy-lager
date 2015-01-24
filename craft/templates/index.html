@@ -28,7 +28,7 @@ tap of ideas, wit and creativity.</p>
     </div>
     <div class="flex">
       {% for entry in craft.entries.section('Work').limit(3).find() %}
-        <div class="g1-flex4 g2-flex6 g3-flex4">
+        <div class="g1-flex4 g2-flex2 g3-flex4">
           <a href="{{ entry.url }}" class="services-entry-wrap">
             {% set image = entry.featuredThumb.first() %}
             {% if image %}
@@ -69,7 +69,7 @@ tap of ideas, wit and creativity.</p>
     <div class="flex">
 
       {% for block in entry.testimonial %}
-      <div class="g1-flex4 g2-flex6 g3-flex4 bubble">
+      <div class="g1-flex4 g2-flex2 g3-flex4 bubble">
         <blockquote>{{ block.quote }}</blockquote>
         {% set photo = block.photo.first() %}
         {% if photo %}
