@@ -1537,7 +1537,7 @@ strong {
   background: rgba(207, 106, 52, 0.8); }
   @media all and (min-width: 81.25em) {
     #on-tap {
-      margin-top: -368px; } }
+      margin-top: -387px; } }
   #on-tap:before {
     content: '';
     position: absolute;
