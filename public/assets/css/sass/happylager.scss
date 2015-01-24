@@ -1358,33 +1358,65 @@ $navSpacing: 50px;
   overflow: hidden;
   position: relative;
 
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    background: rgba(0,0,0,.6);
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 100%;
+
+    @media all and (min-width: $mq4/$base+em) {
+      display: none;
+    }
+  }
+
   img {
     width: 100%;
     max-width: auto;
   }
   .hero-info {
     position: absolute;
-    top: 115px;
+    top: 50%;
     width: 625px;
     left: 50%;
-    @include translate(-50%, 0);
+    @include translate(-50%, -50%);
+
+    @media all and (min-width: $mq3/$base+em) {
+      @include translate(-50%, 0);
+      top: 115px;
+    }
 
     h1 {
-      font-size: 30px;
+      font-size: 24px;
       color: $yellow;
       text-align: center;
       letter-spacing: 4px;
-      margin-bottom: 30px;
+      margin-bottom: 5px;
 
+      @media all and (min-width: $mq1/$base+em) {
+        font-size: 30px;
+        margin-bottom: 30px;
+      }
 
       span {
         font-size: 0;
-        margin-top: 20px;
         display: block;
-        width: 625px;
-        height: 108px;
+        width: 312px;
+        height: 54px;
         background: url($asset_path+'glassfull.png') no-repeat center center;
-        background-size: 625px 108px;
+        background-size: 312px 54px;
+        text-align: center;
+        margin: 5px auto 0;
+
+        @media all and (min-width: $mq1/$base+em) {
+          margin: 20px auto 0;
+          background-size: 625px 108px;
+          width: 625px;
+          height: 108px;
+        }
       }
     }
   }

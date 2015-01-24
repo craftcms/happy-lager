@@ -1470,33 +1470,64 @@ strong {
   max-height: 920px;
   overflow: hidden;
   position: relative; }
+  #hero:before {
+    content: '';
+    display: block;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.6);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
+    @media all and (min-width: 68.75em) {
+      #hero:before {
+        display: none; } }
   #hero img {
     width: 100%;
     max-width: auto; }
   #hero .hero-info {
     position: absolute;
-    top: 115px;
+    top: 50%;
     width: 625px;
     left: 50%;
-    -webkit-transform: translate(-50%, 0);
-    -moz-transform: translate(-50%, 0);
-    -ms-transform: translate(-50%, 0);
-    -o-transform: translate(-50%, 0);
-    transform: translate(-50%, 0); }
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+    @media all and (min-width: 64.0625em) {
+      #hero .hero-info {
+        -webkit-transform: translate(-50%, 0);
+        -moz-transform: translate(-50%, 0);
+        -ms-transform: translate(-50%, 0);
+        -o-transform: translate(-50%, 0);
+        transform: translate(-50%, 0);
+        top: 115px; } }
     #hero .hero-info h1 {
-      font-size: 30px;
+      font-size: 24px;
       color: #fbd334;
       text-align: center;
       letter-spacing: 4px;
-      margin-bottom: 30px; }
+      margin-bottom: 5px; }
+      @media all and (min-width: 37.5em) {
+        #hero .hero-info h1 {
+          font-size: 30px;
+          margin-bottom: 30px; } }
       #hero .hero-info h1 span {
         font-size: 0;
-        margin-top: 20px;
         display: block;
-        width: 625px;
-        height: 108px;
+        width: 312px;
+        height: 54px;
         background: url("../images/glassfull.png") no-repeat center center;
-        background-size: 625px 108px; }
+        background-size: 312px 54px;
+        text-align: center;
+        margin: 5px auto 0; }
+        @media all and (min-width: 37.5em) {
+          #hero .hero-info h1 span {
+            margin: 20px auto 0;
+            background-size: 625px 108px;
+            width: 625px;
+            height: 108px; } }
 
 #on-tap {
   position: relative;
