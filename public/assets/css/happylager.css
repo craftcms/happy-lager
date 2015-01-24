@@ -506,7 +506,7 @@ ul.alt, ul.horz-rule.alt3, ul.button-w-icon.alt2 {
       position: absolute;
       width: 360px;
       background: #f8f8f8; }
-    @media all and (min-width: 64.0625em) {
+    @media all and (min-width: 47.9375em) {
       .horz-rule.alt, .horz-rule.alt3, .horz-rule.button-w-icon.alt2 {
         margin-top: 60px;
         margin-bottom: 60px; } }
@@ -1580,7 +1580,7 @@ strong {
     text-align: center;
     width: 320px;
     position: absolute;
-    top: 43px;
+    top: 2px;
     left: 50%;
     background: white;
     padding-top: 6px;
@@ -1590,6 +1590,9 @@ strong {
     -ms-transform: translate(-50%, 0);
     -o-transform: translate(-50%, 0);
     transform: translate(-50%, 0); }
+    @media all and (min-width: 64.0625em) {
+      .button-w-icon.alt, .button-w-icon.horz-rule.alt3, .button-w-icon.alt2 {
+        top: 43px; } }
     .button-w-icon.alt:after, .button-w-icon.horz-rule.alt3:after, .button-w-icon.alt2:after {
       content: '';
       position: absolute;
@@ -1602,7 +1605,13 @@ strong {
       border-right: 3px solid #222222; }
   .button-w-icon.alt2 {
     padding-left: 70px;
-    width: 500px; }
+    font-size: 12px;
+    top: 0; }
+    @media all and (min-width: 47.9375em) {
+      .button-w-icon.alt2 {
+        width: 500px;
+        font-size: 22px;
+        top: 43px; } }
     .button-w-icon.alt2:after {
       width: 50px; }
   .button-w-icon:hover, .button-w-icon:focus {
@@ -1658,7 +1667,12 @@ strong {
 
 #how-made {
   background: url("../images/how-made-background.jpg") repeat-x center bottom;
-  padding-top: 60px; }
+  padding-top: 20px;
+  padding-bottom: 20px; }
+  @media all and (min-width: 64.0625em) {
+    #how-made {
+      padding-top: 60px;
+      padding-bottom: 0px; } }
   #how-made h1 {
     color: #fbd334;
     text-align: center;
@@ -1675,7 +1689,10 @@ strong {
   -o-transform: translate(-50%, 0);
   transform: translate(-50%, 0);
   left: 50%;
-  top: 38px; }
+  top: -2px; }
+  @media all and (min-width: 64.0625em) {
+    .big-arrow {
+      top: 38px; } }
   .big-arrow:after {
     display: block;
     content: '';

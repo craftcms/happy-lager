@@ -206,7 +206,7 @@ $barHeight: 30px;
       background: $color-2;
     }
 
-    @media all and (min-width: $mq3/$base+em) {
+    @media all and (min-width: $mq2/$base+em) {
       margin-top: 60px;
       margin-bottom: 60px;
     }
@@ -1479,12 +1479,16 @@ $navSpacing: 50px;
     text-align: center;
     width: 320px;
     position: absolute;
-    top: 43px;
+    top: 2px;
     left: 50%;
     background: white;
     padding-top: 6px;
     padding-bottom: 6px;
     @include translate(-50%, 0);
+
+    @media all and (min-width: $mq3/$base+em) {
+      top: 43px;
+    }
 
     &:after {
       content: '';
@@ -1501,7 +1505,14 @@ $navSpacing: 50px;
   &.alt2 {
     padding-left: 70px;
     @extend .alt;
-    width: 500px;
+    font-size: 12px;
+    top: 0;
+
+    @media all and (min-width: $mq2/$base+em) {
+      width: 500px;
+      font-size: 22px;
+      top: 43px;
+    }
 
     &:after {
       width: 50px;
@@ -1561,7 +1572,13 @@ $navSpacing: 50px;
 
 #how-made {
   background: url($asset_path+'how-made-background.jpg') repeat-x center bottom;
-  padding-top: 60px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  @media all and (min-width: $mq3/$base+em) {
+    padding-top: 60px;
+    padding-bottom: 0px;
+  }
 
   h1 {
     color: $yellow;
@@ -1576,7 +1593,11 @@ $navSpacing: 50px;
   height: 45px;
   @include translate(-50%, 0);
   left: 50%;
-  top: 38px;
+  top: -2px;
+
+  @media all and (min-width: $mq3/$base+em) {
+    top: 38px;
+  }
 
   &:after {
     display: block;

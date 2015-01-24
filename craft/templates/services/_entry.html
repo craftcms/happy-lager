@@ -53,7 +53,7 @@
     <section>
       <div class="flex">
         {% for entry in craft.entries.section('Services').type('servicesDetail').order('postDate desc').find() %}
-          <div class="g1-flex4 g2-flex6 g3-flex4">
+          <div class="g1-flex4 g2-flex2 g3-flex4">
             <a href="{{ entry.url }}" class="services-entry-wrap">
               {% set image = entry.featuredImage.first() %}
               {% if image %}
