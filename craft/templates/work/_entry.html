@@ -35,7 +35,23 @@
           </p>
           <hr class="horz-rule">
         </footer>
-        <p><a class="btn" href="">Back to what's on tap</a></p>
+        <a class="btn" href="{{ url(craft.request.firstSegment) }}">Back to what's on tap</a>
+        <nav class="prev-next-entry">
+          {% set params = {
+            section: 'work',
+            order: 'title'
+          } %}
+
+          {% set prevEntry = entry.getPrev(params) %}
+          {% set nextEntry = entry.getNext(params) %}
+
+          {% if prevEntry %}
+          <a href="{{ prevEntry.url }}" class="pag-prev-link">Prev</a>
+          {% endif %}
+          {% if nextEntry %}
+          <a href="{{ nextEntry.url }}" class="pag-next-link">Next</a>
+          {% endif %}
+        </nav>
       </div>
     </div>
   </section>

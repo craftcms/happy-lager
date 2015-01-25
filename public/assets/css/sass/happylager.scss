@@ -738,7 +738,12 @@ $navSpacing: 50px;
 
 		.container {
       max-width: 764px;
-      padding: 3.2em 0;
+      padding: 3.2em 20px;
+
+      @media all and (min-width: $mq3/$base+em) {
+        padding-right: 0px;
+        padding-left: 0px;
+      }
 
       body.services & {
         max-width: 1024px;
@@ -994,7 +999,7 @@ $navSpacing: 50px;
     }
 
     @media all and (min-width: $mq4/$base+em) {
-      width: 645px;
+      width: 668px;
     }
 
     h3 {
@@ -1044,6 +1049,7 @@ $navSpacing: 50px;
     margin-bottom: 60px;
 
     figure {
+      padding-right: 0px;
 
       @media all and (min-width: $mq2/$base+em) {
         width: 100%;
@@ -1052,6 +1058,7 @@ $navSpacing: 50px;
       @media all and (min-width: $mq3/$base+em) {
         width: 570px;
         float: none;
+        padding-right: 25px;
       }
       a img {
 
@@ -1221,33 +1228,59 @@ $navSpacing: 50px;
       color: $color-1;
     }
   }
-  .pag-prev-link,
-  .pag-next-link {
-    width: 20px;
-    height: auto;
-    font-size: 0;
-    position: relative;
+}
+.pag-prev-link,
+.pag-next-link {
+  width: 20px;
+  height: auto;
+  font-size: 0;
+  position: relative;
+  display: block;
+
+  &:after {
     display: block;
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 0;
+    top: 50%;
+    margin-top: -13px;
+    background: url($asset_path+'icon-arrow.svg') no-repeat right center;
+    background-size: 20px 20px;
+    @include rotate(-90deg);
+  }
+}
+.pag-prev-link {
+
+  &:after {
+    left: -5px;
+    @include rotate(90deg);
+  }
+}
+nav.prev-next-entry {
+  float: right;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 40px;
+  display: inline-block;
+
+  .pag-prev-link, .pag-next-link {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    vertical-align: top;
 
     &:after {
-      display: block;
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      left: 0;
-      top: 50%;
-      margin-top: -13px;
-      background: url($asset_path+'icon-arrow.svg') no-repeat right center;
-      background-size: 20px 20px;
-      @include rotate(-90deg);
+      width: 30px;
+      height: 30px;
+      background-size: 30px 30px;
     }
   }
   .pag-prev-link {
 
     &:after {
-      left: -5px;
-      @include rotate(90deg);
+      right: 5px;
     }
   }
 }
@@ -1494,6 +1527,9 @@ $navSpacing: 50px;
           height: 108px;
         }
       }
+    }
+    p:last-of-type {
+      margin-bottom: 0 !important;
     }
   }
 }
@@ -1874,7 +1910,7 @@ $navSpacing: 50px;
 
       @media all and (min-width: $mq1/$base+em) {
         float: right;
-        margin: 15px auto 0;
+        margin: 18px auto 0;
       }
 
       &:after {
