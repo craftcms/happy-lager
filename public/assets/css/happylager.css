@@ -132,6 +132,12 @@ h1.alt, h1.horz-rule.alt3, h1.button-w-icon.alt2 {
   display: inline-block;
   margin-bottom: 30px; }
 
+body.search h2 {
+  line-height: 1.1;
+  margin-bottom: 20px;
+  border-bottom: 1px solid lightgrey;
+  padding-bottom: 20px; }
+
 h3 {
   font-weight: 900; }
 
@@ -708,32 +714,9 @@ strong {
     right: 0;
     width: 160px;
     height: 21px; }
-    #bar #search:after {
-      display: block;
-      position: absolute;
-      top: 1px;
-      right: 4px;
-      font-family: 'happylager';
-      speak: none;
-      font-style: normal;
-      font-weight: normal;
-      font-variant: normal;
-      text-transform: none;
-      line-height: 1;
-      /* Enable Ligatures ================ */
-      -webkit-font-feature-settings: "liga";
-      -moz-font-feature-settings: "liga=1";
-      -moz-font-feature-settings: "liga";
-      -ms-font-feature-settings: "liga" 1;
-      -o-font-feature-settings: "liga";
-      font-feature-settings: "liga";
-      /* Better Font Rendering =========== */
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      content: 'search';
-      color: #a2a2a2;
-      font-size: 12px;
-      line-height: 21px; }
+    #bar #search form.search-form {
+      margin: 0;
+      padding: 0; }
     #bar #search input {
       position: relative;
       z-index: 1;
@@ -745,10 +728,6 @@ strong {
       padding-right: 20px;
       color: #fff;
       background: none;
-      font-family: montserratregular, sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
       -webkit-appearance: none;
       -moz-appearance: none;
       /* Firefox 18- */
@@ -949,7 +928,7 @@ strong {
       background: #fbd334 url("../images/headingbg-yellow.svg"); }
     body.work #main header {
       background: #56b1be url("../images/headingbg-blue.svg"); }
-    body.news #main header {
+    body.news #main header, body.search #main header {
       background: #cf6a34 url("../images/headingbg-orange.svg"); }
     #main header h1 {
       letter-spacing: 6px; }

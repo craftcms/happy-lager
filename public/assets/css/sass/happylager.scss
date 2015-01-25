@@ -444,16 +444,9 @@ strong {
     width: 160px;
     height: 21px;
 
-		&:after {
-      display: block;
-      position: absolute;
-      top: 1px;
-      right: 4px;
-      @include icon;
-      content: 'search';
-      color: $barTextColor;
-      font-size: 12px;
-      line-height: 21px;
+    form.search-form {
+      margin: 0;
+      padding: 0;
     }
 		input {
       position: relative;
@@ -466,7 +459,6 @@ strong {
       padding-right: 20px;
       color: #fff;
       background: none;
-			@include smallText;
 			@include appearance(none);
 
 			&::-webkit-input-placeholder {
@@ -698,7 +690,8 @@ $navSpacing: 50px;
 		body.work & {
       background: #56b1be url($asset_path+'headingbg-blue.svg');
     }
-		body.news & {
+		body.news &,
+    body.search & {
       background: #cf6a34 url($asset_path+'headingbg-orange.svg');
     }
 

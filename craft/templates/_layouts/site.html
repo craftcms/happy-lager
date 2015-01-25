@@ -46,7 +46,9 @@ child templates to define the main contents for the page.
 				</div>
 				<a href="{{ url('clients') }}">Client Login</a>
 				<div id="search">
-					<input type="search" placeholder="Search">
+					<form action="{{ url('search/results') }}" class="search-form">
+						<input type="search" name="q" placeholder="Search">
+					</form>
 				</div>
 			</div>
 		</div>
