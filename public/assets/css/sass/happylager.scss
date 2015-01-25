@@ -1122,16 +1122,41 @@ $navSpacing: 50px;
     margin-bottom: 60px;
     position: relative;
 
-    figure {
+    img {
+      position: absolute;
+      max-width: 1450px;
+      width: 1450px;
+      left: 50%;
+      @include translate(-50%, 0);
 
+      @media all and (min-width: $mq1/$base+em) {
+
+      }
+      @media all and (min-width: $mq2/$base+em) {
+
+      }
+
+      @media all and (min-width: $mq3/$base+em) {
+
+      }
+      @media all and (min-width: $mq4/$base+em) {
+
+      }
     }
     .summary-wrap {
-      position: absolute;
-      top: 50%;
+      position: relative;
+      margin-top: 50px;
+      margin-bottom: 40px;
       width: 100%;
       height: 100%;
       display: block;
-      @include translate(0, -33%);
+      padding: 0 20px;
+
+      @media all and (min-width: $mq2/$base+em) {
+        padding: 0;
+        margin-top: 80px;
+        margin-bottom: 40px;
+      }
 
       h2 {
         padding: 15px 30px;
@@ -1149,7 +1174,7 @@ $navSpacing: 50px;
       p {
         color: white;
         text-align: center;
-        width: 700px;
+        max-width: 700px;
         margin-left: auto;
         margin-right: auto;
       }
