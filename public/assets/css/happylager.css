@@ -1877,40 +1877,47 @@ strong {
     padding-top: 50px;
     padding-bottom: 50px; }
     #footer .flex img {
-      float: left; }
+      display: block;
+      text-align: center;
+      margin: 10px auto; }
+      @media all and (min-width: 37.5em) {
+        #footer .flex img {
+          float: left; } }
     #footer .flex p.copyright {
-      float: left;
-      margin-left: 20px;
-      padding-top: 31px;
+      text-align: center;
       color: #f8f8f8; }
+      @media all and (min-width: 37.5em) {
+        #footer .flex p.copyright {
+          float: left;
+          margin-left: 20px;
+          padding-top: 38px; } }
     #footer .flex a.contact {
-      float: right;
-      margin-top: 10px;
+      display: block;
+      margin: 10px auto 0;
       border: 3px solid #f8f8f8;
-      padding: 18px 20px;
+      padding: 15px 45px 15px 20px;
       color: #f8f8f8;
       text-transform: uppercase;
-      letter-spacing: 0.1em; }
+      letter-spacing: 0.1em;
+      position: relative;
+      width: 260px; }
+      @media all and (min-width: 37.5em) {
+        #footer .flex a.contact {
+          float: right;
+          margin: 15px auto 0; } }
       #footer .flex a.contact:after {
-        margin-left: 10px;
-        font-family: 'happylager';
-        speak: none;
-        font-style: normal;
-        font-weight: normal;
-        font-variant: normal;
-        text-transform: none;
-        line-height: 1;
-        /* Enable Ligatures ================ */
-        -webkit-font-feature-settings: "liga";
-        -moz-font-feature-settings: "liga=1";
-        -moz-font-feature-settings: "liga";
-        -ms-font-feature-settings: "liga" 1;
-        -o-font-feature-settings: "liga";
-        font-feature-settings: "liga";
-        /* Better Font Rendering =========== */
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        content: 'go';
-        font-size: 24px;
-        line-height: 14px;
-        vertical-align: middle; }
+        display: block;
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        right: 16px;
+        top: 14px;
+        margin-left: 0;
+        background: url("../images/icon-arrow-white.svg") no-repeat right center;
+        background-size: 20px 20px;
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        transform: rotate(-90deg); }

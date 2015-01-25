@@ -1843,30 +1843,52 @@ $navSpacing: 50px;
 		padding-bottom: 50px;
 
 		img {
-      float: left;
+      display: block;
+      text-align: center;
+      margin: 10px auto;
+
+      @media all and (min-width: $mq1/$base+em) {
+        float: left;
+      }
     }
 		p.copyright {
-      float: left;
-      margin-left: 20px;
-      padding-top: 31px;
+      text-align: center;
       color: $footerTextColor;
+
+      @media all and (min-width: $mq1/$base+em) {
+        float: left;
+        margin-left: 20px;
+        padding-top: 38px;
+      }
     }
 		a.contact {
-      float: right;
-      margin-top: 10px;
+      display: block;
+      margin: 10px auto 0;
       border: 3px solid $footerTextColor;
-      padding: 18px 20px;
+      padding: 15px 45px 15px 20px;
       color: $footerTextColor;
       text-transform: uppercase;
       letter-spacing: 0.1em;
+      position: relative;
+      width: 260px;
 
-			&:after {
-        margin-left: 10px;
-        @include icon;
-        content: 'go';
-        font-size: 24px;
-        line-height: 14px;
-        vertical-align: middle;
+      @media all and (min-width: $mq1/$base+em) {
+        float: right;
+        margin: 15px auto 0;
+      }
+
+      &:after {
+        display: block;
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        right: 16px;
+        top: 14px;
+        margin-left: 0;
+        background: url($asset_path+'icon-arrow-white.svg') no-repeat right center;
+        background-size: 20px 20px;
+        @include rotate(-90deg);
       }
 		}
 	}
