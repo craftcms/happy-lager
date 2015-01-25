@@ -34,7 +34,7 @@ It’s our job to find it and tell it well.</h1>
 						{% endif %}
 
 						{% if entry.subheading %}
-						<h3 class="delta center subfont reverse"><a href="{{ entry.urlLink }}">{{ entry.subheading }}</a></h3>
+						<h3 class="delta center subfont reverse"><a href="{{ entry.url }}">{{ entry.subheading }}</a></h3>
 						{% endif %}
 
 						{% for block in entry.articleBody %}
@@ -62,7 +62,7 @@ It’s our job to find it and tell it well.</h1>
 							</a>
 						</figure>
 					<div class="summary-wrap">
-						<h3><a href="{{ entry.urlLink }}">{{ entry.title }}</a></h3>
+						<h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
 						{% if entry.shortDescription %}
 							{{ entry.shortDescription }}
 						{% endif %}

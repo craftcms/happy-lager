@@ -1,0 +1,35 @@
+{% extends "_layouts/site" %}
+
+{% block main %}
+
+<header class="alt2">
+  <div class="flex">
+    <div class="g1-flex4 g2-flex6 g3-flex12">
+      <h1 class="alpha center reverse">Search Results</h1>
+    </div>
+  </div>
+</header>
+
+<section class="alt">
+  <div class="flex">
+    {% set query = craft.request.getParam('q') %}
+    {% set entries = craft.entries.search(query).order('score') %}
+
+    {% if entries|length %}
+    <div class="g1-flex4 g2-flex6 g3-flex8 g3-offset2">
+      <h2 class="beta center">{{ entries|length }} results</h2>
+    </div>
+
+    {% for entry in entries %}
+
+    <div class="g1-flex4 g2-flex6 g3-flex8 g3-offset2">
+      <span class="post-date">{{ entry.postDate.format('m.d.Y') }}</span>
+      <h2 class="beta">{{ entry.getLink() }}</h2>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h2 class="beta center">Your search for “{{ query }}” didn’t return any results.</h2>
+    {% endif %}
+  </div>
+</section>
+  {% endblock %}
