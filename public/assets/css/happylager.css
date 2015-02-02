@@ -896,6 +896,13 @@ strong {
     font-size: 18px;
     letter-spacing: 0.05em;
     text-align: center; }
+  #main h4 {
+    margin-bottom: 1.2em;
+    font-family: montserratbold, sans-serif;
+    text-transform: uppercase;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    font-size: 14px; }
   #main ul,
   #main ol {
     margin: 2.2em 0 0.2em 0; }

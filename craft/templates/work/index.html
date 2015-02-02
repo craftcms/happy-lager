@@ -37,14 +37,11 @@ It’s our job to find it and tell it well.</h1>
 						<h3 class="delta center subfont reverse"><a href="{{ entry.url }}">{{ entry.subheading }}</a></h3>
 						{% endif %}
 
-						{% for block in entry.articleBody %}
-
-							{% if block.text %}
-								<div class="block text">
-									{{ block.text }}
-								</div>
-							{% endif %}
-						{% endfor %}
+						{% if entry.shortDescription %}
+							<div class="block text">
+								{{ entry.shortDescription }}
+							</div>
+						{% endif %}
 						<p class="center"><a href="{{ entry.url }}" class="more-link">Full Story</a></p>
 					</div>
 				</article>

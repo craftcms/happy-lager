@@ -636,6 +636,11 @@ $navSpacing: 50px;
     @include subheadingText;
     text-align: center;
   }
+  h4 {
+    margin-bottom: 1.2em;
+    @include subheadingText;
+    font-size: 14px;
+  }
 
 	ul,
 	ol {
