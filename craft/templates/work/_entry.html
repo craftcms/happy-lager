@@ -21,16 +21,14 @@
         <footer>
           <hr class="horz-rule">
           <p class="services center">
-          {% for block in entry.servicesPerformed.type('service') %}
-            {% for services in block.service %}
-              <a href="{{ services.url }}">
-                {% set icon = services.serviceIcon.first() %}
-                {% if icon %}
-                <img src="{{ icon.url }}" alt="{{ icon.title }}">
-                {% endif %}
-                <span class="services-title">{{ services.title }}</span>
-              </a>
-            {% endfor %}
+          {% for service in entry.servicesPerformed %}
+            <a href="{{ service.url }}">
+              {% set icon = service.serviceIcon.first() %}
+              {% if icon %}
+              <img src="{{ icon.url }}" alt="{{ icon.title }}">
+              {% endif %}
+              <span class="services-title">{{ service.title }}</span>
+            </a>
           {% endfor %}
           </p>
           <hr class="horz-rule">
