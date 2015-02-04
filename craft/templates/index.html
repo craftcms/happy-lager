@@ -5,7 +5,7 @@
   <div id="hero">
     {% set image = entry.heroImage.first() %}
     {% if image %}
-      <img src="{{ image.getUrl() }}" alt="image.title"/>
+      <img src="{{ image.getUrl({ height: 916 }) }}" alt="image.title"/>
     {% endif %}
     <div class="hero-info">
       <h1>We always see the glass <br>
@@ -21,7 +21,7 @@ tap of ideas, wit and creativity.</p>
     <div class="flex">
       <div class="g1-flex4 g2-flex6 g3-flex12">
         <div class="on-tap-buttons-wrap">
-          <a class="button-w-icon icon-beer" href="/work">What's on Tap</a>
+          <a class="button-w-icon icon-beer" href="/work">What’s on Tap</a>
           <a href="/work" class="view-more">View More</a>
         </div>
       </div>
@@ -48,35 +48,35 @@ tap of ideas, wit and creativity.</p>
     <div class="flex">
       <div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
           <hr class="horz-rule alt">
-          <a class="button-w-icon alt icon-beaker" href="/about">How it's made</a>
+          <a class="button-w-icon alt icon-beaker" href="/about">How it’s made</a>
       </div>
     </div>
     <div class="flex">
       <div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
-        <h1 class="beta">Uncap Happy Lager to find out how it's made</h1>
+        <h1 class="beta">Uncap Happy Lager to find out how it’s made</h1>
         <h2 class="subfont delta center">Our Experience &middot; Our Services &middot; And more</h2>
       </div>
     </div>
     <div class="flex">
       <div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
-          <hr class="horz-rule alt2">
-          <a class="big-arrow" href="/about">Go</a>
+        <hr class="horz-rule alt2">
+        <a class="big-arrow" href="/about">Go</a>
       </div>
     </div>
   </section>
 
-  <section id="testimonials" style="background-image: url(/assets/images/testimonials-background.jpg);">
+  <section id="testimonials">
     <div class="flex">
 
-      {% for block in entry.testimonial %}
-      <div class="g1-flex4 g2-flex2 g3-flex4 bubble">
-        <blockquote>{{ block.quote }}</blockquote>
-        {% set photo = block.photo.first() %}
-        {% if photo %}
-        <img class="" src="{{ photo.url }}" alt="{{ photo.title }}">
-        {% endif %}
-        <p><cite class="gamma reverse">{{ block.cite }}</cite></p>
-      </div>
+      {% for block in entry.testimonials %}
+        <div class="g1-flex4 g2-flex2 g3-flex4 bubble">
+          <blockquote>{{ block.quote }}</blockquote>
+          {% set photo = block.photo.first() %}
+          {% if photo %}
+            <img class="" src="{{ photo.url({ width: 84, height: 84 }) }}" alt="{{ photo.title }}">
+          {% endif %}
+          <p><cite class="gamma reverse">{{ block.cite }}</cite></p>
+        </div>
       {% endfor %}
 
     </div>
@@ -86,16 +86,13 @@ tap of ideas, wit and creativity.</p>
     <div class="flex">
       <div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
           <hr class="horz-rule alt3">
-          <a class="button-w-icon alt2 icon-beercan" href="/about">Our best Drinking Buddies</a>
+          <a class="button-w-icon alt2 icon-beercan">Our best Drinking Buddies</a>
           <ul class="logos">
-            {% set logos = entry.logo %}
-            {% if logos %}
-              {% for logo in logos %}
-                <li>
-                  <img src="{{ logo.getUrl() }}" alt="logo.title"/>
-                </li>
-              {% endfor %}
-            {% endif %}
+            {% for logo in entry.clientLogos %}
+              <li>
+                <img src="{{ logo.getUrl() }}" alt="logo.title"/>
+              </li>
+            {% endfor %}
           </ul>
       </div>
     </div>

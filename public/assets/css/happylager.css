@@ -57,7 +57,6 @@ select {
   src: url("../fonts/happylager.eot?#iefix-v8rntv") format("embedded-opentype"), url("../fonts/happylager.woff?-v8rntv") format("woff"), url("../fonts/happylager.ttf?-v8rntv") format("truetype"), url("../fonts/happylager.svg?-v8rntv#happylager") format("svg");
   font-weight: normal;
   font-style: normal; }
-
 [data-icon]:before {
   font-family: 'happylager';
   speak: none;
@@ -135,7 +134,7 @@ h1.alt, h1.horz-rule.alt3, h1.button-w-icon.alt2 {
 body.search h2 {
   line-height: 1.1;
   margin-bottom: 20px;
-  border-bottom: 1px solid lightgrey;
+  border-bottom: 1px solid lightgray;
   padding-bottom: 20px; }
 
 h3 {
@@ -677,7 +676,7 @@ strong {
 #bar {
   position: relative;
   height: 30px;
-  border-bottom: 3px solid lightgrey;
+  border-bottom: 3px solid lightgray;
   background: #222222;
   font-family: montserratregular, sans-serif;
   font-size: 10px;
@@ -762,7 +761,7 @@ strong {
 /* header */
 #header {
   position: relative;
-  border-bottom: 4px solid lightgrey; }
+  border-bottom: 4px solid lightgray; }
   #header .flex {
     padding-bottom: 0 !important; }
   #header .flex > * {
@@ -880,7 +879,7 @@ strong {
           letter-spacing: 0.1em;
           text-transform: uppercase;
           line-height: 20px;
-          color: lightgrey; }
+          color: lightgray; }
           #header nav li a em:before {
             content: '[ '; }
           #header nav li a em:after {
@@ -1104,7 +1103,7 @@ strong {
   #main .map-btn {
     margin-right: 0px; }
   #main .subnav {
-    background: lightgrey;
+    background: lightgray;
     margin-bottom: 2px; }
     #main .subnav ul {
       margin-top: 0;
@@ -1673,8 +1672,8 @@ nav.prev-next-entry {
         top: 43px; } }
     .button-w-icon.alt2:after {
       width: 50px; }
-  .button-w-icon:hover, .button-w-icon:focus {
-    color: lightgrey; }
+  .button-w-icon[href]:hover, .button-w-icon[href]:focus {
+    color: lightgray; }
   @media all and (min-width: 37.5em) {
     .button-w-icon {
       display: inline-block; } }
@@ -1711,7 +1710,7 @@ nav.prev-next-entry {
   .view-more:hover, .view-more:focus,
   .hero-cta:hover,
   .hero-cta:focus {
-    color: lightgrey; }
+    color: lightgray; }
 
 .hero-cta {
   font-size: 16px;
@@ -1818,7 +1817,8 @@ nav.prev-next-entry {
 #testimonials {
   border-top: 5px solid #cf6a34;
   padding-top: 100px;
-  padding-bottom: 60px; }
+  padding-bottom: 60px;
+  background-image: url(/assets/images/testimonials-background.jpg); }
   #testimonials .bubble {
     position: relative;
     margin-bottom: 40px;
@@ -1868,7 +1868,8 @@ nav.prev-next-entry {
       color: white;
       padding: 40px 40px 10px 40px;
       font-style: italic;
-      text-align: center; }
+      text-align: center;
+      height: 185px; }
       @media all and (min-width: 64.0625em) {
         #testimonials .bubble blockquote {
           text-align: left; } }

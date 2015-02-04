@@ -1626,7 +1626,7 @@ nav.prev-next-entry {
       width: 50px;
     }
   }
-  &:hover, &:focus {
+  &[href]:hover, &[href]:focus {
     color: $color-3;
   }
   @media all and (min-width: $mq1/$base+em) {
@@ -1785,6 +1785,7 @@ nav.prev-next-entry {
   border-top: 5px solid $color-4;
   padding-top: 100px;
   padding-bottom: 60px;
+  background-image: url(/assets/images/testimonials-background.jpg);
 
   .bubble {
     position: relative;
@@ -1844,6 +1845,7 @@ nav.prev-next-entry {
       padding: 40px 40px 10px 40px;
       font-style: italic;
       text-align: center;
+      height: 185px;
 
       @media all and (min-width: $mq3/$base+em) {
         text-align: left;
