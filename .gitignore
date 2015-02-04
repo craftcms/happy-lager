@@ -6,6 +6,5 @@
 node_modules
 *config.codekit
 craft/app/
-craft/storage/
 craft/config/license.key
 public/assets/site/_*
