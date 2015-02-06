@@ -14,7 +14,17 @@
 
 {% block main %}
 
-{% include "includes/articlebody" %}
+<article>
+	{% include "_includes/content_header" with { showFeaturedImage: true } %}
+
+	<div class="container">
+		<section>
+			{% include "_includes/article_heading" %}
+			<hr class="horz-rule">
+			{% include "_includes/article_body" %}
+		</section>
+	</div>
+</article>
 
 <footer class="authorinfo">
 	<div class="flex">

@@ -68,7 +68,16 @@
       {% endfor %}
     </div>
     {% else %}
-      {% include "includes/articlebody" %}
+
+      <article>
+        {% include "_includes/content_header" %}
+        <div class="container">
+          <section>
+            {% include "_includes/article_heading" %}
+            {% include "_includes/article_body" %}
+          </section>
+        </div>
+      </article>
 
     {% endif %}
   </section>
