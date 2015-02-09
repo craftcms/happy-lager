@@ -1,0 +1,26 @@
+{#
+ # Index Heading include template
+ # ------------------------------
+ #
+ # This template is used to output HTML for the Services and Work index
+ # headings.
+ #
+ # An `entry` variable is expected to be defined.
+-#}
+
+<header class="alt2">
+	<div class="flex">
+		<div class="g1-flex4 g2-flex6 g3-flex12">
+			<h1 class="alpha center reverse">{{ entry.title }}</h1>
+		</div>
+	</div>
+</header>
+
+<section class="alt">
+	<div class="flex">
+		<div class="g1-flex4 g2-flex6 g3-flex8 g3-offset2">
+			<h1 class="delta center subfont">{{ entry.heading }}</h1>
+			<div class="epsilon center">{{ entry.body }}</div>
+		</div>
+	</div>
+</section>

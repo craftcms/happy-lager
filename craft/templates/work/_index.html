@@ -1,29 +1,20 @@
 {#
- # Work index template
- # -------------------
+ # Work Index entry template
+ # -------------------------
  #
- # This template gets loaded when "/work" is requested.
+ # This template gets loaded whenever the Work index is requested, because
+ # the Work Index single-entry section's Template setting is set to
+ # "work/_index".
+ #
+ # An `entry` variable will be automatically passed to this template, which will
+ # be set to the Work Index entry.
 -#}
 
 {% extends "_layouts/site" %}
+{% set bodyClass = "work" %}
 
 {% block main %}
-	<header class="alt2">
-		<div class="flex">
-			<div class="g1-flex4 g2-flex6 g3-flex12">
-				<h1 class="alpha center reverse">{{ title }}</h1>
-			</div>
-		</div>
-	</header>
-
-	<section class="alt">
-		<div class="flex">
-			<div class="g1-flex4 g2-flex6 g3-flex8 g3-offset2">
-				<h1 class="delta center subfont">Every digital product has a story to tell. It’s our job to find it and tell it well.</h1>
-				<p class="epsilon center">While we were not meaning to rhyme, this statement holds true. The end goal is to connect with humans, and we use the basic principles of story to do just that. Browse our work, enjoy the visuals and discover what it takes to create something great.</p>
-			</div>
-		</div>
-	</section>
+	{% include "_includes/index_heading" %}
 
 	{# Loop through all of the Work section entries #}
 	{% for workEntry in craft.entries.section('work') %}

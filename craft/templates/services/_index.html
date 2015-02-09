@@ -14,21 +14,7 @@
 {% set bodyClass = "services" %}
 
 {% block main %}
-	<header class="alt2">
-		<div class="flex">
-			<div class="g1-flex4 g2-flex6 g3-flex12">
-				<h1 class="alpha center reverse">{{ entry.title }}</h1>
-			</div>
-		</div>
-	</header>
-
-	<section class="alt">
-		<div class="flex">
-			<div class="g1-flex4 g2-flex6 g3-flex8 g3-offset2 center">
-				{{ entry.indexHeading }}
-			</div>
-		</div>
-	</section>
+	{% include "_includes/index_heading" %}
 
 	<section>
 		<div class="flex">
