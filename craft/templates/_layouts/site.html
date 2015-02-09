@@ -1,17 +1,16 @@
 {#
 
-The site layout template
---------------------------------------------------------------------------------
-
-This layout template extends the _layouts/base.html layout, and defines the main
-site layout: the header, footer, and main content area.
-
-It’s never accessed directly. Instead it is extended by all of our main site
-templates.
-
-This template defines one block region, `main`, which should be extended by
-child templates to define the main contents for the page.
-
+ # The site layout template
+ # ------------------------
+ #
+ # This layout template extends the _layouts/base.html layout, and defines the
+ # main site layout: the header, footer, and main content area.
+ #
+ # It’s never accessed directly. Instead it is extended by all of our main site
+ # templates.
+ #
+ # This template defines one block region, `main`, which should be extended by
+ # child templates to define the main contents for the page.
 -#}
 
 {% extends "_layouts/base" %}
@@ -26,7 +25,9 @@ child templates to define the main contents for the page.
 
 {# Set the `bodyClass` variable to the entry's section handle if there is one,
    or the first URI segment (this is used by the parent template) #}
-{% set bodyClass = entry is defined ? entry.section.handle : craft.request.firstSegment %}
+{% if bodyClass is not defined %}
+	{% set bodyClass = entry is defined ? entry.section.handle : craft.request.firstSegment %}
+{% endif %}
 
 {# Set the `title` variable to the nav item that matches the first segment #}
 {% if nav[bodyClass] is defined %}
@@ -35,7 +36,6 @@ child templates to define the main contents for the page.
 
 
 {% block body %}
-
 	<div id="bar">
 		<div class="flex">
 			<div class="g1-flex4 g2-flex6 g3-flex12">
@@ -90,5 +90,4 @@ child templates to define the main contents for the page.
 			</div>
 		</div>
 	</footer>
-
 {% endblock %}

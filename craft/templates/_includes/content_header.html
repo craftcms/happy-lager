@@ -1,6 +1,6 @@
 {#
  # Content Header include template
- # -----------------------------------------------------------------------------
+ # -------------------------------
  #
  # This template is used to output HTML for the content header used in Work,
  # Services, and News entries.
@@ -24,7 +24,7 @@
 	{% set image = entry.featuredImage.first() %}
 	{% if image %}
 		<section>
-			<img src="{{ image.getUrl({width: 2000}) }}" alt="{{ image.title }}">
+			<img src="{{ image.getUrl({ width: 2000 }) }}" alt="{{ image.title }}">
 		</section>
 	{% endif %}
 {% endif %}

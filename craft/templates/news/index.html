@@ -1,7 +1,13 @@
+{#
+ # News index template
+ # -------------------
+ #
+ # This template gets loaded when "/news" is requested.
+-#}
+
 {% extends "_layouts/site" %}
 
 {% block main %}
-
 	<header class="alt2">
 		<div class="flex">
 			<div class="g1-flex4 g2-flex6 g3-flex12">
@@ -12,38 +18,54 @@
 
 	<div class="flex">
 
-		{% paginate craft.entries.section('news').limit(4) as entries %}
+		{# Paginate the News entries in groups of 4 #}
+		{% paginate craft.entries.section('news').limit(4) as newsEntries %}
 
-			{% for entry in entries %}
-				<article class="{% if loop.first and craft.request.pageNum == 1 %}featured {% endif %}news-entry">
-					{% set asset = entry.featuredImage.first() %}{% if asset %}
+			{# Loop through this page's News entries #}
+			{% for newsEntry in newsEntries %}
+
+				{# We give special treatment to the most recent News entry #}
+				{% set isFeaturedEntry = (loop.first and craft.request.pageNum == 1) %}
+
+				<article class="{% if isFeaturedEntry %}featured {% endif %}news-entry">
+					{% set image = newsEntry.featuredImage.first() %}
+					{% if image %}
 						<figure>
-							<a href="{{ entry.url }}">
-							{% if loop.first and craft.request.pageNum == 1 %}
-							<img src="{{ asset.getUrl() }}" alt="{{ asset.title }}" width="570" height="348">
-							{% else %}
-	          	<img src="{{ asset.getUrl('thumb') }}" alt="{{ asset.title }}" width="280" height="204">
-							{% endif %}
+							<a href="{{ newsEntry.url }}">
+								{% if isFeaturedEntry %}
+									<img src="{{ image.getUrl() }}" alt="{{ image.title }}" width="570" height="348">
+								{% else %}
+									<img src="{{ image.getUrl('thumb') }}" alt="{{ image.title }}" width="280" height="204">
+								{% endif %}
 							</a>
 						</figure>
-          {% endif %}
+					{% endif %}
+
 					<div class="summary-wrap">
 						<h3>
-						{% if entry.type == 'link' %}
-						<a href="{{ entry.urlLink }}">{{ entry.title }}</a>
-						{% else %}
-						{{ entry.getLink() }}
-						{% endif %}
+							{% if newsEntry.type == 'link' %}
+								<a href="{{ newsEntry.urlLink }}">{{ newsEntry.title }}</a>
+							{% else %}
+								{{ newsEntry.getLink() }}
+							{% endif %}
 						</h3>
-						{% if loop.first and craft.request.pageNum == 1 %}<a href="" class="author">{{ entry.author.name }}</a>{% endif %}
 
-						{% if entry.shortDescription %}
-							{{ entry.shortDescription }}
+						{% if isFeaturedEntry %}
+							<span class="author">{{ newsEntry.author.name }}</span>
 						{% endif %}
-						{% if entry.type == 'link' %}
-							<p><a href="{{ entry.urlLink }}" class="more-link">Check it out</a></p>
+
+						{{ newsEntry.shortDescription }}
+
+						{% if newsEntry.type == 'link' %}
+							<p><a href="{{ newsEntry.urlLink }}" class="more-link">Check it out</a></p>
 						{% else %}
-							<p>{% if loop.first and craft.request.pageNum == 1 %}{% else %}<a href="" class="author">{{ entry.author.getFullName() }}</a> <span class="separator">|</span> {% endif %}<a href="{{ entry.url }}" class="more-link">Read More</a></p>
+							<p>
+								{% if not isFeaturedEntry %}
+									<a href="" class="author">{{ newsEntry.author.getFullName() }}</a>
+									<span class="separator">|</span>
+								{% endif %}
+								<a href="{{ newsEntry.url }}" class="more-link">Read More</a>
+							</p>
 						{% endif %}
 					</div>
 				</article>
@@ -53,24 +75,26 @@
 
 			<div class="pagination">
 				<ul>
-					{% if paginate.prevUrl %}<li><a href="{{ paginate.prevUrl }}" class="pag-prev-link">Previous Page</a></li>{% endif %}
+					{% if paginate.prevUrl %}
+						<li><a href="{{ paginate.prevUrl }}" class="pag-prev-link">Previous Page</a></li>
+					{% endif %}
 
-		    {% for page, url in paginate.getPrevUrls(5) %}
-		        <li><a href="{{ url }}">{{ page }}</a></li>
-		    {% endfor %}
+					{% for page, url in paginate.getPrevUrls(5) %}
+						<li><a href="{{ url }}">{{ page }}</a></li>
+					{% endfor %}
 
-		    <li class="current">{{ paginate.currentPage }}</li>
+					<li class="current">{{ paginate.currentPage }}</li>
 
-		    {% for page, url in paginate.getNextUrls(5) %}
-		        <li><a href="{{ url }}">{{ page }}</a></li>
-		    {% endfor %}
+					{% for page, url in paginate.getNextUrls(5) %}
+						<li><a href="{{ url }}">{{ page }}</a></li>
+					{% endfor %}
 
-		    {% if paginate.nextUrl %}<li><a href="{{ paginate.nextUrl }}" class="pag-next-link">Next Page</a></li>{% endif %}
-
+					{% if paginate.nextUrl %}
+						<li><a href="{{ paginate.nextUrl }}" class="pag-next-link">Next Page</a></li>
+					{% endif %}
+				</ul>
 			</div>
-
 		{% endpaginate %}
 
 	</div>
-
 {% endblock %}

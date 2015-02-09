@@ -1,15 +1,17 @@
 {#
-	# About template
-	# -------------------
-	#
-	# Single about template
-	#
-	#
-	#}
+ # About page template
+ # -------------------
+ #
+ # This template gets loaded whenever the site's About page is requested,
+ # because the "About" single-entry section's Template setting is set to "about".
+ #
+ # An `entry` variable will be automatically passed to this template, which will
+ # be set to the About entry.
+-#}
+
 {% extends "_layouts/site" %}
 
 {% block main %}
-
 	<header class="alt">
 		<div class="flex">
 			<div class="g1-flex4 g2-flex6 g3-flex12">
@@ -21,13 +23,11 @@
 		<div class="flex">
 			<div class="g1-flex4 g2-flex6 g3-flex8 g3-offset2">
 				{% if entry.infoHeroTopText %}
-				<h1 class="delta reverse center subfont">{{ entry.infoHeroTopText }}</h1>
+					<h1 class="delta reverse center subfont">{{ entry.infoHeroTopText }}</h1>
 				{% endif %}
-
 				{% if entry.infoHeroBottomText %}
-				<p class="epsilon center reverse">{{ entry.infoHeroBottomText }}</p>
+					<p class="epsilon center reverse">{{ entry.infoHeroBottomText }}</p>
 				{% endif %}
-
 			</div>
 		</div>
 	</section>
@@ -35,11 +35,10 @@
 		<div class="flex">
 			<div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
 				{% if entry.firstSectionHeader %}
-				<h1 class="beta center">{{ entry.firstSectionHeader }}</h1>
+					<h1 class="beta center">{{ entry.firstSectionHeader }}</h1>
 				{% endif %}
-
 				{% if entry.firstSectionSubheader %}
-				<p class="delta center subfont caps">{{ entry.firstSectionSubheader }}</p>
+					<p class="delta center subfont caps">{{ entry.firstSectionSubheader }}</p>
 				{% endif %}
 			</div>
 		</div>
@@ -53,12 +52,12 @@
 			<div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
 				<div class="g1-flex4 g2-flex6 g3-flex6 flex-nested">
 					{% if entry.firstSectionBodyLeft %}
-					{{ entry.firstSectionBodyLeft }}
+						{{ entry.firstSectionBodyLeft }}
 					{% endif %}
 				</div>
 				<div class="g1-flex4 g2-flex6 g3-flex6 flex-nested push">
 					{% if entry.firstSectionBodyRight %}
-					{{ entry.firstSectionBodyRight }}
+						{{ entry.firstSectionBodyRight }}
 					{% endif %}
 				</div>
 			</div>
@@ -71,11 +70,11 @@
 		<div class="flex">
 			<div class="g1-flex4 g2-flex6 g3-flex8 g3-offset2">
 				{% if entry.secondSectionHeader %}
-				<h1 class="beta center">{{ entry.secondSectionHeader }}</h1>
+					<h1 class="beta center">{{ entry.secondSectionHeader }}</h1>
 				{% endif %}
 
 				{% if entry.secondSectionSubheader %}
-				<p class="delta center subfont caps">{{ entry.secondSectionSubheader }}</p>
+					<p class="delta center subfont caps">{{ entry.secondSectionSubheader }}</p>
 				{% endif %}
 			</div>
 		</div>
@@ -87,7 +86,7 @@
 		<div class="flex">
 			<div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
 				{% if entry.secondSectionBody %}
-				{{ entry.secondSectionBody }}
+					{{ entry.secondSectionBody }}
 				{% endif %}
 			</div>
 		</div>
@@ -100,7 +99,7 @@
 		<div class="flex">
 			<div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
 				{% if entry.thirdSectionHeader %}
-				<h1 class="beta center">{{ entry.thirdSectionHeader }}</h1>
+					<h1 class="beta center">{{ entry.thirdSectionHeader }}</h1>
 				{% endif %}
 			</div>
 		</div>
@@ -113,38 +112,38 @@
 				{% endif %}
 				<dl>
 					{% if entry.personnel1Name %}
-					<dt>{{ entry.personnel1Name }}</dt>
+						<dt>{{ entry.personnel1Name }}</dt>
 					{% endif %}
 					{% if entry.personnel1Name %}
-					<dd>{{ entry.personnel1Title }}</dd>
+						<dd>{{ entry.personnel1Title }}</dd>
 					{% endif %}
 				</dl>
 			</div>
 			<div class="g1-flex4 g2-flex2 g3-flex4">
 				{% set person2Image = entry.personnel2Image.first() %}
 				{% if person2Image %}
-				<img src="{{ person2Image.getUrl('small') }}" alt="{{ person2Image.title }}" />
+					<img src="{{ person2Image.getUrl('small') }}" alt="{{ person2Image.title }}" />
 				{% endif %}
 				<dl>
 					{% if entry.personnel2Name %}
-					<dt>{{ entry.personnel2Name }}</dt>
+						<dt>{{ entry.personnel2Name }}</dt>
 					{% endif %}
 					{% if entry.personnel2Name %}
-					<dd>{{ entry.personnel2Title }}</dd>
+						<dd>{{ entry.personnel2Title }}</dd>
 					{% endif %}
 				</dl>
 			</div>
 			<div class="g1-flex4 g2-flex2 g3-flex4">
 				{% set person3Image = entry.personnel3Image.first() %}
 				{% if person3Image %}
-				<img src="{{ person3Image.getUrl('small') }}" alt="{{ person3Image.title }}" />
+					<img src="{{ person3Image.getUrl('small') }}" alt="{{ person3Image.title }}" />
 				{% endif %}
 				<dl>
 					{% if entry.personnel3Name %}
-					<dt>{{ entry.personnel3Name }}</dt>
+						<dt>{{ entry.personnel3Name }}</dt>
 					{% endif %}
 					{% if entry.personnel3Name %}
-					<dd>{{ entry.personnel3Title }}</dd>
+						<dd>{{ entry.personnel3Title }}</dd>
 					{% endif %}
 				</dl>
 			</div>
@@ -154,42 +153,41 @@
 		<div class="flex">
 			<div class="g1-flex4 g2-flex6 g3-flex5">
 				{% if entry.contactSectionHeader %}
-				<h1 class="gamma subfont alt">{{ entry.contactSectionHeader }}</h1>
+					<h1 class="gamma subfont alt">{{ entry.contactSectionHeader }}</h1>
 				{% endif %}
 				{% if entry.contactSectionAddress %}
-				<p class="delta subfont caps address">{{ entry.contactSectionAddress }}</p>
+					<p class="delta subfont caps address">{{ entry.contactSectionAddress }}</p>
 				{% endif %}
 				<ul>
 					{% if entry.contactSectionPhone1 %}
-					<li class="phone">{{ entry.contactSectionPhone1 }}</li>
+						<li class="phone">{{ entry.contactSectionPhone1 }}</li>
 					{% endif %}
 					{% if entry.contactSectionPhone2 %}
-					<li class="phone">{{ entry.contactSectionPhone2 }}</li>
+						<li class="phone">{{ entry.contactSectionPhone2 }}</li>
 					{% endif %}
 					{% if entry.contactSectionPhone3 %}
-					<li class="phone">{{ entry.contactSectionPhone3 }}</li>
+						<li class="phone">{{ entry.contactSectionPhone3 }}</li>
 					{% endif %}
 				</ul>
 				<ul class="horz-list">
 					{% if entry.contactSectionEmail %}
-					<li>
-						<a href="mailto:{{ entry.contactSectionEmail }}" class="subfont caps email-us-btn">Email Us</a>
-					</li>
+						<li>
+							<a href="mailto:{{ entry.contactSectionEmail }}" class="subfont caps email-us-btn">Email Us</a>
+						</li>
 					{% endif %}
 					{% if entry.contactSectionMapLink %}
-					<li>
-						<a href="{{ entry.contactSectionMapLink }}" class="subfont caps map-btn">Map</a>
-					</li>
+						<li>
+							<a href="{{ entry.contactSectionMapLink }}" class="subfont caps map-btn">Map</a>
+						</li>
 					{% endif %}
 				</ul>
 			</div>
 			<div class="g1-flex4 g2-flex6 g3-flex7">
 				{% set contactImage = entry.contactSectionImage.first() %}
 				{% if contactImage %}
-				<img src="{{ contactImage.getUrl('medium') }}" alt="{{ contactImage.title }}" />
+					<img src="{{ contactImage.getUrl('medium') }}" alt="{{ contactImage.title }}" />
 				{% endif %}
 			</div>
 		</div>
 	</section>
-
 {% endblock %}
