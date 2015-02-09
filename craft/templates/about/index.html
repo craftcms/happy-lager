@@ -22,11 +22,11 @@
 	<section class="info-hero alt">
 		<div class="flex">
 			<div class="g1-flex4 g2-flex6 g3-flex8 g3-offset2">
-				{% if entry.infoHeroTopText %}
-					<h1 class="delta reverse center subfont">{{ entry.infoHeroTopText }}</h1>
+				{% if entry.heading|length %}
+					<h1 class="delta reverse center subfont">{{ entry.heading }}</h1>
 				{% endif %}
-				{% if entry.infoHeroBottomText %}
-					<p class="epsilon center reverse">{{ entry.infoHeroBottomText }}</p>
+				{% if entry.body|length %}
+					<div class="epsilon center reverse">{{ entry.body }}</div>
 				{% endif %}
 			</div>
 		</div>

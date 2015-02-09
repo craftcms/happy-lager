@@ -19,8 +19,12 @@
 <section class="alt">
 	<div class="flex">
 		<div class="g1-flex4 g2-flex6 g3-flex8 g3-offset2">
-			<h1 class="delta center subfont">{{ entry.heading }}</h1>
-			<div class="epsilon center">{{ entry.body }}</div>
+			{% if entry.heading|length %}
+				<h1 class="delta center subfont">{{ entry.heading }}</h1>
+			{% endif %}
+			{% if entry.body|length %}
+				<div class="epsilon center">{{ entry.body }}</div>
+			{% endif %}
 		</div>
 	</div>
 </section>
