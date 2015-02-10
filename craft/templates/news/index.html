@@ -24,6 +24,9 @@
 			{# Loop through this page's News entries #}
 			{% for newsEntry in newsEntries %}
 
+				{# Figure out where this entry should link to #}
+				{% set url = newsEntry.type.handle == 'link' ? newsEntry.linkUrl : newsEntry.url %}
+
 				{# We give special treatment to the most recent News entry #}
 				{% set isFeaturedEntry = (loop.first and craft.request.pageNum == 1) %}
 
@@ -31,7 +34,7 @@
 					{% set image = newsEntry.featuredImage.first() %}
 					{% if image %}
 						<figure>
-							<a href="{{ newsEntry.url }}">
+							<a href="{{ url }}">
 								{% if isFeaturedEntry %}
 									<img src="{{ image.getUrl() }}" alt="{{ image.title }}" width="570" height="348">
 								{% else %}
@@ -42,13 +45,7 @@
 					{% endif %}
 
 					<div class="summary-wrap">
-						<h3>
-							{% if newsEntry.type == 'link' %}
-								<a href="{{ newsEntry.urlLink }}">{{ newsEntry.title }}</a>
-							{% else %}
-								{{ newsEntry.getLink() }}
-							{% endif %}
-						</h3>
+						<h3><a href="{{ url }}">{{ newsEntry.title }}</a></h3>
 
 						{% if isFeaturedEntry %}
 							<span class="author">{{ newsEntry.author.name }}</span>
@@ -56,17 +53,17 @@
 
 						{{ newsEntry.shortDescription }}
 
-						{% if newsEntry.type == 'link' %}
-							<p><a href="{{ newsEntry.urlLink }}" class="more-link">Check it out</a></p>
-						{% else %}
-							<p>
+						<p>
+							{% if newsEntry.type == 'link' %}
+								<a href="{{ url }}" class="more-link">Check it out</a>
+							{% else %}
 								{% if not isFeaturedEntry %}
-									<a href="" class="author">{{ newsEntry.author.getFullName() }}</a>
+									<span class="author">{{ newsEntry.author.getFullName() }}</span>
 									<span class="separator">|</span>
 								{% endif %}
-								<a href="{{ newsEntry.url }}" class="more-link">Read More</a>
-							</p>
-						{% endif %}
+								<a href="{{ url }}" class="more-link">Read More</a>
+							{% endif %}
+						</p>
 					</div>
 				</article>
 			{% endfor %}
