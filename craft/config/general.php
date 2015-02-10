@@ -10,6 +10,10 @@
 return array(
 	'*' => array(
 		'devMode' => true,
+		'environmentVariables' => array(
+			'assetsBaseUrl' => '/assets',
+			'assetsBasePath' => './assets',
+		)
 	),
 
 	// Give CodeKit a custom site URL
