@@ -4,7 +4,7 @@
 // ---------------------------------------------------
 
 // asset path
-$asset_path: "../images/";
+$images_path: "../images/";
 
 // fonts
 $font-primary: "montserratregular", serif;
@@ -694,17 +694,17 @@ $navSpacing: 50px;
 		background-position: 50% 50% !important;
 
 		body.about & {
-      background: #c6c5c5 url($asset_path+'headingbg-gray.svg');
+      background: #c6c5c5 url($images_path+'headingbg-gray.svg');
     }
 		body.services & {
-      background: #fbd334 url($asset_path+'headingbg-yellow.svg');
+      background: #fbd334 url($images_path+'headingbg-yellow.svg');
     }
 		body.work & {
-      background: #56b1be url($asset_path+'headingbg-blue.svg');
+      background: #56b1be url($images_path+'headingbg-blue.svg');
     }
 		body.news &,
     body.search & {
-      background: #cf6a34 url($asset_path+'headingbg-orange.svg');
+      background: #cf6a34 url($images_path+'headingbg-orange.svg');
     }
 
 		h1 {
@@ -772,7 +772,7 @@ $navSpacing: 50px;
 		}
 	}
 	.info-hero {
-		background: #b75e2e url($asset_path+'about-background-image-1.jpg');
+		background: #b75e2e url($images_path+'about-background-image-1.jpg');
 		background-position: center top;
 		padding-top: 60px;
 		padding-bottom: 60px;
@@ -793,7 +793,7 @@ $navSpacing: 50px;
 			right: 0;
 			top: 50%;
 			margin-top: -11px;
-			background: url($asset_path+'icon-arrow.svg') no-repeat right center;
+			background: url($images_path+'icon-arrow.svg') no-repeat right center;
 			background-size: 20px 20px;
 			@include rotate(-90deg);
 		}
@@ -906,7 +906,7 @@ $navSpacing: 50px;
         right: 0;
         top: 50%;
         margin-top: -11px;
-        background: url($asset_path+'icon-arrow.svg') no-repeat right center;
+        background: url($images_path+'icon-arrow.svg') no-repeat right center;
         background-size: 20px 20px;
         @include rotate(-90deg);
       }
@@ -986,7 +986,7 @@ $navSpacing: 50px;
         right: -6px;
         top: 0;
         margin-top: 2px;
-        background: url($asset_path+'icon-arrow.svg') no-repeat right center;
+        background: url($images_path+'icon-arrow.svg') no-repeat right center;
         background-size: 20px 20px;
         @include rotate(-90deg);
       }
@@ -1065,7 +1065,7 @@ $navSpacing: 50px;
       &:after {
         top: 50%;
         margin-top: -11px;
-        background: url($asset_path+'icon-arrow-white.svg') no-repeat right center;
+        background: url($images_path+'icon-arrow-white.svg') no-repeat right center;
       }
     }
   }
@@ -1113,7 +1113,7 @@ $navSpacing: 50px;
     left: 0;
     top: 50%;
     margin-top: -13px;
-    background: url($asset_path+'icon-arrow.svg') no-repeat right center;
+    background: url($images_path+'icon-arrow.svg') no-repeat right center;
     background-size: 20px 20px;
     @include rotate(-90deg);
   }
@@ -1267,7 +1267,7 @@ nav.prev-next-entry {
     left: 50%;
     bottom: 17px;
     margin-left: -10px;
-    background: url($asset_path+'icon-arrow-alt.svg') no-repeat right center;
+    background: url($images_path+'icon-arrow-alt.svg') no-repeat right center;
     background-size: 20px 20px;
   }
 
@@ -1297,7 +1297,7 @@ nav.prev-next-entry {
     top: 0;
     width: 23px;
     height: 31px;
-    background: url($asset_path+'icon-beer.png') no-repeat left top;
+    background: url($images_path+'icon-beer.png') no-repeat left top;
     background-size: 23px 31px;
   }
 }
@@ -1306,7 +1306,7 @@ nav.prev-next-entry {
   &:before {
     width: 26px;
     height: 28px;
-    background-image: url($asset_path+'icon-beaker.png');
+    background-image: url($images_path+'icon-beaker.png');
     background-size: 26px 28px;
   }
 }
@@ -1315,7 +1315,7 @@ nav.prev-next-entry {
   &:before {
     width: 29px;
     height: 29px;
-    background-image: url($asset_path+'icon-news.png');
+    background-image: url($images_path+'icon-news.png');
     background-size: 29px 29px;
   }
 }
@@ -1324,7 +1324,7 @@ nav.prev-next-entry {
   &:before {
     width: 16px;
     height: 30px;
-    background-image: url($asset_path+'icon-beercan.png');
+    background-image: url($images_path+'icon-beercan.png');
     background-size: 16px 30px;
   }
 }
@@ -1382,7 +1382,7 @@ nav.prev-next-entry {
         display: block;
         width: 312px;
         height: 54px;
-        background: url($asset_path+'glassfull.png') no-repeat center center;
+        background: url($images_path+'glassfull.png') no-repeat center center;
         background-size: 312px 54px;
         text-align: center;
         margin: 5px auto 0;
@@ -1524,7 +1524,7 @@ nav.prev-next-entry {
     right: 0;
     top: 10px;
     margin-left: 0;
-    background: url($asset_path+'icon-arrow-white.svg') no-repeat right center;
+    background: url($images_path+'icon-arrow-white.svg') no-repeat right center;
     background-size: 20px 20px;
     @include rotate(-90deg);
   }
@@ -1548,7 +1548,7 @@ nav.prev-next-entry {
 }
 
 #how-made {
-  background: url($asset_path+'how-made-background.jpg') repeat-x center bottom;
+  background: url($images_path+'how-made-background.jpg') repeat-x center bottom;
   padding-top: 20px;
   padding-bottom: 20px;
 
@@ -1585,7 +1585,7 @@ nav.prev-next-entry {
     right: 0;
     top: 10px;
     margin-left: 0;
-    background: url($asset_path+'icon-arrow.svg') no-repeat right center;
+    background: url($images_path+'icon-arrow.svg') no-repeat right center;
     background-size: 45px 45px;
     @include rotate(-90deg);
   }
@@ -1654,7 +1654,7 @@ nav.prev-next-entry {
   border-top: 5px solid $color-4;
   padding-top: 100px;
   padding-bottom: 60px;
-  background-image: url(/assets/images/testimonials-background.jpg);
+  background-image: url($images_path+'testimonials-background.jpg');
 
   .bubble {
     position: relative;
@@ -1695,7 +1695,7 @@ nav.prev-next-entry {
       content: '';
       width: 100%;
       height: 415px;
-      background: url($asset_path+'quote-bubble.png') no-repeat left top;
+      background: url($images_path+'quote-bubble.png') no-repeat left top;
       display: none;
       top: 0;
       left: 15px;
@@ -1787,7 +1787,7 @@ nav.prev-next-entry {
         right: 16px;
         top: 14px;
         margin-left: 0;
-        background: url($asset_path+'icon-arrow-white.svg') no-repeat right center;
+        background: url($images_path+'icon-arrow-white.svg') no-repeat right center;
         background-size: 20px 20px;
         @include rotate(-90deg);
       }

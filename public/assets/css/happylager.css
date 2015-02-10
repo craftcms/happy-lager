@@ -1755,7 +1755,7 @@ nav.prev-next-entry {
   border-top: 5px solid #cf6a34;
   padding-top: 100px;
   padding-bottom: 60px;
-  background-image: url(/assets/images/testimonials-background.jpg); }
+  background-image: url("../images/testimonials-background.jpg"); }
   #testimonials .bubble {
     position: relative;
     margin-bottom: 40px;
