@@ -313,6 +313,9 @@ ul.alt, ul.horz-rule.alt3, ul.button-w-icon.alt2 {
     content: "";
     display: table;
     clear: both; }
+  .flex.flex-full {
+    padding: 60px 0;
+    max-width: none; }
   .flex .g1-flex1 {
     float: left;
     width: 33.33333%;
@@ -482,6 +485,16 @@ ul.alt, ul.horz-rule.alt3, ul.button-w-icon.alt2 {
       display: none; }
     .flex .g3-offset1 {
       margin-left: 8.4%; }
+      .flex .g3-offset1 .flex-nested.g3-flex6.breakout {
+        width: calc(50% + 100px); }
+        .flex .g3-offset1 .flex-nested.g3-flex6.breakout:not(.push) {
+          margin-left: -100px;
+          margin-right: 20px;
+          margin-right: 1.25rem; }
+        .flex .g3-offset1 .flex-nested.g3-flex6.breakout.push {
+          margin-right: -100px;
+          margin-left: 20px;
+          margin-left: 1.25rem; }
     .flex .g3-offset2 {
       margin-left: 16.8%; }
     .flex .g3-offset3 {
@@ -646,6 +659,36 @@ video {
     top: 0;
     left: 0;
     display: block; }
+
+.pullquote p,
+blockquote {
+  border-top: 3px solid #222222;
+  border-bottom: 3px solid #222222;
+  padding: 66px 10px; }
+  .flex-full .pullquote p, .flex-full
+  blockquote {
+    border-top: none;
+    border-bottom: none; }
+
+.pullquote {
+  padding: 0.5em 0; }
+
+blockquote {
+  margin: 30px 0;
+  text-align: center; }
+  blockquote p {
+    margin: 0;
+    font-family: steelfish_rgbold, sans-serif;
+    text-transform: uppercase;
+    font-size: 46px;
+    letter-spacing: 0.1em; }
+    blockquote p:before {
+      content: '“'; }
+    blockquote p:after {
+      content: '”'; }
+  blockquote footer {
+    margin: 10px 0;
+    font-style: italic; }
 
 body {
   background: #f8f8f9;
@@ -909,22 +952,6 @@ strong {
     list-style-type: none; }
   #main ol {
     list-style-type: decimal; }
-  #main .fullimage {
-    height: 320px;
-    background: no-repeat 50% 50%; }
-    #main .fullimage.tall {
-      height: 480px; }
-  #main .fullquote {
-    color: #fff;
-    background: #446c77;
-    text-align: center; }
-    #main .fullquote .container {
-      max-width: 960px; }
-    body.work #main .fullquote {
-      padding-top: 80px;
-      padding-bottom: 80px;
-      margin-top: 60px;
-      margin-bottom: 60px; }
   #main header {
     text-align: center;
     background-position: 50% 50% !important; }
@@ -940,21 +967,6 @@ strong {
       letter-spacing: 6px; }
     #main header + .flex {
       margin-top: 60px; }
-  #main article blockquote {
-    text-align: center; }
-    #main article blockquote p {
-      margin: 0;
-      font-family: steelfish_rgbold, sans-serif;
-      text-transform: uppercase;
-      font-size: 46px;
-      letter-spacing: 0.1em; }
-      #main article blockquote p:before {
-        content: '“'; }
-      #main article blockquote p:after {
-        content: '”'; }
-    #main article blockquote footer {
-      margin: 10px 0;
-      font-style: italic; }
   #main article .container {
     max-width: 764px;
     padding: 3.2em 20px; }
@@ -964,86 +976,6 @@ strong {
         padding-left: 0px; } }
     body.services #main article .container {
       max-width: 1024px; }
-  #main article .block {
-    box-sizing: border-box;
-    /* block positions */ }
-    #main article .block.text {
-      margin: 1.6em auto; }
-    body.services #main article .block.heading h3 {
-      margin-bottom: 10px; }
-    body.services #main article .block.heading:nth-of-type h3 {
-      margin-bottom: 10px; }
-    #main article .block.heading + .block.text {
-      margin-top: 2.2em; }
-      body.services #main article .block.heading + .block.text {
-        margin-top: 0;
-        max-width: 700px;
-        text-align: center; }
-    #main article .block.pullquote, #main article .block.quote, #main article .block.image {
-      margin: 2.2em 0; }
-    #main article .block.pullquote, #main article .block.quote {
-      border: solid #222;
-      border-width: 3px 0;
-      padding: 66px 10px; }
-      body.services #main article .block.pullquote, body.services #main article .block.quote {
-        border-width: 0 0;
-        padding: 0; }
-    #main article .block.pullquote p {
-      margin: 0;
-      font-family: montserratbold, sans-serif;
-      text-transform: uppercase;
-      font-size: 18px;
-      letter-spacing: 0.05em;
-      text-align: center; }
-    #main article .block.image img {
-      display: block; }
-    #main article .block.left, #main article .block.drop-left {
-      float: left;
-      margin-top: 0;
-      margin-left: -80px;
-      margin-right: 20px;
-      width: 440px; }
-    #main article .block.right, #main article .block.drop-right {
-      float: right;
-      margin-top: 0;
-      margin-right: -80px;
-      margin-left: 80px;
-      width: 440px; }
-    #main article .block.drop-left, #main article .block.drop-right {
-      box-sizing: content-box;
-      margin-top: 11.2em !important;
-      border: 3.2em solid transparent;
-      shape-outside: inset(0) border-box;
-      shape-margin: 0; }
-    #main article .block.drop-left {
-      margin-right: 0;
-      border-left-width: 0;
-      border-right-width: 80px; }
-    #main article .block.drop-right {
-      margin-left: 0;
-      border-right-width: 0; }
-    #main article .block.center {
-      margin: 3.2em 0;
-      clear: both;
-      margin-left: -80px;
-      margin-right: -80px; }
-      #main article .block.center.image {
-        margin-left: 0;
-        margin-right: 0; }
-        #main article .block.center.image img {
-          width: 100%;
-          max-width: 640px;
-          margin: 0 auto; }
-    #main article .block.left + .block.right {
-      margin-left: 0; }
-    #main article .block.right + .block.left {
-      margin-right: 0; }
-    #main article .block.left + .block.right + .block, #main article .block.right + .block.left + .block {
-      clear: both; }
-    #main article .block:first-child {
-      margin-top: 0; }
-    #main article .block:last-child {
-      margin-bottom: 0; }
   #main article .authorinfo {
     margin: 3.2em 0;
     border: solid #222;
@@ -1881,9 +1813,6 @@ nav.prev-next-entry {
       text-transform: uppercase;
       letter-spacing: 2px; }
 
-@media screen and (min-width: 1441px) {
-  #main .fullimage {
-    background-size: 100%; } }
 /* footer */
 #footer {
   background: #6b6a6a;

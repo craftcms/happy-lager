@@ -10,6 +10,11 @@
   max-width: $max-width/$base+rem;
   margin: 0 auto;
 
+  &.flex-full {
+    padding: 60px 0;
+    max-width: none;
+  }
+
   // Grid class objects
   @for $i from 1 through $sm-column-count {
     .g1-flex#{$i} {
@@ -94,6 +99,21 @@
     }
     .g3-offset1 {
       margin-left: 8.4%;
+
+      .flex-nested.g3-flex6.breakout {
+        width: calc(50% + 100px);
+
+        &:not(.push) {
+          margin-left: -100px;
+          margin-right: $gutter+px;
+          margin-right: $gutter/$base+rem;
+        }
+        &.push {
+          margin-right: -100px;
+          margin-left: $gutter+px;
+          margin-left: $gutter/$base+rem;
+        }
+      }
     }
     .g3-offset2 {
       margin-left: 16.8%;

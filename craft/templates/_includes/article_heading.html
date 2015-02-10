@@ -7,10 +7,15 @@
  # An `entry` variable is expected to be defined.
 -#}
 
-{% if entry.heading %}
-	<h2 class="beta center">{{ entry.heading }}</h2>
-{% endif %}
-
-{% if entry.subheading %}
-	<h3 class="delta center subfont">{{ entry.subheading }}</h3>
-{% endif %}
+<div class="flex">
+	<div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
+		<hr class="horz-rule">
+		{% if entry.heading %}
+			<h2 class="beta center">{{ entry.heading }}</h2>
+		{% endif %}
+		{% if entry.subheading %}
+			<h3 class="delta center subfont">{{ entry.subheading }}</h3>
+		{% endif %}
+		<hr class="horz-rule">
+	</div>
+</div>

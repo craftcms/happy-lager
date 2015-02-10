@@ -24,7 +24,7 @@
 	{% set image = entry.featuredImage.first() %}
 	{% if image %}
 		<section>
-			<img src="{{ image.getUrl({ width: 2000 }) }}" alt="{{ image.title }}">
+			<img class="contain-media" src="{{ image.getUrl({ width: 1440, height: 360 }) }}" alt="{{ image.title }}">
 		</section>
 	{% endif %}
 {% endif %}

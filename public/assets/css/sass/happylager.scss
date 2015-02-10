@@ -158,11 +158,6 @@ $barHeight: 30px;
 	text-transform: uppercase;
 }
 
-@mixin noMargins {
-	&:first-child { margin-top: 0; }
-	&:last-child { margin-bottom: 0; }
-}
-
 // transitions
 @mixin transition($property, $duration) {
 	-webkit-transition: $property $duration ease-in-out;
@@ -363,6 +358,44 @@ video {
     top: 0;
     left: 0;
     display: block;
+  }
+}
+
+// quotes
+.pullquote p,
+blockquote {
+    border-top: 3px solid $color-1;
+    border-bottom: 3px solid $color-1;
+    padding: 66px 10px;
+
+    .flex-full & {
+      border-top: none;
+      border-bottom: none;
+    }
+}
+.pullquote {
+  padding: 0.5em 0;
+}
+blockquote {
+  margin: 30px 0;
+  text-align: center;
+
+  p {
+    margin: 0;
+    @include headingText;
+    font-size: 46px;
+    letter-spacing: 0.1em;
+
+    &:before {
+      content: '“';
+    }
+    &:after {
+      content: '”';
+    }
+  }
+  footer {
+    margin: 10px 0;
+    font-style: italic;
   }
 }
 
@@ -656,32 +689,6 @@ $navSpacing: 50px;
     list-style-type: decimal;
   }
 
-	.fullimage {
-    height: 320px;
-    background: no-repeat 50% 50%;
-
-		&.tall {
-      height: 480px;
-    }
-	}
-
-	.fullquote {
-    color: #fff;
-    background: #446c77;
-    text-align: center;
-
-		.container {
-      max-width: 960px;
-    }
-
-    body.work & {
-      padding-top: 80px;
-      padding-bottom: 80px;
-      margin-top: 60px;
-      margin-bottom: 60px;
-    }
-	}
-
 	header {
 		text-align: center;
 		background-position: 50% 50% !important;
@@ -712,28 +719,6 @@ $navSpacing: 50px;
 
 	article {
 
-		blockquote {
-      text-align: center;
-
-			p {
-        margin: 0;
-        @include headingText;
-        font-size: 46px;
-        letter-spacing: 0.1em;
-
-				&:before {
-          content: '“';
-        }
-				&:after {
-          content: '”';
-        }
-			}
-			footer {
-        margin: 10px 0;
-        font-style: italic;
-      }
-		}
-
 		.container {
       max-width: 764px;
       padding: 3.2em 20px;
@@ -751,122 +736,6 @@ $navSpacing: 50px;
         }
       }
 		}
-    .block {
-      box-sizing: border-box;
-
-      &.text {
-        margin: 1.6em auto;
-      }
-      &.heading h3 {
-        body.services & {
-          margin-bottom: 10px;
-        }
-      }
-      &.heading:nth-of-type h3 {
-        body.services & {
-          margin-bottom: 10px;
-        }
-      }
-      &.heading + .block.text {
-        margin-top: 2.2em;
-
-        body.services & {
-          margin-top: 0;
-          max-width: 700px;
-          text-align: center;
-        }
-      }
-
-      &.pullquote,
-      &.quote,
-      &.image {
-        margin: 2.2em 0;
-      }
-
-      &.pullquote,
-      &.quote {
-        border: solid #222;
-        border-width: 3px 0;
-        padding: 66px 10px;
-
-        body.services & {
-          border-width: 0 0;
-          padding: 0;
-        }
-      }
-
-      &.pullquote p {
-        margin: 0;
-        @include subheadingText;
-        text-align: center;
-      }
-
-      &.image img {
-        display: block;
-      }
-
-      /* block positions */
-      &.left,
-      &.drop-left {
-        float: left;
-        margin-top: 0;
-        margin-left: -80px;
-        margin-right: 20px;
-        width: 440px;
-      }
-
-      &.right,
-      &.drop-right {
-        float: right;
-        margin-top: 0;
-        margin-right: -80px;
-        margin-left: 80px;
-        width: 440px;
-      }
-
-      &.drop-left,
-      &.drop-right {
-        box-sizing: content-box;
-        margin-top: 11.2em !important;
-        border: 3.2em solid transparent;
-        shape-outside: inset(0)
-        border-box; shape-margin: 0;
-      }
-      &.drop-left {
-        margin-right: 0;
-        border-left-width: 0;
-        border-right-width: 80px;
-      }
-      &.drop-right {
-        margin-left: 0;
-        border-right-width: 0;
-      }
-
-      &.center {
-        margin: 3.2em 0;
-        clear: both;
-        margin-left: -80px;
-        margin-right: -80px;
-
-        &.image {
-          margin-left: 0;
-          margin-right: 0;
-
-          img {
-            width: 100%;
-            max-width: 640px;
-            margin: 0 auto;
-          }
-        }
-      }
-
-      &.left + .block.right { margin-left: 0; }
-      &.right + .block.left { margin-right: 0; }
-      &.left + .block.right + .block,
-      &.right + .block.left + .block { clear: both; }
-
-      @include noMargins;
-    }
 
     .authorinfo {
       margin: 3.2em 0;
@@ -1861,10 +1730,6 @@ nav.prev-next-entry {
       letter-spacing: 2px;
     }
   }
-}
-
-@media screen and (min-width: 1441px) {
-	#main .fullimage { background-size: 100%; }
 }
 
 /* footer */

@@ -7,75 +7,141 @@
  # An `entry` variable is expected to be defined.
 -#}
 
+{% macro getPosition(block) %}
+	{%- spaceless %}
+		{% set positionedTypes = ['text', 'pullQuote', 'image', 'quote'] %}
+		{{ block.type.handle in positionedTypes and block.position ? block.position : 'center' }}
+	{% endspaceless -%}
+{% endmacro %}
+
+{% from _self import getPosition %}
+
+{% set prevType = null %}
+{% set prevPosition = null %}
+{% set nextType = null %}
+{% set nextPosition = null %}
+{% set closedLastRow = true %}
+
 {% for block in entry.articleBody %}
-	{% switch block.type %}
 
-		{% case "heading" %}
+	{% set type = (nextType ?: block.type.handle) %}
+	{% set position = (nextPosition ?: getPosition(block)~'') %}
 
-			<div class="block heading">
-				<h3>{{ block.heading }}</h3>
+	{% set nextType = (not loop.last ? block.next().type.handle) %}
+	{% set nextPosition = (not loop.last ? getPosition(block.next())~'') %}
+
+	{# Is this block floated to the left or right? #}
+	{% set isFloat = position in ['left', 'right'] %}
+
+	{# Is this a breakout block (a sole floated block before a centered block)? #}
+	{% set isBreakout = (
+		isFloat and
+		type in ['pullQuote', 'image'] and
+		(position == 'left' or prevPosition != 'left') and
+		nextPosition == 'center'
+	) %}
+
+	{# Are we starting a new row? #}
+	{% if position == 'full' %}
+		<div class="flex flex-full">
+	{% elseif closedLastRow %}
+		<div class="flex">
+		{% if type not in ['gallery', 'quote'] %}
+			<div class="g1-flex4 g2-flex6
+			{%- if (type == 'image' and position == 'center') %} g3-flex8 g3-offset2
+			{%- else %} g3-flex10 g3-offset1{% endif -%}
+			">
+		{% endif %}
+	{% endif %}
+
+	{% if isFloat %}
+		<div class="g1-flex4 g2-flex6 g3-flex6 flex-nested
+		{%- if isBreakout %} breakout{% endif %}
+		{%- if position == 'right' %} push{% endif -%}
+		">
+	{% endif %}
+
+	{% switch type %}
+		{% case 'newSection' %}
+			<hr class="horz-rule">
+			<h1 class="beta center">{{ block.sectionHeading }}</h1>
+
+		{% case 'heading' %}
+			<h2 class="delta center subfont caps">{{ block.heading }}</h2>
+
+		{% case 'text' %}
+			{{ block.text }}
+
+		{% case 'pullQuote' %}
+			<div class="pullquote">
+				<p class="delta center subfont caps">{{ block.pullQuote }}</p>
 			</div>
 
-		{% case "text" %}
-
-			<div class="block text">
-				{{ block.text }}
-			</div>
-
-		{% case "pullQuote" %}
-
-			<div class="block pullquote {{ block.position }}">
-				<p>{{ block.pullQuote }}</p>
-			</div>
-
-		{% case "image" %}
-
+		{% case 'image' %}
 			{% set image = block.image.first() %}
 			{% if image %}
-				{% if block.position == 'full' %}
-					</div>
-					<div class="fullimage tall" style="background-image: url('{{ image.getUrl({ width: 1440 }) }}');"></div>
-					<div class="container">
+				{% if position == 'full' %}
+					{% do image.setTransform({ width: 1440, height: 480 }) %}
+				{% elseif position == 'center' %}
+					{% do image.setTransform({ width: 600 }) %}
+				{% elseif isBreakout %}
+					{% do image.setTransform({ width: 460 }) %}
 				{% else %}
-					{% if block.position == 'center' %}
-						{% do image.setTransform({ width: 960 }) %}
-					{% else %}
-						{% do image.setTransform({ width: 440 }) %}
-					{% endif %}
-
-					<div class="block image {{ block.position }}">
-						<img src="{{ image.url }}" alt="{{ image.title }}">
-					</div>
+					{% do image.setTransform({ width: 360 }) %}
 				{% endif %}
+
+				<p><img{% if position == 'full' %} class="contain-media"{% endif %} src="{{ image.url }}" alt="{{ image.title }}"></p>
 			{% endif %}
 
-		{% case "quote" %}
-
-			{% if block.position == 'full' %}
+		{% case 'gallery' %}
+			{% for image in block.images %}
+				<div class="g1-flex4 g2-flex2 g3-flex4">
+					<img src="{{ image.getUrl('small') }}" alt="{{ image.title }}">
+					{{ image.shortDescription }}
 				</div>
-				<div class="fullquote"
-				{%- if entry.backgroundColor %} style="background-color:{{ entry.backgroundColor }};"{% endif -%}
-				>
-					<div class="container">
-			{% else %}
-				<div class="block quote {{ block.position }}">
-			{% endif %}
+			{% endfor %}
 
-			<blockquote>
-				<p>{{ block.quote }}</p>
+		{% case 'quote' %}
+			<blockquote
+			{%- if entry.backgroundColor and entry.backgroundColor != '#000000' %} class="reverse" style="background-color: {{ entry.backgroundColor }};"{% endif -%}
+			>
+				<div class="flex">
+					<p>{{ block.quote }}</p>
 
-				{% if block.attribution %}
-					<footer>– <cite>{{ block.attribution }}</footer>
-				{% endif %}
+					{% if block.attribution %}
+						<footer>– <cite>{{ block.attribution }}</footer>
+					{% endif %}
+				</div>
 			</blockquote>
 
-			{% if block.position == 'full' %}
-					</div>
-				</div>
-				<div class="container">
-			{% else %}
-				</div>
-			{% endif %}
-
 	{% endswitch %}
+
+	{% if isFloat %}
+		</div>
+	{% endif %}
+
+	{# Are we closing this row? #}
+	{% if not (
+		(position == 'left' and nextPosition == 'right') or
+		isBreakout
+	) %}
+		{% if position != 'full' and type not in ['gallery', 'quote'] %}
+			</div>
+		{% endif %}
+		</div>
+		{% set closedLastRow = true %}
+	{% else %}
+		{% set closedLastRow = false %}
+	{% endif %}
+
+	{% if type == 'heading' and not loop.first and prevType == 'newSection' %}
+		<div class="flex">
+			<div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
+				<hr class="horz-rule">
+			</div>
+		</div>
+	{% endif %}
+
+	{% set prevType = type %}
+	{% set prevPosition = position %}
 {% endfor %}

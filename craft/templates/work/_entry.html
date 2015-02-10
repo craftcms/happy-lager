@@ -10,17 +10,13 @@
 -#}
 
 {% extends "_layouts/site" %}
+{% set title = entry.title %}
 
 {% block main %}
 	<article>
 		{% include "_includes/content_header" with { showFeaturedImage: true } %}
-		<div class="container">
-			<section>
-				{% include "_includes/article_heading" %}
-				<hr class="horz-rule">
-				{% include "_includes/article_body" %}
-			</section>
-		</div>
+		{% include "_includes/article_heading" %}
+		{% include "_includes/article_body" %}
 	</article>
 
 	<section>

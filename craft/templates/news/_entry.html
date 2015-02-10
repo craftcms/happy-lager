@@ -10,35 +10,20 @@
 -#}
 
 {% extends "_layouts/site" %}
-
 {% set title = entry.title %}
 
 {% block main %}
+	<article>
+		{% include "_includes/content_header" with { showFeaturedImage: true } %}
+		{% include "_includes/article_heading" %}
+		{% include "_includes/article_body" %}
+	</article>
 
-<article>
-	{% include "_includes/content_header" with { showFeaturedImage: true } %}
-
-	<div class="container">
-		<section>
-			{% include "_includes/article_heading" %}
-			<hr class="horz-rule">
-			{% include "_includes/article_body" %}
-		</section>
-	</div>
-</article>
-
-<footer class="authorinfo">
-	<div class="flex">
-		<div class="g1-flex4 g2-flex6 g3-flex12">
-			<p class="center author">{{ entry.author.name }}</p>
+	<footer class="authorinfo">
+		<div class="flex">
+			<div class="g1-flex4 g2-flex6 g3-flex12">
+				<p class="center author">{{ entry.author.name }}</p>
+			</div>
 		</div>
-	</div>
-</footer>
-
-{% endblock %}
-
-
-{% block foot %}
-	{{ parent() }}
-	<script type="text/javascript" src="/assets/lib/shapes-polyfill.min.js"></script>
+	</footer>
 {% endblock %}

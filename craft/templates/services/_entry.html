@@ -10,6 +10,7 @@
 -#}
 
 {% extends "_layouts/site" %}
+{% set title = entry.title %}
 
 {% block main %}
 	<nav class="subnav">
@@ -38,12 +39,7 @@
 	<section>
 		<article>
 			{% include "_includes/content_header" %}
-			<div class="container">
-				<section>
-					{% include "_includes/article_heading" %}
-					{% include "_includes/article_body" %}
-				</section>
-			</div>
+			{% include "_includes/article_body" %}
 		</article>
 	</section>
 

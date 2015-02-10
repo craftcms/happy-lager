@@ -8,3 +8,4 @@ node_modules
 craft/app/
 craft/config/license.key
 public/assets/site/_*
+public/assets/site/*/_*
