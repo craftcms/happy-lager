@@ -33,8 +33,8 @@
 		<div class="flex">
 			<div class="g1-flex4 g2-flex6 g3-flex12">
 				<div class="on-tap-buttons-wrap">
-					<a class="button-w-icon icon-beer" href="/work">What’s on Tap</a>
-					<a href="/work" class="view-more">View More</a>
+					<a class="button-w-icon icon-beer" href="{{ url('work') }}">What’s on Tap</a>
+					<a href="{{ url('work') }}" class="view-more">View More</a>
 				</div>
 			</div>
 		</div>
@@ -61,7 +61,7 @@
 		<div class="flex">
 			<div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
 					<hr class="horz-rule alt">
-					<a class="button-w-icon alt icon-beaker" href="/about">How it’s made</a>
+					<a class="button-w-icon alt icon-beaker" href="{{ url('about') }}">How it’s made</a>
 			</div>
 		</div>
 		<div class="flex">
@@ -73,7 +73,7 @@
 		<div class="flex">
 			<div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
 				<hr class="horz-rule alt2">
-				<a class="big-arrow" href="/about">Go</a>
+				<a class="big-arrow" href="{{ url('about') }}">Go</a>
 			</div>
 		</div>
 	</section>
