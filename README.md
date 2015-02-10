@@ -9,7 +9,7 @@ You can find out more about Craft on [buildwithcraft.com](http://buildwithcraft.
 
 Happy Lager takes advantage of several Craft features:
 
-### Sections
+#### Sections
 
 The content in Happy Lager is managed from the following sections:
 
@@ -27,7 +27,7 @@ The content in Happy Lager is managed from the following sections:
 
 :information_source: Watch the [Section Types video](http://buildwithcraft.com/features/section-types) for an overview of the difference between Singles, Channels, and Structures in Craft.
 
-### Entry Types
+#### Entry Types
 
 The News section has two Entry Types:
 
@@ -36,7 +36,7 @@ The News section has two Entry Types:
 
 :information_source: Watch the [Entry Types video](http://buildwithcraft.com/features/entry-types) for an overview of Entry Types in Craft.
 
-### Matrix Fields
+#### Matrix Fields
 
 This site has the following Matrix fields:
 
@@ -47,7 +47,7 @@ This site has the following Matrix fields:
 
 :information_source: Watch the [Matrix video](http://buildwithcraft.com/features/matrix) for an overview of Matrix in Craft.
 
-### Relations
+#### Relations
 
 This site has the following relational fields:
 
@@ -61,7 +61,7 @@ This site has the following relational fields:
 
 :information_source: Watch the [Relations video](http://buildwithcraft.com/features/relations) for an overview of Relations in Craft.
 
-### Assets
+#### Assets
 
 This site has the following Asset Sources;
 
@@ -97,7 +97,7 @@ If you want to install the site locally, follow these instructions:
 
 7. Create a new virtual host with the hostname `happylager.dev` that points to the happylager/public/ folder.
 
-8. Edit your hosts file to resolve happylager.dev to 127.0.0.1, if necessary.
+8. Edit your hosts file to resolve happylager.dev to `127.0.0.1`, if necessary.
 
 Now you should be able to point your web browser to http://happylager.dev/admin. You should either see a Craft login screen, or a prompt telling you that some database updates need to be run. If it’s the latter, just click “Finish up”.
 
