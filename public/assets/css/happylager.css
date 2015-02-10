@@ -666,32 +666,32 @@ video {
     display: block; }
 
 .pullquote p,
-blockquote {
+.blockquote {
   border-top: 3px solid #222222;
   border-bottom: 3px solid #222222;
   padding: 66px 10px; }
   .flex-full .pullquote p, .flex-full
-  blockquote {
+  .blockquote {
     border-top: none;
     border-bottom: none; }
 
 .pullquote {
   padding: 0.5em 0; }
 
-blockquote {
+.blockquote {
   margin: 30px 0;
   text-align: center; }
-  blockquote p {
+  .blockquote p {
     margin: 0;
     font-family: steelfish_rgbold, sans-serif;
     text-transform: uppercase;
     font-size: 46px;
     letter-spacing: 0.1em; }
-    blockquote p:before {
+    .blockquote p:before {
       content: '“'; }
-    blockquote p:after {
+    .blockquote p:after {
       content: '”'; }
-  blockquote footer {
+  .blockquote footer {
     margin: 10px 0;
     font-style: italic; }
 

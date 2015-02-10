@@ -102,8 +102,12 @@
 			{% endfor %}
 
 		{% case 'quote' %}
-			<blockquote
-			{%- if entry.backgroundColor and entry.backgroundColor != '#000000' %} class="reverse" style="background-color: {{ entry.backgroundColor }};"{% endif -%}
+
+			{# Are we giving it a custom BG color? #}
+			{% set bgColor = position == 'full' and entry.backgroundColor != '#000000' ? entry.backgroundColor %}
+
+			<blockquote class="blockquote{%- if bgColor %} reverse{% endif -%}"
+			{%- if bgColor %} style="background-color: {{ bgColor }};"{% endif -%}
 			>
 				<div class="flex">
 					<p>{{ block.quote }}</p>
