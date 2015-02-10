@@ -34,45 +34,52 @@
 
 	{% include "_includes/article_body" %}
 
-	<section class="alt2">
-		<div class="flex">
-			<div class="g1-flex4 g2-flex6 g3-flex5">
-				{% if entry.contactSectionHeader %}
-					<h1 class="gamma subfont alt">{{ entry.contactSectionHeader }}</h1>
-				{% endif %}
-				{% if entry.contactSectionAddress %}
-					<p class="delta subfont caps address">{{ entry.contactSectionAddress }}</p>
-				{% endif %}
-				<ul>
-					{% if entry.contactSectionPhone1 %}
-						<li class="phone">{{ entry.contactSectionPhone1 }}</li>
+	{# Loop through all of the Locations entries in their Structure-defined order #}
+	{% for locationEntry in craft.entries.section('locations') %}
+		<section class="alt2">
+			<div class="flex">
+				<div class="g1-flex4 g2-flex6 g3-flex5">
+					<h1 class="gamma subfont alt">{{ locationEntry.title }}</h1>
+
+					{% if locationEntry.address %}
+						<p class="delta subfont caps address">{{ locationEntry.address|nl2br }}</p>
 					{% endif %}
-					{% if entry.contactSectionPhone2 %}
-						<li class="phone">{{ entry.contactSectionPhone2 }}</li>
+
+					{% if locationEntry.contactMethods|length %}
+						<dl class="inline">
+							{% for block in locationEntry.contactMethods %}
+								<dt>{{ block.label }}</dt>
+								<dd>{{ block.value }}</dd>
+							{% endfor %}
+						</dl>
 					{% endif %}
-					{% if entry.contactSectionPhone3 %}
-						<li class="phone">{{ entry.contactSectionPhone3 }}</li>
+					{% if locationEntry.email or locationEntry.address %}
+						<ul class="horz-list">
+							{% if locationEntry.email %}
+								<li>
+									<a href="mailto:{{ locationEntry.email }}" class="subfont caps email-us-btn">Email Us</a>
+								</li>
+							{% endif %}
+							{% if locationEntry.address %}
+
+								{# Create a Google Maps URL based on the address #}
+								{% set gMapsUrl = 'https://www.google.com/maps/search/' ~ locationEntry.address|replace("\n", ', ')|url_encode %}
+
+								<li>
+									<a href="{{ gMapsUrl }}" target="_blank" class="subfont caps map-btn">Map</a>
+								</li>
+							{% endif %}
+						</ul>
 					{% endif %}
-				</ul>
-				<ul class="horz-list">
-					{% if entry.email %}
-						<li>
-							<a href="mailto:{{ entry.email }}" class="subfont caps email-us-btn">Email Us</a>
-						</li>
+				</div>
+				<div class="g1-flex4 g2-flex6 g3-flex7">
+					{% set image = locationEntry.featuredImage.first() %}
+					{% if image %}
+						<img src="{{ image.getUrl('medium') }}" alt="{{ image.title }}" />
 					{% endif %}
-					{% if entry.contactSectionMapLink %}
-						<li>
-							<a href="{{ entry.contactSectionMapLink }}" class="subfont caps map-btn">Map</a>
-						</li>
-					{% endif %}
-				</ul>
+				</div>
 			</div>
-			<div class="g1-flex4 g2-flex6 g3-flex7">
-				{% set contactImage = entry.contactSectionImage.first() %}
-				{% if contactImage %}
-					<img src="{{ contactImage.getUrl('medium') }}" alt="{{ contactImage.title }}" />
-				{% endif %}
-			</div>
-		</div>
-	</section>
+		</section>
+	{% endfor %}
+
 {% endblock %}

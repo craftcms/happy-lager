@@ -133,6 +133,16 @@ ul {
     dt {
       font-family: $font-primary;
     }
+
+    &.inline {
+      dt {
+        float: left;
+        margin-right: 0.5em;
+        &:after {
+          content: ':';
+        }
+      }
+    }
   }
   ul {
     list-style-type: none;

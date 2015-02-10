@@ -197,6 +197,11 @@ ul.alt, ul.horz-rule.alt3, ul.button-w-icon.alt2 {
   margin-top: 10px; }
   [role="main"] dl dt {
     font-family: "montserratregular", serif; }
+  [role="main"] dl.inline dt {
+    float: left;
+    margin-right: 0.5em; }
+    [role="main"] dl.inline dt:after {
+      content: ':'; }
 [role="main"] ul {
   list-style-type: none; }
 [role="main"] li {
