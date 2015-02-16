@@ -110,3 +110,4 @@ The Craft Control Panel is located at http://happylager.dev/admin. You can log i
 
 * Username: `admin`
 * Password: `password`
+
