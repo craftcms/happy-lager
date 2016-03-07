@@ -15,7 +15,7 @@
 	<div id="hero">
 		{% set image = entry.heroImage.first() %}
 		{% if image %}
-			<img src="{{ image.getUrl({ height: 916 }) }}" alt="image.title"/>
+			<img src="{{ image.getUrl({ height: 916 }) }}" alt="{{ image.title }}"/>
 		{% endif %}
 
 		<div class="hero-info">
