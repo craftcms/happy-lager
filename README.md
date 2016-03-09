@@ -4,7 +4,6 @@ This repo contains all of the templates, front-end resources, and a MySQL DB dum
 
 You can find out more about Craft on [craftcms.com](https://craftcms.com/).
 
-
 ## Features
 
 Happy Lager takes advantage of several Craft features:
