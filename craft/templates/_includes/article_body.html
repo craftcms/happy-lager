@@ -21,14 +21,15 @@
 {% set nextType = null %}
 {% set nextPosition = null %}
 {% set closedLastRow = true %}
+{% set blocks = entry.articleBody %}
 
-{% for block in entry.articleBody %}
+{% for i, block in blocks %}
 
 	{% set type = (nextType ?: block.type.handle) %}
 	{% set position = (nextPosition ?: getPosition(block)~'') %}
 
-	{% set nextType = (not loop.last ? block.next().type.handle) %}
-	{% set nextPosition = (not loop.last ? getPosition(block.next())~'') %}
+	{% set nextType = (not loop.last ? blocks[i+1].type.handle) %}
+	{% set nextPosition = (not loop.last ? getPosition(blocks[i+1])~'') %}
 
 	{# Is this block floated to the left or right? #}
 	{% set isFloat = position in ['left', 'right'] %}
