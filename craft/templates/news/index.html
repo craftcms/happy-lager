@@ -3,9 +3,35 @@
  # -------------------
  #
  # This template gets loaded when "/news" is requested.
+ #
+ # The page first displays the most recent featured News entry, followed by the
+ # remaining News entries in reverse-chronological order.
 -#}
 
 {% extends "_layouts/site" %}
+
+
+{# Get the most recent featured News entry, regardless of which page we're on #}
+{% set featuredEntry = craft.entries({
+    section: 'news',
+    featuredEntry: 1,
+    order: 'postDate desc'
+}).first() %}
+
+{# Now set the params for the remaining entries, and paginate them in groups of 4 #}
+{% set newsEntriesCriteria = craft.entries({
+    section: 'news',
+    id: (featuredEntry ? 'not '~featuredEntry.id),
+    order: 'postDate desc'
+}) %}
+{% set isFirstPage = craft.request.getPageNum() == 1 %}
+{% set limit = isFirstPage and featuredEntry ? 3 : 4 %}
+{% paginate newsEntriesCriteria.limit(limit) as newsEntries %}
+{% if isFirstPage and featuredEntry %}
+    {# Tack the featured entry onto the front of the list #}
+    {% set newsEntries = [featuredEntry]|merge(newsEntries) %}
+{% endif %}
+
 
 {% block main %}
 	<header class="alt2">
@@ -18,16 +44,13 @@
 
 	<div class="flex">
 
-		{# Paginate the News entries in groups of 4 #}
-		{% paginate craft.entries.section('news').limit(4) as newsEntries %}
-
 		{# Loop through this page's News entries #}
 		{% for newsEntry in newsEntries %}
 
 			{# Figure out where this entry should link to #}
 			{% set url = newsEntry.type.handle == 'link' ? newsEntry.linkUrl : newsEntry.url %}
 
-			{# We give special treatment to the most recent News entry #}
+			{# We give special treatment to the featured entry #}
 			{% set isFeaturedEntry = (loop.first and craft.request.pageNum == 1) %}
 
 			<article class="{% if isFeaturedEntry %}featured {% endif %}news-entry">
