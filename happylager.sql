@@ -1,15 +1,17 @@
 /*
  Navicat MySQL Data Transfer
 
- Source Server         : homestead
- Source Server Version : 50619
- Source Host           : 127.0.0.1
- Source Database       : happylager
+ Source Server         : Local
+ Source Server Type    : MySQL
+ Source Server Version : 50542
+ Source Host           : localhost
+ Source Database       : craft
 
- Target Server Version : 50619
+ Target Server Type    : MySQL
+ Target Server Version : 50542
  File Encoding         : utf-8
 
- Date: 06/03/2016 10:45:50 AM
+ Date: 06/28/2016 16:04:31 PM
 */
 
 SET NAMES utf8;
@@ -313,7 +315,7 @@ CREATE TABLE `craft_elementindexsettings` (
   `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `craft_elementindexsettings_type_unq_idx` (`type`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 --  Records of `craft_elementindexsettings`
@@ -715,7 +717,7 @@ CREATE TABLE `craft_info` (
 --  Records of `craft_info`
 -- ----------------------------
 BEGIN;
-INSERT INTO `craft_info` VALUES ('1', '2.6', '2789', '2.6.5', '2016-05-26 08:10:05', '2', 'Happy Lager', 'http://happylager.dev', 'UTC', '1', '0', 'stable', '2014-07-29 18:21:29', '2016-06-03 17:34:14', '3ebb42f0-5296-4d41-b31e-4dc4882dd453');
+INSERT INTO `craft_info` VALUES ('1', '2.6', '2793', '2.6.5', '2016-06-28 20:43:53', '2', 'Happy Lager', 'http://happylager.dev', 'UTC', '1', '0', 'stable', '2014-07-29 18:21:29', '2016-06-28 23:01:32', '3ebb42f0-5296-4d41-b31e-4dc4882dd453');
 COMMIT;
 
 -- ----------------------------
@@ -1138,13 +1140,13 @@ CREATE TABLE `craft_sessions` (
   KEY `craft_sessions_dateUpdated_idx` (`dateUpdated`),
   KEY `craft_sessions_userId_fk` (`userId`),
   CONSTRAINT `craft_sessions_userId_fk` FOREIGN KEY (`userId`) REFERENCES `craft_users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 --  Records of `craft_sessions`
 -- ----------------------------
 BEGIN;
-INSERT INTO `craft_sessions` VALUES ('1', '1', 'cab417184beaa0530714afc436b15fa63a115b91czozMjoianU4bVd0VXF1RGhMRm5JZ01UUXdsX2FqQzdUWHZ6aUQiOw==', '2016-06-03 17:35:41', '2016-06-03 17:35:41', '548184dd-b903-4a09-ad93-ff9671ec8707');
+INSERT INTO `craft_sessions` VALUES ('1', '1', 'cab417184beaa0530714afc436b15fa63a115b91czozMjoianU4bVd0VXF1RGhMRm5JZ01UUXdsX2FqQzdUWHZ6aUQiOw==', '2016-06-03 17:35:41', '2016-06-03 17:35:41', '548184dd-b903-4a09-ad93-ff9671ec8707'), ('2', '1', 'ceaef9ab223239a17336786e261ceabfda4ca51eczozMjoiVWg0MlVrdm9wZTFlMHY2OHRWT1liMVozZ3NMdkpPS1kiOw==', '2016-06-28 23:01:56', '2016-06-28 23:01:56', 'f4432947-8869-4d5b-b325-2974cd7b6bb2');
 COMMIT;
 
 -- ----------------------------
@@ -1299,7 +1301,7 @@ CREATE TABLE `craft_tasks` (
   KEY `craft_tasks_lft_idx` (`lft`),
   KEY `craft_tasks_rgt_idx` (`rgt`),
   KEY `craft_tasks_level_idx` (`level`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 --  Table structure for `craft_templatecachecriteria`
@@ -1314,7 +1316,7 @@ CREATE TABLE `craft_templatecachecriteria` (
   KEY `craft_templatecachecriteria_cacheId_fk` (`cacheId`),
   KEY `craft_templatecachecriteria_type_idx` (`type`),
   CONSTRAINT `craft_templatecachecriteria_cacheId_fk` FOREIGN KEY (`cacheId`) REFERENCES `craft_templatecaches` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=160 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 --  Table structure for `craft_templatecacheelements`
@@ -1344,7 +1346,7 @@ CREATE TABLE `craft_templatecaches` (
   KEY `craft_templatecaches_expiryDate_cacheKey_locale_path_idx` (`expiryDate`,`cacheKey`,`locale`,`path`),
   KEY `craft_templatecaches_locale_fk` (`locale`),
   CONSTRAINT `craft_templatecaches_locale_fk` FOREIGN KEY (`locale`) REFERENCES `craft_locales` (`locale`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 --  Table structure for `craft_tokens`
@@ -1502,7 +1504,7 @@ CREATE TABLE `craft_users` (
 --  Records of `craft_users`
 -- ----------------------------
 BEGIN;
-INSERT INTO `craft_users` VALUES ('1', 'admin', null, null, null, 'admin@happylager.dev', '$2a$13$5j8bSRoKQZipjtIg6FXWR.kGRR3UfCL.QeMIt2yTRH1.hCNHLQKtq', null, '0', '1', '0', '0', '0', '0', '0', '2016-06-03 17:35:41', '10.10.10.1', null, null, null, null, null, null, null, '0', '2014-07-29 18:21:32', '2014-07-29 18:21:32', '2016-06-03 17:35:41', '953aedcd-73c8-4677-b0c5-4241e8fbb14c');
+INSERT INTO `craft_users` VALUES ('1', 'admin', null, null, null, 'admin@happylager.dev', '$2a$13$5j8bSRoKQZipjtIg6FXWR.kGRR3UfCL.QeMIt2yTRH1.hCNHLQKtq', null, '0', '1', '0', '0', '0', '0', '0', '2016-06-28 23:01:56', '::1', null, null, null, null, null, null, null, '0', '2014-07-29 18:21:32', '2014-07-29 18:21:32', '2016-06-28 23:01:56', '953aedcd-73c8-4677-b0c5-4241e8fbb14c');
 COMMIT;
 
 -- ----------------------------
