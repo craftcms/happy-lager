@@ -1,17 +1,15 @@
 /*
  Navicat MySQL Data Transfer
 
- Source Server         : Local
- Source Server Type    : MySQL
- Source Server Version : 50542
- Source Host           : localhost
- Source Database       : craft
+ Source Server         : homestead
+ Source Server Version : 50631
+ Source Host           : 127.0.0.1
+ Source Database       : happylager
 
- Target Server Type    : MySQL
- Target Server Version : 50542
+ Target Server Version : 50631
  File Encoding         : utf-8
 
- Date: 06/28/2016 16:04:31 PM
+ Date: 08/22/2016 11:07:47 AM
 */
 
 SET NAMES utf8;
@@ -717,7 +715,7 @@ CREATE TABLE `craft_info` (
 --  Records of `craft_info`
 -- ----------------------------
 BEGIN;
-INSERT INTO `craft_info` VALUES ('1', '2.6', '2793', '2.6.5', '2016-06-28 20:43:53', '2', 'Happy Lager', 'http://happylager.dev', 'UTC', '1', '0', 'stable', '2014-07-29 18:21:29', '2016-06-28 23:01:32', '3ebb42f0-5296-4d41-b31e-4dc4882dd453');
+INSERT INTO `craft_info` VALUES ('1', '2.6', '2911', '2.6.5', '2016-08-16 17:20:51', '2', 'Happy Lager', 'http://happylager.dev', 'UTC', '1', '0', 'stable', '2014-07-29 18:21:29', '2016-08-22 17:43:20', '3ebb42f0-5296-4d41-b31e-4dc4882dd453');
 COMMIT;
 
 -- ----------------------------
@@ -1140,14 +1138,7 @@ CREATE TABLE `craft_sessions` (
   KEY `craft_sessions_dateUpdated_idx` (`dateUpdated`),
   KEY `craft_sessions_userId_fk` (`userId`),
   CONSTRAINT `craft_sessions_userId_fk` FOREIGN KEY (`userId`) REFERENCES `craft_users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ----------------------------
---  Records of `craft_sessions`
--- ----------------------------
-BEGIN;
-INSERT INTO `craft_sessions` VALUES ('1', '1', 'cab417184beaa0530714afc436b15fa63a115b91czozMjoianU4bVd0VXF1RGhMRm5JZ01UUXdsX2FqQzdUWHZ6aUQiOw==', '2016-06-03 17:35:41', '2016-06-03 17:35:41', '548184dd-b903-4a09-ad93-ff9671ec8707'), ('2', '1', 'ceaef9ab223239a17336786e261ceabfda4ca51eczozMjoiVWg0MlVrdm9wZTFlMHY2OHRWT1liMVozZ3NMdkpPS1kiOw==', '2016-06-28 23:01:56', '2016-06-28 23:01:56', 'f4432947-8869-4d5b-b325-2974cd7b6bb2');
-COMMIT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 --  Table structure for `craft_shunnedmessages`
@@ -1504,7 +1495,7 @@ CREATE TABLE `craft_users` (
 --  Records of `craft_users`
 -- ----------------------------
 BEGIN;
-INSERT INTO `craft_users` VALUES ('1', 'admin', null, null, null, 'admin@happylager.dev', '$2a$13$5j8bSRoKQZipjtIg6FXWR.kGRR3UfCL.QeMIt2yTRH1.hCNHLQKtq', null, '0', '1', '0', '0', '0', '0', '0', '2016-06-28 23:01:56', '::1', null, null, null, null, null, null, null, '0', '2014-07-29 18:21:32', '2014-07-29 18:21:32', '2016-06-28 23:01:56', '953aedcd-73c8-4677-b0c5-4241e8fbb14c');
+INSERT INTO `craft_users` VALUES ('1', 'admin', null, null, null, 'admin@happylager.dev', '$2a$13$5j8bSRoKQZipjtIg6FXWR.kGRR3UfCL.QeMIt2yTRH1.hCNHLQKtq', null, '0', '1', '0', '0', '0', '0', '0', null, null, null, null, null, null, null, null, null, '0', null, '2016-08-22 18:07:34', '2016-08-22 18:07:34', '953aedcd-73c8-4677-b0c5-4241e8fbb14c');
 COMMIT;
 
 -- ----------------------------
