@@ -11,7 +11,7 @@
  Target Server Version : 50717
  File Encoding         : utf-8
 
- Date: 04/22/2017 06:51:09 AM
+ Date: 04/27/2017 16:44:18 PM
 */
 
 SET NAMES utf8mb4;
@@ -714,7 +714,7 @@ CREATE TABLE `craft_info` (
 --  Records of `craft_info`
 -- ----------------------------
 BEGIN;
-INSERT INTO `craft_info` VALUES ('1', '2.6.2974', '2.6.9', '2', 'Happy Lager', 'http://happylager.dev', 'UTC', '1', '0', '2014-07-29 18:21:29', '2017-04-22 13:49:34', '3ebb42f0-5296-4d41-b31e-4dc4882dd453');
+INSERT INTO `craft_info` VALUES ('1', '2.6.2976', '2.6.9', '2', 'Happy Lager', 'http://happylager.dev', 'UTC', '1', '0', '2014-07-29 18:21:29', '2017-04-27 23:43:49', '3ebb42f0-5296-4d41-b31e-4dc4882dd453');
 COMMIT;
 
 -- ----------------------------
