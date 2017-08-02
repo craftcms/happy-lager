@@ -13,8 +13,7 @@ return array(
 		'environmentVariables' => array(
 			'assetsBaseUrl' => '/assets',
 			'assetsBasePath' => './assets',
-		),
-		'enableCsrfProtection' => true,
+		)
 	),
 
 	// Give CodeKit a custom site URL
