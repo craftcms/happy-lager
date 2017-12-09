@@ -25,7 +25,7 @@
 					<a href="{{ entry.url }}" class="services-entry-wrap">
 						{% set image = entry.featuredImage.first() %}
 						{% if image %}
-							<img src="{{ image.getUrl('thumb') }}" alt="image.title"/>
+							<img src="{{ image.getUrl('thumb') }}" alt="{{ image.title }}"/>
 						{% endif %}
 
 						<h3 class="center">{{ entry.title }}</h3>
