@@ -3,15 +3,15 @@
 
  Source Server         : Homestead (MySQL)
  Source Server Type    : MySQL
- Source Server Version : 50717
+ Source Server Version : 50720
  Source Host           : 127.0.0.1
- Source Database       : happylager
+ Source Schema         : happylager
 
  Target Server Type    : MySQL
- Target Server Version : 50717
- File Encoding         : utf-8
+ Target Server Version : 50720
+ File Encoding         : 65001
 
- Date: 02/08/2017 12:01:40
+ Date: 13/12/2017 13:36:08
 */
 
 SET NAMES utf8mb4;
@@ -1611,7 +1611,7 @@ CREATE TABLE `craft_info` (
 -- Records of craft_info
 -- ----------------------------
 BEGIN;
-INSERT INTO `craft_info` VALUES (1, '2.6.2988', '2.6.10', 2, 'Happy Lager', 'http://happylager.dev', 'UTC', 1, 0, '2014-07-29 18:21:29', '2017-08-02 19:00:03', '3ebb42f0-5296-4d41-b31e-4dc4882dd453');
+INSERT INTO `craft_info` VALUES (1, '2.6.3000', '2.6.13', 2, 'Happy Lager', 'http://happylager.dev', 'UTC', 1, 0, '2014-07-29 18:21:29', '2017-12-10 22:44:53', '3ebb42f0-5296-4d41-b31e-4dc4882dd453');
 COMMIT;
 
 -- ----------------------------
@@ -2062,7 +2062,7 @@ CREATE TABLE `craft_migrations` (
   UNIQUE KEY `craft_migrations_version_unq_idx` (`version`),
   KEY `craft_migrations_pluginId_fk` (`pluginId`),
   CONSTRAINT `craft_migrations_pluginId_fk` FOREIGN KEY (`pluginId`) REFERENCES `craft_plugins` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of craft_migrations
@@ -2151,6 +2151,9 @@ INSERT INTO `craft_migrations` VALUES (80, NULL, 'm160919_000000_usergroup_handl
 INSERT INTO `craft_migrations` VALUES (81, NULL, 'm161108_000000_new_version_format', '2017-02-02 19:47:20', '2017-02-02 19:47:20', '2017-02-02 19:47:20', '422ed1ee-a039-43b5-a3bc-5450439baab0');
 INSERT INTO `craft_migrations` VALUES (82, NULL, 'm161109_000000_index_shuffle', '2017-02-02 19:47:20', '2017-02-02 19:47:20', '2017-02-02 19:47:20', '06a73092-3fd0-4663-b0b1-fd434e340417');
 INSERT INTO `craft_migrations` VALUES (83, NULL, 'm170612_000000_route_index_shuffle', '2017-08-02 19:00:03', '2017-08-02 19:00:03', '2017-08-02 19:00:03', 'e492595f-e57c-4d00-966d-2372b4532db9');
+INSERT INTO `craft_migrations` VALUES (84, NULL, 'm171107_000000_assign_group_permissions', '2017-12-10 22:44:53', '2017-12-10 22:44:53', '2017-12-10 22:44:53', '1de484d7-26e6-4222-b9ae-1d0eb50c271c');
+INSERT INTO `craft_migrations` VALUES (85, NULL, 'm171117_000001_templatecache_index_tune', '2017-12-10 22:44:53', '2017-12-10 22:44:53', '2017-12-10 22:44:53', '6ebb8bc1-dbc0-4c54-a76f-4a7846bb63e9');
+INSERT INTO `craft_migrations` VALUES (86, NULL, 'm171204_000001_templatecache_index_tune_deux', '2017-12-10 22:44:53', '2017-12-10 22:44:53', '2017-12-10 22:44:53', '0c07e8e1-73c5-49fd-92aa-061c80a17266');
 COMMIT;
 
 -- ----------------------------
@@ -3627,6 +3630,8 @@ CREATE TABLE `craft_templatecaches` (
   PRIMARY KEY (`id`),
   KEY `craft_templatecaches_locale_fk` (`locale`),
   KEY `craft_templatecaches_locale_cacheKey_path_expiryDate_idx` (`locale`,`cacheKey`,`path`,`expiryDate`),
+  KEY `craft_templatecaches_cacheKey_locale_expiryDate_idx` (`cacheKey`,`locale`,`expiryDate`),
+  KEY `craft_templatecaches_cacheKey_locale_expiryDate_path_idx` (`cacheKey`,`locale`,`expiryDate`,`path`),
   CONSTRAINT `craft_templatecaches_locale_fk` FOREIGN KEY (`locale`) REFERENCES `craft_locales` (`locale`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
