@@ -5,5 +5,5 @@
 *.sass-cache/
 node_modules
 *config.codekit
-public/assets/site/_*
-public/assets/site/*/_*
+web/assets/site/_*
+web/assets/site/*/_*
