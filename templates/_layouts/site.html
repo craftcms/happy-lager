@@ -81,7 +81,7 @@
 	<footer id="footer">
 		<div class="flex">
 			<div class="g1-flex4 g2-flex3 g3-flex6">
-				<img src="alias(@web/assets/images/hl.svg)" width="76" height="76" alt="H.L.">
+				<img src="{{ alias('@web/assets/images/hl.svg') }}" width="76" height="76" alt="H.L.">
 				<p class="copyright">{{ footer.copyrightNotice|replace('{year}', now|date('Y')) }}</p>
 			</div>
 			<div class="g1-flex4 g2-flex3 g3-flex6">
