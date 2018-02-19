@@ -16,7 +16,7 @@
 
 {# Get the requested search term and find the matching entries #}
 {% set searchTerm = craft.request.getParam('q') %}
-{% set searchResults = craft.entries.search(searchTerm).order('score') %}
+{% set searchResults = craft.entries.search(searchTerm).orderBy('score') %}
 
 {% block main %}
 	<header class="alt2">

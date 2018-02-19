@@ -20,10 +20,10 @@
 		<div class="flex">
 
 			{# Loop through all of the Services entries in their Structure-defined order #}
-			{% for entry in craft.entries.section('services') %}
+			{% for entry in craft.entries.section('services').all() %}
 				<div class="g1-flex4 g2-flex2 g3-flex4">
 					<a href="{{ entry.url }}" class="services-entry-wrap">
-						{% set image = entry.featuredImage.first() %}
+						{% set image = entry.featuredImage.one() %}
 						{% if image %}
 							<img src="{{ image.getUrl('thumb') }}" alt="{{ image.title }}"/>
 						{% endif %}

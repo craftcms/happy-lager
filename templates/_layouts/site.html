@@ -26,7 +26,7 @@
 {# Set the `bodyClass` variable to the entry's section handle if there is one,
    or the first URI segment (this is used by the parent template) #}
 {% if bodyClass is not defined %}
-	{% set bodyClass = entry is defined ? entry.section.handle : craft.request.firstSegment %}
+	{% set bodyClass = entry is defined ? entry.section.handle : craft.app.request.segments|first %}
 {% endif %}
 
 {# Set the `title` variable to the nav item that matches the first segment #}
@@ -61,7 +61,7 @@
 					<ul>
 						{% for slug, item in nav %}
 							<li>
-								<a href="{{ url(slug) }}" {% if craft.request.firstSegment == slug %}class="sel"{% endif %}>
+								<a href="{{ url(slug) }}" {% if craft.app.request.segments|first == slug %}class="sel"{% endif %}>
 									<strong>{{ item.title }}</strong>
 									<span>-</span>
 									<em>{{ item.desc }}</em>

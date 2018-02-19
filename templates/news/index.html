@@ -15,16 +15,16 @@
 {% set featuredEntry = craft.entries({
     section: 'news',
     featuredEntry: 1,
-    order: 'postDate desc'
-}).first() %}
+    orderBy: 'postDate desc'
+}).one() %}
 
 {# Now set the params for the remaining entries, and paginate them in groups of 4 #}
 {% set newsEntriesCriteria = craft.entries({
     section: 'news',
     id: (featuredEntry ? 'not '~featuredEntry.id),
-    order: 'postDate desc'
+    orderBy: 'postDate desc'
 }) %}
-{% set isFirstPage = craft.request.getPageNum() == 1 %}
+{% set isFirstPage = craft.app.request.pageNum == 1 %}
 {% set limit = isFirstPage and featuredEntry ? 3 : 4 %}
 {% paginate newsEntriesCriteria.limit(limit) as newsEntries %}
 {% if isFirstPage and featuredEntry %}
@@ -51,10 +51,10 @@
 			{% set url = newsEntry.type.handle == 'link' ? newsEntry.linkUrl : newsEntry.url %}
 
 			{# We give special treatment to the featured entry #}
-			{% set isFeaturedEntry = (loop.first and craft.request.pageNum == 1) %}
+			{% set isFeaturedEntry = (loop.first and craft.app.request.pageNum == 1) %}
 
 			<article class="{% if isFeaturedEntry %}featured {% endif %}news-entry">
-				{% set image = newsEntry.featuredImage.first() %}
+				{% set image = newsEntry.featuredImage.one() %}
 				{% if image %}
 					<figure>
 						<a href="{{ url }}">

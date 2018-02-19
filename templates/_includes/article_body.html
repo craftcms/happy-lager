@@ -23,7 +23,7 @@
 {% set closedLastRow = true %}
 {% set blocks = entry.articleBody %}
 
-{% for i, block in blocks %}
+{% for i, block in blocks.all() %}
 
 	{% set type = (nextType ?: block.type.handle) %}
 	{% set position = (nextPosition ?: getPosition(block)~'') %}
@@ -79,7 +79,7 @@
 			</div>
 
 		{% case 'image' %}
-			{% set image = block.image.first() %}
+			{% set image = block.image.one() %}
 			{% if image %}
 				{% if position == 'full' %}
 					{% do image.setTransform({ width: 1440, height: 480 }) %}
@@ -95,7 +95,7 @@
 			{% endif %}
 
 		{% case 'gallery' %}
-			{% for image in block.images %}
+			{% for image in block.images.all() %}
 				<div class="g1-flex4 g2-flex2 g3-flex4">
 					<img src="{{ image.getUrl('small') }}" alt="{{ image.title }}">
 					{{ image.shortDescription }}

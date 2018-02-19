@@ -17,13 +17,13 @@
 	{% include "_includes/index_heading" %}
 
 	{# Loop through all of the Work section entries #}
-	{% for workEntry in craft.entries.section('work') %}
+	{% for workEntry in craft.entries.section('work').all() %}
 
 		{# We give special treatment to the latest work entry #}
 		{% if loop.first %}
 
 			<article class="work-entry work-entry-feature">
-				{% set image = workEntry.featuredImage.last() %}
+				{% set image = workEntry.featuredImage.inReverse().one() %}
 				{% if image %}
 					<img src="{{ image.getUrl({ width: 2000 }) }}" alt="{{ image.title }}" width="2000">
 				{% endif %}
@@ -54,7 +54,7 @@
 			{% endif %}
 
 			<article class="work-entry">
-				{% set image = workEntry.featuredImage.last() %}
+				{% set image = workEntry.featuredImage.inReverse().one()  %}
 				{% if image %}
 					<figure>
 						<a href="{{ workEntry.url }}">

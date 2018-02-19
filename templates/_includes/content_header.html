@@ -21,7 +21,7 @@
 {# Does this entry have a featured image? #}
 
 {% if showFeaturedImage is defined and showFeaturedImage %}
-	{% set image = entry.featuredImage.first() %}
+	{% set image = entry.featuredImage.one() %}
 	{% if image %}
 		<section>
 			<img class="contain-media" src="{{ image.getUrl({ width: 1440, height: 360 }) }}" alt="{{ image.title }}">

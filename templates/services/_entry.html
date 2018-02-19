@@ -19,7 +19,7 @@
 				<ul>
 
 					{# Loop through all of the Services entries in their Structure-defined order #}
-					{% for serviceEntry in craft.entries.section('services') %}
+					{% for serviceEntry in craft.entries.section('services').all() %}
 
 						{# Is this the entry we're currently looking at? #}
 						{% set isCurrent = (serviceEntry.id == entry.id) %}
@@ -52,7 +52,7 @@
 						{{ block.text }}
 					</div>
 					<div class="g1-flex4 g2-flex3 g3-flex8">
-						{% set photo = block.image.first() %}
+						{% set photo = block.image.one() %}
 						{% if photo %}
 							<img class="" src="{{ photo.url }}" alt="{{ photo.title }}">
 						{% endif %}
@@ -63,7 +63,7 @@
 	</section>
 
 	{# Load the most recent Work entry that involved this service #}
-	{% set workEntry = craft.entries.section('work').relatedTo(entry).first() %}
+	{% set workEntry = craft.entries.section('work').relatedTo(entry).one() %}
 	{% if workEntry %}
 		<section class="services-work-entry">
 			{% set image = workEntry.featuredImage.last() %}
@@ -74,7 +74,7 @@
 			<div class="flex">
 				<div class="g1-flex4 g2-flex3 g3-flex6">
 					<a href="{{ workEntry.url }}">
-						{% set image = workEntry.featuredImage.first() %}
+						{% set image = workEntry.featuredImage.one() %}
 						{% if image %}
 							<img src="{{ image.url({ width: 440, height: 328 }) }}" alt="{{ image.title }}">
 						{% endif %}

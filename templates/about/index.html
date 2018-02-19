@@ -35,7 +35,7 @@
 	{% include "_includes/article_body" %}
 
 	{# Loop through all of the Locations entries in their Structure-defined order #}
-	{% for locationEntry in craft.entries.section('locations') %}
+	{% for locationEntry in craft.entries.section('locations').all() %}
 		<section class="alt2">
 			<div class="flex">
 				<div class="g1-flex4 g2-flex6 g3-flex5">
@@ -47,7 +47,7 @@
 
 					{% if locationEntry.contactMethods|length %}
 						<dl class="inline">
-							{% for block in locationEntry.contactMethods %}
+							{% for block in locationEntry.contactMethods.all() %}
 								<dt>{{ block.label }}</dt>
 								<dd>{{ block.value }}</dd>
 							{% endfor %}
@@ -73,7 +73,7 @@
 					{% endif %}
 				</div>
 				<div class="g1-flex4 g2-flex6 g3-flex7">
-					{% set image = locationEntry.featuredImage.first() %}
+					{% set image = locationEntry.featuredImage.one() %}
 					{% if image %}
 						<img src="{{ image.getUrl('medium') }}" alt="{{ image.title }}" />
 					{% endif %}

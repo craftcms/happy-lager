@@ -26,9 +26,9 @@
 				<footer>
 					<hr class="horz-rule">
 					<p class="services center">
-						{% for serviceEntry in entry.servicesPerformed %}
+						{% for serviceEntry in entry.servicesPerformed.all() %}
 							<a href="{{ serviceEntry.url }}">
-								{% set icon = serviceEntry.serviceIcon.first() %}
+								{% set icon = serviceEntry.serviceIcon.one() %}
 								{% if icon %}
 								<img src="{{ icon.url }}" alt="{{ icon.title }}">
 								{% endif %}
@@ -38,11 +38,11 @@
 					</p>
 					<hr class="horz-rule">
 				</footer>
-				<a class="btn" href="{{ url(craft.request.firstSegment) }}">Back to what's on tap</a>
+				<a class="btn" href="{{ url(craft.app.request.segments|first) }}">Back to what's on tap</a>
 				<nav class="prev-next-entry">
 					{% set params = {
 						section: 'work',
-						order: 'title'
+						orderBy: 'title'
 					} %}
 
 					{% set prevEntry = entry.getPrev(params) %}

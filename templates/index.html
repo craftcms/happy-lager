@@ -13,7 +13,7 @@
 
 {% block main %}
 	<div id="hero">
-		{% set image = entry.heroImage.first() %}
+		{% set image = entry.heroImage.one() %}
 		{% if image %}
 			<img src="{{ image.getUrl({ height: 916 }) }}" alt="{{ image.title }}"/>
 		{% endif %}
@@ -41,10 +41,10 @@
 		<div class="flex">
 
 			{# Pull in the three latest Work entries #}
-			{% for workEntry in craft.entries.section('work').limit(3) %}
+			{% for workEntry in craft.entries.section('work').limit(3).all() %}
 				<div class="g1-flex4 g2-flex2 g3-flex4">
 					<a href="{{ workEntry.url }}" class="services-entry-wrap">
-						{% set image = workEntry.featuredThumb.first() %}
+						{% set image = workEntry.featuredThumb.one() %}
 						{% if image %}
 							<img src="{{ image.getUrl('thumb') }}" alt="image.title"/>
 						{% endif %}
@@ -80,10 +80,10 @@
 
 	<section id="testimonials">
 		<div class="flex">
-			{% for block in entry.testimonials %}
+			{% for block in entry.testimonials.all() %}
 				<div class="g1-flex4 g2-flex2 g3-flex4 bubble">
 					<blockquote>{{ block.quote }}</blockquote>
-					{% set photo = block.photo.first() %}
+					{% set photo = block.photo.one() %}
 					{% if photo %}
 						<img class="" src="{{ photo.url({ width: 84, height: 84 }) }}" alt="{{ photo.title }}">
 					{% endif %}
@@ -99,7 +99,7 @@
 				<hr class="horz-rule alt3">
 				<a class="button-w-icon alt2 icon-beercan">Our best Drinking Buddies</a>
 				<ul class="logos">
-					{% for logo in entry.clientLogos %}
+					{% for logo in entry.clientLogos.all() %}
 						<li>
 							<img src="{{ logo.getUrl() }}" alt="logo.title"/>
 						</li>
