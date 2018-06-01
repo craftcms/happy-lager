@@ -94,18 +94,18 @@ If you want to install the site locally, follow these instructions:
 
 6. Fill in the proper MySQL credentials in happylager/craft/config/db.php.
 
-7. Create a new virtual host with the hostname `happylager.dev` that points to the happylager/public/ folder.
+7. Create a new virtual host with the hostname `happylager.test` that points to the happylager/public/ folder.
 
 8. Edit your hosts file to resolve happylager.dev to `127.0.0.1`, if necessary.
 
-Now you should be able to point your web browser to http://happylager.dev/admin. You should either see a Craft login screen, or a prompt telling you that some database updates need to be run. If it’s the latter, just click “Finish up”.
+Now you should be able to point your web browser to http://happylager.test/admin. You should either see a Craft login screen, or a prompt telling you that some database updates need to be run. If it’s the latter, just click “Finish up”.
 
-Now point your browser at http://happylager.dev. You should see the Happy Lager homepage.
+Now point your browser at http://happylager.test. You should see the Happy Lager homepage.
 
 
 ## Logging in
 
-The Craft Control Panel is located at http://happylager.dev/admin. You can log in with the following credentials:
+The Craft Control Panel is located at http://happylager.test/admin. You can log in with the following credentials:
 
 * Username: `admin`
 * Password: `password`
