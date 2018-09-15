@@ -1,0 +1,85 @@
+{#
+ # About page template
+ # -------------------
+ #
+ # This template gets loaded whenever the site's About page is requested,
+ # because the "About" single-entry section's Template setting is set to "about".
+ #
+ # An `entry` variable will be automatically passed to this template, which will
+ # be set to the About entry.
+-#}
+
+{% extends "_layouts/site" %}
+
+{% block main %}
+	<header class="alt">
+		<div class="flex">
+			<div class="g1-flex4 g2-flex6 g3-flex12">
+				<h1 class="alpha center reverse">{{ title }}</h1>
+			</div>
+		</div>
+	</header>
+	<section class="info-hero alt">
+		<div class="flex">
+			<div class="g1-flex4 g2-flex6 g3-flex8 g3-offset2">
+				{% if entry.heading|length %}
+					<h1 class="delta reverse center subfont">{{ entry.heading }}</h1>
+				{% endif %}
+				{% if entry.body|length %}
+					<div class="epsilon center reverse">{{ entry.body }}</div>
+				{% endif %}
+			</div>
+		</div>
+	</section>
+
+	{% include "_includes/article_body" %}
+
+	{# Loop through all of the Locations entries in their Structure-defined order #}
+	{% for locationEntry in craft.entries.section('locations').all() %}
+		<section class="alt2">
+			<div class="flex">
+				<div class="g1-flex4 g2-flex6 g3-flex5">
+					<h1 class="gamma subfont alt">{{ locationEntry.title }}</h1>
+
+					{% if locationEntry.address %}
+						<p class="delta subfont caps address">{{ locationEntry.address|nl2br }}</p>
+					{% endif %}
+
+					{% if locationEntry.contactMethods|length %}
+						<dl class="inline">
+							{% for block in locationEntry.contactMethods.all() %}
+								<dt>{{ block.label }}</dt>
+								<dd>{{ block.value }}</dd>
+							{% endfor %}
+						</dl>
+					{% endif %}
+					{% if locationEntry.email or locationEntry.address %}
+						<ul class="horz-list">
+							{% if locationEntry.email %}
+								<li>
+									<a href="mailto:{{ locationEntry.email }}" class="subfont caps email-us-btn">Email Us</a>
+								</li>
+							{% endif %}
+							{% if locationEntry.address %}
+
+								{# Create a Google Maps URL based on the address #}
+								{% set gMapsUrl = 'https://www.google.com/maps/search/' ~ locationEntry.address|replace("\n", ', ')|url_encode %}
+
+								<li>
+									<a href="{{ gMapsUrl }}" target="_blank" class="subfont caps map-btn">Map</a>
+								</li>
+							{% endif %}
+						</ul>
+					{% endif %}
+				</div>
+				<div class="g1-flex4 g2-flex6 g3-flex7">
+					{% set image = locationEntry.featuredImage.one() %}
+					{% if image %}
+						<img src="{{ image.getUrl('medium') }}" alt="{{ image.title }}" />
+					{% endif %}
+				</div>
+			</div>
+		</section>
+	{% endfor %}
+
+{% endblock %}

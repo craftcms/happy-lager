@@ -1,0 +1,92 @@
+{#
+
+ # The site layout template
+ # ------------------------
+ #
+ # This layout template extends the _layouts/base.html layout, and defines the
+ # main site layout: the header, footer, and main content area.
+ #
+ # It’s never accessed directly. Instead it is extended by all of our main site
+ # templates.
+ #
+ # This template defines one block region, `main`, which should be extended by
+ # child templates to define the main contents for the page.
+-#}
+
+{% extends "_layouts/base" %}
+
+{# Define the site navigation #}
+{% set nav = {
+	about:    { title: "The Brewery", desc: "About Us" },
+	services: { title: "How It’s Made", desc: "Services" },
+	work:     { title: "What’s On Tap", desc: "Our Work" },
+	news:     { title: "Brew News", desc: "The Latest" }
+} %}
+
+{# Set the `bodyClass` variable to the entry's section handle if there is one,
+   or the first URI segment (this is used by the parent template) #}
+{% if bodyClass is not defined %}
+	{% set bodyClass = entry is defined ? entry.section.handle : craft.app.request.segments|first %}
+{% endif %}
+
+{# Set the `title` variable to the nav item that matches the first segment #}
+{% if nav[bodyClass] is defined %}
+	{% set title %}{% if title is defined %}{{ title }} - {% endif %}{{ nav[bodyClass].title }}{% endset %}
+{% endif %}
+
+
+{% block body %}
+	<div id="bar">
+		<div class="flex">
+			<div class="g1-flex4 g2-flex6 g3-flex12">
+				<div id="social">
+					<a href="https://dribbble.com/" data-icon="dribbble" title="Happy Lager on Dribbble"></a>
+					<a href="https://twitter.com/" data-icon="twitter" title="Happy Lager on Twitter"></a>
+					<a href="https://www.facebook.com/" data-icon="facebook" title="Happy Lager on Facebook"></a>
+				</div>
+				<div id="search">
+					<form action="{{ url('search/results') }}" class="search-form">
+						<input type="search" name="q" placeholder="Search">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<header id="header">
+		<div class="flex">
+			<div class="g1-flex4 g2-flex6 g3-flex12">
+				<h1><a href="{{ siteUrl }}"><img src="{{ alias('@web/assets/images/happylager.svg') }}" width="300" height="125" alt="Happy Lager - Enjoying Every Bit - Since 2006"></a></h1>
+				<nav>
+					<ul>
+						{% for slug, item in nav %}
+							<li>
+								<a href="{{ url(slug) }}" {% if craft.app.request.segments|first == slug %}class="sel"{% endif %}>
+									<strong>{{ item.title }}</strong>
+									<span>-</span>
+									<em>{{ item.desc }}</em>
+								</a>
+							</li>
+						{% endfor %}
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</header>
+
+	<main id="main" role="main">
+		{% block main %}{% endblock %}
+	</main>
+
+	<footer id="footer">
+		<div class="flex">
+			<div class="g1-flex4 g2-flex3 g3-flex6">
+				<img src="{{ alias('@web/assets/images/hl.svg') }}" width="76" height="76" alt="H.L.">
+				<p class="copyright">{{ footer.copyrightNotice|replace('{year}', now|date('Y')) }}</p>
+			</div>
+			<div class="g1-flex4 g2-flex3 g3-flex6">
+				<a class="contact" href="mailto:{{ footer.email }}">{{ footer.contactUsLabel }}</a>
+			</div>
+		</div>
+	</footer>
+{% endblock %}

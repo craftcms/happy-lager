@@ -4,7 +4,7 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         watch: {
             sass: {
-                files: ['public/assets/css/sass/*.scss'],
+                files: ['web/assets/css/sass/*.scss'],
                 tasks: 'sass'
             },
             concat: {
@@ -16,20 +16,20 @@ module.exports = function(grunt) {
                 tasks: 'uglify'
             },
             js: {
-                files: ['public/assets/js/**', 'src/assets/js/*.js'],
+                files: ['web/assets/js/**', 'src/assets/js/*.js'],
                 tasks: ['jshint']
             }
         },
         sass: {
             dist: {
                 files: {
-                    'public/assets/css/happylager.css': 'public/assets/css/sass/happylager.scss'
+                    'web/assets/css/happylager.css': 'web/assets/css/sass/happylager.scss'
                 }
             }
         },
         imageoptim: {
               myTask: {
-                  src: ['public/assets/site', 'public/assets/images']
+                  src: ['web/assets/site', 'web/assets/images']
               }
         },
         uglify: {
@@ -37,8 +37,8 @@ module.exports = function(grunt) {
                 banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
             },
             build: {
-                src: 'public/assets/js/master.js',
-                dest: 'public/assets/js/master.min.js'
+                src: 'web/assets/js/master.js',
+                dest: 'web/assets/js/master.min.js'
             }
         },
         concat: {
@@ -46,8 +46,8 @@ module.exports = function(grunt) {
                 separator: ';'
             },
             dist: {
-                src: ['public/assets/js/jquery-1.10.2.js', 'public/assets/js/plugins/*.js', 'public/assets/js/main.js'],
-                dest: 'public/assets/js/master.js'
+                src: ['web/assets/js/jquery-1.10.2.js', 'web/assets/js/plugins/*.js', 'web/assets/js/main.js'],
+                dest: 'web/assets/js/master.js'
             }
         },
         jshint: {

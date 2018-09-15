@@ -1,11 +1,9 @@
-*.idea/*
-*.log
-*.DS_Store
-*Thumbs.db
+/.env
+/.idea
+/vendor
+.DS_Store
 *.sass-cache/
 node_modules
 *config.codekit
-craft/app/
-craft/config/license.key
-public/assets/site/_*
-public/assets/site/*/_*
+web/assets/site/_*
+web/assets/site/*/_*

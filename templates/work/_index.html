@@ -1,0 +1,81 @@
+{#
+ # Work Index entry template
+ # -------------------------
+ #
+ # This template gets loaded whenever the Work index is requested, because
+ # the Work Index single-entry section's Template setting is set to
+ # "work/_index".
+ #
+ # An `entry` variable will be automatically passed to this template, which will
+ # be set to the Work Index entry.
+-#}
+
+{% extends "_layouts/site" %}
+{% set bodyClass = "work" %}
+
+{% block main %}
+	{% include "_includes/index_heading" %}
+
+	{# Loop through all of the Work section entries #}
+	{% for workEntry in craft.entries.section('work').all() %}
+
+		{# We give special treatment to the latest work entry #}
+		{% if loop.first %}
+
+			<article class="work-entry work-entry-feature">
+				{% set image = workEntry.featuredImage.inReverse().one() %}
+				{% if image %}
+					<img src="{{ image.getUrl({ width: 2000 }) }}" alt="{{ image.title }}" width="2000">
+				{% endif %}
+
+				<div class="summary-wrap">
+					{% if workEntry.heading %}
+						<a href="{{ workEntry.url }}"><h2 class="center reverse beta">{{ workEntry.heading }}</h2></a>
+					{% endif %}
+
+					{% if workEntry.subheading %}
+						<h3 class="delta center subfont reverse"><a href="{{ workEntry.url }}">{{ workEntry.subheading }}</a></h3>
+					{% endif %}
+
+					{% if workEntry.shortDescription %}
+						<div class="block text">
+							{{ workEntry.shortDescription }}
+						</div>
+					{% endif %}
+					<p class="center"><a href="{{ workEntry.url }}" class="more-link">Full Story</a></p>
+				</div>
+			</article>
+
+		{% else %}
+
+			{# Start the .flex container right after the first entry #}
+			{% if loop.index == 2 %}
+				<div class="flex">
+			{% endif %}
+
+			<article class="work-entry">
+				{% set image = workEntry.featuredImage.inReverse().one()  %}
+				{% if image %}
+					<figure>
+						<a href="{{ workEntry.url }}">
+							<img src="{{ image.getUrl({ width: 616 }) }}" alt="{{ image.title }}" width="616" height="204">
+						</a>
+					</figure>
+				{% endif %}
+
+				<div class="summary-wrap">
+					<h3><a href="{{ workEntry.url }}">{{ workEntry.title }}</a></h3>
+					{{ workEntry.shortDescription }}
+					<p><a href="{{ workEntry.url }}" class="more-link">Read More</a></p>
+				</div>
+			</article>
+
+			{# End the .flex container after the last entry #}
+			{% if loop.last %}
+				</div>
+			{% endif %}
+
+		{% endif %}
+
+	{% endfor %}
+{% endblock %}

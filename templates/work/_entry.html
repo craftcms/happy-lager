@@ -1,0 +1,61 @@
+{#
+ # Work entry template
+ # -------------------
+ #
+ # This template gets loaded whenever a Work entry’s URL is requested, because
+ # the Work section’s Template setting is set to "work/_entry".
+ #
+ # An `entry` variable will be automatically passed to this template, which will
+ # be set to the requested News entry.
+-#}
+
+{% extends "_layouts/site" %}
+{% set title = entry.title %}
+
+{% block main %}
+	<article>
+		{% include "_includes/content_header" with { showFeaturedImage: true } %}
+		{% include "_includes/article_heading" %}
+		{% include "_includes/article_body" %}
+	</article>
+
+	<section>
+		<div class="flex">
+			<div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
+				<p class="center"><img src="{{ alias('@web/assets/images/social-sprite.png') }}"></p>
+				<footer>
+					<hr class="horz-rule">
+					<p class="services center">
+						{% for serviceEntry in entry.servicesPerformed.all() %}
+							<a href="{{ serviceEntry.url }}">
+								{% set icon = serviceEntry.serviceIcon.one() %}
+								{% if icon %}
+								<img src="{{ icon.url }}" alt="{{ icon.title }}">
+								{% endif %}
+								<span class="services-title">{{ serviceEntry.title }}</span>
+							</a>
+						{% endfor %}
+					</p>
+					<hr class="horz-rule">
+				</footer>
+				<a class="btn" href="{{ url(craft.app.request.segments|first) }}">Back to what's on tap</a>
+				<nav class="prev-next-entry">
+					{% set params = {
+						section: 'work',
+						orderBy: 'title'
+					} %}
+
+					{% set prevEntry = entry.getPrev(params) %}
+					{% set nextEntry = entry.getNext(params) %}
+
+					{% if prevEntry %}
+						<a href="{{ prevEntry.url }}" class="pag-prev-link">Prev</a>
+					{% endif %}
+					{% if nextEntry %}
+						<a href="{{ nextEntry.url }}" class="pag-next-link">Next</a>
+					{% endif %}
+				</nav>
+			</div>
+		</div>
+	</section>
+{% endblock %}

@@ -1,0 +1,120 @@
+{#
+ # News index template
+ # -------------------
+ #
+ # This template gets loaded when "/news" is requested.
+ #
+ # The page first displays the most recent featured News entry, followed by the
+ # remaining News entries in reverse-chronological order.
+-#}
+
+{% extends "_layouts/site" %}
+
+
+{# Get the most recent featured News entry, regardless of which page we're on #}
+{% set featuredEntry = craft.entries({
+    section: 'news',
+    featuredEntry: 1,
+    orderBy: 'postDate desc'
+}).one() %}
+
+{# Now set the params for the remaining entries, and paginate them in groups of 4 #}
+{% set newsEntriesCriteria = craft.entries({
+    section: 'news',
+    id: (featuredEntry ? 'not '~featuredEntry.id),
+    orderBy: 'postDate desc'
+}) %}
+{% set isFirstPage = craft.app.request.pageNum == 1 %}
+{% set limit = isFirstPage and featuredEntry ? 3 : 4 %}
+{% paginate newsEntriesCriteria.limit(limit) as newsEntries %}
+{% if isFirstPage and featuredEntry %}
+    {# Tack the featured entry onto the front of the list #}
+    {% set newsEntries = [featuredEntry]|merge(newsEntries) %}
+{% endif %}
+
+
+{% block main %}
+	<header class="alt2">
+		<div class="flex">
+			<div class="g1-flex4 g2-flex6 g3-flex12">
+				<h1 class="alpha center reverse">{{ title }}</h1>
+			</div>
+		</div>
+	</header>
+
+	<div class="flex">
+
+		{# Loop through this page's News entries #}
+		{% for newsEntry in newsEntries %}
+
+			{# Figure out where this entry should link to #}
+			{% set url = newsEntry.type.handle == 'link' ? newsEntry.linkUrl : newsEntry.url %}
+
+			{# We give special treatment to the featured entry #}
+			{% set isFeaturedEntry = (loop.first and craft.app.request.pageNum == 1) %}
+
+			<article class="{% if isFeaturedEntry %}featured {% endif %}news-entry">
+				{% set image = newsEntry.featuredImage.one() %}
+				{% if image %}
+					<figure>
+						<a href="{{ url }}">
+							{% if isFeaturedEntry %}
+								<img src="{{ image.getUrl() }}" alt="{{ image.title }}" width="570" height="348">
+							{% else %}
+								<img src="{{ image.getUrl('thumb') }}" alt="{{ image.title }}" width="280" height="204">
+							{% endif %}
+						</a>
+					</figure>
+				{% endif %}
+
+				<div class="summary-wrap">
+					<h3><a href="{{ url }}">{{ newsEntry.title }}</a></h3>
+
+					{% if isFeaturedEntry %}
+						<span class="author">{{ newsEntry.author.name }}</span>
+					{% endif %}
+
+					{{ newsEntry.shortDescription }}
+
+					<p>
+						{% if newsEntry.type == 'link' %}
+							<a href="{{ url }}" class="more-link">Check it out</a>
+						{% else %}
+							{% if not isFeaturedEntry %}
+								<span class="author">{{ newsEntry.author.getFullName() }}</span>
+								<span class="separator">|</span>
+							{% endif %}
+							<a href="{{ url }}" class="more-link">Read More</a>
+						{% endif %}
+					</p>
+				</div>
+			</article>
+		{% endfor %}
+
+		<hr class="horz-rule">
+
+		<div class="pagination">
+			<ul>
+				{% if paginate.prevUrl %}
+					<li><a href="{{ paginate.prevUrl }}" class="pag-prev-link">Previous Page</a></li>
+				{% endif %}
+
+				{% for page, url in paginate.getPrevUrls(5) %}
+					<li><a href="{{ url }}">{{ page }}</a></li>
+				{% endfor %}
+
+				<li class="current">{{ paginate.currentPage }}</li>
+
+				{% for page, url in paginate.getNextUrls(5) %}
+					<li><a href="{{ url }}">{{ page }}</a></li>
+				{% endfor %}
+
+				{% if paginate.nextUrl %}
+					<li><a href="{{ paginate.nextUrl }}" class="pag-next-link">Next Page</a></li>
+				{% endif %}
+			</ul>
+		</div>
+
+
+	</div>
+{% endblock %}

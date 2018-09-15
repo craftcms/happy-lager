@@ -1,0 +1,117 @@
+{#
+ # Homepage template
+ # -----------------
+ #
+ # This template gets loaded whenever the site's homepage is requested, because
+ # the "Homepage" single-entry section's Template setting is set to "index".
+ #
+ # An `entry` variable will be automatically passed to this template, which will
+ # be set to the Homepage entry.
+-#}
+
+{% extends "_layouts/site" %}
+
+{% block main %}
+	<div id="hero">
+		{% set image = entry.heroImage.one() %}
+		{% if image %}
+			<img src="{{ image.getUrl({ height: 916 }) }}" alt="{{ image.title }}"/>
+		{% endif %}
+
+		<div class="hero-info">
+			<h1>We always see the glass<br>
+				<span class="ir">Half Full</span>
+			</h1>
+			<p class="center reverse">Work with Happy Lager and you will find an endless<br>
+				tap of ideas, wit and creativity.
+			</p>
+			<p class="center"><a href="mailto:hi@happylager.dev" class="hero-cta">Pull up a bar stool</a></p>
+		</div>
+	</div>
+
+	<section id="on-tap">
+		<div class="flex">
+			<div class="g1-flex4 g2-flex6 g3-flex12">
+				<div class="on-tap-buttons-wrap">
+					<a class="button-w-icon icon-beer" href="{{ url('work') }}">What’s on Tap</a>
+					<a href="{{ url('work') }}" class="view-more">View More</a>
+				</div>
+			</div>
+		</div>
+		<div class="flex">
+
+			{# Pull in the three latest Work entries #}
+			{% for workEntry in craft.entries.section('work').limit(3).all() %}
+				<div class="g1-flex4 g2-flex2 g3-flex4">
+					<a href="{{ workEntry.url }}" class="services-entry-wrap">
+						{% set image = workEntry.featuredThumb.one() %}
+						{% if image %}
+							<img src="{{ image.getUrl('thumb') }}" alt="image.title"/>
+						{% endif %}
+						<h3 class="center">{{ workEntry.title }}</h3>
+						{{ workEntry.shortDescription }}
+					</a>
+				</div>
+			{% endfor %}
+
+		</div>
+	</section>
+
+	<section id="how-made">
+		<div class="flex">
+			<div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
+					<hr class="horz-rule alt">
+					<a class="button-w-icon alt icon-beaker" href="{{ url('about') }}">How it’s made</a>
+			</div>
+		</div>
+		<div class="flex">
+			<div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
+				<h1 class="beta">Uncap Happy Lager to find out how it’s made</h1>
+				<h2 class="subfont delta center">Our Experience &middot; Our Services &middot; And more</h2>
+			</div>
+		</div>
+		<div class="flex">
+			<div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
+				<hr class="horz-rule alt2">
+				<a class="big-arrow" href="{{ url('about') }}">Go</a>
+			</div>
+		</div>
+	</section>
+
+	<section id="testimonials">
+		<div class="flex">
+			{% for block in entry.testimonials.all() %}
+				<div class="g1-flex4 g2-flex2 g3-flex4 bubble">
+					<blockquote>{{ block.quote }}</blockquote>
+					{% set photo = block.photo.one() %}
+					{% if photo %}
+						<img class="" src="{{ photo.url({ width: 84, height: 84 }) }}" alt="{{ photo.title }}">
+					{% endif %}
+					<p><cite class="gamma reverse">{{ block.cite }}</cite></p>
+				</div>
+			{% endfor %}
+		</div>
+	</section>
+
+	<section id="best-buddies">
+		<div class="flex">
+			<div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
+				<hr class="horz-rule alt3">
+				<a class="button-w-icon alt2 icon-beercan">Our best Drinking Buddies</a>
+				<ul class="logos">
+					{% for logo in entry.clientLogos.all() %}
+						<li>
+							<img src="{{ logo.getUrl() }}" alt="logo.title"/>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+		<div class="flex">
+			<div class="g1-flex4 g2-flex6 g3-flex10 g3-offset1">
+				<h1 class="beta center">Some Partners Make it all worth while</h1>
+				<h2 class="subfont delta center">Robin Richards &middot; President, Happy Lager</h2>
+			</div>
+		</div>
+	</section>
+{% endblock %}

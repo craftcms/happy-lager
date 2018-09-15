@@ -1,0 +1,30 @@
+{#
+ # Content Header include template
+ # -------------------------------
+ #
+ # This template is used to output HTML for the content header used in Work,
+ # Services, and News entries.
+ #
+ # An `entry` variable is expected to be defined.
+-#}
+
+<header class="alt2"
+{%- if entry.backgroundColor %} style="background:{{ entry.backgroundColor }};"{% endif -%}
+>
+	<div class="flex">
+		<div class="g1-flex4 g2-flex6 g3-flex12">
+			<h1 class="alpha center reverse">{{ entry.title }}</h1>
+		</div>
+	</div>
+</header>
+
+{# Does this entry have a featured image? #}
+
+{% if showFeaturedImage is defined and showFeaturedImage %}
+	{% set image = entry.featuredImage.one() %}
+	{% if image %}
+		<section>
+			<img class="contain-media" src="{{ image.getUrl({ width: 1440, height: 360 }) }}" alt="{{ image.title }}">
+		</section>
+	{% endif %}
+{% endif %}

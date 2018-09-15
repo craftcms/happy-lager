@@ -1,0 +1,39 @@
+{#
+ # Services Index entry template
+ # -----------------------------
+ #
+ # This template gets loaded whenever the Services index is requested, because
+ # the Services Index single-entry section's Template setting is set to
+ # "services/_index".
+ #
+ # An `entry` variable will be automatically passed to this template, which will
+ # be set to the Services Index entry.
+-#}
+
+{% extends "_layouts/site" %}
+{% set bodyClass = "services" %}
+
+{% block main %}
+	{% include "_includes/index_heading" %}
+
+	<section>
+		<div class="flex">
+
+			{# Loop through all of the Services entries in their Structure-defined order #}
+			{% for entry in craft.entries.section('services').all() %}
+				<div class="g1-flex4 g2-flex2 g3-flex4">
+					<a href="{{ entry.url }}" class="services-entry-wrap">
+						{% set image = entry.featuredImage.one() %}
+						{% if image %}
+							<img src="{{ image.getUrl('thumb') }}" alt="{{ image.title }}"/>
+						{% endif %}
+
+						<h3 class="center">{{ entry.title }}</h3>
+						{{ entry.shortDescription }}
+					</a>
+				</div>
+			{% endfor %}
+
+		</div>
+	</section>
+{% endblock %}
