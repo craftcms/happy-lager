@@ -11,7 +11,7 @@
  Target Server Version : 50721
  File Encoding         : 65001
 
- Date: 15/09/2018 14:44:33
+ Date: 15/09/2018 14:47:42
 */
 
 SET NAMES utf8mb4;
@@ -1560,7 +1560,7 @@ CREATE TABLE `info`  (
 -- ----------------------------
 -- Records of info
 -- ----------------------------
-INSERT INTO `info` VALUES (1, '3.0.24', '3.0.93', 1, 'Happy Lager', 'UTC', 1, 0, '1', '2014-07-29 18:21:29', '2018-09-15 21:43:51', '3ebb42f0-5296-4d41-b31e-4dc4882dd453');
+INSERT INTO `info` VALUES (1, '3.0.24', '3.0.93', 1, 'Happy Lager', 'UTC', 1, 0, '1', '2014-07-29 18:21:29', '2018-09-15 21:46:56', '3ebb42f0-5296-4d41-b31e-4dc4882dd453');
 
 -- ----------------------------
 -- Table structure for matrixblocks
@@ -1978,7 +1978,7 @@ CREATE TABLE `migrations`  (
   INDEX `craft_migrations_pluginId_idx`(`pluginId`) USING BTREE,
   INDEX `craft_migrations_type_pluginId_idx`(`type`, `pluginId`) USING BTREE,
   CONSTRAINT `craft_migrations_pluginId_fk` FOREIGN KEY (`pluginId`) REFERENCES `plugins` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 177 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 178 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of migrations
@@ -2159,6 +2159,7 @@ INSERT INTO `migrations` VALUES (173, NULL, 'app', 'm180416_205628_resourcepaths
 INSERT INTO `migrations` VALUES (174, NULL, 'app', 'm180418_205713_widget_cleanup', '2018-09-15 21:43:50', '2018-09-15 21:43:50', '2018-09-15 21:43:50', 'ff7213d7-4712-4dc4-a46d-142622529e22');
 INSERT INTO `migrations` VALUES (175, NULL, 'app', 'm180824_193422_case_sensitivity_fixes', '2018-09-15 21:43:51', '2018-09-15 21:43:51', '2018-09-15 21:43:51', '0acc3f96-de46-42dd-8e5d-2108cbafd224');
 INSERT INTO `migrations` VALUES (176, NULL, 'app', 'm180901_151639_fix_matrixcontent_tables', '2018-09-15 21:43:51', '2018-09-15 21:43:51', '2018-09-15 21:43:51', 'afeed9a9-f8e1-417d-a583-29870c8c27c9');
+INSERT INTO `migrations` VALUES (177, 1, 'plugin', 'm180430_204710_remove_old_plugins', '2018-09-15 21:46:56', '2018-09-15 21:46:56', '2018-09-15 21:46:56', 'a2cd5306-f0bf-4dca-9252-34f7df8da542');
 
 -- ----------------------------
 -- Table structure for plugins
@@ -2185,7 +2186,7 @@ CREATE TABLE `plugins`  (
 -- ----------------------------
 -- Records of plugins
 -- ----------------------------
-INSERT INTO `plugins` VALUES (1, 'redactor', '1.1.0', '1.0.0', NULL, 'unknown', 1, NULL, '2018-02-16 22:20:38', '2018-02-16 22:20:38', '2018-09-15 21:44:14', '2466ee8f-7fab-45ad-b6ec-10d86c18543b');
+INSERT INTO `plugins` VALUES (1, 'redactor', '2.1.6', '2.0.0', NULL, 'unknown', 1, NULL, '2018-02-16 22:20:38', '2018-02-16 22:20:38', '2018-09-15 21:47:03', '2466ee8f-7fab-45ad-b6ec-10d86c18543b');
 
 -- ----------------------------
 -- Table structure for queue
@@ -2358,6 +2359,7 @@ INSERT INTO `resourcepaths` VALUES ('2066887d', 'C:\\dev\\HappyLager\\vendor\\cr
 INSERT INTO `resourcepaths` VALUES ('256fbe48', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\lib\\d3');
 INSERT INTO `resourcepaths` VALUES ('2a0c6993', 'C:\\dev\\HappyLager\\vendor\\craftcms\\redactor\\lib\\redactor-plugins\\fullscreen');
 INSERT INTO `resourcepaths` VALUES ('3440b529', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\src\\web\\assets\\cp\\dist');
+INSERT INTO `resourcepaths` VALUES ('36db6410', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\src\\web\\assets\\utilities\\dist');
 INSERT INTO `resourcepaths` VALUES ('3714bb5e', 'C:\\dev\\HappyLager\\vendor\\craftcms\\redactor\\lib\\redactor');
 INSERT INTO `resourcepaths` VALUES ('396a8491', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\lib\\picturefill');
 INSERT INTO `resourcepaths` VALUES ('5237f911', 'C:\\dev\\HappyLager\\storage\\rebrand\\icon');
@@ -2375,7 +2377,9 @@ INSERT INTO `resourcepaths` VALUES ('a59b0a4f', 'C:\\dev\\HappyLager\\vendor\\cr
 INSERT INTO `resourcepaths` VALUES ('be3214b8', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\src\\web\\assets\\recententries\\dist');
 INSERT INTO `resourcepaths` VALUES ('c8fe335', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\lib\\prismjs');
 INSERT INTO `resourcepaths` VALUES ('cd37abfd', 'C:\\dev\\HappyLager\\vendor\\craftcms\\redactor\\lib\\redactor-plugins\\video');
+INSERT INTO `resourcepaths` VALUES ('d22074e', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\src\\web\\assets\\updater\\dist');
 INSERT INTO `resourcepaths` VALUES ('d536a14f', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\src\\web\\assets\\matrix\\dist');
+INSERT INTO `resourcepaths` VALUES ('e270b1af', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\src\\web\\assets\\updates\\dist');
 INSERT INTO `resourcepaths` VALUES ('e6919483', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\lib\\fabric');
 INSERT INTO `resourcepaths` VALUES ('e87ee622', 'C:\\dev\\HappyLager\\vendor\\craftcms\\redactor\\src\\assets\\field\\dist');
 INSERT INTO `resourcepaths` VALUES ('e8c69184', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\lib\\selectize');
@@ -3496,7 +3500,7 @@ CREATE TABLE `sessions`  (
 -- ----------------------------
 -- Records of sessions
 -- ----------------------------
-INSERT INTO `sessions` VALUES (2, 1, 'IaupS1WU_S_BPT_eq5QUoeB9AjwjHQAv8TnT1CqjA66DsD4-9lJoMwaBCna2RFDaRVN6IfEExfilQqdQND0JjsHW8vCeiXv7fHNS', '2018-09-15 21:44:04', '2018-09-15 21:44:19', '06e51798-3c7b-4a9c-a8b0-e36da9b4d659');
+INSERT INTO `sessions` VALUES (2, 1, 'IaupS1WU_S_BPT_eq5QUoeB9AjwjHQAv8TnT1CqjA66DsD4-9lJoMwaBCna2RFDaRVN6IfEExfilQqdQND0JjsHW8vCeiXv7fHNS', '2018-09-15 21:44:04', '2018-09-15 21:47:02', '06e51798-3c7b-4a9c-a8b0-e36da9b4d659');
 
 -- ----------------------------
 -- Table structure for shunnedmessages
