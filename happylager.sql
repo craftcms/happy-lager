@@ -11,7 +11,7 @@
  Target Server Version : 50721
  File Encoding         : 65001
 
- Date: 17/09/2018 15:06:50
+ Date: 17/09/2018 15:56:45
 */
 
 SET NAMES utf8mb4;
@@ -148,17 +148,6 @@ CREATE TABLE `assettransformindex`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `craft_assettransformindex_volumeId_fileId_location_idx`(`volumeId`, `assetId`, `location`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of assettransformindex
--- ----------------------------
-INSERT INTO `assettransformindex` VALUES (1, 134, 'hero-image.jpg', NULL, '_AUTOx916_crop_center-center_none', 1, 1, 0, '2018-09-17 17:39:11', '2018-09-17 17:39:11', '2018-09-17 17:39:14', '43c4c286-3a4f-45b2-867b-e9b88b1d019e');
-INSERT INTO `assettransformindex` VALUES (2, 132, 'sports-r-us-thumb.jpg', NULL, '_thumb', 1, 1, 0, '2018-09-17 17:39:11', '2018-09-17 17:39:11', '2018-09-17 17:39:14', '10ac354e-7aa8-4683-bd08-06872381cf5e');
-INSERT INTO `assettransformindex` VALUES (3, 104, 'diva-cover.jpg', NULL, '_thumb', 1, 1, 0, '2018-09-17 17:39:11', '2018-09-17 17:39:11', '2018-09-17 17:39:15', 'd1816e81-8a1f-4123-965e-3c9a61d07703');
-INSERT INTO `assettransformindex` VALUES (4, 131, 'on-track-thumb.jpg', NULL, '_thumb', 1, 1, 0, '2018-09-17 17:39:11', '2018-09-17 17:39:11', '2018-09-17 17:39:15', '1c1acd0a-4432-49c6-a5ef-6605a77ed973');
-INSERT INTO `assettransformindex` VALUES (5, 135, 'larry-page.png', NULL, '_84x84_crop_center-center_none', 1, 1, 0, '2018-09-17 17:39:12', '2018-09-17 17:39:12', '2018-09-17 17:39:15', 'e65fc6e6-bb1b-43fb-b1ad-d281fb6bc471');
-INSERT INTO `assettransformindex` VALUES (6, 137, 'ryan-reynolds.png', NULL, '_84x84_crop_center-center_none', 1, 1, 0, '2018-09-17 17:39:12', '2018-09-17 17:39:12', '2018-09-17 17:39:15', '80c6919e-2806-4158-9f41-6e7b45c0db23');
-INSERT INTO `assettransformindex` VALUES (7, 140, 'bob-guff.png', NULL, '_84x84_crop_center-center_none', 1, 1, 0, '2018-09-17 17:39:12', '2018-09-17 17:39:12', '2018-09-17 17:39:17', '66324707-65af-4cfb-896f-582ee2505c08');
 
 -- ----------------------------
 -- Table structure for assettransforms
@@ -3477,7 +3466,7 @@ CREATE TABLE `sessions`  (
 -- ----------------------------
 -- Records of sessions
 -- ----------------------------
-INSERT INTO `sessions` VALUES (1, 1, 'JKEAHkrwepOxeBPlL5frqI4CwtrEYLhEqkn10ieIMxsZl9S1AIhiutWGTHJV86nBJdo9soYp-6ywKJaSAg4Y6Jp4iYMd1GjpBVBO', '2018-09-17 22:03:10', '2018-09-17 22:05:50', '9976f4c8-7b89-46aa-9765-ddd2f0fb379b');
+INSERT INTO `sessions` VALUES (1, 1, 'JKEAHkrwepOxeBPlL5frqI4CwtrEYLhEqkn10ieIMxsZl9S1AIhiutWGTHJV86nBJdo9soYp-6ywKJaSAg4Y6Jp4iYMd1GjpBVBO', '2018-09-17 22:03:10', '2018-09-17 22:07:42', '9976f4c8-7b89-46aa-9765-ddd2f0fb379b');
 
 -- ----------------------------
 -- Table structure for shunnedmessages
