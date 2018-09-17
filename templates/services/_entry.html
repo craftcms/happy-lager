@@ -44,7 +44,7 @@
 	</section>
 
 	<section class="service-points">
-		{% for block in entry.serviceBody %}
+		{% for block in entry.serviceBody.all() %}
 			<div class="flex">
 				<div class="service-point">
 					<div class="g1-flex4 g2-flex3 g3-flex4">
@@ -66,7 +66,7 @@
 	{% set workEntry = craft.entries.section('work').relatedTo(entry).one() %}
 	{% if workEntry %}
 		<section class="services-work-entry">
-			{% set image = workEntry.featuredImage.last() %}
+			{% set image = workEntry.featuredImage.inReverse().one() %}
 			{% if image %}
 				<div style="background-image: url('{{ image.url }}')">
 			{% endif %}

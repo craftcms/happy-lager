@@ -15,7 +15,7 @@
 {% extends "_layouts/site" %}
 
 {# Get the requested search term and find the matching entries #}
-{% set searchTerm = craft.request.getParam('q') %}
+{% set searchTerm = craft.app.request.getParam('q') %}
 {% set searchResults = craft.entries.search(searchTerm).orderBy('score') %}
 
 {% block main %}
@@ -37,7 +37,7 @@
 				</div>
 
 				{# Loop through the results #}
-				{% for entry in searchResults %}
+				{% for entry in searchResults.all() %}
 					<div class="g1-flex4 g2-flex6 g3-flex8 g3-offset2">
 						<span class="post-date">{{ entry.postDate.format('m.d.Y') }}</span>
 						<h2 class="beta">{{ entry.getLink() }}</h2>
