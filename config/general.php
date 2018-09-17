@@ -10,7 +10,7 @@ return [
     // Global settings
     '*' => [
         // Default Week Start Day (0 = Sunday, 1 = Monday...)
-        'defaultWeekStartDay' => 0,
+        'defaultWeekStartDay' => 1,
 
         // Enable CSRF Protection (recommended)
         'enableCsrfProtection' => true,
@@ -23,6 +23,11 @@ return [
 
         // The secure key Craft will use for hashing and encrypting data
         'securityKey' => getenv('SECURITY_KEY'),
+
+        'aliases' => [
+            '@assetBaseUrl' => '/assets',
+            '@assetBasePath' => './assets',
+        ]
     ],
 
     // Dev environment settings
