@@ -11,7 +11,7 @@
  Target Server Version : 50721
  File Encoding         : 65001
 
- Date: 15/09/2018 15:03:11
+ Date: 17/09/2018 15:06:50
 */
 
 SET NAMES utf8mb4;
@@ -147,7 +147,18 @@ CREATE TABLE `assettransformindex`  (
   `uid` char(36) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `craft_assettransformindex_volumeId_fileId_location_idx`(`volumeId`, `assetId`, `location`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 66 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of assettransformindex
+-- ----------------------------
+INSERT INTO `assettransformindex` VALUES (1, 134, 'hero-image.jpg', NULL, '_AUTOx916_crop_center-center_none', 1, 1, 0, '2018-09-17 17:39:11', '2018-09-17 17:39:11', '2018-09-17 17:39:14', '43c4c286-3a4f-45b2-867b-e9b88b1d019e');
+INSERT INTO `assettransformindex` VALUES (2, 132, 'sports-r-us-thumb.jpg', NULL, '_thumb', 1, 1, 0, '2018-09-17 17:39:11', '2018-09-17 17:39:11', '2018-09-17 17:39:14', '10ac354e-7aa8-4683-bd08-06872381cf5e');
+INSERT INTO `assettransformindex` VALUES (3, 104, 'diva-cover.jpg', NULL, '_thumb', 1, 1, 0, '2018-09-17 17:39:11', '2018-09-17 17:39:11', '2018-09-17 17:39:15', 'd1816e81-8a1f-4123-965e-3c9a61d07703');
+INSERT INTO `assettransformindex` VALUES (4, 131, 'on-track-thumb.jpg', NULL, '_thumb', 1, 1, 0, '2018-09-17 17:39:11', '2018-09-17 17:39:11', '2018-09-17 17:39:15', '1c1acd0a-4432-49c6-a5ef-6605a77ed973');
+INSERT INTO `assettransformindex` VALUES (5, 135, 'larry-page.png', NULL, '_84x84_crop_center-center_none', 1, 1, 0, '2018-09-17 17:39:12', '2018-09-17 17:39:12', '2018-09-17 17:39:15', 'e65fc6e6-bb1b-43fb-b1ad-d281fb6bc471');
+INSERT INTO `assettransformindex` VALUES (6, 137, 'ryan-reynolds.png', NULL, '_84x84_crop_center-center_none', 1, 1, 0, '2018-09-17 17:39:12', '2018-09-17 17:39:12', '2018-09-17 17:39:15', '80c6919e-2806-4158-9f41-6e7b45c0db23');
+INSERT INTO `assettransformindex` VALUES (7, 140, 'bob-guff.png', NULL, '_84x84_crop_center-center_none', 1, 1, 0, '2018-09-17 17:39:12', '2018-09-17 17:39:12', '2018-09-17 17:39:17', '66324707-65af-4cfb-896f-582ee2505c08');
 
 -- ----------------------------
 -- Table structure for assettransforms
@@ -391,7 +402,6 @@ CREATE TABLE `deprecationerrors`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `craft_deprecationerrors_key_fingerprint_unq_idx`(`key`, `fingerprint`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
-
 
 -- ----------------------------
 -- Table structure for elementindexsettings
@@ -1249,7 +1259,7 @@ CREATE TABLE `fieldlayoutfields`  (
   CONSTRAINT `craft_fieldlayoutfields_fieldId_fk` FOREIGN KEY (`fieldId`) REFERENCES `fields` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `craft_fieldlayoutfields_layoutId_fk` FOREIGN KEY (`layoutId`) REFERENCES `fieldlayouts` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `craft_fieldlayoutfields_tabId_fk` FOREIGN KEY (`tabId`) REFERENCES `fieldlayouttabs` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 544 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 545 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of fieldlayoutfields
@@ -1314,7 +1324,7 @@ INSERT INTO `fieldlayoutfields` VALUES (538, 197, 122, 47, 0, 3, '2016-06-03 17:
 INSERT INTO `fieldlayoutfields` VALUES (539, 197, 122, 1, 0, 4, '2016-06-03 17:38:06', '2016-06-03 17:38:06', '707f0d71-6324-4d13-8765-5bdb6a0d9e8c');
 INSERT INTO `fieldlayoutfields` VALUES (540, 197, 122, 14, 0, 5, '2016-06-03 17:38:06', '2016-06-03 17:38:06', '856af88a-b500-4c42-bde0-fd627bb98d65');
 INSERT INTO `fieldlayoutfields` VALUES (541, 197, 122, 4, 0, 6, '2016-06-03 17:38:06', '2016-06-03 17:38:06', '80244cdd-4e6e-43c4-bf42-4fc839319e9f');
-INSERT INTO `fieldlayoutfields` VALUES (543, 194, 124, 47, 0, 1, '2018-02-16 22:31:14', '2018-02-16 22:31:14', '7b463470-5a58-4c77-9b1e-5949885ded94');
+INSERT INTO `fieldlayoutfields` VALUES (544, 194, 125, 47, 0, 1, '2018-09-17 22:04:14', '2018-09-17 22:04:14', '68d81632-db84-4d7c-bed2-d26b078cf0d5');
 
 -- ----------------------------
 -- Table structure for fieldlayouts
@@ -1352,9 +1362,9 @@ INSERT INTO `fieldlayouts` VALUES (189, 'craft\\elements\\MatrixBlock', '2015-02
 INSERT INTO `fieldlayouts` VALUES (190, 'craft\\elements\\Entry', '2015-02-10 19:06:53', '2015-02-10 19:06:53', 'a8b59f73-6bdb-4ac9-901b-3894585018fb');
 INSERT INTO `fieldlayouts` VALUES (191, 'craft\\elements\\Entry', '2015-02-10 19:30:56', '2015-02-10 19:30:56', '4cc2a302-6fe7-4f8b-b01b-517ed624cdf7');
 INSERT INTO `fieldlayouts` VALUES (193, 'craft\\elements\\MatrixBlock', '2015-02-10 21:47:22', '2015-02-10 21:47:22', '65bf26e9-50b3-4580-88a4-7a622077d8fb');
-INSERT INTO `fieldlayouts` VALUES (194, 'craft\\elements\\Asset', '2015-02-10 23:15:32', '2018-02-16 22:31:14', 'e4360fb7-190d-42c5-bde0-e01c03bd127c');
-INSERT INTO `fieldlayouts` VALUES (195, 'craft\\elements\\Asset', '2015-02-10 23:15:35', '2018-09-15 21:58:26', 'da21546b-da53-49c7-8821-2685c67df6b4');
-INSERT INTO `fieldlayouts` VALUES (196, 'craft\\elements\\Asset', '2015-02-10 23:15:38', '2018-09-15 21:59:07', '57038148-5c46-43e2-9c5b-9760e04375f2');
+INSERT INTO `fieldlayouts` VALUES (194, 'craft\\elements\\Asset', '2015-02-10 23:15:32', '2018-09-17 22:04:14', 'e4360fb7-190d-42c5-bde0-e01c03bd127c');
+INSERT INTO `fieldlayouts` VALUES (195, 'craft\\elements\\Asset', '2015-02-10 23:15:35', '2018-09-17 22:04:38', 'da21546b-da53-49c7-8821-2685c67df6b4');
+INSERT INTO `fieldlayouts` VALUES (196, 'craft\\elements\\Asset', '2015-02-10 23:15:38', '2018-09-17 22:05:31', '57038148-5c46-43e2-9c5b-9760e04375f2');
 INSERT INTO `fieldlayouts` VALUES (197, 'craft\\elements\\Entry', '2016-06-03 17:38:06', '2016-06-03 17:38:06', 'd45c4454-78e5-415c-8e08-700061feb9b4');
 INSERT INTO `fieldlayouts` VALUES (198, 'craft\\elements\\Asset', '2018-02-16 22:32:04', '2018-02-16 22:32:04', '2d9fb3d5-a903-4ef4-81f3-9eb72e49e728');
 
@@ -1374,7 +1384,7 @@ CREATE TABLE `fieldlayouttabs`  (
   INDEX `craft_fieldlayouttabs_sortOrder_idx`(`sortOrder`) USING BTREE,
   INDEX `craft_fieldlayouttabs_layoutId_fk`(`layoutId`) USING BTREE,
   CONSTRAINT `craft_fieldlayouttabs_layoutId_fk` FOREIGN KEY (`layoutId`) REFERENCES `fieldlayouts` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 125 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 126 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of fieldlayouttabs
@@ -1400,7 +1410,7 @@ INSERT INTO `fieldlayouttabs` VALUES (117, 190, 'Content', 1, '2015-02-10 19:06:
 INSERT INTO `fieldlayouttabs` VALUES (118, 191, 'Content', 1, '2015-02-10 19:30:56', '2015-02-10 19:30:56', 'b110708e-31a1-4aa4-875e-1bfe711bc33d');
 INSERT INTO `fieldlayouttabs` VALUES (120, 193, 'Content', 1, '2015-02-10 21:47:22', '2015-02-10 21:47:22', '1b836983-866d-4174-b506-766e966c2cf6');
 INSERT INTO `fieldlayouttabs` VALUES (122, 197, 'Content', 1, '2016-06-03 17:38:06', '2016-06-03 17:38:06', 'e42cc652-c7e9-4384-b048-f402aa71371b');
-INSERT INTO `fieldlayouttabs` VALUES (124, 194, 'Content', 1, '2018-02-16 22:31:14', '2018-02-16 22:31:14', '7f1a5a0f-20e8-4f1c-b21c-4c4e581b0ecc');
+INSERT INTO `fieldlayouttabs` VALUES (125, 194, 'Content', 1, '2018-09-17 22:04:14', '2018-09-17 22:04:14', '5604db46-6321-4609-b3c1-cd82493a7131');
 
 -- ----------------------------
 -- Table structure for fields
@@ -2148,7 +2158,7 @@ CREATE TABLE `plugins`  (
 -- ----------------------------
 -- Records of plugins
 -- ----------------------------
-INSERT INTO `plugins` VALUES (1, 'redactor', '2.1.6', '2.0.0', NULL, 'unknown', 1, NULL, '2018-02-16 22:20:38', '2018-02-16 22:20:38', '2018-09-15 21:47:03', '2466ee8f-7fab-45ad-b6ec-10d86c18543b');
+INSERT INTO `plugins` VALUES (1, 'redactor', '2.1.6', '2.0.0', NULL, 'unknown', 1, NULL, '2018-02-16 22:20:38', '2018-02-16 22:20:38', '2018-09-17 22:03:21', '2466ee8f-7fab-45ad-b6ec-10d86c18543b');
 
 -- ----------------------------
 -- Table structure for queue
@@ -2172,7 +2182,7 @@ CREATE TABLE `queue`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `craft_queue_fail_timeUpdated_timePushed_idx`(`fail`, `timeUpdated`, `timePushed`) USING BTREE,
   INDEX `craft_queue_fail_timeUpdated_delay_idx`(`fail`, `timeUpdated`, `delay`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for rackspaceaccess
@@ -2321,6 +2331,7 @@ INSERT INTO `resourcepaths` VALUES ('2066887d', 'C:\\dev\\HappyLager\\vendor\\cr
 INSERT INTO `resourcepaths` VALUES ('256fbe48', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\lib\\d3');
 INSERT INTO `resourcepaths` VALUES ('2a081ca2', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\src\\web\\assets\\edittransform\\dist');
 INSERT INTO `resourcepaths` VALUES ('2a0c6993', 'C:\\dev\\HappyLager\\vendor\\craftcms\\redactor\\lib\\redactor-plugins\\fullscreen');
+INSERT INTO `resourcepaths` VALUES ('2ad5aa6f', 'C:\\dev\\HappyLager\\vendor\\craftcms\\redactor\\lib\\redactor');
 INSERT INTO `resourcepaths` VALUES ('3440b529', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\src\\web\\assets\\cp\\dist');
 INSERT INTO `resourcepaths` VALUES ('36db6410', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\src\\web\\assets\\utilities\\dist');
 INSERT INTO `resourcepaths` VALUES ('3714bb5e', 'C:\\dev\\HappyLager\\vendor\\craftcms\\redactor\\lib\\redactor');
@@ -2330,6 +2341,7 @@ INSERT INTO `resourcepaths` VALUES ('57bfbc70', 'C:\\dev\\HappyLager\\vendor\\cr
 INSERT INTO `resourcepaths` VALUES ('6f0fab10', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\src\\web\\assets\\feed\\dist');
 INSERT INTO `resourcepaths` VALUES ('762fdd1e', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\lib\\jquery-ui');
 INSERT INTO `resourcepaths` VALUES ('769375be', '@bower/jquery/dist');
+INSERT INTO `resourcepaths` VALUES ('788cee65', 'C:\\dev\\HappyLager\\vendor\\craftcms\\redactor\\lib\\redactor-plugins\\fullscreen');
 INSERT INTO `resourcepaths` VALUES ('8174c761', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\src\\web\\assets\\login\\dist');
 INSERT INTO `resourcepaths` VALUES ('83544a50', 'C:\\dev\\HappyLager\\storage\\rebrand\\logo');
 INSERT INTO `resourcepaths` VALUES ('87b64e5d', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\lib\\element-resize-detector');
@@ -2340,12 +2352,14 @@ INSERT INTO `resourcepaths` VALUES ('a59b0a4f', 'C:\\dev\\HappyLager\\vendor\\cr
 INSERT INTO `resourcepaths` VALUES ('be3214b8', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\src\\web\\assets\\recententries\\dist');
 INSERT INTO `resourcepaths` VALUES ('c8fe335', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\lib\\prismjs');
 INSERT INTO `resourcepaths` VALUES ('cd37abfd', 'C:\\dev\\HappyLager\\vendor\\craftcms\\redactor\\lib\\redactor-plugins\\video');
+INSERT INTO `resourcepaths` VALUES ('d0f6bacc', 'C:\\dev\\HappyLager\\vendor\\craftcms\\redactor\\lib\\redactor-plugins\\video');
 INSERT INTO `resourcepaths` VALUES ('d22074e', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\src\\web\\assets\\updater\\dist');
 INSERT INTO `resourcepaths` VALUES ('d536a14f', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\src\\web\\assets\\matrix\\dist');
 INSERT INTO `resourcepaths` VALUES ('e270b1af', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\src\\web\\assets\\updates\\dist');
 INSERT INTO `resourcepaths` VALUES ('e6919483', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\lib\\fabric');
 INSERT INTO `resourcepaths` VALUES ('e87ee622', 'C:\\dev\\HappyLager\\vendor\\craftcms\\redactor\\src\\assets\\field\\dist');
 INSERT INTO `resourcepaths` VALUES ('e8c69184', 'C:\\dev\\HappyLager\\vendor\\craftcms\\cms\\lib\\selectize');
+INSERT INTO `resourcepaths` VALUES ('eca4c652', 'C:\\dev\\HappyLager\\vendor\\craftcms\\redactor\\src\\assets\\field\\dist');
 
 -- ----------------------------
 -- Table structure for routes
@@ -3458,12 +3472,12 @@ CREATE TABLE `sessions`  (
   INDEX `craft_sessions_dateUpdated_idx`(`dateUpdated`) USING BTREE,
   INDEX `craft_sessions_userId_fk`(`userId`) USING BTREE,
   CONSTRAINT `craft_sessions_userId_fk` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sessions
 -- ----------------------------
-INSERT INTO `sessions` VALUES (2, 1, 'IaupS1WU_S_BPT_eq5QUoeB9AjwjHQAv8TnT1CqjA66DsD4-9lJoMwaBCna2RFDaRVN6IfEExfilQqdQND0JjsHW8vCeiXv7fHNS', '2018-09-15 21:44:04', '2018-09-15 22:02:28', '06e51798-3c7b-4a9c-a8b0-e36da9b4d659');
+INSERT INTO `sessions` VALUES (1, 1, 'JKEAHkrwepOxeBPlL5frqI4CwtrEYLhEqkn10ieIMxsZl9S1AIhiutWGTHJV86nBJdo9soYp-6ywKJaSAg4Y6Jp4iYMd1GjpBVBO', '2018-09-17 22:03:10', '2018-09-17 22:05:50', '9976f4c8-7b89-46aa-9765-ddd2f0fb379b');
 
 -- ----------------------------
 -- Table structure for shunnedmessages
@@ -3887,7 +3901,7 @@ CREATE TABLE `users`  (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES (1, 'admin', NULL, NULL, NULL, 'admin@happylager.dev', '$2a$13$5j8bSRoKQZipjtIg6FXWR.kGRR3UfCL.QeMIt2yTRH1.hCNHLQKtq', 1, 0, 0, 0, '2018-09-15 21:44:04', '127.0.0.1', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 0, NULL, '2016-08-22 18:42:37', '2018-09-15 21:44:04', '953aedcd-73c8-4677-b0c5-4241e8fbb14c');
+INSERT INTO `users` VALUES (1, 'admin', NULL, NULL, NULL, 'admin@happylager.dev', '$2a$13$5j8bSRoKQZipjtIg6FXWR.kGRR3UfCL.QeMIt2yTRH1.hCNHLQKtq', 1, 0, 0, 0, '2018-09-17 22:03:10', '127.0.0.1', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 0, NULL, '2016-08-22 18:42:37', '2018-09-17 22:03:10', '953aedcd-73c8-4677-b0c5-4241e8fbb14c');
 
 -- ----------------------------
 -- Table structure for volumefolders
@@ -3948,9 +3962,9 @@ CREATE TABLE `volumes`  (
 -- ----------------------------
 -- Records of volumes
 -- ----------------------------
-INSERT INTO `volumes` VALUES (1, 'Site Assets', 'siteAssets', 'craft\\volumes\\Local', 1, '@web/assets/site', '{\"path\":\"@webroot/assets/site\"}', 1, 194, '2014-07-30 22:43:56', '2018-02-16 22:31:14', '0193dc64-5499-4e28-95dd-f8f603154851');
-INSERT INTO `volumes` VALUES (2, 'Company Logos', 'companyLogos', 'craft\\volumes\\Local', 1, '@web/assets/logos', '{\"path\":\"@webroot/assets/logos\"}', 2, 195, '2014-10-07 03:38:14', '2018-09-15 21:58:26', '7d6a9bef-727c-4a0c-9791-4f423956de69');
-INSERT INTO `volumes` VALUES (3, 'Service Icons', 'serviceIcons', 'craft\\volumes\\Local', 1, '@web/assets/images/service-icons', '{\"path\":\"@webroot/assets/images/service-icons\"}', 3, 196, '2014-12-03 20:02:16', '2018-09-15 21:59:07', '3fc34ff2-8da7-4a35-8147-f0a2e01392b9');
+INSERT INTO `volumes` VALUES (1, 'Site Assets', 'siteAssets', 'craft\\volumes\\Local', 1, '@assetBaseUrl/site', '{\"path\":\"@assetBasePath/site\"}', 1, 194, '2014-07-30 22:43:56', '2018-09-17 22:04:14', '0193dc64-5499-4e28-95dd-f8f603154851');
+INSERT INTO `volumes` VALUES (2, 'Company Logos', 'companyLogos', 'craft\\volumes\\Local', 1, '@assetBaseUrl/logos', '{\"path\":\"@assetBasePath/logos\"}', 2, 195, '2014-10-07 03:38:14', '2018-09-17 22:04:38', '7d6a9bef-727c-4a0c-9791-4f423956de69');
+INSERT INTO `volumes` VALUES (3, 'Service Icons', 'serviceIcons', 'craft\\volumes\\Local', 1, '@assetBaseUrl/images/service-icons', '{\"path\":\"@assetBasePath/site/images/service-icons\"}', 3, 196, '2014-12-03 20:02:16', '2018-09-17 22:05:31', '3fc34ff2-8da7-4a35-8147-f0a2e01392b9');
 INSERT INTO `volumes` VALUES (4, 'User Photos', 'userPhotos', 'craft\\volumes\\Local', 0, NULL, '{\"path\":\"@storage/userphotos\"}', 4, 198, '2018-02-16 22:04:25', '2018-02-16 22:32:04', '1f0ea10d-2be0-4638-88da-105d232f4787');
 
 -- ----------------------------
