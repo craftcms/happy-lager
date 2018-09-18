@@ -52,8 +52,6 @@ This site has the following [relational fields](https://docs.craftcms.com/v3/rel
 * **Service Icon** _(Assets)_ – used to relate an icon to Services entries.
 * There are additional Assets fields within the “Article Body” and “Service Body” Matrix fields.
 
-:information_source: Watch the [Relations video](http://craftcms.com/features/relations) for an overview of Relations in Craft.
-
 #### Assets
 
 This site has the following [asset volumes](https://docs.craftcms.com/v3/assets.html):
