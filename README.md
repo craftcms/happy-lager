@@ -108,7 +108,7 @@ If you want to install the site locally, follow these instructions:
 
 6. Create a new virtual host with the hostname `happylager.test` that points to the `happylager.test/web/` folder.
 
-7. Edit your hosts file to resolve `happylager.dev` to `127.0.0.1`, if necessary.
+7. Edit your hosts file to resolve `happylager.test` to `127.0.0.1`, if necessary.
 
 Now point your browser at `http://happylager.test`. You should see the Happy Lager homepage.
 
