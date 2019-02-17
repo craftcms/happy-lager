@@ -3,15 +3,15 @@
 
  Source Server         : Homestead (MySQL)
  Source Server Type    : MySQL
- Source Server Version : 50722
+ Source Server Version : 50724
  Source Host           : 127.0.0.1:33060
  Source Schema         : happylager
 
  Target Server Type    : MySQL
- Target Server Version : 50722
+ Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 08/01/2019 12:16:56
+ Date: 17/02/2019 08:24:23
 */
 
 SET NAMES utf8mb4;
@@ -54,14 +54,17 @@ CREATE TABLE `assets` (
   `height` int(11) unsigned DEFAULT NULL,
   `size` bigint(20) unsigned DEFAULT NULL,
   `focalPoint` varchar(13) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `deletedWithVolume` tinyint(1) DEFAULT NULL,
+  `keptFile` tinyint(1) DEFAULT NULL,
   `dateModified` datetime DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `craft_assets_filename_folderId_unq_idx` (`filename`,`folderId`) USING BTREE,
   KEY `craft_assets_volumeId_idx` (`volumeId`) USING BTREE,
   KEY `craft_assets_folderId_idx` (`folderId`) USING BTREE,
+  KEY `assets_volumeId_keptFile_idx` (`volumeId`,`keptFile`),
+  KEY `assets_filename_folderId_idx` (`filename`,`folderId`),
   CONSTRAINT `craft_assets_folderId_fk` FOREIGN KEY (`folderId`) REFERENCES `volumefolders` (`id`) ON DELETE CASCADE,
   CONSTRAINT `craft_assets_id_fk` FOREIGN KEY (`id`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
   CONSTRAINT `craft_assets_volumeId_fk` FOREIGN KEY (`volumeId`) REFERENCES `volumes` (`id`) ON DELETE CASCADE
@@ -71,63 +74,63 @@ CREATE TABLE `assets` (
 -- Records of assets
 -- ----------------------------
 BEGIN;
-INSERT INTO `assets` VALUES (6, 1, 1, 'water-barley-hops.jpg', 'image', 1420, 728, 182308, NULL, '2014-09-14 15:08:19', '2014-07-30 22:55:13', '2015-02-02 04:40:03', 'a4061a60-44da-4bdd-baeb-5ea173f34024');
-INSERT INTO `assets` VALUES (7, 1, 1, 'laptop-desk.jpg', 'image', 440, 250, 23028, NULL, '2014-09-14 15:08:17', '2014-07-30 22:57:57', '2015-02-02 04:39:57', '2c80cb43-4d61-4ce5-9a3d-bfe4b5f4628a');
-INSERT INTO `assets` VALUES (8, 1, 1, 'coffee-shop.jpg', 'image', 1420, 1360, 344802, NULL, '2014-09-14 15:08:20', '2014-07-30 23:01:25', '2015-02-02 04:39:53', '374e774f-539c-4d1d-b253-7bd5e70d121d');
-INSERT INTO `assets` VALUES (23, 1, 1, 'augmented-reality.jpg', 'image', 1420, 1020, 121601, NULL, '2014-09-14 15:08:18', '2014-07-31 22:02:47', '2015-02-02 04:39:52', '3fcaa874-780d-4d64-bbc6-3939af253f04');
-INSERT INTO `assets` VALUES (28, 1, 1, 'video.jpg', 'image', 440, 250, 10690, NULL, '2014-09-14 15:08:17', '2014-07-31 22:08:34', '2015-02-02 04:40:02', '194e3a17-676e-4bb8-b4c7-395f990ad7cc');
-INSERT INTO `assets` VALUES (29, 1, 1, 'augmented-reality-icons.png', 'image', 960, 102, 4733, NULL, '2014-09-14 15:08:28', '2014-07-31 22:19:29', '2015-02-02 04:39:52', '7252a798-5d07-4427-977f-81db061b5f01');
-INSERT INTO `assets` VALUES (40, 1, 1, 'awesome-cities.jpg', 'image', 416, 215, 34386, NULL, '2014-09-14 15:08:16', '2014-07-31 22:22:21', '2015-02-02 04:39:52', '20d28672-0cbd-4c3e-addb-0af288ea04a4');
-INSERT INTO `assets` VALUES (42, 1, 1, 'fist.jpg', 'image', 1420, 904, 254933, NULL, '2014-09-14 15:08:18', '2014-07-31 23:14:44', '2015-02-02 04:39:56', '90b99d72-3104-4e84-9be8-82384c79f524');
-INSERT INTO `assets` VALUES (44, 1, 1, 'pong.png', 'image', 1420, 394, 6575, NULL, '2014-09-14 15:09:02', '2014-07-31 23:18:18', '2015-02-02 04:39:59', '676cef56-6788-4b48-87bf-91058001e9f6');
-INSERT INTO `assets` VALUES (59, 1, 1, 'gallery.png', 'image', 1440, 480, 715290, NULL, '2014-09-14 15:10:46', '2014-08-06 20:36:49', '2015-02-02 04:39:56', 'a58240ce-a8d4-465c-9545-f128cd84f6b3');
-INSERT INTO `assets` VALUES (60, 1, 1, 'bar.jpg', 'image', 960, 463, 94182, NULL, '2014-09-14 15:08:17', '2014-08-06 21:31:46', '2015-02-02 04:39:52', '4c204c73-0ace-4d40-aac0-04e6deeb3840');
-INSERT INTO `assets` VALUES (72, 1, 1, 'macbook.jpg', 'image', 440, 284, 23739, NULL, '2014-09-14 15:08:17', '2014-08-06 21:33:56', '2015-02-02 04:39:57', '04cb3cc1-ae5a-4788-82e5-b9ef3176f9c3');
-INSERT INTO `assets` VALUES (82, 1, 1, 'diva-interface-work.jpg', 'image', 1400, 324, 50231, NULL, '2014-09-28 16:31:31', '2014-09-23 03:06:38', '2015-02-02 04:39:55', '64c79f89-b616-40c9-b6f8-d580b78bf6a2');
-INSERT INTO `assets` VALUES (83, 1, 1, 'diva-interface-detail.png', 'image', 622, 331, 603612, NULL, '2014-09-23 03:10:32', '2014-09-23 03:10:32', '2015-02-02 04:39:54', '0e8847ba-7ed8-42d0-bd87-066eebd39f14');
-INSERT INTO `assets` VALUES (84, 1, 1, 'diva-mobile-detail.png', 'image', 640, 1136, 108139, NULL, '2014-09-28 16:31:31', '2014-09-23 03:15:27', '2015-02-02 04:39:55', '74f757f0-4e9b-4f64-86eb-dbd714b2a9ff');
-INSERT INTO `assets` VALUES (98, 1, 1, 'news-link-1-image.jpg', 'image', 283, 204, 369861, NULL, '2014-10-03 02:21:34', '2014-10-03 02:21:34', '2015-02-02 04:39:58', '5ca307e8-896c-4c55-9b90-89b9a7219788');
-INSERT INTO `assets` VALUES (100, 1, 1, 'news-link-2-image.jpg', 'image', 283, 204, 367515, NULL, '2014-10-03 03:31:00', '2014-10-03 03:31:00', '2015-02-02 04:39:58', 'd59dda1e-5e9a-4eab-a299-81196c160f95');
-INSERT INTO `assets` VALUES (102, 1, 1, 'news-entry-1-image.jpg', 'image', 283, 204, 382424, NULL, '2014-10-03 03:33:52', '2014-10-03 03:33:52', '2015-02-02 04:39:58', '09404fd4-7ff5-426a-a77b-8462668fc6d5');
-INSERT INTO `assets` VALUES (104, 1, 1, 'diva-cover.jpg', 'image', 570, 345, 392042, NULL, '2014-10-03 03:58:05', '2014-10-03 03:58:05', '2015-02-02 04:39:54', '90f7b27d-5935-47fc-9776-180a9eaca5d7');
-INSERT INTO `assets` VALUES (115, 1, 1, 'email-marketing.jpg', 'image', 284, 204, 352431, NULL, '2014-10-04 15:35:41', '2014-10-04 15:35:41', '2015-02-02 04:39:55', '90a30e26-e27f-48ef-bf41-89a715b67424');
-INSERT INTO `assets` VALUES (121, 1, 1, 'seo.jpg', 'image', 284, 204, 356107, NULL, '2014-10-04 15:42:04', '2014-10-04 15:42:04', '2015-02-02 04:40:00', '406af95b-527d-4c8e-8205-ca094ae5eb6c');
-INSERT INTO `assets` VALUES (123, 1, 1, 'app-development.jpg', 'image', 284, 204, 354634, NULL, '2014-10-04 15:46:51', '2014-10-04 15:46:51', '2015-02-02 04:39:52', '7e9252f2-8d14-4c38-b262-e704edefd378');
-INSERT INTO `assets` VALUES (125, 1, 1, 'strategy.jpg', 'image', 284, 204, 366918, NULL, '2014-10-04 15:47:46', '2014-10-04 15:47:46', '2015-02-02 04:40:02', 'aa544a56-175f-402e-a7ff-20ae44d06af3');
-INSERT INTO `assets` VALUES (127, 1, 1, 'development.jpg', 'image', 284, 204, 344439, NULL, '2014-10-04 15:48:41', '2014-10-04 15:48:41', '2015-02-02 04:39:54', 'a0988eaf-f4e2-430f-8835-3293c685af0c');
-INSERT INTO `assets` VALUES (131, 1, 1, 'on-track-thumb.jpg', 'image', 284, 204, 140750, NULL, '2014-10-05 03:08:45', '2014-10-05 03:08:45', '2015-02-02 04:39:59', '0b4a64c9-9e9d-4e34-b348-96e530258f30');
-INSERT INTO `assets` VALUES (132, 1, 1, 'sports-r-us-thumb.jpg', 'image', 283, 204, 139546, NULL, '2014-10-05 03:08:45', '2014-10-05 03:08:45', '2015-02-02 04:40:00', 'e876ba98-1a17-450c-9e63-adc0e790c5c8');
-INSERT INTO `assets` VALUES (134, 1, 1, 'hero-image.jpg', 'image', 1450, 916, 246984, NULL, '2014-10-06 01:49:48', '2014-10-06 01:49:48', '2015-02-02 04:39:56', '2fa678ca-6edb-46e6-8b83-02e23bb41dcf');
-INSERT INTO `assets` VALUES (135, 1, 1, 'larry-page.png', 'image', 84, 84, 151220, NULL, '2014-10-07 03:41:24', '2014-10-07 03:41:24', '2015-02-04 15:07:12', '9f4d0006-dc9f-411e-b62d-b2a00c4113f1');
-INSERT INTO `assets` VALUES (137, 1, 1, 'ryan-reynolds.png', 'image', 84, 84, 150711, NULL, '2014-10-07 03:43:58', '2014-10-07 03:43:58', '2015-02-04 15:13:25', '927eb8d3-348a-4700-8b5e-85648318346e');
-INSERT INTO `assets` VALUES (140, 1, 1, 'bob-guff.png', 'image', 84, 84, 148537, NULL, '2014-10-07 03:45:38', '2014-10-07 03:45:39', '2015-02-04 15:08:25', 'a006d888-2772-4873-9958-9fa9588872e6');
-INSERT INTO `assets` VALUES (141, 2, 2, 'logo-coke.png', 'image', 165, 75, 142639, NULL, '2014-10-07 03:48:12', '2014-10-07 03:48:12', '2014-10-07 03:48:12', 'b3f0c9ae-90f4-4a51-ba73-b693424572d9');
-INSERT INTO `assets` VALUES (142, 2, 2, 'logo-google.png', 'image', 165, 75, 140641, NULL, '2014-10-07 03:48:21', '2014-10-07 03:48:21', '2014-10-07 03:48:21', '5747ab5f-5aee-4b20-a700-a0a2240faf8c');
-INSERT INTO `assets` VALUES (143, 2, 2, 'logo-Jetblue.png', 'image', 165, 75, 139791, NULL, '2014-10-07 03:48:30', '2014-10-07 03:48:30', '2014-10-07 03:48:30', 'c4705122-4f12-455a-a9af-763a50f7acbf');
-INSERT INTO `assets` VALUES (144, 2, 2, 'logo-mtv.png', 'image', 165, 75, 139584, NULL, '2014-10-07 03:48:40', '2014-10-07 03:48:41', '2014-10-07 03:48:41', '55217bfe-357d-4822-80e1-b863bcf41d29');
-INSERT INTO `assets` VALUES (145, 2, 2, 'logo-newbelgium.png', 'image', 165, 75, 141625, NULL, '2014-10-07 03:48:50', '2014-10-07 03:48:50', '2014-10-07 03:48:50', '26ab2e59-2e73-4ef9-817a-91e27662354f');
-INSERT INTO `assets` VALUES (146, 1, 1, 'sportsrus-bigfeature.jpg', 'image', 1513, 446, 382101, NULL, '2014-10-09 03:37:12', '2014-10-09 03:37:12', '2015-02-02 04:40:00', 'd3bdbf75-064b-4eae-8f2f-a03946b5b779');
-INSERT INTO `assets` VALUES (147, 1, 1, 'diva-bigimage.jpg', 'image', 1500, 493, 410298, NULL, '2014-10-09 03:57:41', '2014-10-09 03:57:41', '2015-02-02 04:39:54', '69cd61b4-86b3-43c5-9aee-da43fe9dbe7c');
-INSERT INTO `assets` VALUES (148, 1, 1, 'ontrack-bigimage.jpg', 'image', 1500, 493, 404370, NULL, '2014-10-09 04:20:25', '2014-10-09 04:20:25', '2015-02-02 04:39:59', 'd75826de-637a-472e-be66-ef89721da151');
-INSERT INTO `assets` VALUES (152, 3, 3, 'app-development.svg', 'image', NULL, NULL, 1842, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:42', '2014-12-03 20:14:42', '53baf170-4450-46b5-9103-07873d81740d');
-INSERT INTO `assets` VALUES (153, 3, 3, 'design.svg', 'image', NULL, NULL, 2642, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:42', '2014-12-03 20:14:42', '6af11d38-1939-4f0c-a66c-3c7e97512b9b');
-INSERT INTO `assets` VALUES (154, 3, 3, 'email-marketing.svg', 'image', NULL, NULL, 2055, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:42', '2014-12-03 20:14:42', '3e87c14a-b147-4d0d-b9c2-aec0b64c4b01');
-INSERT INTO `assets` VALUES (155, 3, 3, 'development.svg', 'image', NULL, NULL, 2167, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:43', '2014-12-03 20:14:43', '036e2a88-d9bc-4dc8-a418-b71ff55194cd');
-INSERT INTO `assets` VALUES (156, 3, 3, 'seo.svg', 'image', NULL, NULL, 1632, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:43', '2014-12-03 20:14:43', 'babaebd8-bbee-4c18-b8d7-065de24e336e');
-INSERT INTO `assets` VALUES (157, 3, 3, 'strategy.svg', 'image', NULL, NULL, 2118, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:43', '2014-12-03 20:14:43', 'ea267e86-001a-40c6-b083-210a89aec3c2');
-INSERT INTO `assets` VALUES (163, 1, 1, 'discover.jpg', 'image', 1200, 394, 372014, NULL, '2014-12-11 01:24:36', '2014-12-11 01:24:36', '2015-02-02 04:39:54', '301a20b4-a847-4138-b226-71ffe3d1dc56');
-INSERT INTO `assets` VALUES (167, 1, 1, 'explore.jpg', 'image', 1200, 394, 378032, NULL, '2014-12-11 01:27:41', '2014-12-11 01:27:41', '2015-02-02 04:39:55', '89819ada-21c0-4791-a4d9-b0b87259e75d');
-INSERT INTO `assets` VALUES (168, 1, 1, 'create-genius.jpg', 'image', 1200, 394, 392282, NULL, '2014-12-11 01:28:48', '2014-12-11 01:28:48', '2015-02-02 04:39:53', '36fd3ebb-a0ec-4ba2-9ad5-45ab717dd492');
-INSERT INTO `assets` VALUES (183, 1, 1, 'moosic-app-ui.jpg', 'image', 700, 522, 394407, NULL, '2014-12-11 03:33:16', '2014-12-11 03:33:17', '2015-02-02 04:39:58', '7a3aac39-6237-4ae5-b717-870cad8a0468');
-INSERT INTO `assets` VALUES (218, 1, 1, 'chicago-office.jpg', 'image', 700, 424, 408964, NULL, '2014-09-14 21:55:35', '2015-02-02 04:39:53', '2015-02-10 19:09:21', 'b608a81b-4d14-4dab-b84a-03594b09d4f1');
-INSERT INTO `assets` VALUES (219, 1, 1, 'macbook-table.jpg', 'image', 363, 255, 385499, NULL, '2014-09-14 21:36:43', '2015-02-02 04:39:57', '2015-02-02 04:39:57', 'dedf499b-e0e7-482e-92d0-a4c1a3132e93');
-INSERT INTO `assets` VALUES (220, 1, 4, 'crystal.jpg', 'image', 560, 560, 109638, NULL, '2016-08-22 18:34:32', '2015-02-02 04:40:00', '2016-08-22 18:34:32', '275961f1-dfd0-40c7-8cb6-d1d6fe0aec8a');
-INSERT INTO `assets` VALUES (221, 1, 4, 'travis.jpg', 'image', 560, 560, 133092, NULL, '2016-08-22 18:34:42', '2015-02-02 04:40:01', '2016-08-22 18:34:42', 'af4861ec-1bea-4c47-9457-17e009c28576');
-INSERT INTO `assets` VALUES (222, 1, 4, 'liz.jpg', 'image', 560, 560, 131415, NULL, '2016-08-22 18:34:07', '2015-02-02 04:40:01', '2016-08-22 18:34:07', 'ed385526-c379-4237-b2fd-3c8afc9b0140');
-INSERT INTO `assets` VALUES (223, 1, 1, 'skis.jpg', 'image', 800, 800, 379214, NULL, '2015-02-02 16:57:36', '2015-02-02 16:54:59', '2015-02-02 16:57:40', '6999843c-f3e8-4030-a04a-09d1e5317a08');
-INSERT INTO `assets` VALUES (249, 1, 1, 'bike.jpg', 'image', 283, 273, 30193, NULL, '2015-02-10 17:22:34', '2015-02-10 17:22:34', '2015-02-10 17:22:34', 'da811e48-5673-495f-b56c-1bdc3c471e5c');
-INSERT INTO `assets` VALUES (250, 1, 1, 'glasses.jpg', 'image', 283, 273, 22694, NULL, '2015-02-10 17:23:54', '2015-02-10 17:23:54', '2015-02-10 17:23:54', 'dd094c64-7943-4558-a90d-a0aac84a5b2a');
-INSERT INTO `assets` VALUES (251, 1, 1, 'skateboard.jpg', 'image', 283, 273, 14841, NULL, '2015-02-10 17:24:39', '2015-02-10 17:24:39', '2015-02-10 17:24:39', 'adee3d6b-8d52-4e48-9d1c-2e55261cdf47');
+INSERT INTO `assets` VALUES (6, 1, 1, 'water-barley-hops.jpg', 'image', 1420, 728, 182308, NULL, NULL, NULL, '2014-09-14 15:08:19', '2014-07-30 22:55:13', '2015-02-02 04:40:03', 'a4061a60-44da-4bdd-baeb-5ea173f34024');
+INSERT INTO `assets` VALUES (7, 1, 1, 'laptop-desk.jpg', 'image', 440, 250, 23028, NULL, NULL, NULL, '2014-09-14 15:08:17', '2014-07-30 22:57:57', '2015-02-02 04:39:57', '2c80cb43-4d61-4ce5-9a3d-bfe4b5f4628a');
+INSERT INTO `assets` VALUES (8, 1, 1, 'coffee-shop.jpg', 'image', 1420, 1360, 344802, NULL, NULL, NULL, '2014-09-14 15:08:20', '2014-07-30 23:01:25', '2015-02-02 04:39:53', '374e774f-539c-4d1d-b253-7bd5e70d121d');
+INSERT INTO `assets` VALUES (23, 1, 1, 'augmented-reality.jpg', 'image', 1420, 1020, 121601, NULL, NULL, NULL, '2014-09-14 15:08:18', '2014-07-31 22:02:47', '2015-02-02 04:39:52', '3fcaa874-780d-4d64-bbc6-3939af253f04');
+INSERT INTO `assets` VALUES (28, 1, 1, 'video.jpg', 'image', 440, 250, 10690, NULL, NULL, NULL, '2014-09-14 15:08:17', '2014-07-31 22:08:34', '2015-02-02 04:40:02', '194e3a17-676e-4bb8-b4c7-395f990ad7cc');
+INSERT INTO `assets` VALUES (29, 1, 1, 'augmented-reality-icons.png', 'image', 960, 102, 4733, NULL, NULL, NULL, '2014-09-14 15:08:28', '2014-07-31 22:19:29', '2015-02-02 04:39:52', '7252a798-5d07-4427-977f-81db061b5f01');
+INSERT INTO `assets` VALUES (40, 1, 1, 'awesome-cities.jpg', 'image', 416, 215, 34386, NULL, NULL, NULL, '2014-09-14 15:08:16', '2014-07-31 22:22:21', '2015-02-02 04:39:52', '20d28672-0cbd-4c3e-addb-0af288ea04a4');
+INSERT INTO `assets` VALUES (42, 1, 1, 'fist.jpg', 'image', 1420, 904, 254933, NULL, NULL, NULL, '2014-09-14 15:08:18', '2014-07-31 23:14:44', '2015-02-02 04:39:56', '90b99d72-3104-4e84-9be8-82384c79f524');
+INSERT INTO `assets` VALUES (44, 1, 1, 'pong.png', 'image', 1420, 394, 6575, NULL, NULL, NULL, '2014-09-14 15:09:02', '2014-07-31 23:18:18', '2015-02-02 04:39:59', '676cef56-6788-4b48-87bf-91058001e9f6');
+INSERT INTO `assets` VALUES (59, 1, 1, 'gallery.png', 'image', 1440, 480, 715290, NULL, NULL, NULL, '2014-09-14 15:10:46', '2014-08-06 20:36:49', '2015-02-02 04:39:56', 'a58240ce-a8d4-465c-9545-f128cd84f6b3');
+INSERT INTO `assets` VALUES (60, 1, 1, 'bar.jpg', 'image', 960, 463, 94182, NULL, NULL, NULL, '2014-09-14 15:08:17', '2014-08-06 21:31:46', '2015-02-02 04:39:52', '4c204c73-0ace-4d40-aac0-04e6deeb3840');
+INSERT INTO `assets` VALUES (72, 1, 1, 'macbook.jpg', 'image', 440, 284, 23739, NULL, NULL, NULL, '2014-09-14 15:08:17', '2014-08-06 21:33:56', '2015-02-02 04:39:57', '04cb3cc1-ae5a-4788-82e5-b9ef3176f9c3');
+INSERT INTO `assets` VALUES (82, 1, 1, 'diva-interface-work.jpg', 'image', 1400, 324, 50231, NULL, NULL, NULL, '2014-09-28 16:31:31', '2014-09-23 03:06:38', '2015-02-02 04:39:55', '64c79f89-b616-40c9-b6f8-d580b78bf6a2');
+INSERT INTO `assets` VALUES (83, 1, 1, 'diva-interface-detail.png', 'image', 622, 331, 603612, NULL, NULL, NULL, '2014-09-23 03:10:32', '2014-09-23 03:10:32', '2015-02-02 04:39:54', '0e8847ba-7ed8-42d0-bd87-066eebd39f14');
+INSERT INTO `assets` VALUES (84, 1, 1, 'diva-mobile-detail.png', 'image', 640, 1136, 108139, NULL, NULL, NULL, '2014-09-28 16:31:31', '2014-09-23 03:15:27', '2015-02-02 04:39:55', '74f757f0-4e9b-4f64-86eb-dbd714b2a9ff');
+INSERT INTO `assets` VALUES (98, 1, 1, 'news-link-1-image.jpg', 'image', 283, 204, 369861, NULL, NULL, NULL, '2014-10-03 02:21:34', '2014-10-03 02:21:34', '2015-02-02 04:39:58', '5ca307e8-896c-4c55-9b90-89b9a7219788');
+INSERT INTO `assets` VALUES (100, 1, 1, 'news-link-2-image.jpg', 'image', 283, 204, 367515, NULL, NULL, NULL, '2014-10-03 03:31:00', '2014-10-03 03:31:00', '2015-02-02 04:39:58', 'd59dda1e-5e9a-4eab-a299-81196c160f95');
+INSERT INTO `assets` VALUES (102, 1, 1, 'news-entry-1-image.jpg', 'image', 283, 204, 382424, NULL, NULL, NULL, '2014-10-03 03:33:52', '2014-10-03 03:33:52', '2015-02-02 04:39:58', '09404fd4-7ff5-426a-a77b-8462668fc6d5');
+INSERT INTO `assets` VALUES (104, 1, 1, 'diva-cover.jpg', 'image', 570, 345, 392042, NULL, NULL, NULL, '2014-10-03 03:58:05', '2014-10-03 03:58:05', '2015-02-02 04:39:54', '90f7b27d-5935-47fc-9776-180a9eaca5d7');
+INSERT INTO `assets` VALUES (115, 1, 1, 'email-marketing.jpg', 'image', 284, 204, 352431, NULL, NULL, NULL, '2014-10-04 15:35:41', '2014-10-04 15:35:41', '2015-02-02 04:39:55', '90a30e26-e27f-48ef-bf41-89a715b67424');
+INSERT INTO `assets` VALUES (121, 1, 1, 'seo.jpg', 'image', 284, 204, 356107, NULL, NULL, NULL, '2014-10-04 15:42:04', '2014-10-04 15:42:04', '2015-02-02 04:40:00', '406af95b-527d-4c8e-8205-ca094ae5eb6c');
+INSERT INTO `assets` VALUES (123, 1, 1, 'app-development.jpg', 'image', 284, 204, 354634, NULL, NULL, NULL, '2014-10-04 15:46:51', '2014-10-04 15:46:51', '2015-02-02 04:39:52', '7e9252f2-8d14-4c38-b262-e704edefd378');
+INSERT INTO `assets` VALUES (125, 1, 1, 'strategy.jpg', 'image', 284, 204, 366918, NULL, NULL, NULL, '2014-10-04 15:47:46', '2014-10-04 15:47:46', '2015-02-02 04:40:02', 'aa544a56-175f-402e-a7ff-20ae44d06af3');
+INSERT INTO `assets` VALUES (127, 1, 1, 'development.jpg', 'image', 284, 204, 344439, NULL, NULL, NULL, '2014-10-04 15:48:41', '2014-10-04 15:48:41', '2015-02-02 04:39:54', 'a0988eaf-f4e2-430f-8835-3293c685af0c');
+INSERT INTO `assets` VALUES (131, 1, 1, 'on-track-thumb.jpg', 'image', 284, 204, 140750, NULL, NULL, NULL, '2014-10-05 03:08:45', '2014-10-05 03:08:45', '2015-02-02 04:39:59', '0b4a64c9-9e9d-4e34-b348-96e530258f30');
+INSERT INTO `assets` VALUES (132, 1, 1, 'sports-r-us-thumb.jpg', 'image', 283, 204, 139546, NULL, NULL, NULL, '2014-10-05 03:08:45', '2014-10-05 03:08:45', '2015-02-02 04:40:00', 'e876ba98-1a17-450c-9e63-adc0e790c5c8');
+INSERT INTO `assets` VALUES (134, 1, 1, 'hero-image.jpg', 'image', 1450, 916, 246984, NULL, NULL, NULL, '2014-10-06 01:49:48', '2014-10-06 01:49:48', '2015-02-02 04:39:56', '2fa678ca-6edb-46e6-8b83-02e23bb41dcf');
+INSERT INTO `assets` VALUES (135, 1, 1, 'larry-page.png', 'image', 84, 84, 151220, NULL, NULL, NULL, '2014-10-07 03:41:24', '2014-10-07 03:41:24', '2015-02-04 15:07:12', '9f4d0006-dc9f-411e-b62d-b2a00c4113f1');
+INSERT INTO `assets` VALUES (137, 1, 1, 'ryan-reynolds.png', 'image', 84, 84, 150711, NULL, NULL, NULL, '2014-10-07 03:43:58', '2014-10-07 03:43:58', '2015-02-04 15:13:25', '927eb8d3-348a-4700-8b5e-85648318346e');
+INSERT INTO `assets` VALUES (140, 1, 1, 'bob-guff.png', 'image', 84, 84, 148537, NULL, NULL, NULL, '2014-10-07 03:45:38', '2014-10-07 03:45:39', '2015-02-04 15:08:25', 'a006d888-2772-4873-9958-9fa9588872e6');
+INSERT INTO `assets` VALUES (141, 2, 2, 'logo-coke.png', 'image', 165, 75, 142639, NULL, NULL, NULL, '2014-10-07 03:48:12', '2014-10-07 03:48:12', '2014-10-07 03:48:12', 'b3f0c9ae-90f4-4a51-ba73-b693424572d9');
+INSERT INTO `assets` VALUES (142, 2, 2, 'logo-google.png', 'image', 165, 75, 140641, NULL, NULL, NULL, '2014-10-07 03:48:21', '2014-10-07 03:48:21', '2014-10-07 03:48:21', '5747ab5f-5aee-4b20-a700-a0a2240faf8c');
+INSERT INTO `assets` VALUES (143, 2, 2, 'logo-Jetblue.png', 'image', 165, 75, 139791, NULL, NULL, NULL, '2014-10-07 03:48:30', '2014-10-07 03:48:30', '2014-10-07 03:48:30', 'c4705122-4f12-455a-a9af-763a50f7acbf');
+INSERT INTO `assets` VALUES (144, 2, 2, 'logo-mtv.png', 'image', 165, 75, 139584, NULL, NULL, NULL, '2014-10-07 03:48:40', '2014-10-07 03:48:41', '2014-10-07 03:48:41', '55217bfe-357d-4822-80e1-b863bcf41d29');
+INSERT INTO `assets` VALUES (145, 2, 2, 'logo-newbelgium.png', 'image', 165, 75, 141625, NULL, NULL, NULL, '2014-10-07 03:48:50', '2014-10-07 03:48:50', '2014-10-07 03:48:50', '26ab2e59-2e73-4ef9-817a-91e27662354f');
+INSERT INTO `assets` VALUES (146, 1, 1, 'sportsrus-bigfeature.jpg', 'image', 1513, 446, 382101, NULL, NULL, NULL, '2014-10-09 03:37:12', '2014-10-09 03:37:12', '2015-02-02 04:40:00', 'd3bdbf75-064b-4eae-8f2f-a03946b5b779');
+INSERT INTO `assets` VALUES (147, 1, 1, 'diva-bigimage.jpg', 'image', 1500, 493, 410298, NULL, NULL, NULL, '2014-10-09 03:57:41', '2014-10-09 03:57:41', '2015-02-02 04:39:54', '69cd61b4-86b3-43c5-9aee-da43fe9dbe7c');
+INSERT INTO `assets` VALUES (148, 1, 1, 'ontrack-bigimage.jpg', 'image', 1500, 493, 404370, NULL, NULL, NULL, '2014-10-09 04:20:25', '2014-10-09 04:20:25', '2015-02-02 04:39:59', 'd75826de-637a-472e-be66-ef89721da151');
+INSERT INTO `assets` VALUES (152, 3, 3, 'app-development.svg', 'image', NULL, NULL, 1842, NULL, NULL, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:42', '2014-12-03 20:14:42', '53baf170-4450-46b5-9103-07873d81740d');
+INSERT INTO `assets` VALUES (153, 3, 3, 'design.svg', 'image', NULL, NULL, 2642, NULL, NULL, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:42', '2014-12-03 20:14:42', '6af11d38-1939-4f0c-a66c-3c7e97512b9b');
+INSERT INTO `assets` VALUES (154, 3, 3, 'email-marketing.svg', 'image', NULL, NULL, 2055, NULL, NULL, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:42', '2014-12-03 20:14:42', '3e87c14a-b147-4d0d-b9c2-aec0b64c4b01');
+INSERT INTO `assets` VALUES (155, 3, 3, 'development.svg', 'image', NULL, NULL, 2167, NULL, NULL, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:43', '2014-12-03 20:14:43', '036e2a88-d9bc-4dc8-a418-b71ff55194cd');
+INSERT INTO `assets` VALUES (156, 3, 3, 'seo.svg', 'image', NULL, NULL, 1632, NULL, NULL, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:43', '2014-12-03 20:14:43', 'babaebd8-bbee-4c18-b8d7-065de24e336e');
+INSERT INTO `assets` VALUES (157, 3, 3, 'strategy.svg', 'image', NULL, NULL, 2118, NULL, NULL, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:43', '2014-12-03 20:14:43', 'ea267e86-001a-40c6-b083-210a89aec3c2');
+INSERT INTO `assets` VALUES (163, 1, 1, 'discover.jpg', 'image', 1200, 394, 372014, NULL, NULL, NULL, '2014-12-11 01:24:36', '2014-12-11 01:24:36', '2015-02-02 04:39:54', '301a20b4-a847-4138-b226-71ffe3d1dc56');
+INSERT INTO `assets` VALUES (167, 1, 1, 'explore.jpg', 'image', 1200, 394, 378032, NULL, NULL, NULL, '2014-12-11 01:27:41', '2014-12-11 01:27:41', '2015-02-02 04:39:55', '89819ada-21c0-4791-a4d9-b0b87259e75d');
+INSERT INTO `assets` VALUES (168, 1, 1, 'create-genius.jpg', 'image', 1200, 394, 392282, NULL, NULL, NULL, '2014-12-11 01:28:48', '2014-12-11 01:28:48', '2015-02-02 04:39:53', '36fd3ebb-a0ec-4ba2-9ad5-45ab717dd492');
+INSERT INTO `assets` VALUES (183, 1, 1, 'moosic-app-ui.jpg', 'image', 700, 522, 394407, NULL, NULL, NULL, '2014-12-11 03:33:16', '2014-12-11 03:33:17', '2015-02-02 04:39:58', '7a3aac39-6237-4ae5-b717-870cad8a0468');
+INSERT INTO `assets` VALUES (218, 1, 1, 'chicago-office.jpg', 'image', 700, 424, 408964, NULL, NULL, NULL, '2014-09-14 21:55:35', '2015-02-02 04:39:53', '2015-02-10 19:09:21', 'b608a81b-4d14-4dab-b84a-03594b09d4f1');
+INSERT INTO `assets` VALUES (219, 1, 1, 'macbook-table.jpg', 'image', 363, 255, 385499, NULL, NULL, NULL, '2014-09-14 21:36:43', '2015-02-02 04:39:57', '2015-02-02 04:39:57', 'dedf499b-e0e7-482e-92d0-a4c1a3132e93');
+INSERT INTO `assets` VALUES (220, 1, 4, 'crystal.jpg', 'image', 560, 560, 109638, NULL, NULL, NULL, '2016-08-22 18:34:32', '2015-02-02 04:40:00', '2016-08-22 18:34:32', '275961f1-dfd0-40c7-8cb6-d1d6fe0aec8a');
+INSERT INTO `assets` VALUES (221, 1, 4, 'travis.jpg', 'image', 560, 560, 133092, NULL, NULL, NULL, '2016-08-22 18:34:42', '2015-02-02 04:40:01', '2016-08-22 18:34:42', 'af4861ec-1bea-4c47-9457-17e009c28576');
+INSERT INTO `assets` VALUES (222, 1, 4, 'liz.jpg', 'image', 560, 560, 131415, NULL, NULL, NULL, '2016-08-22 18:34:07', '2015-02-02 04:40:01', '2016-08-22 18:34:07', 'ed385526-c379-4237-b2fd-3c8afc9b0140');
+INSERT INTO `assets` VALUES (223, 1, 1, 'skis.jpg', 'image', 800, 800, 379214, NULL, NULL, NULL, '2015-02-02 16:57:36', '2015-02-02 16:54:59', '2015-02-02 16:57:40', '6999843c-f3e8-4030-a04a-09d1e5317a08');
+INSERT INTO `assets` VALUES (249, 1, 1, 'bike.jpg', 'image', 283, 273, 30193, NULL, NULL, NULL, '2015-02-10 17:22:34', '2015-02-10 17:22:34', '2015-02-10 17:22:34', 'da811e48-5673-495f-b56c-1bdc3c471e5c');
+INSERT INTO `assets` VALUES (250, 1, 1, 'glasses.jpg', 'image', 283, 273, 22694, NULL, NULL, NULL, '2015-02-10 17:23:54', '2015-02-10 17:23:54', '2015-02-10 17:23:54', 'dd094c64-7943-4558-a90d-a0aac84a5b2a');
+INSERT INTO `assets` VALUES (251, 1, 1, 'skateboard.jpg', 'image', 283, 273, 14841, NULL, NULL, NULL, '2015-02-10 17:24:39', '2015-02-10 17:24:39', '2015-02-10 17:24:39', 'adee3d6b-8d52-4e48-9d1c-2e55261cdf47');
 COMMIT;
 
 -- ----------------------------
@@ -191,11 +194,15 @@ DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `groupId` int(11) NOT NULL,
+  `parentId` int(11) DEFAULT NULL,
+  `deletedWithGroup` tinyint(1) DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
   KEY `craft_categories_groupId_fk` (`groupId`) USING BTREE,
+  KEY `categories_parentId_fk` (`parentId`),
+  CONSTRAINT `categories_parentId_fk` FOREIGN KEY (`parentId`) REFERENCES `categories` (`id`) ON DELETE SET NULL,
   CONSTRAINT `craft_categories_groupId_fk` FOREIGN KEY (`groupId`) REFERENCES `categorygroups` (`id`) ON DELETE CASCADE,
   CONSTRAINT `craft_categories_id_fk` FOREIGN KEY (`id`) REFERENCES `elements` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
@@ -212,12 +219,14 @@ CREATE TABLE `categorygroups` (
   `handle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
+  `dateDeleted` datetime DEFAULT NULL,
   `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `craft_categorygroups_name_unq_idx` (`name`) USING BTREE,
-  UNIQUE KEY `craft_categorygroups_handle_unq_idx` (`handle`) USING BTREE,
   KEY `craft_categorygroups_structureId_fk` (`structureId`) USING BTREE,
   KEY `craft_categorygroups_fieldLayoutId_fk` (`fieldLayoutId`) USING BTREE,
+  KEY `categorygroups_dateDeleted_idx` (`dateDeleted`),
+  KEY `categorygroups_name_idx` (`name`),
+  KEY `categorygroups_handle_idx` (`handle`),
   CONSTRAINT `craft_categorygroups_fieldLayoutId_fk` FOREIGN KEY (`fieldLayoutId`) REFERENCES `fieldlayouts` (`id`) ON DELETE SET NULL,
   CONSTRAINT `craft_categorygroups_structureId_fk` FOREIGN KEY (`structureId`) REFERENCES `structures` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
@@ -417,7 +426,7 @@ CREATE TABLE `elementindexsettings` (
 -- Records of elementindexsettings
 -- ----------------------------
 BEGIN;
-INSERT INTO `elementindexsettings` VALUES (1, 'craft\\elements\\Entry', '{\"sourceOrder\":[[\"key\",\"*\"],[\"heading\",\"Site Pages\"],[\"key\",\"singles\"],[\"heading\",\"Company\"],[\"key\",\"section:2\"],[\"key\",\"section:8\"],[\"key\",\"section:5\"],[\"key\",\"section:3\"]],\"sources\":{\"*\":{\"tableAttributes\":{\"1\":\"section\",\"2\":\"postDate\",\"3\":\"expiryDate\",\"4\":\"author\",\"5\":\"link\"}},\"singles\":{\"tableAttributes\":{\"1\":\"uri\"}},\"section:2\":{\"tableAttributes\":{\"1\":\"type\",\"2\":\"field:75\",\"3\":\"field:15\",\"4\":\"postDate\",\"5\":\"author\",\"6\":\"link\"}},\"section:8\":{\"tableAttributes\":{\"1\":\"field:15\",\"2\":\"field:37\",\"3\":\"field:41\"}},\"section:5\":{\"tableAttributes\":{\"1\":\"field:58\",\"2\":\"uri\"}},\"section:3\":{\"tableAttributes\":{\"1\":\"field:49\",\"2\":\"field:45\",\"3\":\"field:63\",\"4\":\"uri\"}}}}', '2015-12-08 22:41:33', '2016-06-03 17:43:51', 'a7fe2b7c-d2cc-41e6-8fe8-bb00fc1f5866');
+INSERT INTO `elementindexsettings` VALUES (1, 'craft\\elements\\Entry', '{\"sourceOrder\":[[\"key\",\"*\"],[\"heading\",\"Site Pages\"],[\"key\",\"singles\"],[\"heading\",\"Company\"],[\"key\",\"section:f5969f9a-8d3f-487e-9695-cc4e5fbe5efd\"],[\"key\",\"section:45d3a977-dc34-4bff-a39f-425e100a5e6f\"],[\"key\",\"section:f6b0cb16-5df8-4b57-9856-c9c2d6b9699e\"],[\"key\",\"section:b3a9eef3-9444-4995-84e2-6dc6b60aebd2\"]],\"sources\":{\"section:f5969f9a-8d3f-487e-9695-cc4e5fbe5efd\":{\"tableAttributes\":{\"1\":\"type\",\"2\":\"field:75\",\"3\":\"field:15\",\"4\":\"postDate\",\"5\":\"author\",\"6\":\"link\"}},\"section:45d3a977-dc34-4bff-a39f-425e100a5e6f\":{\"tableAttributes\":{\"1\":\"field:15\",\"2\":\"field:37\",\"3\":\"field:41\"}},\"section:f6b0cb16-5df8-4b57-9856-c9c2d6b9699e\":{\"tableAttributes\":{\"1\":\"field:58\",\"2\":\"uri\"}},\"section:b3a9eef3-9444-4995-84e2-6dc6b60aebd2\":{\"tableAttributes\":{\"1\":\"field:49\",\"2\":\"field:45\",\"3\":\"field:63\",\"4\":\"uri\"}}}}', '2015-12-08 22:41:33', '2016-06-03 17:43:51', 'a7fe2b7c-d2cc-41e6-8fe8-bb00fc1f5866');
 COMMIT;
 
 -- ----------------------------
@@ -432,12 +441,14 @@ CREATE TABLE `elements` (
   `archived` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
+  `dateDeleted` datetime DEFAULT NULL,
   `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
   KEY `craft_elements_type_idx` (`type`) USING BTREE,
   KEY `craft_elements_enabled_idx` (`enabled`) USING BTREE,
   KEY `craft_elements_archived_dateCreated_idx` (`archived`,`dateCreated`) USING BTREE,
   KEY `craft_elements_fieldLayoutId_idx` (`fieldLayoutId`) USING BTREE,
+  KEY `elements_dateDeleted_idx` (`dateDeleted`),
   CONSTRAINT `craft_elements_fieldLayoutId_fk` FOREIGN KEY (`fieldLayoutId`) REFERENCES `fieldlayouts` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=257 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
@@ -445,199 +456,199 @@ CREATE TABLE `elements` (
 -- Records of elements
 -- ----------------------------
 BEGIN;
-INSERT INTO `elements` VALUES (1, NULL, 'craft\\elements\\User', 1, 0, '2014-07-29 18:21:32', '2014-07-29 18:21:32', 'b66b2bfe-badb-478a-81ff-1fceb638a019');
-INSERT INTO `elements` VALUES (2, 104, 'craft\\elements\\Entry', 1, 0, '2014-07-29 18:21:35', '2015-02-04 15:13:27', 'f20120a9-7cb6-4c53-8c06-6041a39cc056');
-INSERT INTO `elements` VALUES (4, 197, 'craft\\elements\\Entry', 1, 0, '2014-07-30 21:02:31', '2016-06-03 17:43:25', '8b6c79cf-8e2a-464d-a50f-833445bab37d');
-INSERT INTO `elements` VALUES (6, 194, 'craft\\elements\\Asset', 1, 0, '2014-07-30 22:55:13', '2015-02-02 04:40:03', 'd1e0a2aa-b87a-492a-9ea4-25bbfa85e261');
-INSERT INTO `elements` VALUES (7, 194, 'craft\\elements\\Asset', 1, 0, '2014-07-30 22:57:57', '2015-02-02 04:39:56', '5d3dbc7c-a2c6-402f-a95a-1c1367e6346c');
-INSERT INTO `elements` VALUES (8, 194, 'craft\\elements\\Asset', 1, 0, '2014-07-30 23:01:25', '2015-02-02 04:39:53', 'd1d0c9e7-a055-4054-af1c-24af70d98689');
-INSERT INTO `elements` VALUES (9, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', 'a8680541-518f-49e8-9aa0-47ec9acdb6b6');
-INSERT INTO `elements` VALUES (10, 182, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', '2422ea39-7a29-4f40-bf1b-f4a2c6adc569');
-INSERT INTO `elements` VALUES (11, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', '2ee107c6-3401-4884-b63d-fedfdb2b05e5');
-INSERT INTO `elements` VALUES (12, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', '3e53821a-1e96-47d8-a7f2-3d17b023a7c3');
-INSERT INTO `elements` VALUES (13, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', '8d7308d5-3159-4d1a-a7d1-be38d044eb46');
-INSERT INTO `elements` VALUES (14, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', '47acdbd6-a59f-4956-b78d-bac65ce8be3e');
-INSERT INTO `elements` VALUES (15, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', 'eb7f2dc9-d5ff-4444-9a20-528b0a814ff5');
-INSERT INTO `elements` VALUES (16, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', '2fc99995-3319-4e40-afd8-a3a558be7d78');
-INSERT INTO `elements` VALUES (17, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', '1611383f-e7ad-4e13-a83b-a0539c3f4cf5');
-INSERT INTO `elements` VALUES (18, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', '1114e010-83ff-48e6-91a7-c7cec380f311');
-INSERT INTO `elements` VALUES (23, 194, 'craft\\elements\\Asset', 1, 0, '2014-07-31 22:02:47', '2015-02-02 04:39:52', '00efc6e7-e867-4876-a556-3339351537a6');
-INSERT INTO `elements` VALUES (24, 197, 'craft\\elements\\Entry', 1, 0, '2014-07-31 22:04:17', '2016-06-03 17:43:36', '09fec6f1-89bf-425e-9fe6-a2d632bb6cf3');
-INSERT INTO `elements` VALUES (25, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:04:17', '2016-06-03 17:43:36', 'dc20721f-cbcd-4c15-8289-a3882c4773ff');
-INSERT INTO `elements` VALUES (28, 194, 'craft\\elements\\Asset', 1, 0, '2014-07-31 22:08:34', '2015-02-02 04:40:02', 'a6723024-904e-41c2-8467-5f8b2bef226e');
-INSERT INTO `elements` VALUES (29, 194, 'craft\\elements\\Asset', 1, 0, '2014-07-31 22:19:29', '2015-02-02 04:39:52', '75724019-641a-475d-a1dc-effdd5a50e2b');
-INSERT INTO `elements` VALUES (30, 182, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:20:21', '2016-06-03 17:43:36', 'e8871ca8-2e14-40f8-ae5e-1555a1786e8d');
-INSERT INTO `elements` VALUES (31, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:20:21', '2016-06-03 17:43:36', 'cb003e20-015f-4d3c-9d42-b91d794d0fe1');
-INSERT INTO `elements` VALUES (32, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:20:21', '2016-06-03 17:43:36', '2904c8fa-b0ce-4067-ad56-b1a387a833cf');
-INSERT INTO `elements` VALUES (33, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:20:21', '2016-06-03 17:43:36', '9a8913dd-1fff-4998-accf-791b06d08559');
-INSERT INTO `elements` VALUES (34, 185, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:20:21', '2016-06-03 17:43:36', '2a8166ed-689e-48de-b083-e7585981bcf6');
-INSERT INTO `elements` VALUES (35, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:20:21', '2016-06-03 17:43:36', '734d0e37-f1e0-4353-b4bf-d6e1711fd98b');
-INSERT INTO `elements` VALUES (36, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:20:21', '2016-06-03 17:43:36', 'de1a16b5-adcf-4928-b954-dbb890ab491b');
-INSERT INTO `elements` VALUES (37, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:20:21', '2016-06-03 17:43:36', 'feaf69df-3b41-4e3e-b215-5bab2189b5db');
-INSERT INTO `elements` VALUES (38, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:20:21', '2016-06-03 17:43:37', '3054748a-5d1e-4cf7-8a4b-d0e336173185');
-INSERT INTO `elements` VALUES (39, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:20:21', '2016-06-03 17:43:37', '8cd813dc-8dd5-4b20-a57d-d3f22eca3a2d');
-INSERT INTO `elements` VALUES (40, 194, 'craft\\elements\\Asset', 1, 0, '2014-07-31 22:22:21', '2015-02-02 04:39:52', '5b702218-93b2-41aa-a0ce-7054d508921c');
-INSERT INTO `elements` VALUES (41, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:22:28', '2016-06-03 17:43:36', '331bd2de-e441-42ae-b191-135e2e099b16');
-INSERT INTO `elements` VALUES (42, 194, 'craft\\elements\\Asset', 1, 0, '2014-07-31 23:14:44', '2015-02-02 04:39:56', 'dd4fc1cc-a290-4b04-b3f4-e262a5cd494a');
-INSERT INTO `elements` VALUES (44, 194, 'craft\\elements\\Asset', 1, 0, '2014-07-31 23:18:18', '2015-02-02 04:39:59', '29703024-ed2d-43ea-8b17-cedc503e4b75');
-INSERT INTO `elements` VALUES (45, 197, 'craft\\elements\\Entry', 1, 0, '2014-07-31 23:20:59', '2016-06-03 17:43:06', '328b2654-1f59-4a00-8437-c6d0fb1808bf');
-INSERT INTO `elements` VALUES (46, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 23:20:59', '2016-06-03 17:43:06', '9148d0d8-0104-46f1-9c7b-f80fe437c1e1');
-INSERT INTO `elements` VALUES (48, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 23:20:59', '2016-06-03 17:43:06', 'f355dffe-ac28-4b60-930a-64dbb87a2aec');
-INSERT INTO `elements` VALUES (49, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 23:20:59', '2016-06-03 17:43:06', '3c2a5f48-c8a8-45ba-a8eb-1fb525ab105d');
-INSERT INTO `elements` VALUES (50, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 23:20:59', '2016-06-03 17:43:06', 'c2dc586b-f969-4e84-b634-9425b98bc2ae');
-INSERT INTO `elements` VALUES (51, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 23:20:59', '2016-06-03 17:43:06', '57d8bdce-0146-45e9-9f8d-b82788d6baaf');
-INSERT INTO `elements` VALUES (52, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 23:20:59', '2016-06-03 17:43:06', '6158b2de-d6d6-416e-9951-61dad7777cc1');
-INSERT INTO `elements` VALUES (53, 182, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 23:20:59', '2016-06-03 17:43:06', 'fd0c8f21-2c78-45eb-8c3f-58ee386e30b7');
-INSERT INTO `elements` VALUES (54, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 23:20:59', '2016-06-03 17:43:07', 'dc3b2510-de46-4566-bdf1-8243c1e6b47a');
-INSERT INTO `elements` VALUES (55, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 23:20:59', '2016-06-03 17:43:07', '1d549b45-5cdc-44b9-9d17-9ec3130c2ebf');
-INSERT INTO `elements` VALUES (59, 194, 'craft\\elements\\Asset', 1, 0, '2014-08-06 20:36:49', '2015-02-02 04:39:56', 'ae05e691-1fcf-488c-95b9-896a9f7c04f3');
-INSERT INTO `elements` VALUES (60, 194, 'craft\\elements\\Asset', 1, 0, '2014-08-06 21:31:46', '2015-02-02 04:39:52', 'e6edb6b5-9b94-47e1-b7a9-0da6ebf74a5d');
-INSERT INTO `elements` VALUES (61, 197, 'craft\\elements\\Entry', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '584942bd-d91b-4799-96ff-f10b7be450e2');
-INSERT INTO `elements` VALUES (62, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', 'e4cc5fc4-3ffa-4e3a-b2bf-29c285566790');
-INSERT INTO `elements` VALUES (63, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', 'cfa29e45-5530-450d-bea1-3e1de2c4d6e3');
-INSERT INTO `elements` VALUES (64, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', 'caa335f4-1ab7-417a-b653-ec755633a12d');
-INSERT INTO `elements` VALUES (65, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', 'fc7739fd-1620-42f2-8465-3b62a904a021');
-INSERT INTO `elements` VALUES (66, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '478a6d4c-bc58-4428-b093-519a93621da1');
-INSERT INTO `elements` VALUES (67, 182, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '0deb8f8d-636d-4a14-86d7-4b84ed96b1fc');
-INSERT INTO `elements` VALUES (68, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '50d4ab7c-d0ca-4f14-a916-51a78fa303f2');
-INSERT INTO `elements` VALUES (69, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '424042df-73cc-4ad2-94c1-82904a8d17dd');
-INSERT INTO `elements` VALUES (70, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '11ab6f5b-6eab-4628-9995-4c3283c554d5');
-INSERT INTO `elements` VALUES (71, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', 'fba79122-da03-4f0f-8b7f-7c7a91ecd41d');
-INSERT INTO `elements` VALUES (72, 194, 'craft\\elements\\Asset', 1, 0, '2014-08-06 21:33:56', '2015-02-02 04:39:57', 'c85d6702-ead2-483b-b357-55bbdc061056');
-INSERT INTO `elements` VALUES (73, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:34:12', '2016-06-03 17:42:53', 'f1f5b6a6-92a8-464f-ad9f-487cea36d137');
-INSERT INTO `elements` VALUES (74, 191, 'craft\\elements\\Entry', 1, 0, '2014-09-17 01:15:21', '2015-02-10 18:08:01', '990289b0-2685-4293-a526-2962328c9bac');
-INSERT INTO `elements` VALUES (81, 120, 'craft\\elements\\Entry', 1, 0, '2014-09-23 03:01:18', '2015-02-10 17:33:12', '81dc7a51-0a4a-490c-896d-f8596f6f2434');
-INSERT INTO `elements` VALUES (82, 194, 'craft\\elements\\Asset', 1, 0, '2014-09-23 03:06:38', '2015-02-02 04:39:55', 'd28b57f7-e8b3-439b-8a63-d7806ebff343');
-INSERT INTO `elements` VALUES (83, 194, 'craft\\elements\\Asset', 1, 0, '2014-09-23 03:10:32', '2015-02-02 04:39:54', 'b2d0cf94-1092-45f6-a8fb-68ad94a0abd0');
-INSERT INTO `elements` VALUES (84, 194, 'craft\\elements\\Asset', 1, 0, '2014-09-23 03:15:27', '2015-02-02 04:39:55', '07d60138-94da-4442-8668-370556aa5f3e');
-INSERT INTO `elements` VALUES (85, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-09-23 03:16:00', '2015-02-10 17:33:12', 'c3120e5a-e585-4637-a7fb-4c3b360a3af3');
-INSERT INTO `elements` VALUES (86, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-09-23 03:16:00', '2015-02-10 17:33:12', '82ef5ca3-aa13-4a28-ab46-d7094d7122d9');
-INSERT INTO `elements` VALUES (89, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-09-23 03:16:00', '2015-02-10 17:33:12', '29f0763d-375f-4847-85be-c1fb238afecb');
-INSERT INTO `elements` VALUES (90, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-09-23 03:16:00', '2015-02-10 17:33:12', '40dc6491-6843-4545-8361-1e6fd13c5de5');
-INSERT INTO `elements` VALUES (93, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-09-23 03:16:00', '2015-02-10 17:33:12', '0f93ccd2-2b0d-42b2-888c-7f57aff0fc26');
-INSERT INTO `elements` VALUES (94, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-09-23 03:16:00', '2015-02-10 17:33:12', '90963853-3abe-4acd-b4d1-a26397f12913');
-INSERT INTO `elements` VALUES (95, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-09-23 03:16:00', '2015-02-10 17:33:12', 'eac7a729-cb49-4dc5-bc9f-8dca59957b22');
-INSERT INTO `elements` VALUES (96, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-09-23 03:16:00', '2015-02-10 17:33:12', '7336f746-536d-4e05-8896-9615bda67ea7');
-INSERT INTO `elements` VALUES (97, 185, 'craft\\elements\\MatrixBlock', 1, 0, '2014-09-23 04:26:06', '2015-02-10 17:33:12', 'f0dc3e32-ddc3-443c-b94f-98bcdcfd0588');
-INSERT INTO `elements` VALUES (98, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-03 02:21:34', '2015-02-02 04:39:58', '972b2e4f-d209-4a02-a187-727d4c61303c');
-INSERT INTO `elements` VALUES (99, 92, 'craft\\elements\\Entry', 1, 0, '2014-10-03 02:21:54', '2016-06-03 17:42:43', '1676d123-be2c-4207-a808-74ff8a8d2ee5');
-INSERT INTO `elements` VALUES (100, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-03 03:31:00', '2015-02-02 04:39:58', 'c76e4c54-4e0c-4a14-8112-a9aeda69259d');
-INSERT INTO `elements` VALUES (101, 92, 'craft\\elements\\Entry', 1, 0, '2014-10-03 03:31:13', '2016-06-03 17:42:26', 'd8f7307f-0f0a-4d57-80db-98eb06495f43');
-INSERT INTO `elements` VALUES (102, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-03 03:33:52', '2015-02-02 04:39:58', '55091523-22b2-44cf-a9f9-b532e9732fa0');
-INSERT INTO `elements` VALUES (104, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-03 03:58:05', '2015-02-02 04:39:54', '33965ba1-24dd-4931-a3b6-988dbd6c877f');
-INSERT INTO `elements` VALUES (105, 197, 'craft\\elements\\Entry', 1, 0, '2014-10-03 03:58:26', '2016-06-03 17:42:35', 'f7d1047a-a505-4856-8f28-a1c37cb24e2b');
-INSERT INTO `elements` VALUES (115, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-04 15:35:41', '2015-02-02 04:39:55', '777fa59f-7d1f-4996-8d72-295f4da6ad15');
-INSERT INTO `elements` VALUES (120, 127, 'craft\\elements\\Entry', 1, 0, '2014-10-04 15:40:07', '2015-02-10 17:38:56', '9bf08821-5e47-44ac-b7f7-206527a62379');
-INSERT INTO `elements` VALUES (121, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-04 15:42:04', '2015-02-02 04:40:00', '563ea99a-56ec-48b6-bcfc-8ec1e4d81c25');
-INSERT INTO `elements` VALUES (122, 127, 'craft\\elements\\Entry', 1, 0, '2014-10-04 15:42:09', '2015-02-10 17:38:25', '2ab963fd-3bc8-4c57-9217-1d2b56ae854d');
-INSERT INTO `elements` VALUES (123, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-04 15:46:51', '2015-02-02 04:39:52', '23affce5-c01e-40d3-9081-4b0889eb82eb');
-INSERT INTO `elements` VALUES (124, 127, 'craft\\elements\\Entry', 1, 0, '2014-10-04 15:47:14', '2015-02-10 17:37:53', '06886a87-ad07-464a-be7b-69542f17ed2a');
-INSERT INTO `elements` VALUES (125, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-04 15:47:46', '2015-02-02 04:40:02', '357b3071-b675-40de-b2b1-6ccc1f74a1e6');
-INSERT INTO `elements` VALUES (126, 127, 'craft\\elements\\Entry', 1, 0, '2014-10-04 15:48:03', '2015-02-10 17:37:34', 'ad302328-a501-4995-bae0-8fb81878abc2');
-INSERT INTO `elements` VALUES (127, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-04 15:48:41', '2015-02-02 04:39:54', '4784a8b7-19ab-4302-8eac-05d5e4cfc86c');
-INSERT INTO `elements` VALUES (128, 127, 'craft\\elements\\Entry', 1, 0, '2014-10-04 15:48:45', '2015-02-10 17:37:12', 'ca3616f0-dcc4-42b4-964c-c429d279c4df');
-INSERT INTO `elements` VALUES (129, 127, 'craft\\elements\\Entry', 1, 0, '2014-10-04 15:49:37', '2015-12-08 22:45:10', '9f03d827-9df6-4159-aba8-97e4dd4c39d3');
-INSERT INTO `elements` VALUES (130, 120, 'craft\\elements\\Entry', 1, 0, '2014-10-05 03:05:20', '2015-02-10 17:33:34', '69a3c9c1-f2c1-4761-8e87-47537872d97a');
-INSERT INTO `elements` VALUES (131, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-05 03:08:45', '2015-02-02 04:39:59', 'ee0e582d-c752-41db-8ca0-9341367f3d68');
-INSERT INTO `elements` VALUES (132, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-05 03:08:45', '2015-02-02 04:40:00', '93baeef4-bb9c-4be3-a465-15effe6d53ef');
-INSERT INTO `elements` VALUES (133, 120, 'craft\\elements\\Entry', 1, 0, '2014-10-05 03:09:41', '2015-02-10 17:33:58', '2e70b26c-19fa-4470-9cbd-bdebad80d482');
-INSERT INTO `elements` VALUES (134, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-06 01:49:48', '2015-02-02 04:39:56', '99bfeea8-df67-4cdf-ab20-4ca2520417ee');
-INSERT INTO `elements` VALUES (135, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-07 03:41:24', '2015-02-04 15:07:12', 'bc5bda0d-4296-4fa3-88bf-c02211aba8c6');
-INSERT INTO `elements` VALUES (136, 121, 'craft\\elements\\MatrixBlock', 1, 0, '2014-10-07 03:41:31', '2015-02-04 15:13:27', 'e8ed31fa-1ada-4e41-8c1f-996805e3e994');
-INSERT INTO `elements` VALUES (137, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-07 03:43:58', '2015-02-04 15:13:25', '1d84ba1a-c3a4-4e11-9987-ff748effbf3b');
-INSERT INTO `elements` VALUES (138, 121, 'craft\\elements\\MatrixBlock', 1, 0, '2014-10-07 03:44:02', '2015-02-04 15:13:27', '94c0a25f-1228-4630-a185-b23c8fd39afc');
-INSERT INTO `elements` VALUES (139, 121, 'craft\\elements\\MatrixBlock', 1, 0, '2014-10-07 03:45:26', '2015-02-04 15:13:28', '8ce61324-d955-4bf7-915b-78a3b502cf9d');
-INSERT INTO `elements` VALUES (140, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-07 03:45:39', '2015-02-04 15:08:25', 'c2fc1f5a-cc02-4d0a-a101-3c0c7ea186a0');
-INSERT INTO `elements` VALUES (141, 195, 'craft\\elements\\Asset', 1, 0, '2014-10-07 03:48:12', '2014-10-07 03:48:12', 'cee65a06-138d-4945-9ff8-ac0efb0d54f1');
-INSERT INTO `elements` VALUES (142, 195, 'craft\\elements\\Asset', 1, 0, '2014-10-07 03:48:21', '2014-10-07 03:48:21', '5b0d43ba-81ff-4a50-95d1-89d3dc32f6b2');
-INSERT INTO `elements` VALUES (143, 195, 'craft\\elements\\Asset', 1, 0, '2014-10-07 03:48:30', '2014-10-07 03:48:30', 'd5310a44-55df-40eb-bc4b-9298891f075b');
-INSERT INTO `elements` VALUES (144, 195, 'craft\\elements\\Asset', 1, 0, '2014-10-07 03:48:41', '2014-10-07 03:48:41', '06ad8c35-cd6e-4ac6-afac-42c53b355e2c');
-INSERT INTO `elements` VALUES (145, 195, 'craft\\elements\\Asset', 1, 0, '2014-10-07 03:48:50', '2014-10-07 03:48:50', '473d36b2-7217-4bc1-a9a2-0e7b7f2b5a00');
-INSERT INTO `elements` VALUES (146, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-09 03:37:12', '2015-02-02 04:40:00', '6fbb9892-73dc-40de-b5ab-03f0431df5e7');
-INSERT INTO `elements` VALUES (147, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-09 03:57:41', '2015-02-02 04:39:54', '16b3435f-f0c5-42d9-a78d-33d20ee2019f');
-INSERT INTO `elements` VALUES (148, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-09 04:20:25', '2015-02-02 04:39:59', '36ff010a-0278-485d-bc95-64801f8f8961');
-INSERT INTO `elements` VALUES (152, 196, 'craft\\elements\\Asset', 1, 0, '2014-12-03 20:14:42', '2014-12-03 20:14:42', '9c47a80c-546e-4f64-9b1f-483fcca7ce69');
-INSERT INTO `elements` VALUES (153, 196, 'craft\\elements\\Asset', 1, 0, '2014-12-03 20:14:42', '2014-12-03 20:14:42', '2ab22020-1a24-479e-9170-20bc8c135cf4');
-INSERT INTO `elements` VALUES (154, 196, 'craft\\elements\\Asset', 1, 0, '2014-12-03 20:14:42', '2014-12-03 20:14:42', '17e82cde-7134-41c6-9e6e-c83ba490be5f');
-INSERT INTO `elements` VALUES (155, 196, 'craft\\elements\\Asset', 1, 0, '2014-12-03 20:14:43', '2014-12-03 20:14:43', '5ce35d58-4a74-47f6-997f-062d3c4c41ec');
-INSERT INTO `elements` VALUES (156, 196, 'craft\\elements\\Asset', 1, 0, '2014-12-03 20:14:43', '2014-12-03 20:14:43', 'ac85e46c-fd0a-4f29-86fd-a4b85fd57482');
-INSERT INTO `elements` VALUES (157, 196, 'craft\\elements\\Asset', 1, 0, '2014-12-03 20:14:43', '2014-12-03 20:14:43', 'c7587bc6-8aa8-48a1-bf04-812798ce37f5');
-INSERT INTO `elements` VALUES (160, 185, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-11 00:47:08', '2015-02-10 17:37:53', 'd4b192b3-1e15-47f7-9379-831c5de637cd');
-INSERT INTO `elements` VALUES (163, 194, 'craft\\elements\\Asset', 1, 0, '2014-12-11 01:24:36', '2015-02-02 04:39:54', 'b968b6cc-b80a-4cdb-b5d9-c765dd95badc');
-INSERT INTO `elements` VALUES (167, 194, 'craft\\elements\\Asset', 1, 0, '2014-12-11 01:27:41', '2015-02-02 04:39:55', 'f911bea5-e0f0-414a-95a7-7818fbcca5d5');
-INSERT INTO `elements` VALUES (168, 194, 'craft\\elements\\Asset', 1, 0, '2014-12-11 01:28:48', '2015-02-02 04:39:53', 'e7c277dc-c0b1-45d3-9923-3cf933829506');
-INSERT INTO `elements` VALUES (178, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-11 02:02:54', '2015-02-10 17:37:53', '7ff410ac-1a30-4ea9-8424-5ba1db08787f');
-INSERT INTO `elements` VALUES (179, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-11 02:02:54', '2015-02-10 17:37:53', '0854de58-370d-426a-92e3-08cd3b8b3fbb');
-INSERT INTO `elements` VALUES (180, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-11 02:02:54', '2015-02-10 17:37:53', 'e997902b-deed-45da-9728-7c7c0fa8e80a');
-INSERT INTO `elements` VALUES (181, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-11 02:12:38', '2015-02-10 17:37:53', '4ca5bd5f-cd4b-47d8-9690-4fc6d9cca230');
-INSERT INTO `elements` VALUES (182, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-11 02:12:38', '2015-02-10 17:37:53', '5ccb2124-a1d6-496e-947f-91f77a27ba8b');
-INSERT INTO `elements` VALUES (183, 194, 'craft\\elements\\Asset', 1, 0, '2014-12-11 03:33:16', '2015-02-02 04:39:57', '316424b0-634a-4909-a3b9-758f1800dfa6');
-INSERT INTO `elements` VALUES (184, 185, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:27:03', '2015-02-10 17:38:56', 'b2d727a6-3c00-4157-b3b2-665019538590');
-INSERT INTO `elements` VALUES (185, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:27:03', '2015-02-10 17:38:56', '4cb37d4d-122c-4453-a479-c0cdeee617c2');
-INSERT INTO `elements` VALUES (186, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:27:03', '2015-02-10 17:38:56', 'b87ca293-c571-4c53-9db0-1736cb89c8df');
-INSERT INTO `elements` VALUES (187, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:27:03', '2015-02-10 17:38:56', '5ae2c41f-3849-4db0-92ac-7b43230b8ccb');
-INSERT INTO `elements` VALUES (188, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:27:03', '2015-02-10 17:38:56', '54287471-43d4-4c1c-8c42-514e25d9ad10');
-INSERT INTO `elements` VALUES (189, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:27:03', '2015-02-10 17:38:56', '3d6e1cef-25f6-4609-925f-55ca21a5d175');
-INSERT INTO `elements` VALUES (190, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:30:31', '2015-02-10 17:38:26', 'a4276e3b-c761-4666-a76c-cc2b76e8117d');
-INSERT INTO `elements` VALUES (191, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:30:31', '2015-02-10 17:38:26', '3041e871-4ce2-4946-abe6-f2cb148f037d');
-INSERT INTO `elements` VALUES (192, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:30:31', '2015-02-10 17:38:26', '4a334139-2506-4f89-99fd-9cda9fcc23fc');
-INSERT INTO `elements` VALUES (193, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:30:31', '2015-02-10 17:38:26', '9ccd77fd-746b-4c2c-bd2f-f199b7687fb0');
-INSERT INTO `elements` VALUES (194, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:30:31', '2015-02-10 17:38:26', '705f305b-2bb3-4ab2-85bc-7ec5875d892b');
-INSERT INTO `elements` VALUES (196, 185, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:32:12', '2015-02-10 17:38:26', '72b92336-0c8f-49b5-a14e-b712ffaaf848');
-INSERT INTO `elements` VALUES (197, 185, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:38:41', '2015-02-10 17:37:35', 'c5a08295-0a9f-4853-9dd7-0e432f2efc62');
-INSERT INTO `elements` VALUES (198, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:38:41', '2015-02-10 17:37:35', '40e78579-3bec-4ce6-9d6a-0333cd0ef311');
-INSERT INTO `elements` VALUES (199, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:38:41', '2015-02-10 17:37:35', 'fae63102-c37e-4c3f-a870-eff32d0a52f3');
-INSERT INTO `elements` VALUES (200, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:38:41', '2015-02-10 17:37:35', '81e93b3b-9298-42d8-9b1a-c5b1b4c46a84');
-INSERT INTO `elements` VALUES (201, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:38:41', '2015-02-10 17:37:35', '612a22f4-ca76-4288-a151-39003946e5f9');
-INSERT INTO `elements` VALUES (202, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:41:31', '2015-02-10 17:37:12', '81923eda-b3b0-4e57-aa0e-aa3e628f45ee');
-INSERT INTO `elements` VALUES (203, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:41:31', '2015-02-10 17:37:12', '7aadef63-e5c3-439d-a56d-653565737859');
-INSERT INTO `elements` VALUES (204, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:41:31', '2015-02-10 17:37:12', 'd7e06f3d-b311-4e80-8f6d-1d4a7b3004fb');
-INSERT INTO `elements` VALUES (205, 185, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:44:08', '2015-12-08 22:45:10', '6e5e2597-4659-40be-80d1-94e358c0ce4e');
-INSERT INTO `elements` VALUES (206, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:44:08', '2015-12-08 22:45:10', '614df607-d31c-4d6f-8e02-6f6bc033a15d');
-INSERT INTO `elements` VALUES (207, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:44:08', '2015-12-08 22:45:10', '8995e612-d2dc-4f75-b64c-a5da9764e86a');
-INSERT INTO `elements` VALUES (208, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:44:08', '2015-12-08 22:45:10', 'dbd76d88-ddbb-40de-b94c-a725850a0311');
-INSERT INTO `elements` VALUES (209, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:44:08', '2015-12-08 22:45:10', '9eb13f4f-4e10-419e-990c-273e29593107');
-INSERT INTO `elements` VALUES (210, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:44:08', '2015-12-08 22:45:10', '13604c7c-2897-4dfb-af88-2fb76b1f5d8e');
-INSERT INTO `elements` VALUES (211, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 04:15:18', '2015-02-10 17:33:34', '0e2354af-355c-4774-a059-db55fc1d1f6a');
-INSERT INTO `elements` VALUES (212, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 04:17:11', '2015-02-10 17:33:34', '6127e838-1696-45e0-885f-b1eb7cda4304');
-INSERT INTO `elements` VALUES (213, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 04:18:16', '2015-02-10 17:33:34', '23a9c4dc-fb5d-4e23-b541-31d041e9404a');
-INSERT INTO `elements` VALUES (215, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 04:27:16', '2015-02-10 17:33:34', '908d12aa-67d1-4f09-b214-5f7c48392df5');
-INSERT INTO `elements` VALUES (216, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 04:27:16', '2015-02-10 17:33:35', 'f42794c7-490a-4e84-9e71-15b9917fa5ab');
-INSERT INTO `elements` VALUES (217, 185, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 04:28:36', '2015-02-10 17:33:34', '8ddc7402-470e-4025-be3a-90803af5ffb5');
-INSERT INTO `elements` VALUES (218, 194, 'craft\\elements\\Asset', 1, 0, '2015-02-02 04:39:53', '2015-02-10 19:09:21', '99193912-f8c7-4f49-a959-ab8cb2f55edf');
-INSERT INTO `elements` VALUES (219, 194, 'craft\\elements\\Asset', 1, 0, '2015-02-02 04:39:57', '2015-02-02 04:39:57', 'dafc6f65-673a-4a44-8466-bcfdf5a18f90');
-INSERT INTO `elements` VALUES (220, 194, 'craft\\elements\\Asset', 1, 0, '2015-02-02 04:40:00', '2016-08-22 18:35:19', 'e316a79f-83fb-4d7a-8519-1e3833e20cd1');
-INSERT INTO `elements` VALUES (221, 194, 'craft\\elements\\Asset', 1, 0, '2015-02-02 04:40:01', '2016-08-22 18:35:45', '5cacd689-7569-4429-9fe5-bca474aa0afd');
-INSERT INTO `elements` VALUES (222, 194, 'craft\\elements\\Asset', 1, 0, '2015-02-02 04:40:01', '2016-08-22 18:36:04', '81861608-9db5-44cd-af4f-b702142de67f');
-INSERT INTO `elements` VALUES (223, 194, 'craft\\elements\\Asset', 1, 0, '2015-02-02 16:54:58', '2015-02-02 16:57:40', '9954c1f6-3f79-449c-83fc-a3fa03d7aa9d');
-INSERT INTO `elements` VALUES (224, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 16:56:12', '2015-02-10 17:33:59', '99fd058e-3ab8-494a-9068-a1e3dc9e1cee');
-INSERT INTO `elements` VALUES (225, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 16:56:12', '2015-02-10 17:33:59', '9f6fa8b3-a39a-43c6-aab5-316283cd1e84');
-INSERT INTO `elements` VALUES (227, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 16:59:15', '2015-02-10 17:33:59', 'd88aaa79-14e7-4042-8a03-b85a39dbf752');
-INSERT INTO `elements` VALUES (228, 185, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 17:01:08', '2015-02-10 17:33:59', '7cfff836-16b8-4da1-862a-7148b568b32f');
-INSERT INTO `elements` VALUES (229, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 17:01:08', '2015-02-10 17:33:59', '87167cd0-2228-4d59-b6de-4cc00f66bb00');
-INSERT INTO `elements` VALUES (230, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 17:04:48', '2016-06-03 17:42:35', '9fea522f-d5be-4651-a9cc-c235284d1851');
-INSERT INTO `elements` VALUES (231, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 17:09:37', '2015-02-10 17:33:59', '2740f6dc-341d-4c48-b9c3-e822a1539ccf');
-INSERT INTO `elements` VALUES (232, 187, 'craft\\elements\\GlobalSet', 1, 0, '2015-02-04 15:20:19', '2015-02-10 18:31:03', '92ba4df9-7269-4adf-9f4d-54552eb4f778');
-INSERT INTO `elements` VALUES (233, 130, 'craft\\elements\\Entry', 1, 0, '2015-02-09 17:35:42', '2015-02-09 20:34:54', 'afaeac1c-57b7-449e-84c6-1dea659b45ab');
-INSERT INTO `elements` VALUES (234, 132, 'craft\\elements\\Entry', 1, 0, '2015-02-09 20:37:32', '2015-02-09 20:38:50', 'a15e09c6-8dee-4d9e-9398-378f98e28fd9');
-INSERT INTO `elements` VALUES (235, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-09 21:33:03', '2015-02-10 18:08:01', 'a4e65f65-e1e7-440f-a7cf-95660598e0e8');
-INSERT INTO `elements` VALUES (236, 179, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-09 21:56:10', '2015-02-10 18:08:01', '02567d99-2c2c-4d79-a906-4e36e6261df0');
-INSERT INTO `elements` VALUES (237, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-09 21:56:10', '2015-02-10 18:08:01', 'e087f883-300f-4d8e-bfda-5b2978dbd68e');
-INSERT INTO `elements` VALUES (238, 179, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-09 21:56:10', '2015-02-10 18:08:01', '43687ef2-46ac-4ad1-9945-93fd2a00fdb9');
-INSERT INTO `elements` VALUES (239, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-09 21:56:10', '2015-02-10 18:08:01', 'c921a317-b3ef-4a19-a863-e391f1e465a6');
-INSERT INTO `elements` VALUES (240, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-09 21:56:10', '2015-02-10 18:08:01', 'f1a47001-ab0a-40d1-815d-86ab957c8775');
-INSERT INTO `elements` VALUES (241, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-09 21:56:10', '2015-02-10 18:08:01', 'ab91e42c-9cd5-482e-b30c-ff1943e13934');
-INSERT INTO `elements` VALUES (242, 179, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-09 21:56:10', '2015-02-10 18:08:01', '08bead16-3e03-4f4d-8923-6a326c9190d1');
-INSERT INTO `elements` VALUES (243, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-10 01:16:49', '2015-02-10 18:08:01', '2b2f630a-e0d0-4410-be21-ad4582921710');
-INSERT INTO `elements` VALUES (244, 184, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-10 01:23:33', '2015-02-10 18:08:01', '7122a201-2df8-4c5d-ad87-5e9751189c96');
-INSERT INTO `elements` VALUES (249, 194, 'craft\\elements\\Asset', 1, 0, '2015-02-10 17:22:34', '2015-02-10 17:22:34', 'b45a8350-662c-40a9-8842-d0a62ca25f66');
-INSERT INTO `elements` VALUES (250, 194, 'craft\\elements\\Asset', 1, 0, '2015-02-10 17:23:54', '2015-02-10 17:23:54', '33c1543f-74ff-4222-b80e-7b1a8df1ea88');
-INSERT INTO `elements` VALUES (251, 194, 'craft\\elements\\Asset', 1, 0, '2015-02-10 17:24:39', '2015-02-10 17:24:39', 'd2f9e8d5-29d9-438a-9c15-ab6852f021b4');
-INSERT INTO `elements` VALUES (252, 184, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-10 17:25:04', '2016-06-03 17:43:06', '6f3bff8b-2d6e-4c16-b239-37583648b4a3');
-INSERT INTO `elements` VALUES (253, 190, 'craft\\elements\\Entry', 1, 0, '2015-02-10 19:09:38', '2015-02-10 19:09:38', '653ab656-008d-45aa-a4d7-a2748e40ba04');
-INSERT INTO `elements` VALUES (254, 189, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-10 19:09:38', '2015-02-10 19:09:38', 'eece8cff-d1f7-4146-8517-af0890baf58b');
-INSERT INTO `elements` VALUES (255, 189, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-10 19:09:38', '2015-02-10 19:09:38', '0246053c-39ae-47c0-b543-e7f64852baf3');
-INSERT INTO `elements` VALUES (256, 189, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-10 19:09:38', '2015-02-10 19:09:38', 'fe0df087-c046-48cd-aa12-43a2d0f32c51');
+INSERT INTO `elements` VALUES (1, NULL, 'craft\\elements\\User', 1, 0, '2014-07-29 18:21:32', '2014-07-29 18:21:32', NULL, 'b66b2bfe-badb-478a-81ff-1fceb638a019');
+INSERT INTO `elements` VALUES (2, 104, 'craft\\elements\\Entry', 1, 0, '2014-07-29 18:21:35', '2015-02-04 15:13:27', NULL, 'f20120a9-7cb6-4c53-8c06-6041a39cc056');
+INSERT INTO `elements` VALUES (4, 197, 'craft\\elements\\Entry', 1, 0, '2014-07-30 21:02:31', '2016-06-03 17:43:25', NULL, '8b6c79cf-8e2a-464d-a50f-833445bab37d');
+INSERT INTO `elements` VALUES (6, 194, 'craft\\elements\\Asset', 1, 0, '2014-07-30 22:55:13', '2015-02-02 04:40:03', NULL, 'd1e0a2aa-b87a-492a-9ea4-25bbfa85e261');
+INSERT INTO `elements` VALUES (7, 194, 'craft\\elements\\Asset', 1, 0, '2014-07-30 22:57:57', '2015-02-02 04:39:56', NULL, '5d3dbc7c-a2c6-402f-a95a-1c1367e6346c');
+INSERT INTO `elements` VALUES (8, 194, 'craft\\elements\\Asset', 1, 0, '2014-07-30 23:01:25', '2015-02-02 04:39:53', NULL, 'd1d0c9e7-a055-4054-af1c-24af70d98689');
+INSERT INTO `elements` VALUES (9, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', NULL, 'a8680541-518f-49e8-9aa0-47ec9acdb6b6');
+INSERT INTO `elements` VALUES (10, 182, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', NULL, '2422ea39-7a29-4f40-bf1b-f4a2c6adc569');
+INSERT INTO `elements` VALUES (11, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', NULL, '2ee107c6-3401-4884-b63d-fedfdb2b05e5');
+INSERT INTO `elements` VALUES (12, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', NULL, '3e53821a-1e96-47d8-a7f2-3d17b023a7c3');
+INSERT INTO `elements` VALUES (13, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', NULL, '8d7308d5-3159-4d1a-a7d1-be38d044eb46');
+INSERT INTO `elements` VALUES (14, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', NULL, '47acdbd6-a59f-4956-b78d-bac65ce8be3e');
+INSERT INTO `elements` VALUES (15, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', NULL, 'eb7f2dc9-d5ff-4444-9a20-528b0a814ff5');
+INSERT INTO `elements` VALUES (16, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', NULL, '2fc99995-3319-4e40-afd8-a3a558be7d78');
+INSERT INTO `elements` VALUES (17, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', NULL, '1611383f-e7ad-4e13-a83b-a0539c3f4cf5');
+INSERT INTO `elements` VALUES (18, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', NULL, '1114e010-83ff-48e6-91a7-c7cec380f311');
+INSERT INTO `elements` VALUES (23, 194, 'craft\\elements\\Asset', 1, 0, '2014-07-31 22:02:47', '2015-02-02 04:39:52', NULL, '00efc6e7-e867-4876-a556-3339351537a6');
+INSERT INTO `elements` VALUES (24, 197, 'craft\\elements\\Entry', 1, 0, '2014-07-31 22:04:17', '2016-06-03 17:43:36', NULL, '09fec6f1-89bf-425e-9fe6-a2d632bb6cf3');
+INSERT INTO `elements` VALUES (25, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:04:17', '2016-06-03 17:43:36', NULL, 'dc20721f-cbcd-4c15-8289-a3882c4773ff');
+INSERT INTO `elements` VALUES (28, 194, 'craft\\elements\\Asset', 1, 0, '2014-07-31 22:08:34', '2015-02-02 04:40:02', NULL, 'a6723024-904e-41c2-8467-5f8b2bef226e');
+INSERT INTO `elements` VALUES (29, 194, 'craft\\elements\\Asset', 1, 0, '2014-07-31 22:19:29', '2015-02-02 04:39:52', NULL, '75724019-641a-475d-a1dc-effdd5a50e2b');
+INSERT INTO `elements` VALUES (30, 182, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:20:21', '2016-06-03 17:43:36', NULL, 'e8871ca8-2e14-40f8-ae5e-1555a1786e8d');
+INSERT INTO `elements` VALUES (31, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:20:21', '2016-06-03 17:43:36', NULL, 'cb003e20-015f-4d3c-9d42-b91d794d0fe1');
+INSERT INTO `elements` VALUES (32, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:20:21', '2016-06-03 17:43:36', NULL, '2904c8fa-b0ce-4067-ad56-b1a387a833cf');
+INSERT INTO `elements` VALUES (33, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:20:21', '2016-06-03 17:43:36', NULL, '9a8913dd-1fff-4998-accf-791b06d08559');
+INSERT INTO `elements` VALUES (34, 185, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:20:21', '2016-06-03 17:43:36', NULL, '2a8166ed-689e-48de-b083-e7585981bcf6');
+INSERT INTO `elements` VALUES (35, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:20:21', '2016-06-03 17:43:36', NULL, '734d0e37-f1e0-4353-b4bf-d6e1711fd98b');
+INSERT INTO `elements` VALUES (36, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:20:21', '2016-06-03 17:43:36', NULL, 'de1a16b5-adcf-4928-b954-dbb890ab491b');
+INSERT INTO `elements` VALUES (37, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:20:21', '2016-06-03 17:43:36', NULL, 'feaf69df-3b41-4e3e-b215-5bab2189b5db');
+INSERT INTO `elements` VALUES (38, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:20:21', '2016-06-03 17:43:37', NULL, '3054748a-5d1e-4cf7-8a4b-d0e336173185');
+INSERT INTO `elements` VALUES (39, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:20:21', '2016-06-03 17:43:37', NULL, '8cd813dc-8dd5-4b20-a57d-d3f22eca3a2d');
+INSERT INTO `elements` VALUES (40, 194, 'craft\\elements\\Asset', 1, 0, '2014-07-31 22:22:21', '2015-02-02 04:39:52', NULL, '5b702218-93b2-41aa-a0ce-7054d508921c');
+INSERT INTO `elements` VALUES (41, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 22:22:28', '2016-06-03 17:43:36', NULL, '331bd2de-e441-42ae-b191-135e2e099b16');
+INSERT INTO `elements` VALUES (42, 194, 'craft\\elements\\Asset', 1, 0, '2014-07-31 23:14:44', '2015-02-02 04:39:56', NULL, 'dd4fc1cc-a290-4b04-b3f4-e262a5cd494a');
+INSERT INTO `elements` VALUES (44, 194, 'craft\\elements\\Asset', 1, 0, '2014-07-31 23:18:18', '2015-02-02 04:39:59', NULL, '29703024-ed2d-43ea-8b17-cedc503e4b75');
+INSERT INTO `elements` VALUES (45, 197, 'craft\\elements\\Entry', 1, 0, '2014-07-31 23:20:59', '2016-06-03 17:43:06', NULL, '328b2654-1f59-4a00-8437-c6d0fb1808bf');
+INSERT INTO `elements` VALUES (46, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 23:20:59', '2016-06-03 17:43:06', NULL, '9148d0d8-0104-46f1-9c7b-f80fe437c1e1');
+INSERT INTO `elements` VALUES (48, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 23:20:59', '2016-06-03 17:43:06', NULL, 'f355dffe-ac28-4b60-930a-64dbb87a2aec');
+INSERT INTO `elements` VALUES (49, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 23:20:59', '2016-06-03 17:43:06', NULL, '3c2a5f48-c8a8-45ba-a8eb-1fb525ab105d');
+INSERT INTO `elements` VALUES (50, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 23:20:59', '2016-06-03 17:43:06', NULL, 'c2dc586b-f969-4e84-b634-9425b98bc2ae');
+INSERT INTO `elements` VALUES (51, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 23:20:59', '2016-06-03 17:43:06', NULL, '57d8bdce-0146-45e9-9f8d-b82788d6baaf');
+INSERT INTO `elements` VALUES (52, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 23:20:59', '2016-06-03 17:43:06', NULL, '6158b2de-d6d6-416e-9951-61dad7777cc1');
+INSERT INTO `elements` VALUES (53, 182, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 23:20:59', '2016-06-03 17:43:06', NULL, 'fd0c8f21-2c78-45eb-8c3f-58ee386e30b7');
+INSERT INTO `elements` VALUES (54, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 23:20:59', '2016-06-03 17:43:07', NULL, 'dc3b2510-de46-4566-bdf1-8243c1e6b47a');
+INSERT INTO `elements` VALUES (55, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-31 23:20:59', '2016-06-03 17:43:07', NULL, '1d549b45-5cdc-44b9-9d17-9ec3130c2ebf');
+INSERT INTO `elements` VALUES (59, 194, 'craft\\elements\\Asset', 1, 0, '2014-08-06 20:36:49', '2015-02-02 04:39:56', NULL, 'ae05e691-1fcf-488c-95b9-896a9f7c04f3');
+INSERT INTO `elements` VALUES (60, 194, 'craft\\elements\\Asset', 1, 0, '2014-08-06 21:31:46', '2015-02-02 04:39:52', NULL, 'e6edb6b5-9b94-47e1-b7a9-0da6ebf74a5d');
+INSERT INTO `elements` VALUES (61, 197, 'craft\\elements\\Entry', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', NULL, '584942bd-d91b-4799-96ff-f10b7be450e2');
+INSERT INTO `elements` VALUES (62, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', NULL, 'e4cc5fc4-3ffa-4e3a-b2bf-29c285566790');
+INSERT INTO `elements` VALUES (63, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', NULL, 'cfa29e45-5530-450d-bea1-3e1de2c4d6e3');
+INSERT INTO `elements` VALUES (64, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', NULL, 'caa335f4-1ab7-417a-b653-ec755633a12d');
+INSERT INTO `elements` VALUES (65, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', NULL, 'fc7739fd-1620-42f2-8465-3b62a904a021');
+INSERT INTO `elements` VALUES (66, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', NULL, '478a6d4c-bc58-4428-b093-519a93621da1');
+INSERT INTO `elements` VALUES (67, 182, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', NULL, '0deb8f8d-636d-4a14-86d7-4b84ed96b1fc');
+INSERT INTO `elements` VALUES (68, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', NULL, '50d4ab7c-d0ca-4f14-a916-51a78fa303f2');
+INSERT INTO `elements` VALUES (69, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', NULL, '424042df-73cc-4ad2-94c1-82904a8d17dd');
+INSERT INTO `elements` VALUES (70, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', NULL, '11ab6f5b-6eab-4628-9995-4c3283c554d5');
+INSERT INTO `elements` VALUES (71, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', NULL, 'fba79122-da03-4f0f-8b7f-7c7a91ecd41d');
+INSERT INTO `elements` VALUES (72, 194, 'craft\\elements\\Asset', 1, 0, '2014-08-06 21:33:56', '2015-02-02 04:39:57', NULL, 'c85d6702-ead2-483b-b357-55bbdc061056');
+INSERT INTO `elements` VALUES (73, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:34:12', '2016-06-03 17:42:53', NULL, 'f1f5b6a6-92a8-464f-ad9f-487cea36d137');
+INSERT INTO `elements` VALUES (74, 191, 'craft\\elements\\Entry', 1, 0, '2014-09-17 01:15:21', '2015-02-10 18:08:01', NULL, '990289b0-2685-4293-a526-2962328c9bac');
+INSERT INTO `elements` VALUES (81, 120, 'craft\\elements\\Entry', 1, 0, '2014-09-23 03:01:18', '2015-02-10 17:33:12', NULL, '81dc7a51-0a4a-490c-896d-f8596f6f2434');
+INSERT INTO `elements` VALUES (82, 194, 'craft\\elements\\Asset', 1, 0, '2014-09-23 03:06:38', '2015-02-02 04:39:55', NULL, 'd28b57f7-e8b3-439b-8a63-d7806ebff343');
+INSERT INTO `elements` VALUES (83, 194, 'craft\\elements\\Asset', 1, 0, '2014-09-23 03:10:32', '2015-02-02 04:39:54', NULL, 'b2d0cf94-1092-45f6-a8fb-68ad94a0abd0');
+INSERT INTO `elements` VALUES (84, 194, 'craft\\elements\\Asset', 1, 0, '2014-09-23 03:15:27', '2015-02-02 04:39:55', NULL, '07d60138-94da-4442-8668-370556aa5f3e');
+INSERT INTO `elements` VALUES (85, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-09-23 03:16:00', '2015-02-10 17:33:12', NULL, 'c3120e5a-e585-4637-a7fb-4c3b360a3af3');
+INSERT INTO `elements` VALUES (86, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-09-23 03:16:00', '2015-02-10 17:33:12', NULL, '82ef5ca3-aa13-4a28-ab46-d7094d7122d9');
+INSERT INTO `elements` VALUES (89, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-09-23 03:16:00', '2015-02-10 17:33:12', NULL, '29f0763d-375f-4847-85be-c1fb238afecb');
+INSERT INTO `elements` VALUES (90, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-09-23 03:16:00', '2015-02-10 17:33:12', NULL, '40dc6491-6843-4545-8361-1e6fd13c5de5');
+INSERT INTO `elements` VALUES (93, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-09-23 03:16:00', '2015-02-10 17:33:12', NULL, '0f93ccd2-2b0d-42b2-888c-7f57aff0fc26');
+INSERT INTO `elements` VALUES (94, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-09-23 03:16:00', '2015-02-10 17:33:12', NULL, '90963853-3abe-4acd-b4d1-a26397f12913');
+INSERT INTO `elements` VALUES (95, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-09-23 03:16:00', '2015-02-10 17:33:12', NULL, 'eac7a729-cb49-4dc5-bc9f-8dca59957b22');
+INSERT INTO `elements` VALUES (96, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-09-23 03:16:00', '2015-02-10 17:33:12', NULL, '7336f746-536d-4e05-8896-9615bda67ea7');
+INSERT INTO `elements` VALUES (97, 185, 'craft\\elements\\MatrixBlock', 1, 0, '2014-09-23 04:26:06', '2015-02-10 17:33:12', NULL, 'f0dc3e32-ddc3-443c-b94f-98bcdcfd0588');
+INSERT INTO `elements` VALUES (98, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-03 02:21:34', '2015-02-02 04:39:58', NULL, '972b2e4f-d209-4a02-a187-727d4c61303c');
+INSERT INTO `elements` VALUES (99, 92, 'craft\\elements\\Entry', 1, 0, '2014-10-03 02:21:54', '2016-06-03 17:42:43', NULL, '1676d123-be2c-4207-a808-74ff8a8d2ee5');
+INSERT INTO `elements` VALUES (100, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-03 03:31:00', '2015-02-02 04:39:58', NULL, 'c76e4c54-4e0c-4a14-8112-a9aeda69259d');
+INSERT INTO `elements` VALUES (101, 92, 'craft\\elements\\Entry', 1, 0, '2014-10-03 03:31:13', '2016-06-03 17:42:26', NULL, 'd8f7307f-0f0a-4d57-80db-98eb06495f43');
+INSERT INTO `elements` VALUES (102, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-03 03:33:52', '2015-02-02 04:39:58', NULL, '55091523-22b2-44cf-a9f9-b532e9732fa0');
+INSERT INTO `elements` VALUES (104, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-03 03:58:05', '2015-02-02 04:39:54', NULL, '33965ba1-24dd-4931-a3b6-988dbd6c877f');
+INSERT INTO `elements` VALUES (105, 197, 'craft\\elements\\Entry', 1, 0, '2014-10-03 03:58:26', '2016-06-03 17:42:35', NULL, 'f7d1047a-a505-4856-8f28-a1c37cb24e2b');
+INSERT INTO `elements` VALUES (115, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-04 15:35:41', '2015-02-02 04:39:55', NULL, '777fa59f-7d1f-4996-8d72-295f4da6ad15');
+INSERT INTO `elements` VALUES (120, 127, 'craft\\elements\\Entry', 1, 0, '2014-10-04 15:40:07', '2015-02-10 17:38:56', NULL, '9bf08821-5e47-44ac-b7f7-206527a62379');
+INSERT INTO `elements` VALUES (121, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-04 15:42:04', '2015-02-02 04:40:00', NULL, '563ea99a-56ec-48b6-bcfc-8ec1e4d81c25');
+INSERT INTO `elements` VALUES (122, 127, 'craft\\elements\\Entry', 1, 0, '2014-10-04 15:42:09', '2015-02-10 17:38:25', NULL, '2ab963fd-3bc8-4c57-9217-1d2b56ae854d');
+INSERT INTO `elements` VALUES (123, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-04 15:46:51', '2015-02-02 04:39:52', NULL, '23affce5-c01e-40d3-9081-4b0889eb82eb');
+INSERT INTO `elements` VALUES (124, 127, 'craft\\elements\\Entry', 1, 0, '2014-10-04 15:47:14', '2015-02-10 17:37:53', NULL, '06886a87-ad07-464a-be7b-69542f17ed2a');
+INSERT INTO `elements` VALUES (125, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-04 15:47:46', '2015-02-02 04:40:02', NULL, '357b3071-b675-40de-b2b1-6ccc1f74a1e6');
+INSERT INTO `elements` VALUES (126, 127, 'craft\\elements\\Entry', 1, 0, '2014-10-04 15:48:03', '2015-02-10 17:37:34', NULL, 'ad302328-a501-4995-bae0-8fb81878abc2');
+INSERT INTO `elements` VALUES (127, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-04 15:48:41', '2015-02-02 04:39:54', NULL, '4784a8b7-19ab-4302-8eac-05d5e4cfc86c');
+INSERT INTO `elements` VALUES (128, 127, 'craft\\elements\\Entry', 1, 0, '2014-10-04 15:48:45', '2015-02-10 17:37:12', NULL, 'ca3616f0-dcc4-42b4-964c-c429d279c4df');
+INSERT INTO `elements` VALUES (129, 127, 'craft\\elements\\Entry', 1, 0, '2014-10-04 15:49:37', '2015-12-08 22:45:10', NULL, '9f03d827-9df6-4159-aba8-97e4dd4c39d3');
+INSERT INTO `elements` VALUES (130, 120, 'craft\\elements\\Entry', 1, 0, '2014-10-05 03:05:20', '2015-02-10 17:33:34', NULL, '69a3c9c1-f2c1-4761-8e87-47537872d97a');
+INSERT INTO `elements` VALUES (131, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-05 03:08:45', '2015-02-02 04:39:59', NULL, 'ee0e582d-c752-41db-8ca0-9341367f3d68');
+INSERT INTO `elements` VALUES (132, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-05 03:08:45', '2015-02-02 04:40:00', NULL, '93baeef4-bb9c-4be3-a465-15effe6d53ef');
+INSERT INTO `elements` VALUES (133, 120, 'craft\\elements\\Entry', 1, 0, '2014-10-05 03:09:41', '2015-02-10 17:33:58', NULL, '2e70b26c-19fa-4470-9cbd-bdebad80d482');
+INSERT INTO `elements` VALUES (134, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-06 01:49:48', '2015-02-02 04:39:56', NULL, '99bfeea8-df67-4cdf-ab20-4ca2520417ee');
+INSERT INTO `elements` VALUES (135, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-07 03:41:24', '2015-02-04 15:07:12', NULL, 'bc5bda0d-4296-4fa3-88bf-c02211aba8c6');
+INSERT INTO `elements` VALUES (136, 121, 'craft\\elements\\MatrixBlock', 1, 0, '2014-10-07 03:41:31', '2015-02-04 15:13:27', NULL, 'e8ed31fa-1ada-4e41-8c1f-996805e3e994');
+INSERT INTO `elements` VALUES (137, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-07 03:43:58', '2015-02-04 15:13:25', NULL, '1d84ba1a-c3a4-4e11-9987-ff748effbf3b');
+INSERT INTO `elements` VALUES (138, 121, 'craft\\elements\\MatrixBlock', 1, 0, '2014-10-07 03:44:02', '2015-02-04 15:13:27', NULL, '94c0a25f-1228-4630-a185-b23c8fd39afc');
+INSERT INTO `elements` VALUES (139, 121, 'craft\\elements\\MatrixBlock', 1, 0, '2014-10-07 03:45:26', '2015-02-04 15:13:28', NULL, '8ce61324-d955-4bf7-915b-78a3b502cf9d');
+INSERT INTO `elements` VALUES (140, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-07 03:45:39', '2015-02-04 15:08:25', NULL, 'c2fc1f5a-cc02-4d0a-a101-3c0c7ea186a0');
+INSERT INTO `elements` VALUES (141, 195, 'craft\\elements\\Asset', 1, 0, '2014-10-07 03:48:12', '2014-10-07 03:48:12', NULL, 'cee65a06-138d-4945-9ff8-ac0efb0d54f1');
+INSERT INTO `elements` VALUES (142, 195, 'craft\\elements\\Asset', 1, 0, '2014-10-07 03:48:21', '2014-10-07 03:48:21', NULL, '5b0d43ba-81ff-4a50-95d1-89d3dc32f6b2');
+INSERT INTO `elements` VALUES (143, 195, 'craft\\elements\\Asset', 1, 0, '2014-10-07 03:48:30', '2014-10-07 03:48:30', NULL, 'd5310a44-55df-40eb-bc4b-9298891f075b');
+INSERT INTO `elements` VALUES (144, 195, 'craft\\elements\\Asset', 1, 0, '2014-10-07 03:48:41', '2014-10-07 03:48:41', NULL, '06ad8c35-cd6e-4ac6-afac-42c53b355e2c');
+INSERT INTO `elements` VALUES (145, 195, 'craft\\elements\\Asset', 1, 0, '2014-10-07 03:48:50', '2014-10-07 03:48:50', NULL, '473d36b2-7217-4bc1-a9a2-0e7b7f2b5a00');
+INSERT INTO `elements` VALUES (146, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-09 03:37:12', '2015-02-02 04:40:00', NULL, '6fbb9892-73dc-40de-b5ab-03f0431df5e7');
+INSERT INTO `elements` VALUES (147, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-09 03:57:41', '2015-02-02 04:39:54', NULL, '16b3435f-f0c5-42d9-a78d-33d20ee2019f');
+INSERT INTO `elements` VALUES (148, 194, 'craft\\elements\\Asset', 1, 0, '2014-10-09 04:20:25', '2015-02-02 04:39:59', NULL, '36ff010a-0278-485d-bc95-64801f8f8961');
+INSERT INTO `elements` VALUES (152, 196, 'craft\\elements\\Asset', 1, 0, '2014-12-03 20:14:42', '2014-12-03 20:14:42', NULL, '9c47a80c-546e-4f64-9b1f-483fcca7ce69');
+INSERT INTO `elements` VALUES (153, 196, 'craft\\elements\\Asset', 1, 0, '2014-12-03 20:14:42', '2014-12-03 20:14:42', NULL, '2ab22020-1a24-479e-9170-20bc8c135cf4');
+INSERT INTO `elements` VALUES (154, 196, 'craft\\elements\\Asset', 1, 0, '2014-12-03 20:14:42', '2014-12-03 20:14:42', NULL, '17e82cde-7134-41c6-9e6e-c83ba490be5f');
+INSERT INTO `elements` VALUES (155, 196, 'craft\\elements\\Asset', 1, 0, '2014-12-03 20:14:43', '2014-12-03 20:14:43', NULL, '5ce35d58-4a74-47f6-997f-062d3c4c41ec');
+INSERT INTO `elements` VALUES (156, 196, 'craft\\elements\\Asset', 1, 0, '2014-12-03 20:14:43', '2014-12-03 20:14:43', NULL, 'ac85e46c-fd0a-4f29-86fd-a4b85fd57482');
+INSERT INTO `elements` VALUES (157, 196, 'craft\\elements\\Asset', 1, 0, '2014-12-03 20:14:43', '2014-12-03 20:14:43', NULL, 'c7587bc6-8aa8-48a1-bf04-812798ce37f5');
+INSERT INTO `elements` VALUES (160, 185, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-11 00:47:08', '2015-02-10 17:37:53', NULL, 'd4b192b3-1e15-47f7-9379-831c5de637cd');
+INSERT INTO `elements` VALUES (163, 194, 'craft\\elements\\Asset', 1, 0, '2014-12-11 01:24:36', '2015-02-02 04:39:54', NULL, 'b968b6cc-b80a-4cdb-b5d9-c765dd95badc');
+INSERT INTO `elements` VALUES (167, 194, 'craft\\elements\\Asset', 1, 0, '2014-12-11 01:27:41', '2015-02-02 04:39:55', NULL, 'f911bea5-e0f0-414a-95a7-7818fbcca5d5');
+INSERT INTO `elements` VALUES (168, 194, 'craft\\elements\\Asset', 1, 0, '2014-12-11 01:28:48', '2015-02-02 04:39:53', NULL, 'e7c277dc-c0b1-45d3-9923-3cf933829506');
+INSERT INTO `elements` VALUES (178, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-11 02:02:54', '2015-02-10 17:37:53', NULL, '7ff410ac-1a30-4ea9-8424-5ba1db08787f');
+INSERT INTO `elements` VALUES (179, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-11 02:02:54', '2015-02-10 17:37:53', NULL, '0854de58-370d-426a-92e3-08cd3b8b3fbb');
+INSERT INTO `elements` VALUES (180, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-11 02:02:54', '2015-02-10 17:37:53', NULL, 'e997902b-deed-45da-9728-7c7c0fa8e80a');
+INSERT INTO `elements` VALUES (181, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-11 02:12:38', '2015-02-10 17:37:53', NULL, '4ca5bd5f-cd4b-47d8-9690-4fc6d9cca230');
+INSERT INTO `elements` VALUES (182, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-11 02:12:38', '2015-02-10 17:37:53', NULL, '5ccb2124-a1d6-496e-947f-91f77a27ba8b');
+INSERT INTO `elements` VALUES (183, 194, 'craft\\elements\\Asset', 1, 0, '2014-12-11 03:33:16', '2015-02-02 04:39:57', NULL, '316424b0-634a-4909-a3b9-758f1800dfa6');
+INSERT INTO `elements` VALUES (184, 185, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:27:03', '2015-02-10 17:38:56', NULL, 'b2d727a6-3c00-4157-b3b2-665019538590');
+INSERT INTO `elements` VALUES (185, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:27:03', '2015-02-10 17:38:56', NULL, '4cb37d4d-122c-4453-a479-c0cdeee617c2');
+INSERT INTO `elements` VALUES (186, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:27:03', '2015-02-10 17:38:56', NULL, 'b87ca293-c571-4c53-9db0-1736cb89c8df');
+INSERT INTO `elements` VALUES (187, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:27:03', '2015-02-10 17:38:56', NULL, '5ae2c41f-3849-4db0-92ac-7b43230b8ccb');
+INSERT INTO `elements` VALUES (188, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:27:03', '2015-02-10 17:38:56', NULL, '54287471-43d4-4c1c-8c42-514e25d9ad10');
+INSERT INTO `elements` VALUES (189, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:27:03', '2015-02-10 17:38:56', NULL, '3d6e1cef-25f6-4609-925f-55ca21a5d175');
+INSERT INTO `elements` VALUES (190, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:30:31', '2015-02-10 17:38:26', NULL, 'a4276e3b-c761-4666-a76c-cc2b76e8117d');
+INSERT INTO `elements` VALUES (191, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:30:31', '2015-02-10 17:38:26', NULL, '3041e871-4ce2-4946-abe6-f2cb148f037d');
+INSERT INTO `elements` VALUES (192, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:30:31', '2015-02-10 17:38:26', NULL, '4a334139-2506-4f89-99fd-9cda9fcc23fc');
+INSERT INTO `elements` VALUES (193, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:30:31', '2015-02-10 17:38:26', NULL, '9ccd77fd-746b-4c2c-bd2f-f199b7687fb0');
+INSERT INTO `elements` VALUES (194, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:30:31', '2015-02-10 17:38:26', NULL, '705f305b-2bb3-4ab2-85bc-7ec5875d892b');
+INSERT INTO `elements` VALUES (196, 185, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:32:12', '2015-02-10 17:38:26', NULL, '72b92336-0c8f-49b5-a14e-b712ffaaf848');
+INSERT INTO `elements` VALUES (197, 185, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:38:41', '2015-02-10 17:37:35', NULL, 'c5a08295-0a9f-4853-9dd7-0e432f2efc62');
+INSERT INTO `elements` VALUES (198, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:38:41', '2015-02-10 17:37:35', NULL, '40e78579-3bec-4ce6-9d6a-0333cd0ef311');
+INSERT INTO `elements` VALUES (199, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:38:41', '2015-02-10 17:37:35', NULL, 'fae63102-c37e-4c3f-a870-eff32d0a52f3');
+INSERT INTO `elements` VALUES (200, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:38:41', '2015-02-10 17:37:35', NULL, '81e93b3b-9298-42d8-9b1a-c5b1b4c46a84');
+INSERT INTO `elements` VALUES (201, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:38:41', '2015-02-10 17:37:35', NULL, '612a22f4-ca76-4288-a151-39003946e5f9');
+INSERT INTO `elements` VALUES (202, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:41:31', '2015-02-10 17:37:12', NULL, '81923eda-b3b0-4e57-aa0e-aa3e628f45ee');
+INSERT INTO `elements` VALUES (203, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:41:31', '2015-02-10 17:37:12', NULL, '7aadef63-e5c3-439d-a56d-653565737859');
+INSERT INTO `elements` VALUES (204, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:41:31', '2015-02-10 17:37:12', NULL, 'd7e06f3d-b311-4e80-8f6d-1d4a7b3004fb');
+INSERT INTO `elements` VALUES (205, 185, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:44:08', '2015-12-08 22:45:10', NULL, '6e5e2597-4659-40be-80d1-94e358c0ce4e');
+INSERT INTO `elements` VALUES (206, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:44:08', '2015-12-08 22:45:10', NULL, '614df607-d31c-4d6f-8e02-6f6bc033a15d');
+INSERT INTO `elements` VALUES (207, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:44:08', '2015-12-08 22:45:10', NULL, '8995e612-d2dc-4f75-b64c-a5da9764e86a');
+INSERT INTO `elements` VALUES (208, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:44:08', '2015-12-08 22:45:10', NULL, 'dbd76d88-ddbb-40de-b94c-a725850a0311');
+INSERT INTO `elements` VALUES (209, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:44:08', '2015-12-08 22:45:10', NULL, '9eb13f4f-4e10-419e-990c-273e29593107');
+INSERT INTO `elements` VALUES (210, 193, 'craft\\elements\\MatrixBlock', 1, 0, '2014-12-30 01:44:08', '2015-12-08 22:45:10', NULL, '13604c7c-2897-4dfb-af88-2fb76b1f5d8e');
+INSERT INTO `elements` VALUES (211, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 04:15:18', '2015-02-10 17:33:34', NULL, '0e2354af-355c-4774-a059-db55fc1d1f6a');
+INSERT INTO `elements` VALUES (212, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 04:17:11', '2015-02-10 17:33:34', NULL, '6127e838-1696-45e0-885f-b1eb7cda4304');
+INSERT INTO `elements` VALUES (213, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 04:18:16', '2015-02-10 17:33:34', NULL, '23a9c4dc-fb5d-4e23-b541-31d041e9404a');
+INSERT INTO `elements` VALUES (215, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 04:27:16', '2015-02-10 17:33:34', NULL, '908d12aa-67d1-4f09-b214-5f7c48392df5');
+INSERT INTO `elements` VALUES (216, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 04:27:16', '2015-02-10 17:33:35', NULL, 'f42794c7-490a-4e84-9e71-15b9917fa5ab');
+INSERT INTO `elements` VALUES (217, 185, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 04:28:36', '2015-02-10 17:33:34', NULL, '8ddc7402-470e-4025-be3a-90803af5ffb5');
+INSERT INTO `elements` VALUES (218, 194, 'craft\\elements\\Asset', 1, 0, '2015-02-02 04:39:53', '2015-02-10 19:09:21', NULL, '99193912-f8c7-4f49-a959-ab8cb2f55edf');
+INSERT INTO `elements` VALUES (219, 194, 'craft\\elements\\Asset', 1, 0, '2015-02-02 04:39:57', '2015-02-02 04:39:57', NULL, 'dafc6f65-673a-4a44-8466-bcfdf5a18f90');
+INSERT INTO `elements` VALUES (220, 194, 'craft\\elements\\Asset', 1, 0, '2015-02-02 04:40:00', '2016-08-22 18:35:19', NULL, 'e316a79f-83fb-4d7a-8519-1e3833e20cd1');
+INSERT INTO `elements` VALUES (221, 194, 'craft\\elements\\Asset', 1, 0, '2015-02-02 04:40:01', '2016-08-22 18:35:45', NULL, '5cacd689-7569-4429-9fe5-bca474aa0afd');
+INSERT INTO `elements` VALUES (222, 194, 'craft\\elements\\Asset', 1, 0, '2015-02-02 04:40:01', '2016-08-22 18:36:04', NULL, '81861608-9db5-44cd-af4f-b702142de67f');
+INSERT INTO `elements` VALUES (223, 194, 'craft\\elements\\Asset', 1, 0, '2015-02-02 16:54:58', '2015-02-02 16:57:40', NULL, '9954c1f6-3f79-449c-83fc-a3fa03d7aa9d');
+INSERT INTO `elements` VALUES (224, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 16:56:12', '2015-02-10 17:33:59', NULL, '99fd058e-3ab8-494a-9068-a1e3dc9e1cee');
+INSERT INTO `elements` VALUES (225, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 16:56:12', '2015-02-10 17:33:59', NULL, '9f6fa8b3-a39a-43c6-aab5-316283cd1e84');
+INSERT INTO `elements` VALUES (227, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 16:59:15', '2015-02-10 17:33:59', NULL, 'd88aaa79-14e7-4042-8a03-b85a39dbf752');
+INSERT INTO `elements` VALUES (228, 185, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 17:01:08', '2015-02-10 17:33:59', NULL, '7cfff836-16b8-4da1-862a-7148b568b32f');
+INSERT INTO `elements` VALUES (229, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 17:01:08', '2015-02-10 17:33:59', NULL, '87167cd0-2228-4d59-b6de-4cc00f66bb00');
+INSERT INTO `elements` VALUES (230, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 17:04:48', '2016-06-03 17:42:35', NULL, '9fea522f-d5be-4651-a9cc-c235284d1851');
+INSERT INTO `elements` VALUES (231, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 17:09:37', '2015-02-10 17:33:59', NULL, '2740f6dc-341d-4c48-b9c3-e822a1539ccf');
+INSERT INTO `elements` VALUES (232, 187, 'craft\\elements\\GlobalSet', 1, 0, '2015-02-04 15:20:19', '2015-02-10 18:31:03', NULL, '92ba4df9-7269-4adf-9f4d-54552eb4f778');
+INSERT INTO `elements` VALUES (233, 130, 'craft\\elements\\Entry', 1, 0, '2015-02-09 17:35:42', '2015-02-09 20:34:54', NULL, 'afaeac1c-57b7-449e-84c6-1dea659b45ab');
+INSERT INTO `elements` VALUES (234, 132, 'craft\\elements\\Entry', 1, 0, '2015-02-09 20:37:32', '2015-02-09 20:38:50', NULL, 'a15e09c6-8dee-4d9e-9398-378f98e28fd9');
+INSERT INTO `elements` VALUES (235, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-09 21:33:03', '2015-02-10 18:08:01', NULL, 'a4e65f65-e1e7-440f-a7cf-95660598e0e8');
+INSERT INTO `elements` VALUES (236, 179, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-09 21:56:10', '2015-02-10 18:08:01', NULL, '02567d99-2c2c-4d79-a906-4e36e6261df0');
+INSERT INTO `elements` VALUES (237, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-09 21:56:10', '2015-02-10 18:08:01', NULL, 'e087f883-300f-4d8e-bfda-5b2978dbd68e');
+INSERT INTO `elements` VALUES (238, 179, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-09 21:56:10', '2015-02-10 18:08:01', NULL, '43687ef2-46ac-4ad1-9945-93fd2a00fdb9');
+INSERT INTO `elements` VALUES (239, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-09 21:56:10', '2015-02-10 18:08:01', NULL, 'c921a317-b3ef-4a19-a863-e391f1e465a6');
+INSERT INTO `elements` VALUES (240, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-09 21:56:10', '2015-02-10 18:08:01', NULL, 'f1a47001-ab0a-40d1-815d-86ab957c8775');
+INSERT INTO `elements` VALUES (241, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-09 21:56:10', '2015-02-10 18:08:01', NULL, 'ab91e42c-9cd5-482e-b30c-ff1943e13934');
+INSERT INTO `elements` VALUES (242, 179, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-09 21:56:10', '2015-02-10 18:08:01', NULL, '08bead16-3e03-4f4d-8923-6a326c9190d1');
+INSERT INTO `elements` VALUES (243, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-10 01:16:49', '2015-02-10 18:08:01', NULL, '2b2f630a-e0d0-4410-be21-ad4582921710');
+INSERT INTO `elements` VALUES (244, 184, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-10 01:23:33', '2015-02-10 18:08:01', NULL, '7122a201-2df8-4c5d-ad87-5e9751189c96');
+INSERT INTO `elements` VALUES (249, 194, 'craft\\elements\\Asset', 1, 0, '2015-02-10 17:22:34', '2015-02-10 17:22:34', NULL, 'b45a8350-662c-40a9-8842-d0a62ca25f66');
+INSERT INTO `elements` VALUES (250, 194, 'craft\\elements\\Asset', 1, 0, '2015-02-10 17:23:54', '2015-02-10 17:23:54', NULL, '33c1543f-74ff-4222-b80e-7b1a8df1ea88');
+INSERT INTO `elements` VALUES (251, 194, 'craft\\elements\\Asset', 1, 0, '2015-02-10 17:24:39', '2015-02-10 17:24:39', NULL, 'd2f9e8d5-29d9-438a-9c15-ab6852f021b4');
+INSERT INTO `elements` VALUES (252, 184, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-10 17:25:04', '2016-06-03 17:43:06', NULL, '6f3bff8b-2d6e-4c16-b239-37583648b4a3');
+INSERT INTO `elements` VALUES (253, 190, 'craft\\elements\\Entry', 1, 0, '2015-02-10 19:09:38', '2015-02-10 19:09:38', NULL, '653ab656-008d-45aa-a4d7-a2748e40ba04');
+INSERT INTO `elements` VALUES (254, 189, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-10 19:09:38', '2015-02-10 19:09:38', NULL, 'eece8cff-d1f7-4146-8517-af0890baf58b');
+INSERT INTO `elements` VALUES (255, 189, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-10 19:09:38', '2015-02-10 19:09:38', NULL, '0246053c-39ae-47c0-b543-e7f64852baf3');
+INSERT INTO `elements` VALUES (256, 189, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-10 19:09:38', '2015-02-10 19:09:38', NULL, 'fe0df087-c046-48cd-aa12-43a2d0f32c51');
 COMMIT;
 
 -- ----------------------------
@@ -871,10 +882,12 @@ DROP TABLE IF EXISTS `entries`;
 CREATE TABLE `entries` (
   `id` int(11) NOT NULL,
   `sectionId` int(11) NOT NULL,
+  `parentId` int(11) DEFAULT NULL,
   `typeId` int(11) NOT NULL,
   `authorId` int(11) DEFAULT NULL,
   `postDate` datetime DEFAULT NULL,
   `expiryDate` datetime DEFAULT NULL,
+  `deletedWithEntryType` tinyint(1) DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
@@ -884,37 +897,39 @@ CREATE TABLE `entries` (
   KEY `craft_entries_postDate_idx` (`postDate`) USING BTREE,
   KEY `craft_entries_expiryDate_idx` (`expiryDate`) USING BTREE,
   KEY `craft_entries_authorId_fk` (`authorId`) USING BTREE,
+  KEY `entries_parentId_fk` (`parentId`),
   CONSTRAINT `craft_entries_authorId_fk` FOREIGN KEY (`authorId`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   CONSTRAINT `craft_entries_id_fk` FOREIGN KEY (`id`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
   CONSTRAINT `craft_entries_sectionId_fk` FOREIGN KEY (`sectionId`) REFERENCES `sections` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `craft_entries_typeId_fk` FOREIGN KEY (`typeId`) REFERENCES `entrytypes` (`id`) ON DELETE CASCADE
+  CONSTRAINT `craft_entries_typeId_fk` FOREIGN KEY (`typeId`) REFERENCES `entrytypes` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `entries_parentId_fk` FOREIGN KEY (`parentId`) REFERENCES `entries` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of entries
 -- ----------------------------
 BEGIN;
-INSERT INTO `entries` VALUES (2, 1, 1, NULL, '2014-07-29 18:21:35', NULL, '2014-07-29 18:21:35', '2015-02-04 15:13:28', '53ea9ee4-5daf-4d0f-9955-9385092bbd60');
-INSERT INTO `entries` VALUES (4, 2, 2, 1, '2016-05-06 00:00:00', NULL, '2014-07-30 21:02:32', '2016-06-03 17:43:25', 'd011f859-bee4-4f35-9159-392f5c7a5e6d');
-INSERT INTO `entries` VALUES (24, 2, 2, 1, '2016-05-07 00:00:00', NULL, '2014-07-31 22:04:17', '2016-06-03 17:43:37', '30fcf618-c8df-4b22-b00a-8de18596e87f');
-INSERT INTO `entries` VALUES (45, 2, 2, 1, '2016-05-05 00:00:00', NULL, '2014-07-31 23:20:59', '2016-06-03 17:43:07', 'ad571dd1-4691-434a-b961-0133975beb03');
-INSERT INTO `entries` VALUES (61, 2, 2, 1, '2016-05-04 00:00:00', NULL, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '37b64dde-6b73-4846-930a-ca032467d95b');
-INSERT INTO `entries` VALUES (74, 4, 4, NULL, '2014-09-17 01:15:21', NULL, '2014-09-17 01:15:21', '2015-02-10 18:08:01', 'c31210d7-7e6b-465e-b232-dc2d19b10745');
-INSERT INTO `entries` VALUES (81, 3, 3, 1, '2014-10-05 03:10:00', NULL, '2014-09-23 03:01:18', '2015-02-10 17:33:12', '5df07f5e-ea23-463d-a6e2-6e8f4c16052e');
-INSERT INTO `entries` VALUES (99, 2, 6, 1, '2016-05-03 00:00:00', NULL, '2014-10-03 02:21:54', '2016-06-03 17:42:43', 'c731599d-6635-4b19-a535-e68fe63a1217');
-INSERT INTO `entries` VALUES (101, 2, 6, 1, '2016-05-02 00:00:00', NULL, '2014-10-03 03:31:13', '2016-06-03 17:42:26', '16091360-c9c9-4546-91cd-df15e3999abd');
-INSERT INTO `entries` VALUES (105, 2, 2, 1, '2016-05-01 00:00:00', NULL, '2014-10-03 03:58:26', '2016-06-03 17:42:35', '144b5696-381b-4f42-864b-c267b3a54cc3');
-INSERT INTO `entries` VALUES (120, 5, 7, 1, '2014-10-04 15:40:00', NULL, '2014-10-04 15:40:08', '2015-02-10 17:38:56', '7ae06297-a470-4da7-b668-8fd66e8491c2');
-INSERT INTO `entries` VALUES (122, 5, 7, 1, '2014-10-04 15:42:00', NULL, '2014-10-04 15:42:09', '2015-02-10 17:38:26', '19b10f09-57f7-435c-90d0-807f7cc7870a');
-INSERT INTO `entries` VALUES (124, 5, 7, 1, '2014-10-04 15:47:00', NULL, '2014-10-04 15:47:14', '2015-02-10 17:37:53', '9b1b71c9-1b58-4b8d-b645-d1db6a68537a');
-INSERT INTO `entries` VALUES (126, 5, 7, 1, '2014-10-04 15:48:00', NULL, '2014-10-04 15:48:03', '2015-02-10 17:37:35', '9b6a2efc-1167-4f93-b061-1714eafe6ae4');
-INSERT INTO `entries` VALUES (128, 5, 7, 1, '2014-10-04 15:48:00', NULL, '2014-10-04 15:48:46', '2015-02-10 17:37:12', '40d3a633-c342-48f5-91ef-7e62566a2907');
-INSERT INTO `entries` VALUES (129, 5, 7, 1, '2014-10-04 15:49:00', NULL, '2014-10-04 15:49:37', '2015-12-08 22:45:10', '9eb6ea99-1b13-4d2f-a039-a8306d4a44c2');
-INSERT INTO `entries` VALUES (130, 3, 3, 1, '2014-10-05 03:05:00', NULL, '2014-10-05 03:05:20', '2015-02-10 17:33:35', '55ba44a2-8e85-4a37-9316-2c6cbede2d22');
-INSERT INTO `entries` VALUES (133, 3, 3, 1, '2014-10-06 01:30:00', NULL, '2014-10-05 03:09:42', '2015-02-10 17:33:59', '4bd9864f-cb5c-4b1e-ba28-ec6f025e8847');
-INSERT INTO `entries` VALUES (233, 6, 8, NULL, '2015-02-09 17:48:24', NULL, '2015-02-09 17:35:42', '2015-02-09 20:34:55', '60f0a70e-9136-416f-a501-0cc43fbc20bf');
-INSERT INTO `entries` VALUES (234, 7, 9, NULL, '2015-02-09 20:37:32', NULL, '2015-02-09 20:37:32', '2015-02-09 20:38:51', '9bf20e65-558f-4343-a9a2-9e54320b55c1');
-INSERT INTO `entries` VALUES (253, 8, 10, 1, '2015-02-10 19:09:38', NULL, '2015-02-10 19:09:38', '2015-02-10 19:09:38', '1a579582-4a61-4a38-9894-69c9720f79d2');
+INSERT INTO `entries` VALUES (2, 1, NULL, 1, NULL, '2014-07-29 18:21:35', NULL, NULL, '2014-07-29 18:21:35', '2015-02-04 15:13:28', '53ea9ee4-5daf-4d0f-9955-9385092bbd60');
+INSERT INTO `entries` VALUES (4, 2, NULL, 2, 1, '2016-05-06 00:00:00', NULL, NULL, '2014-07-30 21:02:32', '2016-06-03 17:43:25', 'd011f859-bee4-4f35-9159-392f5c7a5e6d');
+INSERT INTO `entries` VALUES (24, 2, NULL, 2, 1, '2016-05-07 00:00:00', NULL, NULL, '2014-07-31 22:04:17', '2016-06-03 17:43:37', '30fcf618-c8df-4b22-b00a-8de18596e87f');
+INSERT INTO `entries` VALUES (45, 2, NULL, 2, 1, '2016-05-05 00:00:00', NULL, NULL, '2014-07-31 23:20:59', '2016-06-03 17:43:07', 'ad571dd1-4691-434a-b961-0133975beb03');
+INSERT INTO `entries` VALUES (61, 2, NULL, 2, 1, '2016-05-04 00:00:00', NULL, NULL, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '37b64dde-6b73-4846-930a-ca032467d95b');
+INSERT INTO `entries` VALUES (74, 4, NULL, 4, NULL, '2014-09-17 01:15:21', NULL, NULL, '2014-09-17 01:15:21', '2015-02-10 18:08:01', 'c31210d7-7e6b-465e-b232-dc2d19b10745');
+INSERT INTO `entries` VALUES (81, 3, NULL, 3, 1, '2014-10-05 03:10:00', NULL, NULL, '2014-09-23 03:01:18', '2015-02-10 17:33:12', '5df07f5e-ea23-463d-a6e2-6e8f4c16052e');
+INSERT INTO `entries` VALUES (99, 2, NULL, 6, 1, '2016-05-03 00:00:00', NULL, NULL, '2014-10-03 02:21:54', '2016-06-03 17:42:43', 'c731599d-6635-4b19-a535-e68fe63a1217');
+INSERT INTO `entries` VALUES (101, 2, NULL, 6, 1, '2016-05-02 00:00:00', NULL, NULL, '2014-10-03 03:31:13', '2016-06-03 17:42:26', '16091360-c9c9-4546-91cd-df15e3999abd');
+INSERT INTO `entries` VALUES (105, 2, NULL, 2, 1, '2016-05-01 00:00:00', NULL, NULL, '2014-10-03 03:58:26', '2016-06-03 17:42:35', '144b5696-381b-4f42-864b-c267b3a54cc3');
+INSERT INTO `entries` VALUES (120, 5, NULL, 7, 1, '2014-10-04 15:40:00', NULL, NULL, '2014-10-04 15:40:08', '2015-02-10 17:38:56', '7ae06297-a470-4da7-b668-8fd66e8491c2');
+INSERT INTO `entries` VALUES (122, 5, NULL, 7, 1, '2014-10-04 15:42:00', NULL, NULL, '2014-10-04 15:42:09', '2015-02-10 17:38:26', '19b10f09-57f7-435c-90d0-807f7cc7870a');
+INSERT INTO `entries` VALUES (124, 5, NULL, 7, 1, '2014-10-04 15:47:00', NULL, NULL, '2014-10-04 15:47:14', '2015-02-10 17:37:53', '9b1b71c9-1b58-4b8d-b645-d1db6a68537a');
+INSERT INTO `entries` VALUES (126, 5, NULL, 7, 1, '2014-10-04 15:48:00', NULL, NULL, '2014-10-04 15:48:03', '2015-02-10 17:37:35', '9b6a2efc-1167-4f93-b061-1714eafe6ae4');
+INSERT INTO `entries` VALUES (128, 5, NULL, 7, 1, '2014-10-04 15:48:00', NULL, NULL, '2014-10-04 15:48:46', '2015-02-10 17:37:12', '40d3a633-c342-48f5-91ef-7e62566a2907');
+INSERT INTO `entries` VALUES (129, 5, NULL, 7, 1, '2014-10-04 15:49:00', NULL, NULL, '2014-10-04 15:49:37', '2015-12-08 22:45:10', '9eb6ea99-1b13-4d2f-a039-a8306d4a44c2');
+INSERT INTO `entries` VALUES (130, 3, NULL, 3, 1, '2014-10-05 03:05:00', NULL, NULL, '2014-10-05 03:05:20', '2015-02-10 17:33:35', '55ba44a2-8e85-4a37-9316-2c6cbede2d22');
+INSERT INTO `entries` VALUES (133, 3, NULL, 3, 1, '2014-10-06 01:30:00', NULL, NULL, '2014-10-05 03:09:42', '2015-02-10 17:33:59', '4bd9864f-cb5c-4b1e-ba28-ec6f025e8847');
+INSERT INTO `entries` VALUES (233, 6, NULL, 8, NULL, '2015-02-09 17:48:24', NULL, NULL, '2015-02-09 17:35:42', '2015-02-09 20:34:55', '60f0a70e-9136-416f-a501-0cc43fbc20bf');
+INSERT INTO `entries` VALUES (234, 7, NULL, 9, NULL, '2015-02-09 20:37:32', NULL, NULL, '2015-02-09 20:37:32', '2015-02-09 20:38:51', '9bf20e65-558f-4343-a9a2-9e54320b55c1');
+INSERT INTO `entries` VALUES (253, 8, NULL, 10, 1, '2015-02-10 19:09:38', NULL, NULL, '2015-02-10 19:09:38', '2015-02-10 19:09:38', '1a579582-4a61-4a38-9894-69c9720f79d2');
 COMMIT;
 
 -- ----------------------------
@@ -960,12 +975,14 @@ CREATE TABLE `entrytypes` (
   `sortOrder` smallint(6) unsigned DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
+  `dateDeleted` datetime DEFAULT NULL,
   `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `craft_entrytypes_name_sectionId_unq_idx` (`name`,`sectionId`) USING BTREE,
-  UNIQUE KEY `craft_entrytypes_handle_sectionId_unq_idx` (`handle`,`sectionId`) USING BTREE,
   KEY `craft_entrytypes_sectionId_fk` (`sectionId`) USING BTREE,
   KEY `craft_entrytypes_fieldLayoutId_fk` (`fieldLayoutId`) USING BTREE,
+  KEY `entrytypes_dateDeleted_idx` (`dateDeleted`),
+  KEY `entrytypes_name_sectionId_idx` (`name`,`sectionId`),
+  KEY `entrytypes_handle_sectionId_idx` (`handle`,`sectionId`),
   CONSTRAINT `craft_entrytypes_fieldLayoutId_fk` FOREIGN KEY (`fieldLayoutId`) REFERENCES `fieldlayouts` (`id`) ON DELETE SET NULL,
   CONSTRAINT `craft_entrytypes_sectionId_fk` FOREIGN KEY (`sectionId`) REFERENCES `sections` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
@@ -974,15 +991,15 @@ CREATE TABLE `entrytypes` (
 -- Records of entrytypes
 -- ----------------------------
 BEGIN;
-INSERT INTO `entrytypes` VALUES (1, 1, 104, 'Homepage', 'homepage', 0, NULL, '{section.name|raw}', NULL, '2014-07-29 18:21:35', '2014-10-07 03:46:17', '1f72a359-0ce9-4415-82dc-88dc833073c3');
-INSERT INTO `entrytypes` VALUES (2, 2, 197, 'Article', 'article', 1, 'Title', NULL, NULL, '2014-07-29 18:21:35', '2016-06-03 17:38:06', 'eba60966-6218-4985-b901-fff1e5f97a49');
-INSERT INTO `entrytypes` VALUES (3, 3, 120, 'Work', 'work', 1, 'Title', NULL, NULL, '2014-09-16 19:33:06', '2015-02-04 13:48:53', '01416786-fb23-483e-9b86-d70279bf18a9');
-INSERT INTO `entrytypes` VALUES (4, 4, 191, 'About', 'about', 0, NULL, '{section.name|raw}', NULL, '2014-09-17 01:15:21', '2015-02-10 19:30:56', '6ef72b30-6af9-4545-81e9-b2c900cd08d4');
-INSERT INTO `entrytypes` VALUES (6, 2, 92, 'Link', 'link', 1, 'Title', NULL, NULL, '2014-10-03 02:11:55', '2014-10-03 02:15:38', 'b31c607b-b75a-4a78-b14b-d94bf8faa0c3');
-INSERT INTO `entrytypes` VALUES (7, 5, 127, 'Services', 'services', 1, 'Title', NULL, NULL, '2014-10-03 15:34:57', '2015-02-09 20:32:20', 'c09d31ed-3004-484c-89ef-e9d262f31f00');
-INSERT INTO `entrytypes` VALUES (8, 6, 130, 'Services Index', 'servicesIndex', 1, 'Title', NULL, NULL, '2015-02-09 17:35:42', '2015-02-09 20:34:21', '7f0d6d70-ed28-45f1-88c0-4463e96f110f');
-INSERT INTO `entrytypes` VALUES (9, 7, 132, 'Work Index', 'workIndex', 1, 'Title', NULL, NULL, '2015-02-09 20:37:32', '2015-02-09 20:38:02', '261c3cde-2d6c-4b23-b6cd-6def95992cf8');
-INSERT INTO `entrytypes` VALUES (10, 8, 190, 'Locations', 'locations', 1, 'Title', NULL, NULL, '2015-02-10 18:32:00', '2015-02-10 19:06:53', 'ae84d93c-8a94-4605-bf08-11ada918f964');
+INSERT INTO `entrytypes` VALUES (1, 1, 104, 'Homepage', 'homepage', 0, NULL, '{section.name|raw}', NULL, '2014-07-29 18:21:35', '2014-10-07 03:46:17', NULL, '1f72a359-0ce9-4415-82dc-88dc833073c3');
+INSERT INTO `entrytypes` VALUES (2, 2, 197, 'Article', 'article', 1, 'Title', NULL, NULL, '2014-07-29 18:21:35', '2016-06-03 17:38:06', NULL, 'eba60966-6218-4985-b901-fff1e5f97a49');
+INSERT INTO `entrytypes` VALUES (3, 3, 120, 'Work', 'work', 1, 'Title', NULL, NULL, '2014-09-16 19:33:06', '2015-02-04 13:48:53', NULL, '01416786-fb23-483e-9b86-d70279bf18a9');
+INSERT INTO `entrytypes` VALUES (4, 4, 191, 'About', 'about', 0, NULL, '{section.name|raw}', NULL, '2014-09-17 01:15:21', '2015-02-10 19:30:56', NULL, '6ef72b30-6af9-4545-81e9-b2c900cd08d4');
+INSERT INTO `entrytypes` VALUES (6, 2, 92, 'Link', 'link', 1, 'Title', NULL, NULL, '2014-10-03 02:11:55', '2014-10-03 02:15:38', NULL, 'b31c607b-b75a-4a78-b14b-d94bf8faa0c3');
+INSERT INTO `entrytypes` VALUES (7, 5, 127, 'Services', 'services', 1, 'Title', NULL, NULL, '2014-10-03 15:34:57', '2015-02-09 20:32:20', NULL, 'c09d31ed-3004-484c-89ef-e9d262f31f00');
+INSERT INTO `entrytypes` VALUES (8, 6, 130, 'Services Index', 'servicesIndex', 1, 'Title', NULL, NULL, '2015-02-09 17:35:42', '2015-02-09 20:34:21', NULL, '7f0d6d70-ed28-45f1-88c0-4463e96f110f');
+INSERT INTO `entrytypes` VALUES (9, 7, 132, 'Work Index', 'workIndex', 1, 'Title', NULL, NULL, '2015-02-09 20:37:32', '2015-02-09 20:38:02', NULL, '261c3cde-2d6c-4b23-b6cd-6def95992cf8');
+INSERT INTO `entrytypes` VALUES (10, 8, 190, 'Locations', 'locations', 1, 'Title', NULL, NULL, '2015-02-10 18:32:00', '2015-02-10 19:06:53', NULL, 'ae84d93c-8a94-4605-bf08-11ada918f964');
 COMMIT;
 
 -- ----------------------------
@@ -1346,39 +1363,41 @@ CREATE TABLE `fieldlayouts` (
   `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
+  `dateDeleted` datetime DEFAULT NULL,
   `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `craft_fieldlayouts_type_idx` (`type`) USING BTREE
+  KEY `craft_fieldlayouts_type_idx` (`type`) USING BTREE,
+  KEY `fieldlayouts_dateDeleted_idx` (`dateDeleted`)
 ) ENGINE=InnoDB AUTO_INCREMENT=199 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of fieldlayouts
 -- ----------------------------
 BEGIN;
-INSERT INTO `fieldlayouts` VALUES (92, 'craft\\elements\\Entry', '2014-10-03 02:15:38', '2014-10-03 02:15:38', 'b89ba12c-3f9b-4e8d-a190-073678e01175');
-INSERT INTO `fieldlayouts` VALUES (104, 'craft\\elements\\Entry', '2014-10-07 03:46:17', '2014-10-07 03:46:17', '31a1e163-6326-436a-9feb-53b372c086e3');
-INSERT INTO `fieldlayouts` VALUES (120, 'craft\\elements\\Entry', '2015-02-04 13:48:53', '2015-02-04 13:48:53', 'b3e92e12-b415-4a53-b67e-ade9f5fdf5dc');
-INSERT INTO `fieldlayouts` VALUES (121, 'craft\\elements\\MatrixBlock', '2015-02-04 14:17:43', '2015-02-04 14:17:43', '569a9c10-0657-4dbf-87c9-005afb784b54');
-INSERT INTO `fieldlayouts` VALUES (127, 'craft\\elements\\Entry', '2015-02-09 20:32:20', '2015-02-09 20:32:20', 'c06e2a9b-cc41-4ff9-ac5e-0d463b45e764');
-INSERT INTO `fieldlayouts` VALUES (130, 'craft\\elements\\Entry', '2015-02-09 20:34:21', '2015-02-09 20:34:21', '423d0eb9-9236-47c9-a98a-30fc46947c71');
-INSERT INTO `fieldlayouts` VALUES (132, 'craft\\elements\\Entry', '2015-02-09 20:38:02', '2015-02-09 20:38:02', 'e3a26917-97ba-4590-a8f3-bb08b01991f3');
-INSERT INTO `fieldlayouts` VALUES (179, 'craft\\elements\\MatrixBlock', '2015-02-10 17:39:37', '2015-02-10 17:39:37', '8d01ea64-38fa-43f7-be8a-43e4e460bfbd');
-INSERT INTO `fieldlayouts` VALUES (180, 'craft\\elements\\MatrixBlock', '2015-02-10 17:39:37', '2015-02-10 17:39:37', '0189a187-131f-46a8-b494-cd94c82d6aae');
-INSERT INTO `fieldlayouts` VALUES (181, 'craft\\elements\\MatrixBlock', '2015-02-10 17:39:37', '2015-02-10 17:39:37', '4ade673e-0245-430b-b932-c8ea86e36773');
-INSERT INTO `fieldlayouts` VALUES (182, 'craft\\elements\\MatrixBlock', '2015-02-10 17:39:37', '2015-02-10 17:39:37', '83f7b1de-657b-45bb-94e4-57d10973c78c');
-INSERT INTO `fieldlayouts` VALUES (183, 'craft\\elements\\MatrixBlock', '2015-02-10 17:39:37', '2015-02-10 17:39:37', '327aba6f-b81c-4179-9e58-208d34322ced');
-INSERT INTO `fieldlayouts` VALUES (184, 'craft\\elements\\MatrixBlock', '2015-02-10 17:39:37', '2015-02-10 17:39:37', '0964c39a-7c91-4ac2-a9e6-584a7c845d32');
-INSERT INTO `fieldlayouts` VALUES (185, 'craft\\elements\\MatrixBlock', '2015-02-10 17:39:37', '2015-02-10 17:39:37', 'b82a12f2-e814-4b74-9b32-bd1a90497a65');
-INSERT INTO `fieldlayouts` VALUES (187, 'craft\\elements\\GlobalSet', '2015-02-10 18:31:03', '2015-02-10 18:31:03', 'ba0a8885-3474-4231-9827-b6a6da467937');
-INSERT INTO `fieldlayouts` VALUES (189, 'craft\\elements\\MatrixBlock', '2015-02-10 19:04:16', '2015-02-10 19:04:16', '3c4c697e-cb6b-4704-bee5-9a2bae9da8f7');
-INSERT INTO `fieldlayouts` VALUES (190, 'craft\\elements\\Entry', '2015-02-10 19:06:53', '2015-02-10 19:06:53', 'a8b59f73-6bdb-4ac9-901b-3894585018fb');
-INSERT INTO `fieldlayouts` VALUES (191, 'craft\\elements\\Entry', '2015-02-10 19:30:56', '2015-02-10 19:30:56', '4cc2a302-6fe7-4f8b-b01b-517ed624cdf7');
-INSERT INTO `fieldlayouts` VALUES (193, 'craft\\elements\\MatrixBlock', '2015-02-10 21:47:22', '2015-02-10 21:47:22', '65bf26e9-50b3-4580-88a4-7a622077d8fb');
-INSERT INTO `fieldlayouts` VALUES (194, 'craft\\elements\\Asset', '2015-02-10 23:15:32', '2018-09-17 22:04:14', 'e4360fb7-190d-42c5-bde0-e01c03bd127c');
-INSERT INTO `fieldlayouts` VALUES (195, 'craft\\elements\\Asset', '2015-02-10 23:15:35', '2018-09-17 22:04:38', 'da21546b-da53-49c7-8821-2685c67df6b4');
-INSERT INTO `fieldlayouts` VALUES (196, 'craft\\elements\\Asset', '2015-02-10 23:15:38', '2018-09-17 22:05:31', '57038148-5c46-43e2-9c5b-9760e04375f2');
-INSERT INTO `fieldlayouts` VALUES (197, 'craft\\elements\\Entry', '2016-06-03 17:38:06', '2016-06-03 17:38:06', 'd45c4454-78e5-415c-8e08-700061feb9b4');
-INSERT INTO `fieldlayouts` VALUES (198, 'craft\\elements\\Asset', '2018-02-16 22:32:04', '2018-02-16 22:32:04', '2d9fb3d5-a903-4ef4-81f3-9eb72e49e728');
+INSERT INTO `fieldlayouts` VALUES (92, 'craft\\elements\\Entry', '2014-10-03 02:15:38', '2014-10-03 02:15:38', NULL, 'b89ba12c-3f9b-4e8d-a190-073678e01175');
+INSERT INTO `fieldlayouts` VALUES (104, 'craft\\elements\\Entry', '2014-10-07 03:46:17', '2014-10-07 03:46:17', NULL, '31a1e163-6326-436a-9feb-53b372c086e3');
+INSERT INTO `fieldlayouts` VALUES (120, 'craft\\elements\\Entry', '2015-02-04 13:48:53', '2015-02-04 13:48:53', NULL, 'b3e92e12-b415-4a53-b67e-ade9f5fdf5dc');
+INSERT INTO `fieldlayouts` VALUES (121, 'craft\\elements\\MatrixBlock', '2015-02-04 14:17:43', '2015-02-04 14:17:43', NULL, '569a9c10-0657-4dbf-87c9-005afb784b54');
+INSERT INTO `fieldlayouts` VALUES (127, 'craft\\elements\\Entry', '2015-02-09 20:32:20', '2015-02-09 20:32:20', NULL, 'c06e2a9b-cc41-4ff9-ac5e-0d463b45e764');
+INSERT INTO `fieldlayouts` VALUES (130, 'craft\\elements\\Entry', '2015-02-09 20:34:21', '2015-02-09 20:34:21', NULL, '423d0eb9-9236-47c9-a98a-30fc46947c71');
+INSERT INTO `fieldlayouts` VALUES (132, 'craft\\elements\\Entry', '2015-02-09 20:38:02', '2015-02-09 20:38:02', NULL, 'e3a26917-97ba-4590-a8f3-bb08b01991f3');
+INSERT INTO `fieldlayouts` VALUES (179, 'craft\\elements\\MatrixBlock', '2015-02-10 17:39:37', '2015-02-10 17:39:37', NULL, '8d01ea64-38fa-43f7-be8a-43e4e460bfbd');
+INSERT INTO `fieldlayouts` VALUES (180, 'craft\\elements\\MatrixBlock', '2015-02-10 17:39:37', '2015-02-10 17:39:37', NULL, '0189a187-131f-46a8-b494-cd94c82d6aae');
+INSERT INTO `fieldlayouts` VALUES (181, 'craft\\elements\\MatrixBlock', '2015-02-10 17:39:37', '2015-02-10 17:39:37', NULL, '4ade673e-0245-430b-b932-c8ea86e36773');
+INSERT INTO `fieldlayouts` VALUES (182, 'craft\\elements\\MatrixBlock', '2015-02-10 17:39:37', '2015-02-10 17:39:37', NULL, '83f7b1de-657b-45bb-94e4-57d10973c78c');
+INSERT INTO `fieldlayouts` VALUES (183, 'craft\\elements\\MatrixBlock', '2015-02-10 17:39:37', '2015-02-10 17:39:37', NULL, '327aba6f-b81c-4179-9e58-208d34322ced');
+INSERT INTO `fieldlayouts` VALUES (184, 'craft\\elements\\MatrixBlock', '2015-02-10 17:39:37', '2015-02-10 17:39:37', NULL, '0964c39a-7c91-4ac2-a9e6-584a7c845d32');
+INSERT INTO `fieldlayouts` VALUES (185, 'craft\\elements\\MatrixBlock', '2015-02-10 17:39:37', '2015-02-10 17:39:37', NULL, 'b82a12f2-e814-4b74-9b32-bd1a90497a65');
+INSERT INTO `fieldlayouts` VALUES (187, 'craft\\elements\\GlobalSet', '2015-02-10 18:31:03', '2015-02-10 18:31:03', NULL, 'ba0a8885-3474-4231-9827-b6a6da467937');
+INSERT INTO `fieldlayouts` VALUES (189, 'craft\\elements\\MatrixBlock', '2015-02-10 19:04:16', '2015-02-10 19:04:16', NULL, '3c4c697e-cb6b-4704-bee5-9a2bae9da8f7');
+INSERT INTO `fieldlayouts` VALUES (190, 'craft\\elements\\Entry', '2015-02-10 19:06:53', '2015-02-10 19:06:53', NULL, 'a8b59f73-6bdb-4ac9-901b-3894585018fb');
+INSERT INTO `fieldlayouts` VALUES (191, 'craft\\elements\\Entry', '2015-02-10 19:30:56', '2015-02-10 19:30:56', NULL, '4cc2a302-6fe7-4f8b-b01b-517ed624cdf7');
+INSERT INTO `fieldlayouts` VALUES (193, 'craft\\elements\\MatrixBlock', '2015-02-10 21:47:22', '2015-02-10 21:47:22', NULL, '65bf26e9-50b3-4580-88a4-7a622077d8fb');
+INSERT INTO `fieldlayouts` VALUES (194, 'craft\\elements\\Asset', '2015-02-10 23:15:32', '2018-09-17 22:04:14', NULL, 'e4360fb7-190d-42c5-bde0-e01c03bd127c');
+INSERT INTO `fieldlayouts` VALUES (195, 'craft\\elements\\Asset', '2015-02-10 23:15:35', '2018-09-17 22:04:38', NULL, 'da21546b-da53-49c7-8821-2685c67df6b4');
+INSERT INTO `fieldlayouts` VALUES (196, 'craft\\elements\\Asset', '2015-02-10 23:15:38', '2018-09-17 22:05:31', NULL, '57038148-5c46-43e2-9c5b-9760e04375f2');
+INSERT INTO `fieldlayouts` VALUES (197, 'craft\\elements\\Entry', '2016-06-03 17:38:06', '2016-06-03 17:38:06', NULL, 'd45c4454-78e5-415c-8e08-700061feb9b4');
+INSERT INTO `fieldlayouts` VALUES (198, 'craft\\elements\\Asset', '2018-02-16 22:32:04', '2018-02-16 22:32:04', NULL, '2d9fb3d5-a903-4ef4-81f3-9eb72e49e728');
 COMMIT;
 
 -- ----------------------------
@@ -1438,6 +1457,7 @@ CREATE TABLE `fields` (
   `handle` varchar(58) COLLATE utf8_unicode_ci NOT NULL,
   `context` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'global',
   `instructions` text COLLATE utf8_unicode_ci,
+  `searchable` tinyint(1) NOT NULL DEFAULT '1',
   `translationMethod` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'none',
   `translationKeyFormat` text COLLATE utf8_unicode_ci,
   `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -1456,49 +1476,49 @@ CREATE TABLE `fields` (
 -- Records of fields
 -- ----------------------------
 BEGIN;
-INSERT INTO `fields` VALUES (1, 1, 'Heading', 'heading', 'global', '', 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"}', '2014-07-29 18:21:34', '2018-02-16 22:04:30', '9bb293f8-c659-4035-b5d3-e30dbf8d1c5b');
-INSERT INTO `fields` VALUES (2, 1, 'Body', 'body', 'global', NULL, 'site', NULL, 'craft\\redactor\\Field', '{\"redactorConfig\":\"Standard.json\"}', '2014-07-29 18:21:34', '2014-07-29 18:21:34', '08f8ec90-f7ad-4d40-9880-3c96304f1e4e');
-INSERT INTO `fields` VALUES (4, 1, 'Article Body', 'articleBody', 'global', '', 'none', NULL, 'craft\\fields\\Matrix', '{\"maxBlocks\":null,\"localizeBlocks\":false,\"contentTable\":\"{{%matrixcontent_articlebody}}\"}', '2014-07-30 20:59:37', '2015-02-10 17:39:37', '82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e');
-INSERT INTO `fields` VALUES (5, NULL, 'Text', 'text', 'matrixBlockType:1', '', 'none', NULL, 'craft\\redactor\\Field', '{\"cleanupHtml\":\"1\",\"purifyHtml\":\"1\",\"columnType\":\"text\",\"redactorConfig\":\"Standard.json\"}', '2014-07-30 20:59:37', '2015-02-10 17:39:37', 'e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c');
-INSERT INTO `fields` VALUES (6, NULL, 'Pull Quote', 'pullQuote', 'matrixBlockType:2', '', 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"}', '2014-07-30 21:01:11', '2018-02-16 22:04:30', 'a8a6d843-bec1-4882-98ec-30cb74f5b16f');
-INSERT INTO `fields` VALUES (7, NULL, 'Position', 'position', 'matrixBlockType:2', '', 'none', NULL, 'craft\\fields\\Dropdown', '{\"options\":[{\"label\":\"Left\",\"value\":\"left\",\"default\":\"\"},{\"label\":\"Center\",\"value\":\"center\",\"default\":\"\"},{\"label\":\"Right\",\"value\":\"right\",\"default\":\"\"}]}', '2014-07-30 21:01:11', '2018-02-16 22:04:33', 'a88d73a8-c75f-4c72-aa70-a39dfbbff0fe');
-INSERT INTO `fields` VALUES (8, NULL, 'Heading', 'heading', 'matrixBlockType:3', '', 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"}', '2014-07-30 22:37:57', '2018-02-16 22:04:30', '631f668a-3658-48a4-89fd-8da5af0a60cc');
-INSERT INTO `fields` VALUES (9, NULL, 'Image', 'image', 'matrixBlockType:4', '', 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"folder:1\"],\"defaultUploadLocationSource\":\"folder:1\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"folder:1\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"1\",\"allowedKinds\":[\"image\"],\"limit\":\"1\",\"localizeRelations\":false}', '2014-07-30 22:37:57', '2018-02-16 22:04:30', '964a1aba-15ac-413f-86c1-03fbf37f30c7');
-INSERT INTO `fields` VALUES (10, NULL, 'Position', 'position', 'matrixBlockType:4', '', 'none', NULL, 'craft\\fields\\Dropdown', '{\"options\":[{\"label\":\"Left\",\"value\":\"left\",\"default\":\"\"},{\"label\":\"Center\",\"value\":\"center\",\"default\":\"\"},{\"label\":\"Right\",\"value\":\"right\",\"default\":\"\"},{\"label\":\"Full\",\"value\":\"full\",\"default\":\"\"}]}', '2014-07-30 22:37:57', '2018-02-16 22:04:33', 'f87a6243-5b7f-4456-9106-ccfb6e03b754');
-INSERT INTO `fields` VALUES (11, NULL, 'Quote', 'quote', 'matrixBlockType:5', '', 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"}', '2014-07-30 22:37:57', '2018-02-16 22:04:30', '35200549-df46-4092-994a-a8015c5810ba');
-INSERT INTO `fields` VALUES (12, NULL, 'Attribution', 'attribution', 'matrixBlockType:5', '', 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"}', '2014-07-30 22:37:57', '2018-02-16 22:04:30', '41e6fac7-12d7-45c9-ac83-0aa59793d872');
-INSERT INTO `fields` VALUES (13, NULL, 'Position', 'position', 'matrixBlockType:5', '', 'none', NULL, 'craft\\fields\\Dropdown', '{\"options\":[{\"label\":\"Center\",\"value\":\"center\",\"default\":\"\"},{\"label\":\"Full\",\"value\":\"full\",\"default\":\"\"}]}', '2014-07-30 22:37:57', '2018-02-16 22:04:33', 'a5b4b046-1178-45f9-b4cf-3e3bef86e067');
-INSERT INTO `fields` VALUES (14, 1, 'Subheading', 'subheading', 'global', '', 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"}', '2014-07-30 22:42:02', '2018-02-16 22:04:30', '674e53a6-d62c-4322-ae09-349765f1ef17');
-INSERT INTO `fields` VALUES (15, 1, 'Featured Image', 'featuredImage', 'global', '', 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"folder:1\"],\"defaultUploadLocationSource\":\"folder:1\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"folder:1\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"1\",\"allowedKinds\":[\"image\"],\"limit\":\"2\",\"localizeRelations\":false}', '2014-07-30 22:47:26', '2018-02-16 22:04:30', '0cbb9736-a84b-4e83-803c-5077f56394a9');
-INSERT INTO `fields` VALUES (37, 7, 'Address', 'address', 'global', '', 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"1\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"}', '2014-09-17 02:24:38', '2018-02-16 22:04:30', '422c7da9-d3e4-4d0a-8225-bbbc8264f029');
-INSERT INTO `fields` VALUES (41, 7, 'Email', 'email', 'global', '', 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"}', '2014-09-17 02:25:59', '2018-02-16 22:04:30', 'b75266c9-d8d2-42ae-9024-0fecb8bdc994');
-INSERT INTO `fields` VALUES (44, NULL, 'Caption', 'caption', 'matrixBlockType:4', '', 'none', NULL, 'craft\\redactor\\Field', '{\"cleanupHtml\":\"1\",\"purifyHtml\":\"1\",\"columnType\":\"text\",\"redactorConfig\":\"Simple.json\"}', '2014-09-25 13:33:39', '2015-02-10 17:39:37', '7ca32393-f78c-4de0-9f8f-52b64e09584f');
-INSERT INTO `fields` VALUES (45, 1, 'Background Color', 'backgroundColor', 'global', 'Hex value for alternate background color.', 'none', NULL, 'craft\\fields\\Color', NULL, '2014-09-28 16:42:04', '2015-02-02 04:29:55', 'cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea');
-INSERT INTO `fields` VALUES (46, 1, 'Link URL', 'linkUrl', 'global', '', 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"e.g. http://example.com\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"}', '2014-10-03 02:13:50', '2018-02-16 22:04:30', '4ca9d3b8-ff02-403a-9010-45763fcdea9f');
-INSERT INTO `fields` VALUES (47, 1, 'Short Description', 'shortDescription', 'global', 'Short description for use in index regions.', 'none', NULL, 'craft\\redactor\\Field', '{\"cleanupHtml\":\"1\",\"purifyHtml\":\"1\",\"columnType\":\"text\",\"redactorConfig\":\"Simple.json\"}', '2014-10-03 02:15:14', '2015-02-10 23:43:38', 'aef80333-1412-4130-bb84-ac3bdbbcbbe2');
-INSERT INTO `fields` VALUES (48, 1, 'Index Heading', 'indexHeading', 'global', 'Page heading for services structure index page.', 'none', NULL, 'craft\\redactor\\Field', '{\"cleanupHtml\":\"\",\"purifyHtml\":\"1\",\"columnType\":\"text\",\"redactorConfig\":\"\"}', '2014-10-03 15:40:45', '2015-02-10 19:35:00', '67ff16f0-04e2-492b-b999-a7d364331d80');
-INSERT INTO `fields` VALUES (49, 1, 'Featured Thumb', 'featuredThumb', 'global', 'Thumb image for use on home page or archives.', 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":\"*\",\"defaultUploadLocationSource\":\"folder:1\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"folder:1\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"1\",\"localizeRelations\":false}', '2014-10-05 03:01:09', '2018-02-16 22:04:30', '0305c984-3934-4c7a-9de9-b0162c5b0112');
-INSERT INTO `fields` VALUES (50, 4, 'Hero Image', 'heroImage', 'global', 'Choose the big homepage hero image. The image should be at least 1450×916 for best results.', 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"folder:1\"],\"defaultUploadLocationSource\":\"folder:1\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"folder:1\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"1\",\"localizeRelations\":false}', '2014-10-06 01:48:43', '2018-02-16 22:04:30', 'a2129d62-1d81-4c2f-a92d-81c03ed120dc');
-INSERT INTO `fields` VALUES (51, 4, 'Testimonials', 'testimonials', 'global', '', 'none', NULL, 'craft\\fields\\Matrix', '{\"maxBlocks\":\"3\",\"localizeBlocks\":false,\"contentTable\":\"{{%matrixcontent_testimonials}}\"}', '2014-10-07 03:36:07', '2015-02-04 14:17:43', '8823155c-e84a-4a38-af30-2cb88b705e7b');
-INSERT INTO `fields` VALUES (52, NULL, 'Quote', 'quote', 'matrixBlockType:6', '', 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"}', '2014-10-07 03:36:07', '2018-02-16 22:04:30', '39b59166-9d91-4d17-baf9-229aca6174c2');
-INSERT INTO `fields` VALUES (53, NULL, 'Cite', 'cite', 'matrixBlockType:6', '', 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"}', '2014-10-07 03:36:07', '2018-02-16 22:04:30', '4ed4bf91-bcf9-45a9-84f7-d5d768103a09');
-INSERT INTO `fields` VALUES (54, NULL, 'Photo', 'photo', 'matrixBlockType:6', '', 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"folder:1\"],\"defaultUploadLocationSource\":\"folder:1\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"folder:1\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"1\",\"localizeRelations\":false}', '2014-10-07 03:36:07', '2018-02-16 22:04:30', 'a418bde2-f4cc-4ed2-a358-44362a0cb3a9');
-INSERT INTO `fields` VALUES (55, 4, 'Client Logos', 'clientLogos', 'global', '', 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"folder:2\"],\"defaultUploadLocationSource\":\"folder:2\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"folder:1\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"\",\"localizeRelations\":false}', '2014-10-07 03:40:02', '2018-02-16 22:04:30', '950b3c0e-9780-4487-a881-23d96d6075d5');
-INSERT INTO `fields` VALUES (58, 3, 'Service Icon', 'serviceIcon', 'global', '', 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"folder:3\"],\"defaultUploadLocationSource\":\"folder:1\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"folder:1\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"1\",\"localizeRelations\":false}', '2014-12-03 20:01:25', '2018-02-16 22:04:30', 'd96355a7-1353-4097-bf08-3bd5c44821f8');
-INSERT INTO `fields` VALUES (59, 3, 'Service Body', 'serviceBody', 'global', '', 'none', NULL, 'craft\\fields\\Matrix', '{\"maxBlocks\":null,\"localizeBlocks\":false,\"contentTable\":\"{{%matrixcontent_servicebody}}\"}', '2014-12-11 01:59:32', '2015-02-10 21:47:22', '9bf9e642-2881-44b4-99ff-2cbed3ccc2d7');
-INSERT INTO `fields` VALUES (60, NULL, 'Heading', 'heading', 'matrixBlockType:8', '', 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"}', '2014-12-11 01:59:32', '2018-02-16 22:04:30', '3285a611-4363-43f2-82b5-97e2d253cab3');
-INSERT INTO `fields` VALUES (61, NULL, 'Text', 'text', 'matrixBlockType:8', '', 'none', NULL, 'craft\\redactor\\Field', '{\"cleanupHtml\":\"1\",\"purifyHtml\":\"1\",\"columnType\":\"text\",\"redactorConfig\":\"\"}', '2014-12-11 01:59:32', '2015-02-10 21:47:22', 'c9ccf068-4ace-4b21-9356-68f3faa96cf3');
-INSERT INTO `fields` VALUES (62, NULL, 'Image', 'image', 'matrixBlockType:8', '', 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"folder:1\"],\"defaultUploadLocationSource\":\"folder:1\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"folder:1\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"1\",\"localizeRelations\":false}', '2014-12-11 01:59:32', '2018-02-16 22:04:30', '9ce53ce9-939b-4760-97f4-545ef2c388eb');
-INSERT INTO `fields` VALUES (63, 5, 'Services Performed', 'servicesPerformed', 'global', '', 'none', NULL, 'craft\\fields\\Entries', '{\"sources\":[\"section:5\"],\"limit\":\"\",\"localizeRelations\":false}', '2015-02-04 13:48:32', '2015-02-04 13:53:08', 'a988d6b4-6983-48e6-b08e-8fd72e31e483');
-INSERT INTO `fields` VALUES (64, 6, 'Copyright Notice', 'copyrightNotice', 'global', '', 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"}', '2015-02-04 15:21:00', '2018-02-16 22:04:30', '5095500e-4962-429c-9b9c-7a4d0d4f930c');
-INSERT INTO `fields` VALUES (65, 6, 'Contact Us Label', 'contactUsLabel', 'global', '', 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"}', '2015-02-04 15:22:02', '2018-02-16 22:04:30', 'fcf41a5f-68b5-42dd-8ca1-cc457eb749f0');
-INSERT INTO `fields` VALUES (67, NULL, 'Section Heading', 'sectionHeading', 'matrixBlockType:9', '', 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"}', '2015-02-09 21:38:01', '2018-02-16 22:04:30', '8cd6b011-5271-484d-85d9-6a6b731137e9');
-INSERT INTO `fields` VALUES (69, NULL, 'Images', 'images', 'matrixBlockType:10', '', 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"folder:1\"],\"defaultUploadLocationSource\":\"folder:1\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"folder:1\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"3\",\"localizeRelations\":false}', '2015-02-10 01:21:43', '2018-02-16 22:04:30', 'ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7');
-INSERT INTO `fields` VALUES (70, NULL, 'Position', 'position', 'matrixBlockType:1', '', 'none', NULL, 'craft\\fields\\Dropdown', '{\"options\":[{\"label\":\"Left\",\"value\":\"left\",\"default\":\"\"},{\"label\":\"Center\",\"value\":\"center\",\"default\":\"\"},{\"label\":\"Right\",\"value\":\"right\",\"default\":\"\"}]}', '2015-02-10 01:28:28', '2018-02-16 22:04:33', 'cc6a4697-6d1c-4342-b9de-bce13295a885');
-INSERT INTO `fields` VALUES (72, 7, 'Contact Methods', 'contactMethods', 'global', '', 'none', NULL, 'craft\\fields\\Matrix', '{\"maxBlocks\":null,\"localizeBlocks\":false,\"contentTable\":\"{{%matrixcontent_contactmethods}}\"}', '2015-02-10 19:04:15', '2015-02-10 19:04:15', 'b01498fe-6db2-4b1d-84d2-8cd0cb62f449');
-INSERT INTO `fields` VALUES (73, NULL, 'Label', 'label', 'matrixBlockType:11', '', 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"}', '2015-02-10 19:04:16', '2018-02-16 22:04:30', 'aad31ad0-0405-41b5-aff0-4ec567b557a0');
-INSERT INTO `fields` VALUES (74, NULL, 'Value', 'value', 'matrixBlockType:11', '', 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"}', '2015-02-10 19:04:16', '2018-02-16 22:04:30', '0275193a-3c51-46a3-afd0-49e55a93bfd3');
-INSERT INTO `fields` VALUES (75, 1, 'Featured?', 'featuredEntry', 'global', 'Should this entry be featured on the listing page?', 'none', NULL, 'craft\\fields\\Lightswitch', '{\"default\":\"\"}', '2016-06-03 17:36:43', '2016-06-03 17:44:08', 'a171d498-9024-4855-9a6c-b3b96765ab7c');
+INSERT INTO `fields` VALUES (1, 1, 'Heading', 'heading', 'global', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"}', '2014-07-29 18:21:34', '2018-02-16 22:04:30', '9bb293f8-c659-4035-b5d3-e30dbf8d1c5b');
+INSERT INTO `fields` VALUES (2, 1, 'Body', 'body', 'global', NULL, 1, 'site', NULL, 'craft\\redactor\\Field', '{\"redactorConfig\":\"Standard.json\"}', '2014-07-29 18:21:34', '2014-07-29 18:21:34', '08f8ec90-f7ad-4d40-9880-3c96304f1e4e');
+INSERT INTO `fields` VALUES (4, 1, 'Article Body', 'articleBody', 'global', '', 1, 'none', NULL, 'craft\\fields\\Matrix', '{\"maxBlocks\":null,\"localizeBlocks\":false,\"contentTable\":\"{{%matrixcontent_articlebody}}\"}', '2014-07-30 20:59:37', '2015-02-10 17:39:37', '82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e');
+INSERT INTO `fields` VALUES (5, NULL, 'Text', 'text', 'matrixBlockType:070be8db-f9b0-4605-98ae-e9b54b1af3f6', '', 1, 'none', NULL, 'craft\\redactor\\Field', '{\"cleanupHtml\":\"1\",\"purifyHtml\":\"1\",\"columnType\":\"text\",\"redactorConfig\":\"Standard.json\"}', '2014-07-30 20:59:37', '2015-02-10 17:39:37', 'e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c');
+INSERT INTO `fields` VALUES (6, NULL, 'Pull Quote', 'pullQuote', 'matrixBlockType:daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"}', '2014-07-30 21:01:11', '2018-02-16 22:04:30', 'a8a6d843-bec1-4882-98ec-30cb74f5b16f');
+INSERT INTO `fields` VALUES (7, NULL, 'Position', 'position', 'matrixBlockType:daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890', '', 1, 'none', NULL, 'craft\\fields\\Dropdown', '{\"options\":[{\"label\":\"Left\",\"value\":\"left\",\"default\":\"\"},{\"label\":\"Center\",\"value\":\"center\",\"default\":\"\"},{\"label\":\"Right\",\"value\":\"right\",\"default\":\"\"}]}', '2014-07-30 21:01:11', '2019-02-17 16:23:57', 'a88d73a8-c75f-4c72-aa70-a39dfbbff0fe');
+INSERT INTO `fields` VALUES (8, NULL, 'Heading', 'heading', 'matrixBlockType:1d5e20da-bc96-4a33-b045-8d1fa5870e74', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"}', '2014-07-30 22:37:57', '2019-02-17 16:23:57', '631f668a-3658-48a4-89fd-8da5af0a60cc');
+INSERT INTO `fields` VALUES (9, NULL, 'Image', 'image', 'matrixBlockType:9123201b-837c-4269-9d7c-d5e11bba1e2b', '', 1, 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"folder:20095f95-422a-46cc-a5d0-3bc6b0a4da20\"],\"defaultUploadLocationSource\":\"folder:20095f95-422a-46cc-a5d0-3bc6b0a4da20\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"folder:20095f95-422a-46cc-a5d0-3bc6b0a4da20\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"1\",\"allowedKinds\":[\"image\"],\"limit\":\"1\",\"localizeRelations\":false}', '2014-07-30 22:37:57', '2018-02-16 22:04:30', '964a1aba-15ac-413f-86c1-03fbf37f30c7');
+INSERT INTO `fields` VALUES (10, NULL, 'Position', 'position', 'matrixBlockType:9123201b-837c-4269-9d7c-d5e11bba1e2b', '', 1, 'none', NULL, 'craft\\fields\\Dropdown', '{\"options\":[{\"label\":\"Left\",\"value\":\"left\",\"default\":\"\"},{\"label\":\"Center\",\"value\":\"center\",\"default\":\"\"},{\"label\":\"Right\",\"value\":\"right\",\"default\":\"\"},{\"label\":\"Full\",\"value\":\"full\",\"default\":\"\"}]}', '2014-07-30 22:37:57', '2018-02-16 22:04:33', 'f87a6243-5b7f-4456-9106-ccfb6e03b754');
+INSERT INTO `fields` VALUES (11, NULL, 'Quote', 'quote', 'matrixBlockType:97ff3c80-2398-4ca5-9d03-c3b8727c6eb2', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"}', '2014-07-30 22:37:57', '2018-02-16 22:04:30', '35200549-df46-4092-994a-a8015c5810ba');
+INSERT INTO `fields` VALUES (12, NULL, 'Attribution', 'attribution', 'matrixBlockType:97ff3c80-2398-4ca5-9d03-c3b8727c6eb2', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"}', '2014-07-30 22:37:57', '2018-02-16 22:04:30', '41e6fac7-12d7-45c9-ac83-0aa59793d872');
+INSERT INTO `fields` VALUES (13, NULL, 'Position', 'position', 'matrixBlockType:97ff3c80-2398-4ca5-9d03-c3b8727c6eb2', '', 1, 'none', NULL, 'craft\\fields\\Dropdown', '{\"options\":[{\"label\":\"Center\",\"value\":\"center\",\"default\":\"\"},{\"label\":\"Full\",\"value\":\"full\",\"default\":\"\"}]}', '2014-07-30 22:37:57', '2019-02-17 16:23:57', 'a5b4b046-1178-45f9-b4cf-3e3bef86e067');
+INSERT INTO `fields` VALUES (14, 1, 'Subheading', 'subheading', 'global', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"}', '2014-07-30 22:42:02', '2018-02-16 22:04:30', '674e53a6-d62c-4322-ae09-349765f1ef17');
+INSERT INTO `fields` VALUES (15, 1, 'Featured Image', 'featuredImage', 'global', '', 1, 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"],\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"1\",\"allowedKinds\":[\"image\"],\"limit\":\"2\",\"localizeRelations\":false}', '2014-07-30 22:47:26', '2019-02-17 16:23:57', '0cbb9736-a84b-4e83-803c-5077f56394a9');
+INSERT INTO `fields` VALUES (37, 7, 'Address', 'address', 'global', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"1\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"}', '2014-09-17 02:24:38', '2018-02-16 22:04:30', '422c7da9-d3e4-4d0a-8225-bbbc8264f029');
+INSERT INTO `fields` VALUES (41, 7, 'Email', 'email', 'global', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"}', '2014-09-17 02:25:59', '2018-02-16 22:04:30', 'b75266c9-d8d2-42ae-9024-0fecb8bdc994');
+INSERT INTO `fields` VALUES (44, NULL, 'Caption', 'caption', 'matrixBlockType:9123201b-837c-4269-9d7c-d5e11bba1e2b', '', 1, 'none', NULL, 'craft\\redactor\\Field', '{\"cleanupHtml\":\"1\",\"purifyHtml\":\"1\",\"columnType\":\"text\",\"redactorConfig\":\"Simple.json\"}', '2014-09-25 13:33:39', '2019-02-17 16:23:57', '7ca32393-f78c-4de0-9f8f-52b64e09584f');
+INSERT INTO `fields` VALUES (45, 1, 'Background Color', 'backgroundColor', 'global', 'Hex value for alternate background color.', 1, 'none', NULL, 'craft\\fields\\Color', '[]', '2014-09-28 16:42:04', '2015-02-02 04:29:55', 'cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea');
+INSERT INTO `fields` VALUES (46, 1, 'Link URL', 'linkUrl', 'global', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"e.g. http://example.com\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"}', '2014-10-03 02:13:50', '2018-02-16 22:04:30', '4ca9d3b8-ff02-403a-9010-45763fcdea9f');
+INSERT INTO `fields` VALUES (47, 1, 'Short Description', 'shortDescription', 'global', 'Short description for use in index regions.', 1, 'none', NULL, 'craft\\redactor\\Field', '{\"cleanupHtml\":\"1\",\"purifyHtml\":\"1\",\"columnType\":\"text\",\"redactorConfig\":\"Simple.json\"}', '2014-10-03 02:15:14', '2015-02-10 23:43:38', 'aef80333-1412-4130-bb84-ac3bdbbcbbe2');
+INSERT INTO `fields` VALUES (48, 1, 'Index Heading', 'indexHeading', 'global', 'Page heading for services structure index page.', 1, 'none', NULL, 'craft\\redactor\\Field', '{\"cleanupHtml\":\"\",\"purifyHtml\":\"1\",\"columnType\":\"text\",\"redactorConfig\":\"\"}', '2014-10-03 15:40:45', '2015-02-10 19:35:00', '67ff16f0-04e2-492b-b999-a7d364331d80');
+INSERT INTO `fields` VALUES (49, 1, 'Featured Thumb', 'featuredThumb', 'global', 'Thumb image for use on home page or archives.', 1, 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":\"*\",\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"1\",\"localizeRelations\":false}', '2014-10-05 03:01:09', '2019-02-17 16:23:57', '0305c984-3934-4c7a-9de9-b0162c5b0112');
+INSERT INTO `fields` VALUES (50, 4, 'Hero Image', 'heroImage', 'global', 'Choose the big homepage hero image. The image should be at least 1450×916 for best results.', 1, 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"],\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"1\",\"localizeRelations\":false}', '2014-10-06 01:48:43', '2019-02-17 16:23:57', 'a2129d62-1d81-4c2f-a92d-81c03ed120dc');
+INSERT INTO `fields` VALUES (51, 4, 'Testimonials', 'testimonials', 'global', '', 1, 'none', NULL, 'craft\\fields\\Matrix', '{\"maxBlocks\":\"3\",\"localizeBlocks\":false,\"contentTable\":\"{{%matrixcontent_testimonials}}\"}', '2014-10-07 03:36:07', '2015-02-04 14:17:43', '8823155c-e84a-4a38-af30-2cb88b705e7b');
+INSERT INTO `fields` VALUES (52, NULL, 'Quote', 'quote', 'matrixBlockType:b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"}', '2014-10-07 03:36:07', '2018-02-16 22:04:30', '39b59166-9d91-4d17-baf9-229aca6174c2');
+INSERT INTO `fields` VALUES (53, NULL, 'Cite', 'cite', 'matrixBlockType:b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"}', '2014-10-07 03:36:07', '2018-02-16 22:04:30', '4ed4bf91-bcf9-45a9-84f7-d5d768103a09');
+INSERT INTO `fields` VALUES (54, NULL, 'Photo', 'photo', 'matrixBlockType:b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3', '', 1, 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"],\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"1\",\"localizeRelations\":false}', '2014-10-07 03:36:07', '2019-02-17 16:23:57', 'a418bde2-f4cc-4ed2-a358-44362a0cb3a9');
+INSERT INTO `fields` VALUES (55, 4, 'Client Logos', 'clientLogos', 'global', '', 1, 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"volume:7d6a9bef-727c-4a0c-9791-4f423956de69\"],\"defaultUploadLocationSource\":\"volume:7d6a9bef-727c-4a0c-9791-4f423956de69\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"\",\"localizeRelations\":false}', '2014-10-07 03:40:02', '2019-02-17 16:23:57', '950b3c0e-9780-4487-a881-23d96d6075d5');
+INSERT INTO `fields` VALUES (58, 3, 'Service Icon', 'serviceIcon', 'global', '', 1, 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"volume:3fc34ff2-8da7-4a35-8147-f0a2e01392b9\"],\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"1\",\"localizeRelations\":false}', '2014-12-03 20:01:25', '2019-02-17 16:23:57', 'd96355a7-1353-4097-bf08-3bd5c44821f8');
+INSERT INTO `fields` VALUES (59, 3, 'Service Body', 'serviceBody', 'global', '', 1, 'none', NULL, 'craft\\fields\\Matrix', '{\"maxBlocks\":null,\"localizeBlocks\":false,\"contentTable\":\"{{%matrixcontent_servicebody}}\"}', '2014-12-11 01:59:32', '2015-02-10 21:47:22', '9bf9e642-2881-44b4-99ff-2cbed3ccc2d7');
+INSERT INTO `fields` VALUES (60, NULL, 'Heading', 'heading', 'matrixBlockType:aa39e3a4-2d2c-4ed2-a9b5-74122ece5947', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"}', '2014-12-11 01:59:32', '2018-02-16 22:04:30', '3285a611-4363-43f2-82b5-97e2d253cab3');
+INSERT INTO `fields` VALUES (61, NULL, 'Text', 'text', 'matrixBlockType:aa39e3a4-2d2c-4ed2-a9b5-74122ece5947', '', 1, 'none', NULL, 'craft\\redactor\\Field', '{\"cleanupHtml\":\"1\",\"purifyHtml\":\"1\",\"columnType\":\"text\",\"redactorConfig\":\"\"}', '2014-12-11 01:59:32', '2015-02-10 21:47:22', 'c9ccf068-4ace-4b21-9356-68f3faa96cf3');
+INSERT INTO `fields` VALUES (62, NULL, 'Image', 'image', 'matrixBlockType:aa39e3a4-2d2c-4ed2-a9b5-74122ece5947', '', 1, 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"],\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"1\",\"localizeRelations\":false}', '2014-12-11 01:59:32', '2019-02-17 16:23:57', '9ce53ce9-939b-4760-97f4-545ef2c388eb');
+INSERT INTO `fields` VALUES (63, 5, 'Services Performed', 'servicesPerformed', 'global', '', 1, 'none', NULL, 'craft\\fields\\Entries', '{\"sources\":[\"section:f6b0cb16-5df8-4b57-9856-c9c2d6b9699e\"],\"limit\":\"\",\"localizeRelations\":false}', '2015-02-04 13:48:32', '2015-02-04 13:53:08', 'a988d6b4-6983-48e6-b08e-8fd72e31e483');
+INSERT INTO `fields` VALUES (64, 6, 'Copyright Notice', 'copyrightNotice', 'global', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"}', '2015-02-04 15:21:00', '2018-02-16 22:04:30', '5095500e-4962-429c-9b9c-7a4d0d4f930c');
+INSERT INTO `fields` VALUES (65, 6, 'Contact Us Label', 'contactUsLabel', 'global', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"}', '2015-02-04 15:22:02', '2018-02-16 22:04:30', 'fcf41a5f-68b5-42dd-8ca1-cc457eb749f0');
+INSERT INTO `fields` VALUES (67, NULL, 'Section Heading', 'sectionHeading', 'matrixBlockType:e1c6c95e-a19b-4cd8-9a83-935e91f862c0', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"}', '2015-02-09 21:38:01', '2019-02-17 16:23:57', '8cd6b011-5271-484d-85d9-6a6b731137e9');
+INSERT INTO `fields` VALUES (69, NULL, 'Images', 'images', 'matrixBlockType:0f3ede99-8b78-4042-85c9-422f57f5b01b', '', 1, 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"],\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"3\",\"localizeRelations\":false}', '2015-02-10 01:21:43', '2019-02-17 16:23:57', 'ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7');
+INSERT INTO `fields` VALUES (70, NULL, 'Position', 'position', 'matrixBlockType:070be8db-f9b0-4605-98ae-e9b54b1af3f6', '', 1, 'none', NULL, 'craft\\fields\\Dropdown', '{\"options\":[{\"label\":\"Left\",\"value\":\"left\",\"default\":\"\"},{\"label\":\"Center\",\"value\":\"center\",\"default\":\"\"},{\"label\":\"Right\",\"value\":\"right\",\"default\":\"\"}]}', '2015-02-10 01:28:28', '2019-02-17 16:23:57', 'cc6a4697-6d1c-4342-b9de-bce13295a885');
+INSERT INTO `fields` VALUES (72, 7, 'Contact Methods', 'contactMethods', 'global', '', 1, 'none', NULL, 'craft\\fields\\Matrix', '{\"maxBlocks\":null,\"localizeBlocks\":false,\"contentTable\":\"{{%matrixcontent_contactmethods}}\"}', '2015-02-10 19:04:15', '2015-02-10 19:04:15', 'b01498fe-6db2-4b1d-84d2-8cd0cb62f449');
+INSERT INTO `fields` VALUES (73, NULL, 'Label', 'label', 'matrixBlockType:ecd6fdce-8d11-4aa6-a167-e731757515c6', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"}', '2015-02-10 19:04:16', '2018-02-16 22:04:30', 'aad31ad0-0405-41b5-aff0-4ec567b557a0');
+INSERT INTO `fields` VALUES (74, NULL, 'Value', 'value', 'matrixBlockType:ecd6fdce-8d11-4aa6-a167-e731757515c6', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"}', '2015-02-10 19:04:16', '2019-02-17 16:23:57', '0275193a-3c51-46a3-afd0-49e55a93bfd3');
+INSERT INTO `fields` VALUES (75, 1, 'Featured?', 'featuredEntry', 'global', 'Should this entry be featured on the listing page?', 1, 'none', NULL, 'craft\\fields\\Lightswitch', '{\"default\":\"\"}', '2016-06-03 17:36:43', '2016-06-03 17:44:08', 'a171d498-9024-4855-9a6c-b3b96765ab7c');
 COMMIT;
 
 -- ----------------------------
@@ -1536,11 +1556,9 @@ CREATE TABLE `info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `version` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `schemaVersion` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-  `edition` tinyint(3) unsigned NOT NULL,
-  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `timezone` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `on` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `maintenance` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `config` mediumtext COLLATE utf8_unicode_ci,
+  `configMap` mediumtext COLLATE utf8_unicode_ci,
   `fieldVersion` char(12) COLLATE utf8_unicode_ci DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
@@ -1552,7 +1570,7 @@ CREATE TABLE `info` (
 -- Records of info
 -- ----------------------------
 BEGIN;
-INSERT INTO `info` VALUES (1, '3.0.37', '3.0.94', 1, 'Happy Lager', 'UTC', 1, 0, '1', '2014-07-29 18:21:29', '2019-01-03 23:53:10', '3ebb42f0-5296-4d41-b31e-4dc4882dd453');
+INSERT INTO `info` VALUES (1, '3.1.12', '3.1.25', 0, 'a:17:{s:12:\"dateModified\";i:1550420631;s:10:\"siteGroups\";a:1:{s:36:\"268c3c49-6715-4b6a-a1b9-f27313adabd1\";a:1:{s:4:\"name\";s:16:\"Happy Lager (en)\";}}s:5:\"sites\";a:1:{s:36:\"06f4e499-3cdc-4d64-aec2-9a7d3a143c75\";a:8:{s:4:\"name\";s:16:\"Happy Lager (en)\";s:6:\"handle\";s:2:\"en\";s:8:\"language\";s:2:\"en\";s:7:\"hasUrls\";s:1:\"1\";s:7:\"baseUrl\";s:0:\"\";s:9:\"sortOrder\";s:1:\"1\";s:7:\"primary\";s:1:\"1\";s:9:\"siteGroup\";s:36:\"268c3c49-6715-4b6a-a1b9-f27313adabd1\";}}s:8:\"sections\";a:8:{s:36:\"f6b0cb16-5df8-4b57-9856-c9c2d6b9699e\";a:8:{s:4:\"name\";s:8:\"Services\";s:6:\"handle\";s:8:\"services\";s:4:\"type\";s:9:\"structure\";s:16:\"enableVersioning\";s:1:\"1\";s:16:\"propagateEntries\";s:1:\"1\";s:9:\"structure\";a:2:{s:3:\"uid\";s:36:\"aa3fe533-8552-43f9-a172-69982d59561d\";s:9:\"maxLevels\";s:1:\"1\";}s:10:\"entryTypes\";a:1:{s:36:\"c09d31ed-3004-484c-89ef-e9d262f31f00\";a:7:{s:4:\"name\";s:8:\"Services\";s:6:\"handle\";s:8:\"services\";s:13:\"hasTitleField\";s:1:\"1\";s:10:\"titleLabel\";s:5:\"Title\";s:11:\"titleFormat\";N;s:9:\"sortOrder\";N;s:12:\"fieldLayouts\";a:1:{s:36:\"c06e2a9b-cc41-4ff9-ac5e-0d463b45e764\";a:1:{s:4:\"tabs\";a:1:{i:0;a:3:{s:4:\"name\";s:7:\"Content\";s:9:\"sortOrder\";s:1:\"1\";s:6:\"fields\";a:5:{s:36:\"0cbb9736-a84b-4e83-803c-5077f56394a9\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"1\";}s:36:\"d96355a7-1353-4097-bf08-3bd5c44821f8\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"2\";}s:36:\"aef80333-1412-4130-bb84-ac3bdbbcbbe2\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"3\";}s:36:\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"4\";}s:36:\"9bf9e642-2881-44b4-99ff-2cbed3ccc2d7\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"5\";}}}}}}}}s:12:\"siteSettings\";a:1:{s:36:\"06f4e499-3cdc-4d64-aec2-9a7d3a143c75\";a:4:{s:16:\"enabledByDefault\";s:1:\"1\";s:7:\"hasUrls\";s:1:\"1\";s:9:\"uriFormat\";s:15:\"services/{slug}\";s:8:\"template\";s:15:\"services/_entry\";}}}s:36:\"45d3a977-dc34-4bff-a39f-425e100a5e6f\";a:8:{s:4:\"name\";s:9:\"Locations\";s:6:\"handle\";s:9:\"locations\";s:4:\"type\";s:9:\"structure\";s:16:\"enableVersioning\";s:1:\"1\";s:16:\"propagateEntries\";s:1:\"1\";s:9:\"structure\";a:2:{s:3:\"uid\";s:36:\"3c13606e-11f9-4cbd-bbae-c29608750caf\";s:9:\"maxLevels\";s:1:\"1\";}s:10:\"entryTypes\";a:1:{s:36:\"ae84d93c-8a94-4605-bf08-11ada918f964\";a:7:{s:4:\"name\";s:9:\"Locations\";s:6:\"handle\";s:9:\"locations\";s:13:\"hasTitleField\";s:1:\"1\";s:10:\"titleLabel\";s:5:\"Title\";s:11:\"titleFormat\";N;s:9:\"sortOrder\";N;s:12:\"fieldLayouts\";a:1:{s:36:\"a8b59f73-6bdb-4ac9-901b-3894585018fb\";a:1:{s:4:\"tabs\";a:1:{i:0;a:3:{s:4:\"name\";s:7:\"Content\";s:9:\"sortOrder\";s:1:\"1\";s:6:\"fields\";a:4:{s:36:\"0cbb9736-a84b-4e83-803c-5077f56394a9\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"1\";}s:36:\"422c7da9-d3e4-4d0a-8225-bbbc8264f029\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"2\";}s:36:\"b01498fe-6db2-4b1d-84d2-8cd0cb62f449\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"3\";}s:36:\"b75266c9-d8d2-42ae-9024-0fecb8bdc994\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"4\";}}}}}}}}s:12:\"siteSettings\";a:1:{s:36:\"06f4e499-3cdc-4d64-aec2-9a7d3a143c75\";a:4:{s:16:\"enabledByDefault\";s:1:\"1\";s:7:\"hasUrls\";s:1:\"0\";s:9:\"uriFormat\";N;s:8:\"template\";N;}}}s:36:\"735318f3-e53c-4ce1-8dad-4c7a5c7c5bee\";a:7:{s:4:\"name\";s:8:\"Homepage\";s:6:\"handle\";s:8:\"homepage\";s:4:\"type\";s:6:\"single\";s:16:\"enableVersioning\";s:1:\"1\";s:16:\"propagateEntries\";s:1:\"1\";s:10:\"entryTypes\";a:1:{s:36:\"1f72a359-0ce9-4415-82dc-88dc833073c3\";a:7:{s:4:\"name\";s:8:\"Homepage\";s:6:\"handle\";s:8:\"homepage\";s:13:\"hasTitleField\";s:1:\"0\";s:10:\"titleLabel\";N;s:11:\"titleFormat\";s:18:\"{section.name|raw}\";s:9:\"sortOrder\";N;s:12:\"fieldLayouts\";a:1:{s:36:\"31a1e163-6326-436a-9feb-53b372c086e3\";a:1:{s:4:\"tabs\";a:1:{i:0;a:3:{s:4:\"name\";s:7:\"Content\";s:9:\"sortOrder\";s:1:\"1\";s:6:\"fields\";a:3:{s:36:\"a2129d62-1d81-4c2f-a92d-81c03ed120dc\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"1\";}s:36:\"8823155c-e84a-4a38-af30-2cb88b705e7b\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"2\";}s:36:\"950b3c0e-9780-4487-a881-23d96d6075d5\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"3\";}}}}}}}}s:12:\"siteSettings\";a:1:{s:36:\"06f4e499-3cdc-4d64-aec2-9a7d3a143c75\";a:4:{s:16:\"enabledByDefault\";s:1:\"1\";s:7:\"hasUrls\";s:1:\"1\";s:9:\"uriFormat\";s:8:\"__home__\";s:8:\"template\";s:5:\"index\";}}}s:36:\"f5969f9a-8d3f-487e-9695-cc4e5fbe5efd\";a:7:{s:4:\"name\";s:4:\"News\";s:6:\"handle\";s:4:\"news\";s:4:\"type\";s:7:\"channel\";s:16:\"enableVersioning\";s:1:\"1\";s:16:\"propagateEntries\";s:1:\"1\";s:10:\"entryTypes\";a:2:{s:36:\"eba60966-6218-4985-b901-fff1e5f97a49\";a:7:{s:4:\"name\";s:7:\"Article\";s:6:\"handle\";s:7:\"article\";s:13:\"hasTitleField\";s:1:\"1\";s:10:\"titleLabel\";s:5:\"Title\";s:11:\"titleFormat\";N;s:9:\"sortOrder\";N;s:12:\"fieldLayouts\";a:1:{s:36:\"d45c4454-78e5-415c-8e08-700061feb9b4\";a:1:{s:4:\"tabs\";a:1:{i:0;a:3:{s:4:\"name\";s:7:\"Content\";s:9:\"sortOrder\";s:1:\"1\";s:6:\"fields\";a:6:{s:36:\"a171d498-9024-4855-9a6c-b3b96765ab7c\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"1\";}s:36:\"0cbb9736-a84b-4e83-803c-5077f56394a9\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"2\";}s:36:\"aef80333-1412-4130-bb84-ac3bdbbcbbe2\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"3\";}s:36:\"9bb293f8-c659-4035-b5d3-e30dbf8d1c5b\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"4\";}s:36:\"674e53a6-d62c-4322-ae09-349765f1ef17\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"5\";}s:36:\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"6\";}}}}}}}s:36:\"b31c607b-b75a-4a78-b14b-d94bf8faa0c3\";a:7:{s:4:\"name\";s:4:\"Link\";s:6:\"handle\";s:4:\"link\";s:13:\"hasTitleField\";s:1:\"1\";s:10:\"titleLabel\";s:5:\"Title\";s:11:\"titleFormat\";N;s:9:\"sortOrder\";N;s:12:\"fieldLayouts\";a:1:{s:36:\"b89ba12c-3f9b-4e8d-a190-073678e01175\";a:1:{s:4:\"tabs\";a:1:{i:0;a:3:{s:4:\"name\";s:7:\"Content\";s:9:\"sortOrder\";s:1:\"1\";s:6:\"fields\";a:3:{s:36:\"aef80333-1412-4130-bb84-ac3bdbbcbbe2\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"1\";}s:36:\"0cbb9736-a84b-4e83-803c-5077f56394a9\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"2\";}s:36:\"4ca9d3b8-ff02-403a-9010-45763fcdea9f\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"3\";}}}}}}}}s:12:\"siteSettings\";a:1:{s:36:\"06f4e499-3cdc-4d64-aec2-9a7d3a143c75\";a:4:{s:16:\"enabledByDefault\";s:1:\"1\";s:7:\"hasUrls\";s:1:\"1\";s:9:\"uriFormat\";s:11:\"news/{slug}\";s:8:\"template\";s:11:\"news/_entry\";}}}s:36:\"b3a9eef3-9444-4995-84e2-6dc6b60aebd2\";a:7:{s:4:\"name\";s:4:\"Work\";s:6:\"handle\";s:4:\"work\";s:4:\"type\";s:7:\"channel\";s:16:\"enableVersioning\";s:1:\"1\";s:16:\"propagateEntries\";s:1:\"1\";s:10:\"entryTypes\";a:1:{s:36:\"01416786-fb23-483e-9b86-d70279bf18a9\";a:7:{s:4:\"name\";s:4:\"Work\";s:6:\"handle\";s:4:\"work\";s:13:\"hasTitleField\";s:1:\"1\";s:10:\"titleLabel\";s:5:\"Title\";s:11:\"titleFormat\";N;s:9:\"sortOrder\";N;s:12:\"fieldLayouts\";a:1:{s:36:\"b3e92e12-b415-4a53-b67e-ade9f5fdf5dc\";a:1:{s:4:\"tabs\";a:2:{i:0;a:3:{s:4:\"name\";s:7:\"Content\";s:9:\"sortOrder\";s:1:\"1\";s:6:\"fields\";a:5:{s:36:\"aef80333-1412-4130-bb84-ac3bdbbcbbe2\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"1\";}s:36:\"9bb293f8-c659-4035-b5d3-e30dbf8d1c5b\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"2\";}s:36:\"674e53a6-d62c-4322-ae09-349765f1ef17\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"3\";}s:36:\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"4\";}s:36:\"a988d6b4-6983-48e6-b08e-8fd72e31e483\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"6\";}}}i:1;a:3:{s:4:\"name\";s:6:\"Design\";s:9:\"sortOrder\";s:1:\"2\";s:6:\"fields\";a:3:{s:36:\"0cbb9736-a84b-4e83-803c-5077f56394a9\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"1\";}s:36:\"0305c984-3934-4c7a-9de9-b0162c5b0112\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"2\";}s:36:\"cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"3\";}}}}}}}}s:12:\"siteSettings\";a:1:{s:36:\"06f4e499-3cdc-4d64-aec2-9a7d3a143c75\";a:4:{s:16:\"enabledByDefault\";s:1:\"1\";s:7:\"hasUrls\";s:1:\"1\";s:9:\"uriFormat\";s:11:\"work/{slug}\";s:8:\"template\";s:11:\"work/_entry\";}}}s:36:\"1a1f289d-3e32-4409-bfb2-03ec7e7d1b81\";a:7:{s:4:\"name\";s:5:\"About\";s:6:\"handle\";s:5:\"about\";s:4:\"type\";s:6:\"single\";s:16:\"enableVersioning\";s:1:\"1\";s:16:\"propagateEntries\";s:1:\"1\";s:10:\"entryTypes\";a:1:{s:36:\"6ef72b30-6af9-4545-81e9-b2c900cd08d4\";a:7:{s:4:\"name\";s:5:\"About\";s:6:\"handle\";s:5:\"about\";s:13:\"hasTitleField\";s:1:\"0\";s:10:\"titleLabel\";N;s:11:\"titleFormat\";s:18:\"{section.name|raw}\";s:9:\"sortOrder\";N;s:12:\"fieldLayouts\";a:1:{s:36:\"4cc2a302-6fe7-4f8b-b01b-517ed624cdf7\";a:1:{s:4:\"tabs\";a:1:{i:0;a:3:{s:4:\"name\";s:7:\"Content\";s:9:\"sortOrder\";s:1:\"1\";s:6:\"fields\";a:3:{s:36:\"9bb293f8-c659-4035-b5d3-e30dbf8d1c5b\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"1\";}s:36:\"08f8ec90-f7ad-4d40-9880-3c96304f1e4e\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"2\";}s:36:\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"3\";}}}}}}}}s:12:\"siteSettings\";a:1:{s:36:\"06f4e499-3cdc-4d64-aec2-9a7d3a143c75\";a:4:{s:16:\"enabledByDefault\";s:1:\"1\";s:7:\"hasUrls\";s:1:\"1\";s:9:\"uriFormat\";s:5:\"about\";s:8:\"template\";s:5:\"about\";}}}s:36:\"5fa323b7-9755-4174-bed2-0f2b11c05701\";a:7:{s:4:\"name\";s:14:\"Services Index\";s:6:\"handle\";s:13:\"servicesIndex\";s:4:\"type\";s:6:\"single\";s:16:\"enableVersioning\";s:1:\"1\";s:16:\"propagateEntries\";s:1:\"1\";s:10:\"entryTypes\";a:1:{s:36:\"7f0d6d70-ed28-45f1-88c0-4463e96f110f\";a:7:{s:4:\"name\";s:14:\"Services Index\";s:6:\"handle\";s:13:\"servicesIndex\";s:13:\"hasTitleField\";s:1:\"1\";s:10:\"titleLabel\";s:5:\"Title\";s:11:\"titleFormat\";N;s:9:\"sortOrder\";N;s:12:\"fieldLayouts\";a:1:{s:36:\"423d0eb9-9236-47c9-a98a-30fc46947c71\";a:1:{s:4:\"tabs\";a:1:{i:0;a:3:{s:4:\"name\";s:7:\"Content\";s:9:\"sortOrder\";s:1:\"1\";s:6:\"fields\";a:2:{s:36:\"9bb293f8-c659-4035-b5d3-e30dbf8d1c5b\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"1\";}s:36:\"08f8ec90-f7ad-4d40-9880-3c96304f1e4e\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"2\";}}}}}}}}s:12:\"siteSettings\";a:1:{s:36:\"06f4e499-3cdc-4d64-aec2-9a7d3a143c75\";a:4:{s:16:\"enabledByDefault\";s:1:\"1\";s:7:\"hasUrls\";s:1:\"1\";s:9:\"uriFormat\";s:8:\"services\";s:8:\"template\";s:15:\"services/_index\";}}}s:36:\"1ff1d4d0-499c-41b9-b071-77031c901052\";a:7:{s:4:\"name\";s:10:\"Work Index\";s:6:\"handle\";s:9:\"workIndex\";s:4:\"type\";s:6:\"single\";s:16:\"enableVersioning\";s:1:\"1\";s:16:\"propagateEntries\";s:1:\"1\";s:10:\"entryTypes\";a:1:{s:36:\"261c3cde-2d6c-4b23-b6cd-6def95992cf8\";a:7:{s:4:\"name\";s:10:\"Work Index\";s:6:\"handle\";s:9:\"workIndex\";s:13:\"hasTitleField\";s:1:\"1\";s:10:\"titleLabel\";s:5:\"Title\";s:11:\"titleFormat\";N;s:9:\"sortOrder\";N;s:12:\"fieldLayouts\";a:1:{s:36:\"e3a26917-97ba-4590-a8f3-bb08b01991f3\";a:1:{s:4:\"tabs\";a:1:{i:0;a:3:{s:4:\"name\";s:7:\"Content\";s:9:\"sortOrder\";s:1:\"1\";s:6:\"fields\";a:2:{s:36:\"9bb293f8-c659-4035-b5d3-e30dbf8d1c5b\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"1\";}s:36:\"08f8ec90-f7ad-4d40-9880-3c96304f1e4e\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"2\";}}}}}}}}s:12:\"siteSettings\";a:1:{s:36:\"06f4e499-3cdc-4d64-aec2-9a7d3a143c75\";a:4:{s:16:\"enabledByDefault\";s:1:\"1\";s:7:\"hasUrls\";s:1:\"1\";s:9:\"uriFormat\";s:4:\"work\";s:8:\"template\";s:11:\"work/_index\";}}}}s:11:\"fieldGroups\";a:6:{s:36:\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\";a:1:{s:4:\"name\";s:7:\"General\";}s:36:\"8b4aae04-76ef-48c2-a294-e81064a470ed\";a:1:{s:4:\"name\";s:8:\"Services\";}s:36:\"d58a1faa-0bf6-46b2-b880-b0c14bebca75\";a:1:{s:4:\"name\";s:8:\"Homepage\";}s:36:\"f00e1793-0757-46e5-99e9-016b21359ac7\";a:1:{s:4:\"name\";s:4:\"Work\";}s:36:\"f7189ca2-4b93-4661-830a-a71aff8aa3cd\";a:1:{s:4:\"name\";s:6:\"Footer\";}s:36:\"0815347a-8e73-45fd-93c9-2244ac562559\";a:1:{s:4:\"name\";s:12:\"Contact Info\";}}s:6:\"fields\";a:22:{s:36:\"9bb293f8-c659-4035-b5d3-e30dbf8d1c5b\";a:10:{s:4:\"name\";s:7:\"Heading\";s:6:\"handle\";s:7:\"heading\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:22:\"craft\\fields\\PlainText\";s:8:\"settings\";a:5:{s:11:\"placeholder\";s:0:\"\";s:9:\"multiline\";s:0:\"\";s:11:\"initialRows\";s:1:\"4\";s:9:\"charLimit\";s:3:\"255\";s:10:\"columnType\";s:6:\"string\";}s:10:\"fieldGroup\";s:36:\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\";s:17:\"contentColumnType\";s:6:\"string\";}s:36:\"08f8ec90-f7ad-4d40-9880-3c96304f1e4e\";a:10:{s:4:\"name\";s:4:\"Body\";s:6:\"handle\";s:4:\"body\";s:12:\"instructions\";N;s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"site\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:20:\"craft\\redactor\\Field\";s:8:\"settings\";a:1:{s:14:\"redactorConfig\";s:13:\"Standard.json\";}s:10:\"fieldGroup\";s:36:\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\";s:17:\"contentColumnType\";s:4:\"text\";}s:36:\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\";a:10:{s:4:\"name\";s:12:\"Article Body\";s:6:\"handle\";s:11:\"articleBody\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:19:\"craft\\fields\\Matrix\";s:8:\"settings\";a:3:{s:9:\"maxBlocks\";N;s:14:\"localizeBlocks\";b:0;s:12:\"contentTable\";s:30:\"{{%matrixcontent_articlebody}}\";}s:10:\"fieldGroup\";s:36:\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\";s:17:\"contentColumnType\";s:6:\"string\";}s:36:\"674e53a6-d62c-4322-ae09-349765f1ef17\";a:10:{s:4:\"name\";s:10:\"Subheading\";s:6:\"handle\";s:10:\"subheading\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:22:\"craft\\fields\\PlainText\";s:8:\"settings\";a:5:{s:11:\"placeholder\";s:0:\"\";s:9:\"multiline\";s:0:\"\";s:11:\"initialRows\";s:1:\"4\";s:9:\"charLimit\";s:3:\"255\";s:10:\"columnType\";s:6:\"string\";}s:10:\"fieldGroup\";s:36:\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\";s:17:\"contentColumnType\";s:6:\"string\";}s:36:\"0cbb9736-a84b-4e83-803c-5077f56394a9\";a:10:{s:4:\"name\";s:14:\"Featured Image\";s:6:\"handle\";s:13:\"featuredImage\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:19:\"craft\\fields\\Assets\";s:8:\"settings\";a:10:{s:15:\"useSingleFolder\";s:0:\"\";s:7:\"sources\";a:1:{i:0;s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";}s:27:\"defaultUploadLocationSource\";s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";s:28:\"defaultUploadLocationSubpath\";s:0:\"\";s:26:\"singleUploadLocationSource\";s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";s:27:\"singleUploadLocationSubpath\";s:0:\"\";s:13:\"restrictFiles\";s:1:\"1\";s:12:\"allowedKinds\";a:1:{i:0;s:5:\"image\";}s:5:\"limit\";s:1:\"2\";s:17:\"localizeRelations\";b:0;}s:10:\"fieldGroup\";s:36:\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\";s:17:\"contentColumnType\";s:6:\"string\";}s:36:\"422c7da9-d3e4-4d0a-8225-bbbc8264f029\";a:10:{s:4:\"name\";s:7:\"Address\";s:6:\"handle\";s:7:\"address\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:22:\"craft\\fields\\PlainText\";s:8:\"settings\";a:5:{s:11:\"placeholder\";s:0:\"\";s:9:\"multiline\";s:1:\"1\";s:11:\"initialRows\";s:1:\"4\";s:9:\"charLimit\";s:0:\"\";s:10:\"columnType\";s:4:\"text\";}s:10:\"fieldGroup\";s:36:\"0815347a-8e73-45fd-93c9-2244ac562559\";s:17:\"contentColumnType\";s:4:\"text\";}s:36:\"b75266c9-d8d2-42ae-9024-0fecb8bdc994\";a:10:{s:4:\"name\";s:5:\"Email\";s:6:\"handle\";s:5:\"email\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:22:\"craft\\fields\\PlainText\";s:8:\"settings\";a:5:{s:11:\"placeholder\";s:0:\"\";s:9:\"multiline\";s:0:\"\";s:11:\"initialRows\";s:1:\"4\";s:9:\"charLimit\";s:3:\"255\";s:10:\"columnType\";s:6:\"string\";}s:10:\"fieldGroup\";s:36:\"0815347a-8e73-45fd-93c9-2244ac562559\";s:17:\"contentColumnType\";s:6:\"string\";}s:36:\"cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea\";a:10:{s:4:\"name\";s:16:\"Background Color\";s:6:\"handle\";s:15:\"backgroundColor\";s:12:\"instructions\";s:41:\"Hex value for alternate background color.\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:18:\"craft\\fields\\Color\";s:8:\"settings\";a:0:{}s:10:\"fieldGroup\";s:36:\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\";s:17:\"contentColumnType\";s:9:\"string(7)\";}s:36:\"4ca9d3b8-ff02-403a-9010-45763fcdea9f\";a:10:{s:4:\"name\";s:8:\"Link URL\";s:6:\"handle\";s:7:\"linkUrl\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:22:\"craft\\fields\\PlainText\";s:8:\"settings\";a:5:{s:11:\"placeholder\";s:23:\"e.g. http://example.com\";s:9:\"multiline\";s:0:\"\";s:11:\"initialRows\";s:1:\"4\";s:9:\"charLimit\";s:3:\"255\";s:10:\"columnType\";s:6:\"string\";}s:10:\"fieldGroup\";s:36:\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\";s:17:\"contentColumnType\";s:6:\"string\";}s:36:\"aef80333-1412-4130-bb84-ac3bdbbcbbe2\";a:10:{s:4:\"name\";s:17:\"Short Description\";s:6:\"handle\";s:16:\"shortDescription\";s:12:\"instructions\";s:43:\"Short description for use in index regions.\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:20:\"craft\\redactor\\Field\";s:8:\"settings\";a:4:{s:11:\"cleanupHtml\";s:1:\"1\";s:10:\"purifyHtml\";s:1:\"1\";s:10:\"columnType\";s:4:\"text\";s:14:\"redactorConfig\";s:11:\"Simple.json\";}s:10:\"fieldGroup\";s:36:\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\";s:17:\"contentColumnType\";s:4:\"text\";}s:36:\"67ff16f0-04e2-492b-b999-a7d364331d80\";a:10:{s:4:\"name\";s:13:\"Index Heading\";s:6:\"handle\";s:12:\"indexHeading\";s:12:\"instructions\";s:47:\"Page heading for services structure index page.\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:20:\"craft\\redactor\\Field\";s:8:\"settings\";a:4:{s:11:\"cleanupHtml\";s:0:\"\";s:10:\"purifyHtml\";s:1:\"1\";s:10:\"columnType\";s:4:\"text\";s:14:\"redactorConfig\";s:0:\"\";}s:10:\"fieldGroup\";s:36:\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\";s:17:\"contentColumnType\";s:4:\"text\";}s:36:\"0305c984-3934-4c7a-9de9-b0162c5b0112\";a:10:{s:4:\"name\";s:14:\"Featured Thumb\";s:6:\"handle\";s:13:\"featuredThumb\";s:12:\"instructions\";s:45:\"Thumb image for use on home page or archives.\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:19:\"craft\\fields\\Assets\";s:8:\"settings\";a:9:{s:15:\"useSingleFolder\";s:0:\"\";s:7:\"sources\";s:1:\"*\";s:27:\"defaultUploadLocationSource\";s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";s:28:\"defaultUploadLocationSubpath\";s:0:\"\";s:26:\"singleUploadLocationSource\";s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";s:27:\"singleUploadLocationSubpath\";s:0:\"\";s:13:\"restrictFiles\";s:0:\"\";s:5:\"limit\";s:1:\"1\";s:17:\"localizeRelations\";b:0;}s:10:\"fieldGroup\";s:36:\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\";s:17:\"contentColumnType\";s:6:\"string\";}s:36:\"a2129d62-1d81-4c2f-a92d-81c03ed120dc\";a:10:{s:4:\"name\";s:10:\"Hero Image\";s:6:\"handle\";s:9:\"heroImage\";s:12:\"instructions\";s:92:\"Choose the big homepage hero image. The image should be at least 1450×916 for best results.\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:19:\"craft\\fields\\Assets\";s:8:\"settings\";a:9:{s:15:\"useSingleFolder\";s:0:\"\";s:7:\"sources\";a:1:{i:0;s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";}s:27:\"defaultUploadLocationSource\";s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";s:28:\"defaultUploadLocationSubpath\";s:0:\"\";s:26:\"singleUploadLocationSource\";s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";s:27:\"singleUploadLocationSubpath\";s:0:\"\";s:13:\"restrictFiles\";s:0:\"\";s:5:\"limit\";s:1:\"1\";s:17:\"localizeRelations\";b:0;}s:10:\"fieldGroup\";s:36:\"d58a1faa-0bf6-46b2-b880-b0c14bebca75\";s:17:\"contentColumnType\";s:6:\"string\";}s:36:\"8823155c-e84a-4a38-af30-2cb88b705e7b\";a:10:{s:4:\"name\";s:12:\"Testimonials\";s:6:\"handle\";s:12:\"testimonials\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:19:\"craft\\fields\\Matrix\";s:8:\"settings\";a:3:{s:9:\"maxBlocks\";s:1:\"3\";s:14:\"localizeBlocks\";b:0;s:12:\"contentTable\";s:31:\"{{%matrixcontent_testimonials}}\";}s:10:\"fieldGroup\";s:36:\"d58a1faa-0bf6-46b2-b880-b0c14bebca75\";s:17:\"contentColumnType\";s:6:\"string\";}s:36:\"950b3c0e-9780-4487-a881-23d96d6075d5\";a:10:{s:4:\"name\";s:12:\"Client Logos\";s:6:\"handle\";s:11:\"clientLogos\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:19:\"craft\\fields\\Assets\";s:8:\"settings\";a:9:{s:15:\"useSingleFolder\";s:0:\"\";s:7:\"sources\";a:1:{i:0;s:43:\"volume:7d6a9bef-727c-4a0c-9791-4f423956de69\";}s:27:\"defaultUploadLocationSource\";s:43:\"volume:7d6a9bef-727c-4a0c-9791-4f423956de69\";s:28:\"defaultUploadLocationSubpath\";s:0:\"\";s:26:\"singleUploadLocationSource\";s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";s:27:\"singleUploadLocationSubpath\";s:0:\"\";s:13:\"restrictFiles\";s:0:\"\";s:5:\"limit\";s:0:\"\";s:17:\"localizeRelations\";b:0;}s:10:\"fieldGroup\";s:36:\"d58a1faa-0bf6-46b2-b880-b0c14bebca75\";s:17:\"contentColumnType\";s:6:\"string\";}s:36:\"d96355a7-1353-4097-bf08-3bd5c44821f8\";a:10:{s:4:\"name\";s:12:\"Service Icon\";s:6:\"handle\";s:11:\"serviceIcon\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:19:\"craft\\fields\\Assets\";s:8:\"settings\";a:9:{s:15:\"useSingleFolder\";s:0:\"\";s:7:\"sources\";a:1:{i:0;s:43:\"volume:3fc34ff2-8da7-4a35-8147-f0a2e01392b9\";}s:27:\"defaultUploadLocationSource\";s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";s:28:\"defaultUploadLocationSubpath\";s:0:\"\";s:26:\"singleUploadLocationSource\";s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";s:27:\"singleUploadLocationSubpath\";s:0:\"\";s:13:\"restrictFiles\";s:0:\"\";s:5:\"limit\";s:1:\"1\";s:17:\"localizeRelations\";b:0;}s:10:\"fieldGroup\";s:36:\"8b4aae04-76ef-48c2-a294-e81064a470ed\";s:17:\"contentColumnType\";s:6:\"string\";}s:36:\"9bf9e642-2881-44b4-99ff-2cbed3ccc2d7\";a:10:{s:4:\"name\";s:12:\"Service Body\";s:6:\"handle\";s:11:\"serviceBody\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:19:\"craft\\fields\\Matrix\";s:8:\"settings\";a:3:{s:9:\"maxBlocks\";N;s:14:\"localizeBlocks\";b:0;s:12:\"contentTable\";s:30:\"{{%matrixcontent_servicebody}}\";}s:10:\"fieldGroup\";s:36:\"8b4aae04-76ef-48c2-a294-e81064a470ed\";s:17:\"contentColumnType\";s:6:\"string\";}s:36:\"a988d6b4-6983-48e6-b08e-8fd72e31e483\";a:10:{s:4:\"name\";s:18:\"Services Performed\";s:6:\"handle\";s:17:\"servicesPerformed\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:20:\"craft\\fields\\Entries\";s:8:\"settings\";a:3:{s:7:\"sources\";a:1:{i:0;s:44:\"section:f6b0cb16-5df8-4b57-9856-c9c2d6b9699e\";}s:5:\"limit\";s:0:\"\";s:17:\"localizeRelations\";b:0;}s:10:\"fieldGroup\";s:36:\"f00e1793-0757-46e5-99e9-016b21359ac7\";s:17:\"contentColumnType\";s:6:\"string\";}s:36:\"5095500e-4962-429c-9b9c-7a4d0d4f930c\";a:10:{s:4:\"name\";s:16:\"Copyright Notice\";s:6:\"handle\";s:15:\"copyrightNotice\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:22:\"craft\\fields\\PlainText\";s:8:\"settings\";a:5:{s:11:\"placeholder\";s:0:\"\";s:9:\"multiline\";s:0:\"\";s:11:\"initialRows\";s:1:\"4\";s:9:\"charLimit\";s:3:\"255\";s:10:\"columnType\";s:6:\"string\";}s:10:\"fieldGroup\";s:36:\"f7189ca2-4b93-4661-830a-a71aff8aa3cd\";s:17:\"contentColumnType\";s:6:\"string\";}s:36:\"fcf41a5f-68b5-42dd-8ca1-cc457eb749f0\";a:10:{s:4:\"name\";s:16:\"Contact Us Label\";s:6:\"handle\";s:14:\"contactUsLabel\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:22:\"craft\\fields\\PlainText\";s:8:\"settings\";a:5:{s:11:\"placeholder\";s:0:\"\";s:9:\"multiline\";s:0:\"\";s:11:\"initialRows\";s:1:\"4\";s:9:\"charLimit\";s:3:\"255\";s:10:\"columnType\";s:6:\"string\";}s:10:\"fieldGroup\";s:36:\"f7189ca2-4b93-4661-830a-a71aff8aa3cd\";s:17:\"contentColumnType\";s:6:\"string\";}s:36:\"b01498fe-6db2-4b1d-84d2-8cd0cb62f449\";a:10:{s:4:\"name\";s:15:\"Contact Methods\";s:6:\"handle\";s:14:\"contactMethods\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:19:\"craft\\fields\\Matrix\";s:8:\"settings\";a:3:{s:9:\"maxBlocks\";N;s:14:\"localizeBlocks\";b:0;s:12:\"contentTable\";s:33:\"{{%matrixcontent_contactmethods}}\";}s:10:\"fieldGroup\";s:36:\"0815347a-8e73-45fd-93c9-2244ac562559\";s:17:\"contentColumnType\";s:6:\"string\";}s:36:\"a171d498-9024-4855-9a6c-b3b96765ab7c\";a:10:{s:4:\"name\";s:9:\"Featured?\";s:6:\"handle\";s:13:\"featuredEntry\";s:12:\"instructions\";s:50:\"Should this entry be featured on the listing page?\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:24:\"craft\\fields\\Lightswitch\";s:8:\"settings\";a:1:{s:7:\"default\";s:0:\"\";}s:10:\"fieldGroup\";s:36:\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\";s:17:\"contentColumnType\";s:7:\"boolean\";}}s:16:\"matrixBlockTypes\";a:10:{s:36:\"070be8db-f9b0-4605-98ae-e9b54b1af3f6\";a:6:{s:4:\"name\";s:4:\"Text\";s:6:\"handle\";s:4:\"text\";s:9:\"sortOrder\";s:1:\"3\";s:5:\"field\";s:36:\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\";s:12:\"fieldLayouts\";a:1:{s:36:\"4ade673e-0245-430b-b932-c8ea86e36773\";a:1:{s:4:\"tabs\";a:1:{i:0;a:3:{s:4:\"name\";s:7:\"Content\";s:9:\"sortOrder\";s:1:\"1\";s:6:\"fields\";a:2:{s:36:\"e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"1\";}s:36:\"cc6a4697-6d1c-4342-b9de-bce13295a885\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"2\";}}}}}}s:6:\"fields\";a:2:{s:36:\"e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c\";a:10:{s:4:\"name\";s:4:\"Text\";s:6:\"handle\";s:4:\"text\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:20:\"craft\\redactor\\Field\";s:8:\"settings\";a:4:{s:11:\"cleanupHtml\";s:1:\"1\";s:10:\"purifyHtml\";s:1:\"1\";s:10:\"columnType\";s:4:\"text\";s:14:\"redactorConfig\";s:13:\"Standard.json\";}s:10:\"fieldGroup\";N;s:17:\"contentColumnType\";s:4:\"text\";}s:36:\"cc6a4697-6d1c-4342-b9de-bce13295a885\";a:10:{s:4:\"name\";s:8:\"Position\";s:6:\"handle\";s:8:\"position\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:21:\"craft\\fields\\Dropdown\";s:8:\"settings\";a:1:{s:7:\"options\";a:3:{i:0;a:3:{s:5:\"label\";s:4:\"Left\";s:5:\"value\";s:4:\"left\";s:7:\"default\";s:0:\"\";}i:1;a:3:{s:5:\"label\";s:6:\"Center\";s:5:\"value\";s:6:\"center\";s:7:\"default\";s:0:\"\";}i:2;a:3:{s:5:\"label\";s:5:\"Right\";s:5:\"value\";s:5:\"right\";s:7:\"default\";s:0:\"\";}}}s:10:\"fieldGroup\";N;s:17:\"contentColumnType\";s:6:\"string\";}}}s:36:\"daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890\";a:6:{s:4:\"name\";s:10:\"Pull Quote\";s:6:\"handle\";s:9:\"pullQuote\";s:9:\"sortOrder\";s:1:\"4\";s:5:\"field\";s:36:\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\";s:12:\"fieldLayouts\";a:1:{s:36:\"83f7b1de-657b-45bb-94e4-57d10973c78c\";a:1:{s:4:\"tabs\";a:1:{i:0;a:3:{s:4:\"name\";s:7:\"Content\";s:9:\"sortOrder\";s:1:\"1\";s:6:\"fields\";a:2:{s:36:\"a8a6d843-bec1-4882-98ec-30cb74f5b16f\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"1\";}s:36:\"a88d73a8-c75f-4c72-aa70-a39dfbbff0fe\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"2\";}}}}}}s:6:\"fields\";a:2:{s:36:\"a8a6d843-bec1-4882-98ec-30cb74f5b16f\";a:10:{s:4:\"name\";s:10:\"Pull Quote\";s:6:\"handle\";s:9:\"pullQuote\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:22:\"craft\\fields\\PlainText\";s:8:\"settings\";a:5:{s:11:\"placeholder\";s:0:\"\";s:9:\"multiline\";s:0:\"\";s:11:\"initialRows\";s:1:\"4\";s:9:\"charLimit\";s:0:\"\";s:10:\"columnType\";s:4:\"text\";}s:10:\"fieldGroup\";N;s:17:\"contentColumnType\";s:4:\"text\";}s:36:\"a88d73a8-c75f-4c72-aa70-a39dfbbff0fe\";a:10:{s:4:\"name\";s:8:\"Position\";s:6:\"handle\";s:8:\"position\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:21:\"craft\\fields\\Dropdown\";s:8:\"settings\";a:1:{s:7:\"options\";a:3:{i:0;a:3:{s:5:\"label\";s:4:\"Left\";s:5:\"value\";s:4:\"left\";s:7:\"default\";s:0:\"\";}i:1;a:3:{s:5:\"label\";s:6:\"Center\";s:5:\"value\";s:6:\"center\";s:7:\"default\";s:0:\"\";}i:2;a:3:{s:5:\"label\";s:5:\"Right\";s:5:\"value\";s:5:\"right\";s:7:\"default\";s:0:\"\";}}}s:10:\"fieldGroup\";N;s:17:\"contentColumnType\";s:6:\"string\";}}}s:36:\"1d5e20da-bc96-4a33-b045-8d1fa5870e74\";a:6:{s:4:\"name\";s:7:\"Heading\";s:6:\"handle\";s:7:\"heading\";s:9:\"sortOrder\";s:1:\"2\";s:5:\"field\";s:36:\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\";s:12:\"fieldLayouts\";a:1:{s:36:\"0189a187-131f-46a8-b494-cd94c82d6aae\";a:1:{s:4:\"tabs\";a:1:{i:0;a:3:{s:4:\"name\";s:7:\"Content\";s:9:\"sortOrder\";s:1:\"1\";s:6:\"fields\";a:1:{s:36:\"631f668a-3658-48a4-89fd-8da5af0a60cc\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"1\";}}}}}}s:6:\"fields\";a:1:{s:36:\"631f668a-3658-48a4-89fd-8da5af0a60cc\";a:10:{s:4:\"name\";s:7:\"Heading\";s:6:\"handle\";s:7:\"heading\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:22:\"craft\\fields\\PlainText\";s:8:\"settings\";a:5:{s:11:\"placeholder\";s:0:\"\";s:9:\"multiline\";s:0:\"\";s:11:\"initialRows\";s:1:\"4\";s:9:\"charLimit\";s:3:\"255\";s:10:\"columnType\";s:6:\"string\";}s:10:\"fieldGroup\";N;s:17:\"contentColumnType\";s:6:\"string\";}}}s:36:\"9123201b-837c-4269-9d7c-d5e11bba1e2b\";a:6:{s:4:\"name\";s:5:\"Image\";s:6:\"handle\";s:5:\"image\";s:9:\"sortOrder\";s:1:\"5\";s:5:\"field\";s:36:\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\";s:12:\"fieldLayouts\";a:1:{s:36:\"327aba6f-b81c-4179-9e58-208d34322ced\";a:1:{s:4:\"tabs\";a:1:{i:0;a:3:{s:4:\"name\";s:7:\"Content\";s:9:\"sortOrder\";s:1:\"1\";s:6:\"fields\";a:3:{s:36:\"964a1aba-15ac-413f-86c1-03fbf37f30c7\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"1\";}s:36:\"7ca32393-f78c-4de0-9f8f-52b64e09584f\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"2\";}s:36:\"f87a6243-5b7f-4456-9106-ccfb6e03b754\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"3\";}}}}}}s:6:\"fields\";a:3:{s:36:\"964a1aba-15ac-413f-86c1-03fbf37f30c7\";a:10:{s:4:\"name\";s:5:\"Image\";s:6:\"handle\";s:5:\"image\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:19:\"craft\\fields\\Assets\";s:8:\"settings\";a:10:{s:15:\"useSingleFolder\";s:0:\"\";s:7:\"sources\";a:1:{i:0;s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";}s:27:\"defaultUploadLocationSource\";s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";s:28:\"defaultUploadLocationSubpath\";s:0:\"\";s:26:\"singleUploadLocationSource\";s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";s:27:\"singleUploadLocationSubpath\";s:0:\"\";s:13:\"restrictFiles\";s:1:\"1\";s:12:\"allowedKinds\";a:1:{i:0;s:5:\"image\";}s:5:\"limit\";s:1:\"1\";s:17:\"localizeRelations\";b:0;}s:10:\"fieldGroup\";N;s:17:\"contentColumnType\";s:6:\"string\";}s:36:\"f87a6243-5b7f-4456-9106-ccfb6e03b754\";a:10:{s:4:\"name\";s:8:\"Position\";s:6:\"handle\";s:8:\"position\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:21:\"craft\\fields\\Dropdown\";s:8:\"settings\";a:1:{s:7:\"options\";a:4:{i:0;a:3:{s:5:\"label\";s:4:\"Left\";s:5:\"value\";s:4:\"left\";s:7:\"default\";s:0:\"\";}i:1;a:3:{s:5:\"label\";s:6:\"Center\";s:5:\"value\";s:6:\"center\";s:7:\"default\";s:0:\"\";}i:2;a:3:{s:5:\"label\";s:5:\"Right\";s:5:\"value\";s:5:\"right\";s:7:\"default\";s:0:\"\";}i:3;a:3:{s:5:\"label\";s:4:\"Full\";s:5:\"value\";s:4:\"full\";s:7:\"default\";s:0:\"\";}}}s:10:\"fieldGroup\";N;s:17:\"contentColumnType\";s:6:\"string\";}s:36:\"7ca32393-f78c-4de0-9f8f-52b64e09584f\";a:10:{s:4:\"name\";s:7:\"Caption\";s:6:\"handle\";s:7:\"caption\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:20:\"craft\\redactor\\Field\";s:8:\"settings\";a:4:{s:11:\"cleanupHtml\";s:1:\"1\";s:10:\"purifyHtml\";s:1:\"1\";s:10:\"columnType\";s:4:\"text\";s:14:\"redactorConfig\";s:11:\"Simple.json\";}s:10:\"fieldGroup\";N;s:17:\"contentColumnType\";s:4:\"text\";}}}s:36:\"97ff3c80-2398-4ca5-9d03-c3b8727c6eb2\";a:6:{s:4:\"name\";s:5:\"Quote\";s:6:\"handle\";s:5:\"quote\";s:9:\"sortOrder\";s:1:\"7\";s:5:\"field\";s:36:\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\";s:12:\"fieldLayouts\";a:1:{s:36:\"b82a12f2-e814-4b74-9b32-bd1a90497a65\";a:1:{s:4:\"tabs\";a:1:{i:0;a:3:{s:4:\"name\";s:7:\"Content\";s:9:\"sortOrder\";s:1:\"1\";s:6:\"fields\";a:3:{s:36:\"35200549-df46-4092-994a-a8015c5810ba\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"1\";}s:36:\"41e6fac7-12d7-45c9-ac83-0aa59793d872\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"2\";}s:36:\"a5b4b046-1178-45f9-b4cf-3e3bef86e067\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"3\";}}}}}}s:6:\"fields\";a:3:{s:36:\"35200549-df46-4092-994a-a8015c5810ba\";a:10:{s:4:\"name\";s:5:\"Quote\";s:6:\"handle\";s:5:\"quote\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:22:\"craft\\fields\\PlainText\";s:8:\"settings\";a:5:{s:11:\"placeholder\";s:0:\"\";s:9:\"multiline\";s:0:\"\";s:11:\"initialRows\";s:1:\"4\";s:9:\"charLimit\";s:0:\"\";s:10:\"columnType\";s:4:\"text\";}s:10:\"fieldGroup\";N;s:17:\"contentColumnType\";s:4:\"text\";}s:36:\"41e6fac7-12d7-45c9-ac83-0aa59793d872\";a:10:{s:4:\"name\";s:11:\"Attribution\";s:6:\"handle\";s:11:\"attribution\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:22:\"craft\\fields\\PlainText\";s:8:\"settings\";a:5:{s:11:\"placeholder\";s:0:\"\";s:9:\"multiline\";s:0:\"\";s:11:\"initialRows\";s:1:\"4\";s:9:\"charLimit\";s:0:\"\";s:10:\"columnType\";s:4:\"text\";}s:10:\"fieldGroup\";N;s:17:\"contentColumnType\";s:4:\"text\";}s:36:\"a5b4b046-1178-45f9-b4cf-3e3bef86e067\";a:10:{s:4:\"name\";s:8:\"Position\";s:6:\"handle\";s:8:\"position\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:21:\"craft\\fields\\Dropdown\";s:8:\"settings\";a:1:{s:7:\"options\";a:2:{i:0;a:3:{s:5:\"label\";s:6:\"Center\";s:5:\"value\";s:6:\"center\";s:7:\"default\";s:0:\"\";}i:1;a:3:{s:5:\"label\";s:4:\"Full\";s:5:\"value\";s:4:\"full\";s:7:\"default\";s:0:\"\";}}}s:10:\"fieldGroup\";N;s:17:\"contentColumnType\";s:6:\"string\";}}}s:36:\"e1c6c95e-a19b-4cd8-9a83-935e91f862c0\";a:6:{s:4:\"name\";s:11:\"New Section\";s:6:\"handle\";s:10:\"newSection\";s:9:\"sortOrder\";s:1:\"1\";s:5:\"field\";s:36:\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\";s:12:\"fieldLayouts\";a:1:{s:36:\"8d01ea64-38fa-43f7-be8a-43e4e460bfbd\";a:1:{s:4:\"tabs\";a:1:{i:0;a:3:{s:4:\"name\";s:7:\"Content\";s:9:\"sortOrder\";s:1:\"1\";s:6:\"fields\";a:1:{s:36:\"8cd6b011-5271-484d-85d9-6a6b731137e9\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"1\";}}}}}}s:6:\"fields\";a:1:{s:36:\"8cd6b011-5271-484d-85d9-6a6b731137e9\";a:10:{s:4:\"name\";s:15:\"Section Heading\";s:6:\"handle\";s:14:\"sectionHeading\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:22:\"craft\\fields\\PlainText\";s:8:\"settings\";a:5:{s:11:\"placeholder\";s:0:\"\";s:9:\"multiline\";s:0:\"\";s:11:\"initialRows\";s:1:\"4\";s:9:\"charLimit\";s:3:\"255\";s:10:\"columnType\";s:6:\"string\";}s:10:\"fieldGroup\";N;s:17:\"contentColumnType\";s:6:\"string\";}}}s:36:\"0f3ede99-8b78-4042-85c9-422f57f5b01b\";a:6:{s:4:\"name\";s:7:\"Gallery\";s:6:\"handle\";s:7:\"gallery\";s:9:\"sortOrder\";s:1:\"6\";s:5:\"field\";s:36:\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\";s:12:\"fieldLayouts\";a:1:{s:36:\"0964c39a-7c91-4ac2-a9e6-584a7c845d32\";a:1:{s:4:\"tabs\";a:1:{i:0;a:3:{s:4:\"name\";s:7:\"Content\";s:9:\"sortOrder\";s:1:\"1\";s:6:\"fields\";a:1:{s:36:\"ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"1\";}}}}}}s:6:\"fields\";a:1:{s:36:\"ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7\";a:10:{s:4:\"name\";s:6:\"Images\";s:6:\"handle\";s:6:\"images\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:19:\"craft\\fields\\Assets\";s:8:\"settings\";a:9:{s:15:\"useSingleFolder\";s:0:\"\";s:7:\"sources\";a:1:{i:0;s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";}s:27:\"defaultUploadLocationSource\";s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";s:28:\"defaultUploadLocationSubpath\";s:0:\"\";s:26:\"singleUploadLocationSource\";s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";s:27:\"singleUploadLocationSubpath\";s:0:\"\";s:13:\"restrictFiles\";s:0:\"\";s:5:\"limit\";s:1:\"3\";s:17:\"localizeRelations\";b:0;}s:10:\"fieldGroup\";N;s:17:\"contentColumnType\";s:6:\"string\";}}}s:36:\"b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3\";a:6:{s:4:\"name\";s:11:\"Testimonial\";s:6:\"handle\";s:11:\"testimonial\";s:9:\"sortOrder\";s:1:\"1\";s:5:\"field\";s:36:\"8823155c-e84a-4a38-af30-2cb88b705e7b\";s:12:\"fieldLayouts\";a:1:{s:36:\"569a9c10-0657-4dbf-87c9-005afb784b54\";a:1:{s:4:\"tabs\";a:1:{i:0;a:3:{s:4:\"name\";s:7:\"Content\";s:9:\"sortOrder\";s:1:\"1\";s:6:\"fields\";a:3:{s:36:\"39b59166-9d91-4d17-baf9-229aca6174c2\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"1\";}s:36:\"4ed4bf91-bcf9-45a9-84f7-d5d768103a09\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"2\";}s:36:\"a418bde2-f4cc-4ed2-a358-44362a0cb3a9\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"3\";}}}}}}s:6:\"fields\";a:3:{s:36:\"39b59166-9d91-4d17-baf9-229aca6174c2\";a:10:{s:4:\"name\";s:5:\"Quote\";s:6:\"handle\";s:5:\"quote\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:22:\"craft\\fields\\PlainText\";s:8:\"settings\";a:5:{s:11:\"placeholder\";s:0:\"\";s:9:\"multiline\";s:0:\"\";s:11:\"initialRows\";s:1:\"4\";s:9:\"charLimit\";s:0:\"\";s:10:\"columnType\";s:4:\"text\";}s:10:\"fieldGroup\";N;s:17:\"contentColumnType\";s:4:\"text\";}s:36:\"4ed4bf91-bcf9-45a9-84f7-d5d768103a09\";a:10:{s:4:\"name\";s:4:\"Cite\";s:6:\"handle\";s:4:\"cite\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:22:\"craft\\fields\\PlainText\";s:8:\"settings\";a:5:{s:11:\"placeholder\";s:0:\"\";s:9:\"multiline\";s:0:\"\";s:11:\"initialRows\";s:1:\"4\";s:9:\"charLimit\";s:0:\"\";s:10:\"columnType\";s:4:\"text\";}s:10:\"fieldGroup\";N;s:17:\"contentColumnType\";s:4:\"text\";}s:36:\"a418bde2-f4cc-4ed2-a358-44362a0cb3a9\";a:10:{s:4:\"name\";s:5:\"Photo\";s:6:\"handle\";s:5:\"photo\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:19:\"craft\\fields\\Assets\";s:8:\"settings\";a:9:{s:15:\"useSingleFolder\";s:0:\"\";s:7:\"sources\";a:1:{i:0;s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";}s:27:\"defaultUploadLocationSource\";s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";s:28:\"defaultUploadLocationSubpath\";s:0:\"\";s:26:\"singleUploadLocationSource\";s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";s:27:\"singleUploadLocationSubpath\";s:0:\"\";s:13:\"restrictFiles\";s:0:\"\";s:5:\"limit\";s:1:\"1\";s:17:\"localizeRelations\";b:0;}s:10:\"fieldGroup\";N;s:17:\"contentColumnType\";s:6:\"string\";}}}s:36:\"aa39e3a4-2d2c-4ed2-a9b5-74122ece5947\";a:6:{s:4:\"name\";s:13:\"Service Point\";s:6:\"handle\";s:13:\"servicesPoint\";s:9:\"sortOrder\";s:1:\"1\";s:5:\"field\";s:36:\"9bf9e642-2881-44b4-99ff-2cbed3ccc2d7\";s:12:\"fieldLayouts\";a:1:{s:36:\"65bf26e9-50b3-4580-88a4-7a622077d8fb\";a:1:{s:4:\"tabs\";a:1:{i:0;a:3:{s:4:\"name\";s:7:\"Content\";s:9:\"sortOrder\";s:1:\"1\";s:6:\"fields\";a:3:{s:36:\"3285a611-4363-43f2-82b5-97e2d253cab3\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"1\";}s:36:\"c9ccf068-4ace-4b21-9356-68f3faa96cf3\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"2\";}s:36:\"9ce53ce9-939b-4760-97f4-545ef2c388eb\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"3\";}}}}}}s:6:\"fields\";a:3:{s:36:\"3285a611-4363-43f2-82b5-97e2d253cab3\";a:10:{s:4:\"name\";s:7:\"Heading\";s:6:\"handle\";s:7:\"heading\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:22:\"craft\\fields\\PlainText\";s:8:\"settings\";a:5:{s:11:\"placeholder\";s:0:\"\";s:9:\"multiline\";s:0:\"\";s:11:\"initialRows\";s:1:\"4\";s:9:\"charLimit\";s:0:\"\";s:10:\"columnType\";s:4:\"text\";}s:10:\"fieldGroup\";N;s:17:\"contentColumnType\";s:4:\"text\";}s:36:\"c9ccf068-4ace-4b21-9356-68f3faa96cf3\";a:10:{s:4:\"name\";s:4:\"Text\";s:6:\"handle\";s:4:\"text\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:20:\"craft\\redactor\\Field\";s:8:\"settings\";a:4:{s:11:\"cleanupHtml\";s:1:\"1\";s:10:\"purifyHtml\";s:1:\"1\";s:10:\"columnType\";s:4:\"text\";s:14:\"redactorConfig\";s:0:\"\";}s:10:\"fieldGroup\";N;s:17:\"contentColumnType\";s:4:\"text\";}s:36:\"9ce53ce9-939b-4760-97f4-545ef2c388eb\";a:10:{s:4:\"name\";s:5:\"Image\";s:6:\"handle\";s:5:\"image\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:19:\"craft\\fields\\Assets\";s:8:\"settings\";a:9:{s:15:\"useSingleFolder\";s:0:\"\";s:7:\"sources\";a:1:{i:0;s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";}s:27:\"defaultUploadLocationSource\";s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";s:28:\"defaultUploadLocationSubpath\";s:0:\"\";s:26:\"singleUploadLocationSource\";s:43:\"volume:0193dc64-5499-4e28-95dd-f8f603154851\";s:27:\"singleUploadLocationSubpath\";s:0:\"\";s:13:\"restrictFiles\";s:0:\"\";s:5:\"limit\";s:1:\"1\";s:17:\"localizeRelations\";b:0;}s:10:\"fieldGroup\";N;s:17:\"contentColumnType\";s:6:\"string\";}}}s:36:\"ecd6fdce-8d11-4aa6-a167-e731757515c6\";a:6:{s:4:\"name\";s:14:\"Contact Method\";s:6:\"handle\";s:13:\"contactMethod\";s:9:\"sortOrder\";s:1:\"1\";s:5:\"field\";s:36:\"b01498fe-6db2-4b1d-84d2-8cd0cb62f449\";s:12:\"fieldLayouts\";a:1:{s:36:\"3c4c697e-cb6b-4704-bee5-9a2bae9da8f7\";a:1:{s:4:\"tabs\";a:1:{i:0;a:3:{s:4:\"name\";s:7:\"Content\";s:9:\"sortOrder\";s:1:\"1\";s:6:\"fields\";a:2:{s:36:\"aad31ad0-0405-41b5-aff0-4ec567b557a0\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"1\";}s:36:\"0275193a-3c51-46a3-afd0-49e55a93bfd3\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"2\";}}}}}}s:6:\"fields\";a:2:{s:36:\"aad31ad0-0405-41b5-aff0-4ec567b557a0\";a:10:{s:4:\"name\";s:5:\"Label\";s:6:\"handle\";s:5:\"label\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:22:\"craft\\fields\\PlainText\";s:8:\"settings\";a:5:{s:11:\"placeholder\";s:0:\"\";s:9:\"multiline\";s:0:\"\";s:11:\"initialRows\";s:1:\"4\";s:9:\"charLimit\";s:3:\"255\";s:10:\"columnType\";s:6:\"string\";}s:10:\"fieldGroup\";N;s:17:\"contentColumnType\";s:6:\"string\";}s:36:\"0275193a-3c51-46a3-afd0-49e55a93bfd3\";a:10:{s:4:\"name\";s:5:\"Value\";s:6:\"handle\";s:5:\"value\";s:12:\"instructions\";s:0:\"\";s:10:\"searchable\";s:1:\"1\";s:17:\"translationMethod\";s:4:\"none\";s:20:\"translationKeyFormat\";N;s:4:\"type\";s:22:\"craft\\fields\\PlainText\";s:8:\"settings\";a:5:{s:11:\"placeholder\";s:0:\"\";s:9:\"multiline\";s:0:\"\";s:11:\"initialRows\";s:1:\"4\";s:9:\"charLimit\";s:3:\"255\";s:10:\"columnType\";s:6:\"string\";}s:10:\"fieldGroup\";N;s:17:\"contentColumnType\";s:6:\"string\";}}}}s:7:\"volumes\";a:4:{s:36:\"0193dc64-5499-4e28-95dd-f8f603154851\";a:8:{s:4:\"name\";s:11:\"Site Assets\";s:6:\"handle\";s:10:\"siteAssets\";s:4:\"type\";s:19:\"craft\\volumes\\Local\";s:7:\"hasUrls\";s:1:\"1\";s:3:\"url\";s:18:\"@assetBaseUrl/site\";s:8:\"settings\";a:1:{s:4:\"path\";s:19:\"@assetBasePath/site\";}s:9:\"sortOrder\";s:1:\"1\";s:12:\"fieldLayouts\";a:1:{s:36:\"e4360fb7-190d-42c5-bde0-e01c03bd127c\";a:1:{s:4:\"tabs\";a:1:{i:0;a:3:{s:4:\"name\";s:7:\"Content\";s:9:\"sortOrder\";s:1:\"1\";s:6:\"fields\";a:1:{s:36:\"aef80333-1412-4130-bb84-ac3bdbbcbbe2\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"1\";}}}}}}}s:36:\"7d6a9bef-727c-4a0c-9791-4f423956de69\";a:8:{s:4:\"name\";s:13:\"Company Logos\";s:6:\"handle\";s:12:\"companyLogos\";s:4:\"type\";s:19:\"craft\\volumes\\Local\";s:7:\"hasUrls\";s:1:\"1\";s:3:\"url\";s:19:\"@assetBaseUrl/logos\";s:8:\"settings\";a:1:{s:4:\"path\";s:20:\"@assetBasePath/logos\";}s:9:\"sortOrder\";s:1:\"2\";s:12:\"fieldLayouts\";a:1:{s:36:\"da21546b-da53-49c7-8821-2685c67df6b4\";a:1:{s:4:\"tabs\";a:0:{}}}}s:36:\"3fc34ff2-8da7-4a35-8147-f0a2e01392b9\";a:8:{s:4:\"name\";s:13:\"Service Icons\";s:6:\"handle\";s:12:\"serviceIcons\";s:4:\"type\";s:19:\"craft\\volumes\\Local\";s:7:\"hasUrls\";s:1:\"1\";s:3:\"url\";s:34:\"@assetBaseUrl/images/service-icons\";s:8:\"settings\";a:1:{s:4:\"path\";s:40:\"@assetBasePath/site/images/service-icons\";}s:9:\"sortOrder\";s:1:\"3\";s:12:\"fieldLayouts\";a:1:{s:36:\"57038148-5c46-43e2-9c5b-9760e04375f2\";a:1:{s:4:\"tabs\";a:0:{}}}}s:36:\"1f0ea10d-2be0-4638-88da-105d232f4787\";a:8:{s:4:\"name\";s:11:\"User Photos\";s:6:\"handle\";s:10:\"userPhotos\";s:4:\"type\";s:19:\"craft\\volumes\\Local\";s:7:\"hasUrls\";s:1:\"0\";s:3:\"url\";N;s:8:\"settings\";a:1:{s:4:\"path\";s:19:\"@storage/userphotos\";}s:9:\"sortOrder\";s:1:\"4\";s:12:\"fieldLayouts\";a:1:{s:36:\"2d9fb3d5-a903-4ef4-81f3-9eb72e49e728\";a:1:{s:4:\"tabs\";a:0:{}}}}}s:14:\"categoryGroups\";a:0:{}s:9:\"tagGroups\";a:0:{}s:5:\"users\";a:5:{s:24:\"requireEmailVerification\";b:1;s:23:\"allowPublicRegistration\";b:0;s:12:\"defaultGroup\";N;s:14:\"photoVolumeUid\";s:36:\"1f0ea10d-2be0-4638-88da-105d232f4787\";s:12:\"photoSubpath\";s:0:\"\";}s:10:\"globalSets\";a:1:{s:36:\"8dbeba09-2202-4eb4-8f3c-b15633a4830d\";a:3:{s:4:\"name\";s:14:\"Footer Content\";s:6:\"handle\";s:6:\"footer\";s:12:\"fieldLayouts\";a:1:{s:36:\"ba0a8885-3474-4231-9827-b6a6da467937\";a:1:{s:4:\"tabs\";a:1:{i:0;a:3:{s:4:\"name\";s:7:\"Content\";s:9:\"sortOrder\";s:1:\"1\";s:6:\"fields\";a:3:{s:36:\"5095500e-4962-429c-9b9c-7a4d0d4f930c\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"1\";}s:36:\"fcf41a5f-68b5-42dd-8ca1-cc457eb749f0\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"2\";}s:36:\"b75266c9-d8d2-42ae-9024-0fecb8bdc994\";a:2:{s:8:\"required\";s:1:\"0\";s:9:\"sortOrder\";s:1:\"3\";}}}}}}}}s:7:\"plugins\";a:1:{s:8:\"redactor\";a:4:{s:8:\"settings\";N;s:10:\"licenseKey\";N;s:7:\"enabled\";s:1:\"1\";s:13:\"schemaVersion\";s:5:\"2.0.0\";}}s:5:\"email\";a:4:{s:9:\"fromEmail\";s:20:\"admin@happylager.dev\";s:8:\"fromName\";s:10:\"Happylager\";s:8:\"template\";N;s:13:\"transportType\";s:37:\"craft\\mail\\transportadapters\\Sendmail\";}s:6:\"system\";a:5:{s:7:\"edition\";s:3:\"pro\";s:4:\"live\";b:1;s:4:\"name\";s:11:\"Happy Lager\";s:8:\"timeZone\";s:3:\"UTC\";s:13:\"schemaVersion\";s:6:\"3.1.25\";}s:15:\"imageTransforms\";a:3:{s:36:\"726664b6-90aa-4fa9-9d03-23be4ba628bc\";a:9:{s:4:\"name\";s:5:\"Small\";s:6:\"handle\";s:5:\"small\";s:4:\"mode\";s:4:\"crop\";s:8:\"position\";s:13:\"center-center\";s:5:\"width\";s:3:\"400\";s:6:\"height\";s:3:\"339\";s:6:\"format\";N;s:7:\"quality\";N;s:9:\"interlace\";s:4:\"none\";}s:36:\"36f99c8f-0ba4-4e4c-af7d-a07dee715ac1\";a:9:{s:4:\"name\";s:6:\"Medium\";s:6:\"handle\";s:6:\"medium\";s:4:\"mode\";s:4:\"crop\";s:8:\"position\";s:13:\"center-center\";s:5:\"width\";s:3:\"700\";s:6:\"height\";s:3:\"424\";s:6:\"format\";N;s:7:\"quality\";N;s:9:\"interlace\";s:4:\"none\";}s:36:\"0f910d7c-0ba2-476a-a7c9-fa489255e601\";a:9:{s:4:\"name\";s:5:\"Thumb\";s:6:\"handle\";s:5:\"thumb\";s:4:\"mode\";s:4:\"crop\";s:8:\"position\";s:13:\"center-center\";s:5:\"width\";s:3:\"280\";s:6:\"height\";s:3:\"204\";s:6:\"format\";N;s:7:\"quality\";N;s:9:\"interlace\";s:4:\"none\";}}s:6:\"routes\";a:2:{s:36:\"222c9203-357b-45a9-ab56-ad4df20ad9a0\";a:5:{s:8:\"uriParts\";a:1:{i:0;s:5:\"about\";}s:10:\"uriPattern\";s:5:\"about\";s:8:\"template\";s:5:\"about\";s:9:\"sortOrder\";s:1:\"1\";s:7:\"siteUid\";N;}s:36:\"f2315ceb-90c3-45fe-b6c1-0b847b577a68\";a:5:{s:8:\"uriParts\";a:1:{i:0;s:14:\"search/results\";}s:10:\"uriPattern\";s:14:\"search/results\";s:8:\"template\";s:15:\"search/_results\";s:9:\"sortOrder\";s:1:\"2\";s:7:\"siteUid\";N;}}}', NULL, '1', '2014-07-29 18:21:29', '2019-02-17 16:23:57', '3ebb42f0-5296-4d41-b31e-4dc4882dd453');
 COMMIT;
 
 -- ----------------------------
@@ -1566,6 +1584,7 @@ CREATE TABLE `matrixblocks` (
   `typeId` int(11) NOT NULL,
   `ownerSiteId` int(11) DEFAULT NULL,
   `sortOrder` smallint(6) unsigned DEFAULT NULL,
+  `deletedWithOwner` tinyint(1) DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
@@ -1586,119 +1605,119 @@ CREATE TABLE `matrixblocks` (
 -- Records of matrixblocks
 -- ----------------------------
 BEGIN;
-INSERT INTO `matrixblocks` VALUES (9, 4, 4, 1, NULL, 1, '2014-07-30 23:02:16', '2016-06-03 17:43:25', '95dd2776-0616-49fc-b47d-c48b0f42ec66');
-INSERT INTO `matrixblocks` VALUES (10, 4, 4, 2, NULL, 2, '2014-07-30 23:02:16', '2016-06-03 17:43:25', 'ca74240d-8649-4d53-a029-2e435b1591e0');
-INSERT INTO `matrixblocks` VALUES (11, 4, 4, 4, NULL, 3, '2014-07-30 23:02:16', '2016-06-03 17:43:25', 'eb7aac49-2f44-4f4d-8848-61ae2037877f');
-INSERT INTO `matrixblocks` VALUES (12, 4, 4, 3, NULL, 4, '2014-07-30 23:02:16', '2016-06-03 17:43:25', '83524b1b-8362-40c8-958b-253fa65040ab');
-INSERT INTO `matrixblocks` VALUES (13, 4, 4, 1, NULL, 5, '2014-07-30 23:02:16', '2016-06-03 17:43:25', 'aa854f17-eb58-40da-aa09-2048ac72066f');
-INSERT INTO `matrixblocks` VALUES (14, 4, 4, 3, NULL, 6, '2014-07-30 23:02:16', '2016-06-03 17:43:25', '3521c77d-4f60-4ed6-b2f6-c2409ba19c03');
-INSERT INTO `matrixblocks` VALUES (15, 4, 4, 1, NULL, 7, '2014-07-30 23:02:16', '2016-06-03 17:43:25', 'f0cc77f2-83d8-4967-90a1-ab525e591376');
-INSERT INTO `matrixblocks` VALUES (16, 4, 4, 4, NULL, 8, '2014-07-30 23:02:16', '2016-06-03 17:43:25', '6281d25d-63c5-44dd-94d7-58da3b65aca3');
-INSERT INTO `matrixblocks` VALUES (17, 4, 4, 3, NULL, 9, '2014-07-30 23:02:16', '2016-06-03 17:43:25', '6b95578b-1584-47fd-8bd9-d714ee2aa3b6');
-INSERT INTO `matrixblocks` VALUES (18, 4, 4, 1, NULL, 10, '2014-07-30 23:02:16', '2016-06-03 17:43:25', 'f103246c-759e-4a17-afff-51f7b898e59c');
-INSERT INTO `matrixblocks` VALUES (25, 24, 4, 1, NULL, 1, '2014-07-31 22:04:17', '2016-06-03 17:43:36', '48fb1d2c-355c-4a10-81ad-39794a6fb6a0');
-INSERT INTO `matrixblocks` VALUES (30, 24, 4, 2, NULL, 2, '2014-07-31 22:20:21', '2016-06-03 17:43:36', '382a5b52-ad0d-4388-9632-2d03ffd8384f');
-INSERT INTO `matrixblocks` VALUES (31, 24, 4, 4, NULL, 3, '2014-07-31 22:20:21', '2016-06-03 17:43:36', 'd7312f60-2be1-4455-9711-271a7cba3424');
-INSERT INTO `matrixblocks` VALUES (32, 24, 4, 3, NULL, 4, '2014-07-31 22:20:21', '2016-06-03 17:43:36', 'd7444e91-5957-4828-ac47-61163fffac3c');
-INSERT INTO `matrixblocks` VALUES (33, 24, 4, 1, NULL, 6, '2014-07-31 22:20:21', '2016-06-03 17:43:36', '30e83f60-1b15-4b6b-aa3e-9b6364399fac');
-INSERT INTO `matrixblocks` VALUES (34, 24, 4, 5, NULL, 7, '2014-07-31 22:20:21', '2016-06-03 17:43:36', 'f38bf9e0-2f39-4d6c-bd2a-c81e3c65dc13');
-INSERT INTO `matrixblocks` VALUES (35, 24, 4, 3, NULL, 8, '2014-07-31 22:20:21', '2016-06-03 17:43:36', '4f6de08b-e0af-42e1-bc5f-cef922479960');
-INSERT INTO `matrixblocks` VALUES (36, 24, 4, 1, NULL, 9, '2014-07-31 22:20:21', '2016-06-03 17:43:36', '43e8ccbb-fabc-4ff3-a00f-54555529b0d2');
-INSERT INTO `matrixblocks` VALUES (37, 24, 4, 4, NULL, 10, '2014-07-31 22:20:21', '2016-06-03 17:43:37', 'd2ca7cc5-4bd0-4c6b-866f-1b493f260b2d');
-INSERT INTO `matrixblocks` VALUES (38, 24, 4, 3, NULL, 11, '2014-07-31 22:20:21', '2016-06-03 17:43:37', '2de1cb4a-4953-4b6a-9c84-a2efc958ba02');
-INSERT INTO `matrixblocks` VALUES (39, 24, 4, 1, NULL, 12, '2014-07-31 22:20:21', '2016-06-03 17:43:37', '8f0da717-6c38-45c0-9191-68519cd57369');
-INSERT INTO `matrixblocks` VALUES (41, 24, 4, 4, NULL, 5, '2014-07-31 22:22:28', '2016-06-03 17:43:36', 'c45be028-eb34-41c5-b6a7-92fd04709ca0');
-INSERT INTO `matrixblocks` VALUES (46, 45, 4, 1, NULL, 1, '2014-07-31 23:20:59', '2016-06-03 17:43:06', '49f900fa-aad1-47a7-acdd-f689d4ae2262');
-INSERT INTO `matrixblocks` VALUES (48, 45, 4, 3, NULL, 3, '2014-07-31 23:20:59', '2016-06-03 17:43:06', 'beed1aba-2499-4342-be9d-03ae7413a1ab');
-INSERT INTO `matrixblocks` VALUES (49, 45, 4, 1, NULL, 4, '2014-07-31 23:20:59', '2016-06-03 17:43:06', '5de1a535-c082-4410-b1d6-76682a52982e');
-INSERT INTO `matrixblocks` VALUES (50, 45, 4, 4, NULL, 5, '2014-07-31 23:20:59', '2016-06-03 17:43:06', '064ef82e-07ac-4944-9eb6-f3ecba739285');
-INSERT INTO `matrixblocks` VALUES (51, 45, 4, 3, NULL, 6, '2014-07-31 23:20:59', '2016-06-03 17:43:06', 'd2dd3c7c-318f-458c-becc-3c747e043aaa');
-INSERT INTO `matrixblocks` VALUES (52, 45, 4, 1, NULL, 7, '2014-07-31 23:20:59', '2016-06-03 17:43:06', '8cab92a1-0e42-4e7b-8b93-33e8b54bd2e4');
-INSERT INTO `matrixblocks` VALUES (53, 45, 4, 2, NULL, 8, '2014-07-31 23:20:59', '2016-06-03 17:43:07', '51b4bef6-407d-442f-9a35-eccedc89dbd5');
-INSERT INTO `matrixblocks` VALUES (54, 45, 4, 3, NULL, 9, '2014-07-31 23:20:59', '2016-06-03 17:43:07', '09295003-273f-4fda-8aa8-8f8d41fbd44d');
-INSERT INTO `matrixblocks` VALUES (55, 45, 4, 1, NULL, 10, '2014-07-31 23:20:59', '2016-06-03 17:43:07', '4d71f4be-d9d5-4105-b2fb-e35e6c44687b');
-INSERT INTO `matrixblocks` VALUES (62, 61, 4, 1, NULL, 1, '2014-08-06 21:32:48', '2016-06-03 17:42:53', 'cc70cb10-2c5e-4a64-be06-2ccf1984082e');
-INSERT INTO `matrixblocks` VALUES (63, 61, 4, 1, NULL, 3, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '9d080e6a-21c5-4131-a2d0-8e72ebe097f3');
-INSERT INTO `matrixblocks` VALUES (64, 61, 4, 4, NULL, 4, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '3b9a944b-a955-4d15-9211-2c0c101eba5e');
-INSERT INTO `matrixblocks` VALUES (65, 61, 4, 3, NULL, 5, '2014-08-06 21:32:48', '2016-06-03 17:42:53', 'c989d6aa-46e3-4a5f-af1a-04064af4a7b4');
-INSERT INTO `matrixblocks` VALUES (66, 61, 4, 1, NULL, 6, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '91a94ecc-bfbc-4f5c-b434-c09f7bd1a01d');
-INSERT INTO `matrixblocks` VALUES (67, 61, 4, 2, NULL, 7, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '33202ceb-0c8d-490b-abd4-32246f675a6a');
-INSERT INTO `matrixblocks` VALUES (68, 61, 4, 1, NULL, 8, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '8b67e068-307b-44e4-bb2d-c8641aa94fee');
-INSERT INTO `matrixblocks` VALUES (69, 61, 4, 4, NULL, 9, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '81a1b65c-5b83-4303-b336-933087ff3fc8');
-INSERT INTO `matrixblocks` VALUES (70, 61, 4, 3, NULL, 10, '2014-08-06 21:32:48', '2016-06-03 17:42:53', 'aa837782-0876-4182-bd59-2829e5f02ebc');
-INSERT INTO `matrixblocks` VALUES (71, 61, 4, 1, NULL, 11, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '4ac53d06-6471-450c-a2fe-a8eabfba4c6f');
-INSERT INTO `matrixblocks` VALUES (73, 61, 4, 4, NULL, 2, '2014-08-06 21:34:12', '2016-06-03 17:42:53', 'eb6c284d-93cf-4314-adc8-eea6c2e1a726');
-INSERT INTO `matrixblocks` VALUES (85, 81, 4, 1, NULL, 1, '2014-09-23 03:16:00', '2015-02-10 17:33:12', 'efe8c04d-3d88-4010-8042-f832d0c74b58');
-INSERT INTO `matrixblocks` VALUES (86, 81, 4, 4, NULL, 2, '2014-09-23 03:16:00', '2015-02-10 17:33:12', '054c99cd-b254-431e-b964-e30741734513');
-INSERT INTO `matrixblocks` VALUES (89, 81, 4, 3, NULL, 3, '2014-09-23 03:16:00', '2015-02-10 17:33:12', '16ade06a-ee0c-4664-8346-56b5662a45be');
-INSERT INTO `matrixblocks` VALUES (90, 81, 4, 1, NULL, 4, '2014-09-23 03:16:00', '2015-02-10 17:33:12', 'bc99d2cb-7463-4ec4-87bf-f2dcd00c1a5c');
-INSERT INTO `matrixblocks` VALUES (93, 81, 4, 3, NULL, 6, '2014-09-23 03:16:00', '2015-02-10 17:33:12', '256cd0bf-0c10-4ca4-8515-37e88710bc92');
-INSERT INTO `matrixblocks` VALUES (94, 81, 4, 1, NULL, 7, '2014-09-23 03:16:00', '2015-02-10 17:33:12', 'fa5cce53-92e3-4fa1-bb31-fa4d753cf40d');
-INSERT INTO `matrixblocks` VALUES (95, 81, 4, 4, NULL, 8, '2014-09-23 03:16:00', '2015-02-10 17:33:12', '21047a0a-a55e-4e43-b702-bd7640eb5fa9');
-INSERT INTO `matrixblocks` VALUES (96, 81, 4, 1, NULL, 9, '2014-09-23 03:16:00', '2015-02-10 17:33:12', '173b13d7-652e-4ab4-9da6-b1c3bf475781');
-INSERT INTO `matrixblocks` VALUES (97, 81, 4, 5, NULL, 5, '2014-09-23 04:26:06', '2015-02-10 17:33:12', '92eb11c0-5e04-42a0-9b61-7030e0bf7acd');
-INSERT INTO `matrixblocks` VALUES (136, 2, 51, 6, NULL, 1, '2014-10-07 03:41:31', '2015-02-04 15:13:27', '39a1a1f6-fef9-409d-99b2-7041b1cd3b28');
-INSERT INTO `matrixblocks` VALUES (138, 2, 51, 6, NULL, 2, '2014-10-07 03:44:02', '2015-02-04 15:13:28', '0ddf9dd2-fa23-470d-81a7-0aef5edd0264');
-INSERT INTO `matrixblocks` VALUES (139, 2, 51, 6, NULL, 3, '2014-10-07 03:45:26', '2015-02-04 15:13:28', '2df03347-33d3-4678-a443-50f013a7bce7');
-INSERT INTO `matrixblocks` VALUES (160, 124, 4, 5, NULL, 1, '2014-12-11 00:47:08', '2015-02-10 17:37:53', 'bb420464-62f7-4563-afdb-4923abe8e69d');
-INSERT INTO `matrixblocks` VALUES (178, 124, 59, 8, NULL, 1, '2014-12-11 02:02:54', '2015-02-10 17:37:53', '00bc86d2-dbe6-439c-8e4a-0deab71d5306');
-INSERT INTO `matrixblocks` VALUES (179, 124, 59, 8, NULL, 2, '2014-12-11 02:02:54', '2015-02-10 17:37:53', 'ec062ea5-84f2-474b-8317-2262300635d8');
-INSERT INTO `matrixblocks` VALUES (180, 124, 59, 8, NULL, 3, '2014-12-11 02:02:54', '2015-02-10 17:37:53', 'c6406bd4-4f21-4c1e-b16d-882b74a61056');
-INSERT INTO `matrixblocks` VALUES (181, 124, 4, 3, NULL, 2, '2014-12-11 02:12:38', '2015-02-10 17:37:53', '26ce3fb7-adb1-4a61-a484-1915381b4717');
-INSERT INTO `matrixblocks` VALUES (182, 124, 4, 1, NULL, 3, '2014-12-11 02:12:38', '2015-02-10 17:37:53', '6eaaaeed-4548-44c2-ada3-0135bf96eed2');
-INSERT INTO `matrixblocks` VALUES (184, 120, 4, 5, NULL, 1, '2014-12-30 01:27:03', '2015-02-10 17:38:56', '72805d12-6020-423a-a121-6c82011fcf89');
-INSERT INTO `matrixblocks` VALUES (185, 120, 4, 3, NULL, 2, '2014-12-30 01:27:03', '2015-02-10 17:38:56', '7d3ab6d1-6099-4057-9f84-06ce325db30f');
-INSERT INTO `matrixblocks` VALUES (186, 120, 4, 1, NULL, 3, '2014-12-30 01:27:03', '2015-02-10 17:38:56', '3f835f4e-9e3c-4454-a32f-691c13038d43');
-INSERT INTO `matrixblocks` VALUES (187, 120, 59, 8, NULL, 1, '2014-12-30 01:27:03', '2015-02-10 17:38:56', '70f30eed-ac33-4e24-970d-cc862122f860');
-INSERT INTO `matrixblocks` VALUES (188, 120, 59, 8, NULL, 2, '2014-12-30 01:27:03', '2015-02-10 17:38:56', 'e3ffa221-841a-459a-9c1d-6d3591b055a9');
-INSERT INTO `matrixblocks` VALUES (189, 120, 59, 8, NULL, 3, '2014-12-30 01:27:03', '2015-02-10 17:38:56', 'c30472f9-1d72-49aa-b452-5f5fbee0481d');
-INSERT INTO `matrixblocks` VALUES (190, 122, 4, 3, NULL, 1, '2014-12-30 01:30:31', '2015-02-10 17:38:26', '9798475b-7d38-4794-8e9b-fc9ecc29a707');
-INSERT INTO `matrixblocks` VALUES (191, 122, 4, 1, NULL, 2, '2014-12-30 01:30:31', '2015-02-10 17:38:26', '980271af-70dd-46d1-a9dd-303190726445');
-INSERT INTO `matrixblocks` VALUES (192, 122, 59, 8, NULL, 1, '2014-12-30 01:30:31', '2015-02-10 17:38:26', '11da3d10-499f-49a8-864a-0f49a55c7474');
-INSERT INTO `matrixblocks` VALUES (193, 122, 59, 8, NULL, 2, '2014-12-30 01:30:31', '2015-02-10 17:38:26', '94e728a5-d6a6-499d-813e-eaf3dc98fbba');
-INSERT INTO `matrixblocks` VALUES (194, 122, 59, 8, NULL, 3, '2014-12-30 01:30:31', '2015-02-10 17:38:26', 'fe6609cf-d2d4-4252-91fd-55eff519c36f');
-INSERT INTO `matrixblocks` VALUES (196, 122, 4, 5, NULL, 3, '2014-12-30 01:32:12', '2015-02-10 17:38:26', '3238d00a-ef9e-4b93-9d73-2794bb3da785');
-INSERT INTO `matrixblocks` VALUES (197, 126, 4, 5, NULL, 1, '2014-12-30 01:38:41', '2015-02-10 17:37:35', 'e1ea54fc-2d00-4358-b0fb-e6d9a36e45b6');
-INSERT INTO `matrixblocks` VALUES (198, 126, 4, 3, NULL, 2, '2014-12-30 01:38:41', '2015-02-10 17:37:35', 'c8c73e77-af0c-4923-83a5-945829dc6adb');
-INSERT INTO `matrixblocks` VALUES (199, 126, 4, 1, NULL, 3, '2014-12-30 01:38:41', '2015-02-10 17:37:35', 'b1173420-80d1-49d3-9c53-51e6adc46c5b');
-INSERT INTO `matrixblocks` VALUES (200, 126, 59, 8, NULL, 1, '2014-12-30 01:38:41', '2015-02-10 17:37:35', '3549e5da-e355-4a81-8ca7-b7fa6f3293d7');
-INSERT INTO `matrixblocks` VALUES (201, 126, 59, 8, NULL, 2, '2014-12-30 01:38:41', '2015-02-10 17:37:35', '1ccf9b80-f17e-4012-8fe8-2bb1d597b0bd');
-INSERT INTO `matrixblocks` VALUES (202, 128, 4, 3, NULL, 1, '2014-12-30 01:41:31', '2015-02-10 17:37:12', '7d1d2cc1-277e-4b71-8f39-85d09c6b3a4c');
-INSERT INTO `matrixblocks` VALUES (203, 128, 4, 1, NULL, 2, '2014-12-30 01:41:31', '2015-02-10 17:37:12', '3013b318-4ba5-46e6-b07a-3749da4bd099');
-INSERT INTO `matrixblocks` VALUES (204, 128, 59, 8, NULL, 1, '2014-12-30 01:41:31', '2015-02-10 17:37:12', '11363cca-aafb-4b11-90fe-f34b6c6fe4c5');
-INSERT INTO `matrixblocks` VALUES (205, 129, 4, 5, NULL, 1, '2014-12-30 01:44:08', '2015-12-08 22:45:10', '0891efe3-0898-4553-9952-a482bb06bcb3');
-INSERT INTO `matrixblocks` VALUES (206, 129, 4, 3, NULL, 2, '2014-12-30 01:44:08', '2015-12-08 22:45:10', 'b72c7714-064a-4548-982a-ba01727180ef');
-INSERT INTO `matrixblocks` VALUES (207, 129, 4, 1, NULL, 3, '2014-12-30 01:44:08', '2015-12-08 22:45:10', 'd66fa9df-3d35-46cc-b318-48d9ce02113e');
-INSERT INTO `matrixblocks` VALUES (208, 129, 59, 8, NULL, 1, '2014-12-30 01:44:08', '2015-12-08 22:45:10', '17ed1480-8a0e-4be8-a61b-a8ee7cc9ad53');
-INSERT INTO `matrixblocks` VALUES (209, 129, 59, 8, NULL, 2, '2014-12-30 01:44:08', '2015-12-08 22:45:10', 'c5d25894-51cf-41ce-b3ef-fc539828429c');
-INSERT INTO `matrixblocks` VALUES (210, 129, 59, 8, NULL, 3, '2014-12-30 01:44:08', '2015-12-08 22:45:10', '91879f1f-44cb-4349-b493-35fc18c38c4e');
-INSERT INTO `matrixblocks` VALUES (211, 130, 4, 1, NULL, 1, '2015-02-02 04:15:19', '2015-02-10 17:33:34', 'e0c82c12-5235-4ac7-a222-d3a12f254fe1');
-INSERT INTO `matrixblocks` VALUES (212, 130, 4, 4, NULL, 3, '2015-02-02 04:17:12', '2015-02-10 17:33:34', '7f673df8-1aa7-440b-b098-c81924c217e0');
-INSERT INTO `matrixblocks` VALUES (213, 130, 4, 1, NULL, 2, '2015-02-02 04:18:16', '2015-02-10 17:33:34', 'bbaa8c7c-bda1-4c8e-adb7-15f5c6fd5f14');
-INSERT INTO `matrixblocks` VALUES (215, 130, 4, 3, NULL, 5, '2015-02-02 04:27:16', '2015-02-10 17:33:35', '8784d1e4-9a9b-4965-9d52-72339e54d15f');
-INSERT INTO `matrixblocks` VALUES (216, 130, 4, 1, NULL, 6, '2015-02-02 04:27:16', '2015-02-10 17:33:35', 'd0346023-98c8-479b-90f6-2d43002f5c43');
-INSERT INTO `matrixblocks` VALUES (217, 130, 4, 5, NULL, 4, '2015-02-02 04:28:36', '2015-02-10 17:33:34', '8d8c9543-215f-4efa-8935-e9a9ce01ed99');
-INSERT INTO `matrixblocks` VALUES (224, 133, 4, 4, NULL, 2, '2015-02-02 16:56:12', '2015-02-10 17:33:59', 'cc995ffd-494d-4e69-b671-28f3fc64e872');
-INSERT INTO `matrixblocks` VALUES (225, 133, 4, 1, NULL, 3, '2015-02-02 16:56:12', '2015-02-10 17:33:59', '76e1bfe0-80c9-4b28-80db-ce6f664623af');
-INSERT INTO `matrixblocks` VALUES (227, 133, 4, 1, NULL, 6, '2015-02-02 16:59:15', '2015-02-10 17:33:59', '7c53c122-4e3e-45e6-86b9-3ed98f0d3018');
-INSERT INTO `matrixblocks` VALUES (228, 133, 4, 5, NULL, 4, '2015-02-02 17:01:08', '2015-02-10 17:33:59', '1e72069a-0712-4cd0-bc9d-6e9a8a0f56b7');
-INSERT INTO `matrixblocks` VALUES (229, 133, 4, 3, NULL, 5, '2015-02-02 17:01:08', '2015-02-10 17:33:59', '7494657c-29ee-4ed1-981e-4f02412bd071');
-INSERT INTO `matrixblocks` VALUES (230, 105, 4, 1, NULL, 1, '2015-02-02 17:04:48', '2016-06-03 17:42:35', '470c20c2-cb2e-4edc-8e8f-6db6f88cff32');
-INSERT INTO `matrixblocks` VALUES (231, 133, 4, 1, NULL, 1, '2015-02-02 17:09:37', '2015-02-10 17:33:59', '093dc82e-e743-4284-b5b6-6d9fefcc3323');
-INSERT INTO `matrixblocks` VALUES (235, 74, 4, 3, NULL, 2, '2015-02-09 21:33:03', '2015-02-10 18:08:01', 'b5f47a7d-e805-492f-8248-ee551ea33415');
-INSERT INTO `matrixblocks` VALUES (236, 74, 4, 9, NULL, 1, '2015-02-09 21:56:10', '2015-02-10 18:08:01', '4559753d-3684-4902-b852-842b20b067d3');
-INSERT INTO `matrixblocks` VALUES (237, 74, 4, 1, NULL, 3, '2015-02-09 21:56:10', '2015-02-10 18:08:01', '34d7d02d-7e6d-4855-b6dc-6f56f3a68772');
-INSERT INTO `matrixblocks` VALUES (238, 74, 4, 9, NULL, 5, '2015-02-09 21:56:10', '2015-02-10 18:08:01', '40108f89-c627-42ae-91b2-22b8ed870099');
-INSERT INTO `matrixblocks` VALUES (239, 74, 4, 3, NULL, 6, '2015-02-09 21:56:10', '2015-02-10 18:08:01', 'd8859697-85e3-41e5-8db6-45082150584d');
-INSERT INTO `matrixblocks` VALUES (240, 74, 4, 4, NULL, 7, '2015-02-09 21:56:10', '2015-02-10 18:08:01', '449dace2-4127-4d32-9bb7-5ee0e53d8e2b');
-INSERT INTO `matrixblocks` VALUES (241, 74, 4, 1, NULL, 8, '2015-02-09 21:56:10', '2015-02-10 18:08:01', '48164fdb-6911-48aa-9e5d-ca33b00c1ad2');
-INSERT INTO `matrixblocks` VALUES (242, 74, 4, 9, NULL, 9, '2015-02-09 21:56:10', '2015-02-10 18:08:01', '160bb71b-5d4f-4b64-8b63-51708e2effd5');
-INSERT INTO `matrixblocks` VALUES (243, 74, 4, 1, NULL, 4, '2015-02-10 01:16:49', '2015-02-10 18:08:01', 'c775fe82-489a-4460-8ef4-b1520b480667');
-INSERT INTO `matrixblocks` VALUES (244, 74, 4, 10, NULL, 10, '2015-02-10 01:23:33', '2015-02-10 18:08:01', '33e38234-0a43-420f-b6e9-fb22bd4344e0');
-INSERT INTO `matrixblocks` VALUES (252, 45, 4, 10, NULL, 2, '2015-02-10 17:25:04', '2016-06-03 17:43:06', 'a739d49b-9781-4154-98bf-743a05a2f50f');
-INSERT INTO `matrixblocks` VALUES (254, 253, 72, 11, NULL, 1, '2015-02-10 19:09:38', '2015-02-10 19:09:38', '59853d25-3671-405e-8c8e-fb8569377b23');
-INSERT INTO `matrixblocks` VALUES (255, 253, 72, 11, NULL, 2, '2015-02-10 19:09:38', '2015-02-10 19:09:38', '6284d3c8-c9cf-4d63-b108-dff0ff82ed3e');
-INSERT INTO `matrixblocks` VALUES (256, 253, 72, 11, NULL, 3, '2015-02-10 19:09:38', '2015-02-10 19:09:38', '8e2691a7-2d7e-4ca7-9c09-b91707f68f39');
+INSERT INTO `matrixblocks` VALUES (9, 4, 4, 1, NULL, 1, NULL, '2014-07-30 23:02:16', '2016-06-03 17:43:25', '95dd2776-0616-49fc-b47d-c48b0f42ec66');
+INSERT INTO `matrixblocks` VALUES (10, 4, 4, 2, NULL, 2, NULL, '2014-07-30 23:02:16', '2016-06-03 17:43:25', 'ca74240d-8649-4d53-a029-2e435b1591e0');
+INSERT INTO `matrixblocks` VALUES (11, 4, 4, 4, NULL, 3, NULL, '2014-07-30 23:02:16', '2016-06-03 17:43:25', 'eb7aac49-2f44-4f4d-8848-61ae2037877f');
+INSERT INTO `matrixblocks` VALUES (12, 4, 4, 3, NULL, 4, NULL, '2014-07-30 23:02:16', '2016-06-03 17:43:25', '83524b1b-8362-40c8-958b-253fa65040ab');
+INSERT INTO `matrixblocks` VALUES (13, 4, 4, 1, NULL, 5, NULL, '2014-07-30 23:02:16', '2016-06-03 17:43:25', 'aa854f17-eb58-40da-aa09-2048ac72066f');
+INSERT INTO `matrixblocks` VALUES (14, 4, 4, 3, NULL, 6, NULL, '2014-07-30 23:02:16', '2016-06-03 17:43:25', '3521c77d-4f60-4ed6-b2f6-c2409ba19c03');
+INSERT INTO `matrixblocks` VALUES (15, 4, 4, 1, NULL, 7, NULL, '2014-07-30 23:02:16', '2016-06-03 17:43:25', 'f0cc77f2-83d8-4967-90a1-ab525e591376');
+INSERT INTO `matrixblocks` VALUES (16, 4, 4, 4, NULL, 8, NULL, '2014-07-30 23:02:16', '2016-06-03 17:43:25', '6281d25d-63c5-44dd-94d7-58da3b65aca3');
+INSERT INTO `matrixblocks` VALUES (17, 4, 4, 3, NULL, 9, NULL, '2014-07-30 23:02:16', '2016-06-03 17:43:25', '6b95578b-1584-47fd-8bd9-d714ee2aa3b6');
+INSERT INTO `matrixblocks` VALUES (18, 4, 4, 1, NULL, 10, NULL, '2014-07-30 23:02:16', '2016-06-03 17:43:25', 'f103246c-759e-4a17-afff-51f7b898e59c');
+INSERT INTO `matrixblocks` VALUES (25, 24, 4, 1, NULL, 1, NULL, '2014-07-31 22:04:17', '2016-06-03 17:43:36', '48fb1d2c-355c-4a10-81ad-39794a6fb6a0');
+INSERT INTO `matrixblocks` VALUES (30, 24, 4, 2, NULL, 2, NULL, '2014-07-31 22:20:21', '2016-06-03 17:43:36', '382a5b52-ad0d-4388-9632-2d03ffd8384f');
+INSERT INTO `matrixblocks` VALUES (31, 24, 4, 4, NULL, 3, NULL, '2014-07-31 22:20:21', '2016-06-03 17:43:36', 'd7312f60-2be1-4455-9711-271a7cba3424');
+INSERT INTO `matrixblocks` VALUES (32, 24, 4, 3, NULL, 4, NULL, '2014-07-31 22:20:21', '2016-06-03 17:43:36', 'd7444e91-5957-4828-ac47-61163fffac3c');
+INSERT INTO `matrixblocks` VALUES (33, 24, 4, 1, NULL, 6, NULL, '2014-07-31 22:20:21', '2016-06-03 17:43:36', '30e83f60-1b15-4b6b-aa3e-9b6364399fac');
+INSERT INTO `matrixblocks` VALUES (34, 24, 4, 5, NULL, 7, NULL, '2014-07-31 22:20:21', '2016-06-03 17:43:36', 'f38bf9e0-2f39-4d6c-bd2a-c81e3c65dc13');
+INSERT INTO `matrixblocks` VALUES (35, 24, 4, 3, NULL, 8, NULL, '2014-07-31 22:20:21', '2016-06-03 17:43:36', '4f6de08b-e0af-42e1-bc5f-cef922479960');
+INSERT INTO `matrixblocks` VALUES (36, 24, 4, 1, NULL, 9, NULL, '2014-07-31 22:20:21', '2016-06-03 17:43:36', '43e8ccbb-fabc-4ff3-a00f-54555529b0d2');
+INSERT INTO `matrixblocks` VALUES (37, 24, 4, 4, NULL, 10, NULL, '2014-07-31 22:20:21', '2016-06-03 17:43:37', 'd2ca7cc5-4bd0-4c6b-866f-1b493f260b2d');
+INSERT INTO `matrixblocks` VALUES (38, 24, 4, 3, NULL, 11, NULL, '2014-07-31 22:20:21', '2016-06-03 17:43:37', '2de1cb4a-4953-4b6a-9c84-a2efc958ba02');
+INSERT INTO `matrixblocks` VALUES (39, 24, 4, 1, NULL, 12, NULL, '2014-07-31 22:20:21', '2016-06-03 17:43:37', '8f0da717-6c38-45c0-9191-68519cd57369');
+INSERT INTO `matrixblocks` VALUES (41, 24, 4, 4, NULL, 5, NULL, '2014-07-31 22:22:28', '2016-06-03 17:43:36', 'c45be028-eb34-41c5-b6a7-92fd04709ca0');
+INSERT INTO `matrixblocks` VALUES (46, 45, 4, 1, NULL, 1, NULL, '2014-07-31 23:20:59', '2016-06-03 17:43:06', '49f900fa-aad1-47a7-acdd-f689d4ae2262');
+INSERT INTO `matrixblocks` VALUES (48, 45, 4, 3, NULL, 3, NULL, '2014-07-31 23:20:59', '2016-06-03 17:43:06', 'beed1aba-2499-4342-be9d-03ae7413a1ab');
+INSERT INTO `matrixblocks` VALUES (49, 45, 4, 1, NULL, 4, NULL, '2014-07-31 23:20:59', '2016-06-03 17:43:06', '5de1a535-c082-4410-b1d6-76682a52982e');
+INSERT INTO `matrixblocks` VALUES (50, 45, 4, 4, NULL, 5, NULL, '2014-07-31 23:20:59', '2016-06-03 17:43:06', '064ef82e-07ac-4944-9eb6-f3ecba739285');
+INSERT INTO `matrixblocks` VALUES (51, 45, 4, 3, NULL, 6, NULL, '2014-07-31 23:20:59', '2016-06-03 17:43:06', 'd2dd3c7c-318f-458c-becc-3c747e043aaa');
+INSERT INTO `matrixblocks` VALUES (52, 45, 4, 1, NULL, 7, NULL, '2014-07-31 23:20:59', '2016-06-03 17:43:06', '8cab92a1-0e42-4e7b-8b93-33e8b54bd2e4');
+INSERT INTO `matrixblocks` VALUES (53, 45, 4, 2, NULL, 8, NULL, '2014-07-31 23:20:59', '2016-06-03 17:43:07', '51b4bef6-407d-442f-9a35-eccedc89dbd5');
+INSERT INTO `matrixblocks` VALUES (54, 45, 4, 3, NULL, 9, NULL, '2014-07-31 23:20:59', '2016-06-03 17:43:07', '09295003-273f-4fda-8aa8-8f8d41fbd44d');
+INSERT INTO `matrixblocks` VALUES (55, 45, 4, 1, NULL, 10, NULL, '2014-07-31 23:20:59', '2016-06-03 17:43:07', '4d71f4be-d9d5-4105-b2fb-e35e6c44687b');
+INSERT INTO `matrixblocks` VALUES (62, 61, 4, 1, NULL, 1, NULL, '2014-08-06 21:32:48', '2016-06-03 17:42:53', 'cc70cb10-2c5e-4a64-be06-2ccf1984082e');
+INSERT INTO `matrixblocks` VALUES (63, 61, 4, 1, NULL, 3, NULL, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '9d080e6a-21c5-4131-a2d0-8e72ebe097f3');
+INSERT INTO `matrixblocks` VALUES (64, 61, 4, 4, NULL, 4, NULL, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '3b9a944b-a955-4d15-9211-2c0c101eba5e');
+INSERT INTO `matrixblocks` VALUES (65, 61, 4, 3, NULL, 5, NULL, '2014-08-06 21:32:48', '2016-06-03 17:42:53', 'c989d6aa-46e3-4a5f-af1a-04064af4a7b4');
+INSERT INTO `matrixblocks` VALUES (66, 61, 4, 1, NULL, 6, NULL, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '91a94ecc-bfbc-4f5c-b434-c09f7bd1a01d');
+INSERT INTO `matrixblocks` VALUES (67, 61, 4, 2, NULL, 7, NULL, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '33202ceb-0c8d-490b-abd4-32246f675a6a');
+INSERT INTO `matrixblocks` VALUES (68, 61, 4, 1, NULL, 8, NULL, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '8b67e068-307b-44e4-bb2d-c8641aa94fee');
+INSERT INTO `matrixblocks` VALUES (69, 61, 4, 4, NULL, 9, NULL, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '81a1b65c-5b83-4303-b336-933087ff3fc8');
+INSERT INTO `matrixblocks` VALUES (70, 61, 4, 3, NULL, 10, NULL, '2014-08-06 21:32:48', '2016-06-03 17:42:53', 'aa837782-0876-4182-bd59-2829e5f02ebc');
+INSERT INTO `matrixblocks` VALUES (71, 61, 4, 1, NULL, 11, NULL, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '4ac53d06-6471-450c-a2fe-a8eabfba4c6f');
+INSERT INTO `matrixblocks` VALUES (73, 61, 4, 4, NULL, 2, NULL, '2014-08-06 21:34:12', '2016-06-03 17:42:53', 'eb6c284d-93cf-4314-adc8-eea6c2e1a726');
+INSERT INTO `matrixblocks` VALUES (85, 81, 4, 1, NULL, 1, NULL, '2014-09-23 03:16:00', '2015-02-10 17:33:12', 'efe8c04d-3d88-4010-8042-f832d0c74b58');
+INSERT INTO `matrixblocks` VALUES (86, 81, 4, 4, NULL, 2, NULL, '2014-09-23 03:16:00', '2015-02-10 17:33:12', '054c99cd-b254-431e-b964-e30741734513');
+INSERT INTO `matrixblocks` VALUES (89, 81, 4, 3, NULL, 3, NULL, '2014-09-23 03:16:00', '2015-02-10 17:33:12', '16ade06a-ee0c-4664-8346-56b5662a45be');
+INSERT INTO `matrixblocks` VALUES (90, 81, 4, 1, NULL, 4, NULL, '2014-09-23 03:16:00', '2015-02-10 17:33:12', 'bc99d2cb-7463-4ec4-87bf-f2dcd00c1a5c');
+INSERT INTO `matrixblocks` VALUES (93, 81, 4, 3, NULL, 6, NULL, '2014-09-23 03:16:00', '2015-02-10 17:33:12', '256cd0bf-0c10-4ca4-8515-37e88710bc92');
+INSERT INTO `matrixblocks` VALUES (94, 81, 4, 1, NULL, 7, NULL, '2014-09-23 03:16:00', '2015-02-10 17:33:12', 'fa5cce53-92e3-4fa1-bb31-fa4d753cf40d');
+INSERT INTO `matrixblocks` VALUES (95, 81, 4, 4, NULL, 8, NULL, '2014-09-23 03:16:00', '2015-02-10 17:33:12', '21047a0a-a55e-4e43-b702-bd7640eb5fa9');
+INSERT INTO `matrixblocks` VALUES (96, 81, 4, 1, NULL, 9, NULL, '2014-09-23 03:16:00', '2015-02-10 17:33:12', '173b13d7-652e-4ab4-9da6-b1c3bf475781');
+INSERT INTO `matrixblocks` VALUES (97, 81, 4, 5, NULL, 5, NULL, '2014-09-23 04:26:06', '2015-02-10 17:33:12', '92eb11c0-5e04-42a0-9b61-7030e0bf7acd');
+INSERT INTO `matrixblocks` VALUES (136, 2, 51, 6, NULL, 1, NULL, '2014-10-07 03:41:31', '2015-02-04 15:13:27', '39a1a1f6-fef9-409d-99b2-7041b1cd3b28');
+INSERT INTO `matrixblocks` VALUES (138, 2, 51, 6, NULL, 2, NULL, '2014-10-07 03:44:02', '2015-02-04 15:13:28', '0ddf9dd2-fa23-470d-81a7-0aef5edd0264');
+INSERT INTO `matrixblocks` VALUES (139, 2, 51, 6, NULL, 3, NULL, '2014-10-07 03:45:26', '2015-02-04 15:13:28', '2df03347-33d3-4678-a443-50f013a7bce7');
+INSERT INTO `matrixblocks` VALUES (160, 124, 4, 5, NULL, 1, NULL, '2014-12-11 00:47:08', '2015-02-10 17:37:53', 'bb420464-62f7-4563-afdb-4923abe8e69d');
+INSERT INTO `matrixblocks` VALUES (178, 124, 59, 8, NULL, 1, NULL, '2014-12-11 02:02:54', '2015-02-10 17:37:53', '00bc86d2-dbe6-439c-8e4a-0deab71d5306');
+INSERT INTO `matrixblocks` VALUES (179, 124, 59, 8, NULL, 2, NULL, '2014-12-11 02:02:54', '2015-02-10 17:37:53', 'ec062ea5-84f2-474b-8317-2262300635d8');
+INSERT INTO `matrixblocks` VALUES (180, 124, 59, 8, NULL, 3, NULL, '2014-12-11 02:02:54', '2015-02-10 17:37:53', 'c6406bd4-4f21-4c1e-b16d-882b74a61056');
+INSERT INTO `matrixblocks` VALUES (181, 124, 4, 3, NULL, 2, NULL, '2014-12-11 02:12:38', '2015-02-10 17:37:53', '26ce3fb7-adb1-4a61-a484-1915381b4717');
+INSERT INTO `matrixblocks` VALUES (182, 124, 4, 1, NULL, 3, NULL, '2014-12-11 02:12:38', '2015-02-10 17:37:53', '6eaaaeed-4548-44c2-ada3-0135bf96eed2');
+INSERT INTO `matrixblocks` VALUES (184, 120, 4, 5, NULL, 1, NULL, '2014-12-30 01:27:03', '2015-02-10 17:38:56', '72805d12-6020-423a-a121-6c82011fcf89');
+INSERT INTO `matrixblocks` VALUES (185, 120, 4, 3, NULL, 2, NULL, '2014-12-30 01:27:03', '2015-02-10 17:38:56', '7d3ab6d1-6099-4057-9f84-06ce325db30f');
+INSERT INTO `matrixblocks` VALUES (186, 120, 4, 1, NULL, 3, NULL, '2014-12-30 01:27:03', '2015-02-10 17:38:56', '3f835f4e-9e3c-4454-a32f-691c13038d43');
+INSERT INTO `matrixblocks` VALUES (187, 120, 59, 8, NULL, 1, NULL, '2014-12-30 01:27:03', '2015-02-10 17:38:56', '70f30eed-ac33-4e24-970d-cc862122f860');
+INSERT INTO `matrixblocks` VALUES (188, 120, 59, 8, NULL, 2, NULL, '2014-12-30 01:27:03', '2015-02-10 17:38:56', 'e3ffa221-841a-459a-9c1d-6d3591b055a9');
+INSERT INTO `matrixblocks` VALUES (189, 120, 59, 8, NULL, 3, NULL, '2014-12-30 01:27:03', '2015-02-10 17:38:56', 'c30472f9-1d72-49aa-b452-5f5fbee0481d');
+INSERT INTO `matrixblocks` VALUES (190, 122, 4, 3, NULL, 1, NULL, '2014-12-30 01:30:31', '2015-02-10 17:38:26', '9798475b-7d38-4794-8e9b-fc9ecc29a707');
+INSERT INTO `matrixblocks` VALUES (191, 122, 4, 1, NULL, 2, NULL, '2014-12-30 01:30:31', '2015-02-10 17:38:26', '980271af-70dd-46d1-a9dd-303190726445');
+INSERT INTO `matrixblocks` VALUES (192, 122, 59, 8, NULL, 1, NULL, '2014-12-30 01:30:31', '2015-02-10 17:38:26', '11da3d10-499f-49a8-864a-0f49a55c7474');
+INSERT INTO `matrixblocks` VALUES (193, 122, 59, 8, NULL, 2, NULL, '2014-12-30 01:30:31', '2015-02-10 17:38:26', '94e728a5-d6a6-499d-813e-eaf3dc98fbba');
+INSERT INTO `matrixblocks` VALUES (194, 122, 59, 8, NULL, 3, NULL, '2014-12-30 01:30:31', '2015-02-10 17:38:26', 'fe6609cf-d2d4-4252-91fd-55eff519c36f');
+INSERT INTO `matrixblocks` VALUES (196, 122, 4, 5, NULL, 3, NULL, '2014-12-30 01:32:12', '2015-02-10 17:38:26', '3238d00a-ef9e-4b93-9d73-2794bb3da785');
+INSERT INTO `matrixblocks` VALUES (197, 126, 4, 5, NULL, 1, NULL, '2014-12-30 01:38:41', '2015-02-10 17:37:35', 'e1ea54fc-2d00-4358-b0fb-e6d9a36e45b6');
+INSERT INTO `matrixblocks` VALUES (198, 126, 4, 3, NULL, 2, NULL, '2014-12-30 01:38:41', '2015-02-10 17:37:35', 'c8c73e77-af0c-4923-83a5-945829dc6adb');
+INSERT INTO `matrixblocks` VALUES (199, 126, 4, 1, NULL, 3, NULL, '2014-12-30 01:38:41', '2015-02-10 17:37:35', 'b1173420-80d1-49d3-9c53-51e6adc46c5b');
+INSERT INTO `matrixblocks` VALUES (200, 126, 59, 8, NULL, 1, NULL, '2014-12-30 01:38:41', '2015-02-10 17:37:35', '3549e5da-e355-4a81-8ca7-b7fa6f3293d7');
+INSERT INTO `matrixblocks` VALUES (201, 126, 59, 8, NULL, 2, NULL, '2014-12-30 01:38:41', '2015-02-10 17:37:35', '1ccf9b80-f17e-4012-8fe8-2bb1d597b0bd');
+INSERT INTO `matrixblocks` VALUES (202, 128, 4, 3, NULL, 1, NULL, '2014-12-30 01:41:31', '2015-02-10 17:37:12', '7d1d2cc1-277e-4b71-8f39-85d09c6b3a4c');
+INSERT INTO `matrixblocks` VALUES (203, 128, 4, 1, NULL, 2, NULL, '2014-12-30 01:41:31', '2015-02-10 17:37:12', '3013b318-4ba5-46e6-b07a-3749da4bd099');
+INSERT INTO `matrixblocks` VALUES (204, 128, 59, 8, NULL, 1, NULL, '2014-12-30 01:41:31', '2015-02-10 17:37:12', '11363cca-aafb-4b11-90fe-f34b6c6fe4c5');
+INSERT INTO `matrixblocks` VALUES (205, 129, 4, 5, NULL, 1, NULL, '2014-12-30 01:44:08', '2015-12-08 22:45:10', '0891efe3-0898-4553-9952-a482bb06bcb3');
+INSERT INTO `matrixblocks` VALUES (206, 129, 4, 3, NULL, 2, NULL, '2014-12-30 01:44:08', '2015-12-08 22:45:10', 'b72c7714-064a-4548-982a-ba01727180ef');
+INSERT INTO `matrixblocks` VALUES (207, 129, 4, 1, NULL, 3, NULL, '2014-12-30 01:44:08', '2015-12-08 22:45:10', 'd66fa9df-3d35-46cc-b318-48d9ce02113e');
+INSERT INTO `matrixblocks` VALUES (208, 129, 59, 8, NULL, 1, NULL, '2014-12-30 01:44:08', '2015-12-08 22:45:10', '17ed1480-8a0e-4be8-a61b-a8ee7cc9ad53');
+INSERT INTO `matrixblocks` VALUES (209, 129, 59, 8, NULL, 2, NULL, '2014-12-30 01:44:08', '2015-12-08 22:45:10', 'c5d25894-51cf-41ce-b3ef-fc539828429c');
+INSERT INTO `matrixblocks` VALUES (210, 129, 59, 8, NULL, 3, NULL, '2014-12-30 01:44:08', '2015-12-08 22:45:10', '91879f1f-44cb-4349-b493-35fc18c38c4e');
+INSERT INTO `matrixblocks` VALUES (211, 130, 4, 1, NULL, 1, NULL, '2015-02-02 04:15:19', '2015-02-10 17:33:34', 'e0c82c12-5235-4ac7-a222-d3a12f254fe1');
+INSERT INTO `matrixblocks` VALUES (212, 130, 4, 4, NULL, 3, NULL, '2015-02-02 04:17:12', '2015-02-10 17:33:34', '7f673df8-1aa7-440b-b098-c81924c217e0');
+INSERT INTO `matrixblocks` VALUES (213, 130, 4, 1, NULL, 2, NULL, '2015-02-02 04:18:16', '2015-02-10 17:33:34', 'bbaa8c7c-bda1-4c8e-adb7-15f5c6fd5f14');
+INSERT INTO `matrixblocks` VALUES (215, 130, 4, 3, NULL, 5, NULL, '2015-02-02 04:27:16', '2015-02-10 17:33:35', '8784d1e4-9a9b-4965-9d52-72339e54d15f');
+INSERT INTO `matrixblocks` VALUES (216, 130, 4, 1, NULL, 6, NULL, '2015-02-02 04:27:16', '2015-02-10 17:33:35', 'd0346023-98c8-479b-90f6-2d43002f5c43');
+INSERT INTO `matrixblocks` VALUES (217, 130, 4, 5, NULL, 4, NULL, '2015-02-02 04:28:36', '2015-02-10 17:33:34', '8d8c9543-215f-4efa-8935-e9a9ce01ed99');
+INSERT INTO `matrixblocks` VALUES (224, 133, 4, 4, NULL, 2, NULL, '2015-02-02 16:56:12', '2015-02-10 17:33:59', 'cc995ffd-494d-4e69-b671-28f3fc64e872');
+INSERT INTO `matrixblocks` VALUES (225, 133, 4, 1, NULL, 3, NULL, '2015-02-02 16:56:12', '2015-02-10 17:33:59', '76e1bfe0-80c9-4b28-80db-ce6f664623af');
+INSERT INTO `matrixblocks` VALUES (227, 133, 4, 1, NULL, 6, NULL, '2015-02-02 16:59:15', '2015-02-10 17:33:59', '7c53c122-4e3e-45e6-86b9-3ed98f0d3018');
+INSERT INTO `matrixblocks` VALUES (228, 133, 4, 5, NULL, 4, NULL, '2015-02-02 17:01:08', '2015-02-10 17:33:59', '1e72069a-0712-4cd0-bc9d-6e9a8a0f56b7');
+INSERT INTO `matrixblocks` VALUES (229, 133, 4, 3, NULL, 5, NULL, '2015-02-02 17:01:08', '2015-02-10 17:33:59', '7494657c-29ee-4ed1-981e-4f02412bd071');
+INSERT INTO `matrixblocks` VALUES (230, 105, 4, 1, NULL, 1, NULL, '2015-02-02 17:04:48', '2016-06-03 17:42:35', '470c20c2-cb2e-4edc-8e8f-6db6f88cff32');
+INSERT INTO `matrixblocks` VALUES (231, 133, 4, 1, NULL, 1, NULL, '2015-02-02 17:09:37', '2015-02-10 17:33:59', '093dc82e-e743-4284-b5b6-6d9fefcc3323');
+INSERT INTO `matrixblocks` VALUES (235, 74, 4, 3, NULL, 2, NULL, '2015-02-09 21:33:03', '2015-02-10 18:08:01', 'b5f47a7d-e805-492f-8248-ee551ea33415');
+INSERT INTO `matrixblocks` VALUES (236, 74, 4, 9, NULL, 1, NULL, '2015-02-09 21:56:10', '2015-02-10 18:08:01', '4559753d-3684-4902-b852-842b20b067d3');
+INSERT INTO `matrixblocks` VALUES (237, 74, 4, 1, NULL, 3, NULL, '2015-02-09 21:56:10', '2015-02-10 18:08:01', '34d7d02d-7e6d-4855-b6dc-6f56f3a68772');
+INSERT INTO `matrixblocks` VALUES (238, 74, 4, 9, NULL, 5, NULL, '2015-02-09 21:56:10', '2015-02-10 18:08:01', '40108f89-c627-42ae-91b2-22b8ed870099');
+INSERT INTO `matrixblocks` VALUES (239, 74, 4, 3, NULL, 6, NULL, '2015-02-09 21:56:10', '2015-02-10 18:08:01', 'd8859697-85e3-41e5-8db6-45082150584d');
+INSERT INTO `matrixblocks` VALUES (240, 74, 4, 4, NULL, 7, NULL, '2015-02-09 21:56:10', '2015-02-10 18:08:01', '449dace2-4127-4d32-9bb7-5ee0e53d8e2b');
+INSERT INTO `matrixblocks` VALUES (241, 74, 4, 1, NULL, 8, NULL, '2015-02-09 21:56:10', '2015-02-10 18:08:01', '48164fdb-6911-48aa-9e5d-ca33b00c1ad2');
+INSERT INTO `matrixblocks` VALUES (242, 74, 4, 9, NULL, 9, NULL, '2015-02-09 21:56:10', '2015-02-10 18:08:01', '160bb71b-5d4f-4b64-8b63-51708e2effd5');
+INSERT INTO `matrixblocks` VALUES (243, 74, 4, 1, NULL, 4, NULL, '2015-02-10 01:16:49', '2015-02-10 18:08:01', 'c775fe82-489a-4460-8ef4-b1520b480667');
+INSERT INTO `matrixblocks` VALUES (244, 74, 4, 10, NULL, 10, NULL, '2015-02-10 01:23:33', '2015-02-10 18:08:01', '33e38234-0a43-420f-b6e9-fb22bd4344e0');
+INSERT INTO `matrixblocks` VALUES (252, 45, 4, 10, NULL, 2, NULL, '2015-02-10 17:25:04', '2016-06-03 17:43:06', 'a739d49b-9781-4154-98bf-743a05a2f50f');
+INSERT INTO `matrixblocks` VALUES (254, 253, 72, 11, NULL, 1, NULL, '2015-02-10 19:09:38', '2015-02-10 19:09:38', '59853d25-3671-405e-8c8e-fb8569377b23');
+INSERT INTO `matrixblocks` VALUES (255, 253, 72, 11, NULL, 2, NULL, '2015-02-10 19:09:38', '2015-02-10 19:09:38', '6284d3c8-c9cf-4d63-b108-dff0ff82ed3e');
+INSERT INTO `matrixblocks` VALUES (256, 253, 72, 11, NULL, 3, NULL, '2015-02-10 19:09:38', '2015-02-10 19:09:38', '8e2691a7-2d7e-4ca7-9c09-b91707f68f39');
 COMMIT;
 
 -- ----------------------------
@@ -1983,7 +2002,7 @@ CREATE TABLE `migrations` (
   KEY `craft_migrations_pluginId_idx` (`pluginId`) USING BTREE,
   KEY `craft_migrations_type_pluginId_idx` (`type`,`pluginId`) USING BTREE,
   CONSTRAINT `craft_migrations_pluginId_fk` FOREIGN KEY (`pluginId`) REFERENCES `plugins` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=179 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=218 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of migrations
@@ -2167,6 +2186,45 @@ INSERT INTO `migrations` VALUES (175, NULL, 'app', 'm180824_193422_case_sensitiv
 INSERT INTO `migrations` VALUES (176, NULL, 'app', 'm180901_151639_fix_matrixcontent_tables', '2018-09-15 21:43:51', '2018-09-15 21:43:51', '2018-09-15 21:43:51', 'afeed9a9-f8e1-417d-a583-29870c8c27c9');
 INSERT INTO `migrations` VALUES (177, 1, 'plugin', 'm180430_204710_remove_old_plugins', '2018-09-15 21:46:56', '2018-09-15 21:46:56', '2018-09-15 21:46:56', 'a2cd5306-f0bf-4dca-9252-34f7df8da542');
 INSERT INTO `migrations` VALUES (178, NULL, 'app', 'm181112_203955_sequences_table', '2019-01-03 23:53:10', '2019-01-03 23:53:10', '2019-01-03 23:53:10', '84ff8ee5-fac1-4a87-8137-66708827d803');
+INSERT INTO `migrations` VALUES (179, NULL, 'app', 'm170630_161027_deprecation_line_nullable', '2019-02-17 16:23:51', '2019-02-17 16:23:51', '2019-02-17 16:23:51', 'bfacd230-46c3-41a3-a6b2-a3213d52a4e7');
+INSERT INTO `migrations` VALUES (180, NULL, 'app', 'm180425_203349_searchable_fields', '2019-02-17 16:23:51', '2019-02-17 16:23:51', '2019-02-17 16:23:51', 'c6b2b346-91cc-4a0e-9ee7-dd93a05c74fe');
+INSERT INTO `migrations` VALUES (181, NULL, 'app', 'm180516_153000_uids_in_field_settings', '2019-02-17 16:23:51', '2019-02-17 16:23:51', '2019-02-17 16:23:51', '251453ea-32e2-48bc-b39c-947d32579614');
+INSERT INTO `migrations` VALUES (182, NULL, 'app', 'm180517_173000_user_photo_volume_to_uid', '2019-02-17 16:23:51', '2019-02-17 16:23:51', '2019-02-17 16:23:51', 'a0218389-ffb2-4705-a14a-bc0af87048bf');
+INSERT INTO `migrations` VALUES (183, NULL, 'app', 'm180518_173000_permissions_to_uid', '2019-02-17 16:23:51', '2019-02-17 16:23:51', '2019-02-17 16:23:51', '23fe0d68-cc81-496b-a8aa-d917bc385771');
+INSERT INTO `migrations` VALUES (184, NULL, 'app', 'm180520_173000_matrix_context_to_uids', '2019-02-17 16:23:51', '2019-02-17 16:23:51', '2019-02-17 16:23:51', '50ba721f-c58b-49d4-8de6-3f88ee15d906');
+INSERT INTO `migrations` VALUES (185, NULL, 'app', 'm180521_173000_initial_yml_and_snapshot', '2019-02-17 16:23:52', '2019-02-17 16:23:52', '2019-02-17 16:23:52', 'cb453f43-c266-4a8b-9b2d-f82f7da78dfe');
+INSERT INTO `migrations` VALUES (186, NULL, 'app', 'm180731_162030_soft_delete_sites', '2019-02-17 16:23:52', '2019-02-17 16:23:52', '2019-02-17 16:23:52', '8ff90abb-a813-4966-840d-7994eb544e43');
+INSERT INTO `migrations` VALUES (187, NULL, 'app', 'm180810_214427_soft_delete_field_layouts', '2019-02-17 16:23:52', '2019-02-17 16:23:52', '2019-02-17 16:23:52', '04d5caf9-3abb-4688-8a48-089798c0e2fa');
+INSERT INTO `migrations` VALUES (188, NULL, 'app', 'm180810_214439_soft_delete_elements', '2019-02-17 16:23:53', '2019-02-17 16:23:53', '2019-02-17 16:23:53', '5d4282bf-b2b1-40a0-acfe-04686e3489cd');
+INSERT INTO `migrations` VALUES (189, NULL, 'app', 'm180904_112109_permission_changes', '2019-02-17 16:23:53', '2019-02-17 16:23:53', '2019-02-17 16:23:53', '6d2a58cc-9a5f-4288-93d5-fc69b74990f5');
+INSERT INTO `migrations` VALUES (190, NULL, 'app', 'm180910_142030_soft_delete_sitegroups', '2019-02-17 16:23:53', '2019-02-17 16:23:53', '2019-02-17 16:23:53', '202f3314-f9b3-44c7-9217-be5a3927957a');
+INSERT INTO `migrations` VALUES (191, NULL, 'app', 'm181011_160000_soft_delete_asset_support', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '2019-02-17 16:23:54', 'ecd6e49e-702c-4fbc-8eec-6b6c88365df4');
+INSERT INTO `migrations` VALUES (192, NULL, 'app', 'm181016_183648_set_default_user_settings', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '736f4a1e-c099-4c58-9499-a949a7111912');
+INSERT INTO `migrations` VALUES (193, NULL, 'app', 'm181017_225222_system_config_settings', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '8b215a52-bf0f-401f-b1b9-d9934c32f6db');
+INSERT INTO `migrations` VALUES (194, NULL, 'app', 'm181018_222343_drop_userpermissions_from_config', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '4bd5a9be-9739-4167-9d7d-c4225b5221b0');
+INSERT INTO `migrations` VALUES (195, NULL, 'app', 'm181029_130000_add_transforms_routes_to_config', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '58d7a516-4ca8-422f-8953-2eac8e3bec38');
+INSERT INTO `migrations` VALUES (196, NULL, 'app', 'm181121_001712_cleanup_field_configs', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '0ffcdc0e-fd64-4280-b8bb-47a371b968d9');
+INSERT INTO `migrations` VALUES (197, NULL, 'app', 'm181128_193942_fix_project_config', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '2efa1930-a18c-4e97-b7eb-e2c74686564f');
+INSERT INTO `migrations` VALUES (198, NULL, 'app', 'm181130_143040_fix_schema_version', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '2019-02-17 16:23:54', 'ba92ed04-dbd6-4fda-a2cc-9260f7f9fee5');
+INSERT INTO `migrations` VALUES (199, NULL, 'app', 'm181211_143040_fix_entry_type_uids', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '2019-02-17 16:23:54', 'd7ffd18a-e4bf-4de3-b133-28f9e1fd6749');
+INSERT INTO `migrations` VALUES (200, NULL, 'app', 'm181213_102500_config_map_aliases', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '2019-02-17 16:23:54', 'fe09eb22-9f1a-4cf0-a1c1-43508ca9bbf5');
+INSERT INTO `migrations` VALUES (201, NULL, 'app', 'm181217_153000_fix_structure_uids', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '7c4b6494-823d-4ffe-b33e-2387b16c2b92');
+INSERT INTO `migrations` VALUES (202, NULL, 'app', 'm190104_152725_store_licensed_plugin_editions', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '2019-02-17 16:23:54', 'b4e237bd-087e-472d-9b39-2e4595c7d251');
+INSERT INTO `migrations` VALUES (203, NULL, 'app', 'm190108_110000_cleanup_project_config', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '2019-02-17 16:23:54', 'a9637ccd-6d47-49f6-99fe-34b8994276a0');
+INSERT INTO `migrations` VALUES (204, NULL, 'app', 'm190108_113000_asset_field_setting_change', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '871a1fb5-038b-4b8e-bc4b-5204c8946ca3');
+INSERT INTO `migrations` VALUES (205, NULL, 'app', 'm190109_172845_fix_colspan', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '7eaa7fb0-45fd-480a-a0e1-9c99fe59a7cc');
+INSERT INTO `migrations` VALUES (206, NULL, 'app', 'm190110_150000_prune_nonexisting_sites', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '2019-02-17 16:23:54', '3d406339-c1be-4e42-bf39-fa8030bac76f');
+INSERT INTO `migrations` VALUES (207, NULL, 'app', 'm190110_214819_soft_delete_volumes', '2019-02-17 16:23:55', '2019-02-17 16:23:55', '2019-02-17 16:23:55', '699405d7-2818-4e28-ad8a-2b7a6fa7e95c');
+INSERT INTO `migrations` VALUES (208, NULL, 'app', 'm190112_124737_fix_user_settings', '2019-02-17 16:23:55', '2019-02-17 16:23:55', '2019-02-17 16:23:55', '3417da9e-9daa-4b3a-b5f9-7fe8f08c2d1e');
+INSERT INTO `migrations` VALUES (209, NULL, 'app', 'm190112_131225_fix_field_layouts', '2019-02-17 16:23:55', '2019-02-17 16:23:55', '2019-02-17 16:23:55', '80c10ad7-fecf-40bd-879f-f9798cdf1300');
+INSERT INTO `migrations` VALUES (210, NULL, 'app', 'm190112_201010_more_soft_deletes', '2019-02-17 16:23:57', '2019-02-17 16:23:57', '2019-02-17 16:23:57', '72fb3b7d-836a-4455-b9dc-100fbb899da1');
+INSERT INTO `migrations` VALUES (211, NULL, 'app', 'm190114_143000_more_asset_field_setting_changes', '2019-02-17 16:23:57', '2019-02-17 16:23:57', '2019-02-17 16:23:57', '2990e90b-49bd-409e-91d8-a41e7e62efa2');
+INSERT INTO `migrations` VALUES (212, NULL, 'app', 'm190121_120000_rich_text_config_setting', '2019-02-17 16:23:57', '2019-02-17 16:23:57', '2019-02-17 16:23:57', '97708267-c30f-4aee-831d-543e926327fa');
+INSERT INTO `migrations` VALUES (213, NULL, 'app', 'm190125_191628_fix_email_transport_password', '2019-02-17 16:23:57', '2019-02-17 16:23:57', '2019-02-17 16:23:57', 'bdbe6705-cb82-415c-b5e6-c3650ec0b7e7');
+INSERT INTO `migrations` VALUES (214, NULL, 'app', 'm190128_181422_cleanup_volume_folders', '2019-02-17 16:23:57', '2019-02-17 16:23:57', '2019-02-17 16:23:57', '2cb95ed2-b6eb-4359-a019-c35f72cf4959');
+INSERT INTO `migrations` VALUES (215, NULL, 'app', 'm190205_140000_fix_asset_soft_delete_index', '2019-02-17 16:23:57', '2019-02-17 16:23:57', '2019-02-17 16:23:57', 'd50da613-f691-491f-af6b-f05dac29c3b9');
+INSERT INTO `migrations` VALUES (216, NULL, 'app', 'm190208_140000_reset_project_config_mapping', '2019-02-17 16:23:57', '2019-02-17 16:23:57', '2019-02-17 16:23:57', '0195e8b5-39fc-4424-a096-67203eb720c4');
+INSERT INTO `migrations` VALUES (217, NULL, 'app', 'm190218_143000_element_index_settings_uid', '2019-02-17 16:23:57', '2019-02-17 16:23:57', '2019-02-17 16:23:57', '67c5b493-e394-44b3-99a3-083ab1bb47c1');
 COMMIT;
 
 -- ----------------------------
@@ -2178,24 +2236,21 @@ CREATE TABLE `plugins` (
   `handle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `version` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `schemaVersion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `licenseKey` char(24) COLLATE utf8_unicode_ci DEFAULT NULL,
   `licenseKeyStatus` enum('valid','invalid','mismatched','astray','unknown') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'unknown',
-  `enabled` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `settings` text COLLATE utf8_unicode_ci,
+  `licensedEdition` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `installDate` datetime NOT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `craft_plugins_handle_unq_idx` (`handle`) USING BTREE,
-  KEY `craft_plugins_enabled_idx` (`enabled`) USING BTREE
+  UNIQUE KEY `craft_plugins_handle_unq_idx` (`handle`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of plugins
 -- ----------------------------
 BEGIN;
-INSERT INTO `plugins` VALUES (1, 'redactor', '2.1.6', '2.0.0', NULL, 'unknown', 1, NULL, '2018-02-16 22:20:38', '2018-02-16 22:20:38', '2018-09-17 22:03:21', '2466ee8f-7fab-45ad-b6ec-10d86c18543b');
+INSERT INTO `plugins` VALUES (1, 'redactor', '2.1.6', '2.0.0', 'unknown', NULL, '2018-02-16 22:20:38', '2018-02-16 22:20:38', '2018-09-17 22:03:21', '2466ee8f-7fab-45ad-b6ec-10d86c18543b');
 COMMIT;
 
 -- ----------------------------
@@ -2418,35 +2473,6 @@ INSERT INTO `resourcepaths` VALUES ('e8c69184', 'C:\\dev\\HappyLager\\vendor\\cr
 INSERT INTO `resourcepaths` VALUES ('ea6c6ccf', '@lib/selectize');
 INSERT INTO `resourcepaths` VALUES ('ec434986', '@craft/web/assets/cp/dist');
 INSERT INTO `resourcepaths` VALUES ('eca4c652', 'C:\\dev\\HappyLager\\vendor\\craftcms\\redactor\\src\\assets\\field\\dist');
-COMMIT;
-
--- ----------------------------
--- Table structure for routes
--- ----------------------------
-DROP TABLE IF EXISTS `routes`;
-CREATE TABLE `routes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `siteId` int(11) DEFAULT NULL,
-  `uriParts` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `uriPattern` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `template` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
-  `sortOrder` smallint(6) unsigned DEFAULT NULL,
-  `dateCreated` datetime NOT NULL,
-  `dateUpdated` datetime NOT NULL,
-  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `craft_routes_uriPattern_unq_idx` (`uriPattern`) USING BTREE,
-  KEY `craft_routes_urlPattern_idx` (`uriPattern`) USING BTREE,
-  KEY `craft_routes_siteId_idx` (`siteId`) USING BTREE,
-  CONSTRAINT `craft_routes_siteId_fk` FOREIGN KEY (`siteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
-
--- ----------------------------
--- Records of routes
--- ----------------------------
-BEGIN;
-INSERT INTO `routes` VALUES (1, NULL, '[\"about\"]', 'about', 'about', 1, '2014-09-17 01:15:41', '2018-09-15 21:43:49', '222c9203-357b-45a9-ab56-ad4df20ad9a0');
-INSERT INTO `routes` VALUES (2, NULL, '[\"search/results\"]', 'search/results', 'search/_results', 2, '2015-01-25 19:35:30', '2018-09-15 21:43:49', 'f2315ceb-90c3-45fe-b6c1-0b847b577a68');
 COMMIT;
 
 -- ----------------------------
@@ -3464,11 +3490,13 @@ CREATE TABLE `sections` (
   `propagateEntries` tinyint(1) NOT NULL DEFAULT '1',
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
+  `dateDeleted` datetime DEFAULT NULL,
   `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `craft_sections_name_unq_idx` (`name`) USING BTREE,
-  UNIQUE KEY `craft_sections_handle_unq_idx` (`handle`) USING BTREE,
   KEY `craft_sections_structureId_fk` (`structureId`) USING BTREE,
+  KEY `sections_dateDeleted_idx` (`dateDeleted`),
+  KEY `sections_name_idx` (`name`),
+  KEY `sections_handle_idx` (`handle`),
   CONSTRAINT `craft_sections_structureId_fk` FOREIGN KEY (`structureId`) REFERENCES `structures` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
@@ -3476,14 +3504,14 @@ CREATE TABLE `sections` (
 -- Records of sections
 -- ----------------------------
 BEGIN;
-INSERT INTO `sections` VALUES (1, NULL, 'Homepage', 'homepage', 'single', 1, 1, '2014-07-29 18:21:35', '2014-07-29 18:21:35', '735318f3-e53c-4ce1-8dad-4c7a5c7c5bee');
-INSERT INTO `sections` VALUES (2, NULL, 'News', 'news', 'channel', 1, 1, '2014-07-29 18:21:35', '2014-07-30 23:20:45', 'f5969f9a-8d3f-487e-9695-cc4e5fbe5efd');
-INSERT INTO `sections` VALUES (3, NULL, 'Work', 'work', 'channel', 1, 1, '2014-09-16 19:33:06', '2014-09-16 19:33:06', 'b3a9eef3-9444-4995-84e2-6dc6b60aebd2');
-INSERT INTO `sections` VALUES (4, NULL, 'About', 'about', 'single', 1, 1, '2014-09-17 01:15:20', '2014-09-17 01:15:20', '1a1f289d-3e32-4409-bfb2-03ec7e7d1b81');
-INSERT INTO `sections` VALUES (5, 1, 'Services', 'services', 'structure', 1, 1, '2014-09-17 04:13:31', '2015-02-09 17:39:16', 'f6b0cb16-5df8-4b57-9856-c9c2d6b9699e');
-INSERT INTO `sections` VALUES (6, NULL, 'Services Index', 'servicesIndex', 'single', 1, 1, '2015-02-09 17:35:42', '2015-02-09 17:48:24', '5fa323b7-9755-4174-bed2-0f2b11c05701');
-INSERT INTO `sections` VALUES (7, NULL, 'Work Index', 'workIndex', 'single', 1, 1, '2015-02-09 20:37:32', '2015-02-09 20:37:32', '1ff1d4d0-499c-41b9-b071-77031c901052');
-INSERT INTO `sections` VALUES (8, 2, 'Locations', 'locations', 'structure', 1, 1, '2015-02-10 18:32:00', '2015-02-10 18:32:00', '45d3a977-dc34-4bff-a39f-425e100a5e6f');
+INSERT INTO `sections` VALUES (1, NULL, 'Homepage', 'homepage', 'single', 1, 1, '2014-07-29 18:21:35', '2014-07-29 18:21:35', NULL, '735318f3-e53c-4ce1-8dad-4c7a5c7c5bee');
+INSERT INTO `sections` VALUES (2, NULL, 'News', 'news', 'channel', 1, 1, '2014-07-29 18:21:35', '2014-07-30 23:20:45', NULL, 'f5969f9a-8d3f-487e-9695-cc4e5fbe5efd');
+INSERT INTO `sections` VALUES (3, NULL, 'Work', 'work', 'channel', 1, 1, '2014-09-16 19:33:06', '2014-09-16 19:33:06', NULL, 'b3a9eef3-9444-4995-84e2-6dc6b60aebd2');
+INSERT INTO `sections` VALUES (4, NULL, 'About', 'about', 'single', 1, 1, '2014-09-17 01:15:20', '2014-09-17 01:15:20', NULL, '1a1f289d-3e32-4409-bfb2-03ec7e7d1b81');
+INSERT INTO `sections` VALUES (5, 1, 'Services', 'services', 'structure', 1, 1, '2014-09-17 04:13:31', '2015-02-09 17:39:16', NULL, 'f6b0cb16-5df8-4b57-9856-c9c2d6b9699e');
+INSERT INTO `sections` VALUES (6, NULL, 'Services Index', 'servicesIndex', 'single', 1, 1, '2015-02-09 17:35:42', '2015-02-09 17:48:24', NULL, '5fa323b7-9755-4174-bed2-0f2b11c05701');
+INSERT INTO `sections` VALUES (7, NULL, 'Work Index', 'workIndex', 'single', 1, 1, '2015-02-09 20:37:32', '2015-02-09 20:37:32', NULL, '1ff1d4d0-499c-41b9-b071-77031c901052');
+INSERT INTO `sections` VALUES (8, 2, 'Locations', 'locations', 'structure', 1, 1, '2015-02-10 18:32:00', '2015-02-10 18:32:00', NULL, '45d3a977-dc34-4bff-a39f-425e100a5e6f');
 COMMIT;
 
 -- ----------------------------
@@ -3584,16 +3612,18 @@ CREATE TABLE `sitegroups` (
   `name` varchar(255) NOT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
+  `dateDeleted` datetime DEFAULT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `craft_sitegroups_name_unq_idx` (`name`) USING BTREE
+  KEY `sitegroups_dateDeleted_idx` (`dateDeleted`),
+  KEY `sitegroups_name_idx` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sitegroups
 -- ----------------------------
 BEGIN;
-INSERT INTO `sitegroups` VALUES (1, 'Happy Lager (en)', '2018-02-16 22:04:33', '2018-02-16 22:04:33', '268c3c49-6715-4b6a-a1b9-f27313adabd1');
+INSERT INTO `sitegroups` VALUES (1, 'Happy Lager (en)', '2018-02-16 22:04:33', '2018-02-16 22:04:33', NULL, '268c3c49-6715-4b6a-a1b9-f27313adabd1');
 COMMIT;
 
 -- ----------------------------
@@ -3612,11 +3642,13 @@ CREATE TABLE `sites` (
   `sortOrder` smallint(6) unsigned DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
+  `dateDeleted` datetime DEFAULT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `craft_sites_handle_unq_idx` (`handle`) USING BTREE,
   KEY `craft_sites_sortOrder_idx` (`sortOrder`) USING BTREE,
   KEY `craft_sites_groupId_fk` (`groupId`) USING BTREE,
+  KEY `sites_dateDeleted_idx` (`dateDeleted`),
+  KEY `sites_handle_idx` (`handle`),
   CONSTRAINT `craft_sites_groupId_fk` FOREIGN KEY (`groupId`) REFERENCES `sitegroups` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
@@ -3624,7 +3656,7 @@ CREATE TABLE `sites` (
 -- Records of sites
 -- ----------------------------
 BEGIN;
-INSERT INTO `sites` VALUES (1, 1, 1, 'Happy Lager (en)', 'en', 'en', 1, '', 1, '2018-02-16 22:04:25', '2018-02-16 22:44:11', '06f4e499-3cdc-4d64-aec2-9a7d3a143c75');
+INSERT INTO `sites` VALUES (1, 1, 1, 'Happy Lager (en)', 'en', 'en', 1, '', 1, '2018-02-16 22:04:25', '2018-02-16 22:44:11', NULL, '06f4e499-3cdc-4d64-aec2-9a7d3a143c75');
 COMMIT;
 
 -- ----------------------------
@@ -3677,16 +3709,18 @@ CREATE TABLE `structures` (
   `maxLevels` smallint(6) unsigned DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
+  `dateDeleted` datetime DEFAULT NULL,
   `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `structures_dateDeleted_idx` (`dateDeleted`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of structures
 -- ----------------------------
 BEGIN;
-INSERT INTO `structures` VALUES (1, 1, '2014-10-03 15:28:03', '2015-02-09 17:39:16', 'aa3fe533-8552-43f9-a172-69982d59561d');
-INSERT INTO `structures` VALUES (2, 1, '2015-02-10 18:32:00', '2015-02-10 18:32:00', '3c13606e-11f9-4cbd-bbae-c29608750caf');
+INSERT INTO `structures` VALUES (1, 1, '2014-10-03 15:28:03', '2015-02-09 17:39:16', NULL, 'aa3fe533-8552-43f9-a172-69982d59561d');
+INSERT INTO `structures` VALUES (2, 1, '2015-02-10 18:32:00', '2015-02-10 18:32:00', NULL, '3c13606e-11f9-4cbd-bbae-c29608750caf');
 COMMIT;
 
 -- ----------------------------
@@ -3708,29 +3742,6 @@ CREATE TABLE `systemmessages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
--- Table structure for systemsettings
--- ----------------------------
-DROP TABLE IF EXISTS `systemsettings`;
-CREATE TABLE `systemsettings` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `category` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-  `settings` text COLLATE utf8_unicode_ci,
-  `dateCreated` datetime NOT NULL,
-  `dateUpdated` datetime NOT NULL,
-  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `craft_systemsettings_category_unq_idx` (`category`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
-
--- ----------------------------
--- Records of systemsettings
--- ----------------------------
-BEGIN;
-INSERT INTO `systemsettings` VALUES (1, 'email', '{\"fromEmail\":\"admin@happylager.dev\",\"fromName\":\"Happylager\",\"template\":null,\"transportType\":\"craft\\\\mail\\\\transportadapters\\\\Sendmail\"}', '2014-07-29 18:21:34', '2018-02-16 22:04:23', 'ea5576dc-1778-49e8-a32e-19e49f3800b2');
-INSERT INTO `systemsettings` VALUES (2, 'users', '{\"requireEmailVerification\":true,\"allowPublicRegistration\":false,\"defaultGroup\":null,\"photoVolumeId\":4,\"photoSubpath\":\"\"}', '2018-02-16 22:04:25', '2018-02-16 22:04:25', '391958fc-2f83-4a78-ad98-ebc08a1b4914');
-COMMIT;
-
--- ----------------------------
 -- Table structure for taggroups
 -- ----------------------------
 DROP TABLE IF EXISTS `taggroups`;
@@ -3741,11 +3752,13 @@ CREATE TABLE `taggroups` (
   `fieldLayoutId` int(11) DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
+  `dateDeleted` datetime DEFAULT NULL,
   `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `craft_taggroups_name_unq_idx` (`name`) USING BTREE,
-  UNIQUE KEY `craft_taggroups_handle_unq_idx` (`handle`) USING BTREE,
   KEY `craft_taggroups_fieldLayoutId_fk` (`fieldLayoutId`) USING BTREE,
+  KEY `taggroups_dateDeleted_idx` (`dateDeleted`),
+  KEY `taggroups_name_idx` (`name`),
+  KEY `taggroups_handle_idx` (`handle`),
   CONSTRAINT `craft_taggroups_fieldLayoutId_fk` FOREIGN KEY (`fieldLayoutId`) REFERENCES `fieldlayouts` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
@@ -3756,6 +3769,7 @@ DROP TABLE IF EXISTS `tags`;
 CREATE TABLE `tags` (
   `id` int(11) NOT NULL,
   `groupId` int(11) NOT NULL,
+  `deletedWithGroup` tinyint(1) DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
@@ -3886,16 +3900,16 @@ CREATE TABLE `userpermissions` (
 -- ----------------------------
 BEGIN;
 INSERT INTO `userpermissions` VALUES (1, 'accesscp', '2014-07-31 23:26:48', '2014-07-31 23:26:48', '9d54f3b4-b41d-4259-9467-058c9afe36c9');
-INSERT INTO `userpermissions` VALUES (2, 'editentries:2', '2014-07-31 23:26:48', '2014-07-31 23:26:48', '4ba56acb-117e-461a-92d8-135bc05075f3');
-INSERT INTO `userpermissions` VALUES (3, 'createentries:2', '2014-07-31 23:26:48', '2014-07-31 23:26:48', '59d65aa1-2a1a-40c6-910e-f2ca44afd7ea');
-INSERT INTO `userpermissions` VALUES (4, 'publishentries:2', '2014-07-31 23:26:48', '2014-07-31 23:26:48', 'ce0c71f9-251d-49fe-94ef-b748be9a8549');
-INSERT INTO `userpermissions` VALUES (5, 'deleteentries:2', '2014-07-31 23:26:48', '2014-07-31 23:26:48', 'b32951a3-c201-4af2-a166-500036d1d84f');
-INSERT INTO `userpermissions` VALUES (6, 'editpeerentries:2', '2014-07-31 23:26:48', '2014-07-31 23:26:48', 'a636ccb4-0001-4d42-b0fb-98bcf89f3a54');
-INSERT INTO `userpermissions` VALUES (7, 'publishpeerentries:2', '2014-07-31 23:26:48', '2014-07-31 23:26:48', 'dc0947cc-eddd-4187-ae3c-55098b2481fa');
-INSERT INTO `userpermissions` VALUES (8, 'deletepeerentries:2', '2014-07-31 23:26:48', '2014-07-31 23:26:48', 'ec8a0ddc-00f2-4457-a1b5-4b7758d15b97');
-INSERT INTO `userpermissions` VALUES (9, 'editpeerentrydrafts:2', '2014-07-31 23:26:48', '2014-07-31 23:26:48', 'a4410acb-7054-4493-8866-b6add56c4dae');
-INSERT INTO `userpermissions` VALUES (10, 'publishpeerentrydrafts:2', '2014-07-31 23:26:48', '2014-07-31 23:26:48', 'bed1592b-2942-4379-85fe-59bb0f1ecaa9');
-INSERT INTO `userpermissions` VALUES (11, 'deletepeerentrydrafts:2', '2014-07-31 23:26:48', '2014-07-31 23:26:48', 'a76119b6-c268-4309-b1cf-8638d2a484f1');
+INSERT INTO `userpermissions` VALUES (2, 'editentries:f5969f9a-8d3f-487e-9695-cc4e5fbe5efd', '2014-07-31 23:26:48', '2019-02-17 16:23:51', '4ba56acb-117e-461a-92d8-135bc05075f3');
+INSERT INTO `userpermissions` VALUES (3, 'createentries:f5969f9a-8d3f-487e-9695-cc4e5fbe5efd', '2014-07-31 23:26:48', '2019-02-17 16:23:51', '59d65aa1-2a1a-40c6-910e-f2ca44afd7ea');
+INSERT INTO `userpermissions` VALUES (4, 'publishentries:f5969f9a-8d3f-487e-9695-cc4e5fbe5efd', '2014-07-31 23:26:48', '2019-02-17 16:23:51', 'ce0c71f9-251d-49fe-94ef-b748be9a8549');
+INSERT INTO `userpermissions` VALUES (5, 'deleteentries:f5969f9a-8d3f-487e-9695-cc4e5fbe5efd', '2014-07-31 23:26:48', '2019-02-17 16:23:51', 'b32951a3-c201-4af2-a166-500036d1d84f');
+INSERT INTO `userpermissions` VALUES (6, 'editpeerentries:f5969f9a-8d3f-487e-9695-cc4e5fbe5efd', '2014-07-31 23:26:48', '2019-02-17 16:23:51', 'a636ccb4-0001-4d42-b0fb-98bcf89f3a54');
+INSERT INTO `userpermissions` VALUES (7, 'publishpeerentries:f5969f9a-8d3f-487e-9695-cc4e5fbe5efd', '2014-07-31 23:26:48', '2019-02-17 16:23:51', 'dc0947cc-eddd-4187-ae3c-55098b2481fa');
+INSERT INTO `userpermissions` VALUES (8, 'deletepeerentries:f5969f9a-8d3f-487e-9695-cc4e5fbe5efd', '2014-07-31 23:26:48', '2019-02-17 16:23:51', 'ec8a0ddc-00f2-4457-a1b5-4b7758d15b97');
+INSERT INTO `userpermissions` VALUES (9, 'editpeerentrydrafts:f5969f9a-8d3f-487e-9695-cc4e5fbe5efd', '2014-07-31 23:26:48', '2019-02-17 16:23:51', 'a4410acb-7054-4493-8866-b6add56c4dae');
+INSERT INTO `userpermissions` VALUES (10, 'publishpeerentrydrafts:f5969f9a-8d3f-487e-9695-cc4e5fbe5efd', '2014-07-31 23:26:48', '2019-02-17 16:23:51', 'bed1592b-2942-4379-85fe-59bb0f1ecaa9');
+INSERT INTO `userpermissions` VALUES (11, 'deletepeerentrydrafts:f5969f9a-8d3f-487e-9695-cc4e5fbe5efd', '2014-07-31 23:26:48', '2019-02-17 16:23:51', 'a76119b6-c268-4309-b1cf-8638d2a484f1');
 COMMIT;
 
 -- ----------------------------
@@ -4046,11 +4060,13 @@ CREATE TABLE `volumes` (
   `fieldLayoutId` int(10) DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
+  `dateDeleted` datetime DEFAULT NULL,
   `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `craft_volumes_name_unq_idx` (`name`) USING BTREE,
-  UNIQUE KEY `craft_volumes_handle_unq_idx` (`handle`) USING BTREE,
   KEY `craft_volumes_fieldLayoutId_fk` (`fieldLayoutId`) USING BTREE,
+  KEY `volumes_dateDeleted_idx` (`dateDeleted`),
+  KEY `volumes_name_idx` (`name`),
+  KEY `volumes_handle_idx` (`handle`),
   CONSTRAINT `craft_volumes_fieldLayoutId_fk` FOREIGN KEY (`fieldLayoutId`) REFERENCES `fieldlayouts` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
@@ -4058,10 +4074,10 @@ CREATE TABLE `volumes` (
 -- Records of volumes
 -- ----------------------------
 BEGIN;
-INSERT INTO `volumes` VALUES (1, 'Site Assets', 'siteAssets', 'craft\\volumes\\Local', 1, '@assetBaseUrl/site', '{\"path\":\"@assetBasePath/site\"}', 1, 194, '2014-07-30 22:43:56', '2018-09-17 22:04:14', '0193dc64-5499-4e28-95dd-f8f603154851');
-INSERT INTO `volumes` VALUES (2, 'Company Logos', 'companyLogos', 'craft\\volumes\\Local', 1, '@assetBaseUrl/logos', '{\"path\":\"@assetBasePath/logos\"}', 2, 195, '2014-10-07 03:38:14', '2018-09-17 22:04:38', '7d6a9bef-727c-4a0c-9791-4f423956de69');
-INSERT INTO `volumes` VALUES (3, 'Service Icons', 'serviceIcons', 'craft\\volumes\\Local', 1, '@assetBaseUrl/images/service-icons', '{\"path\":\"@assetBasePath/site/images/service-icons\"}', 3, 196, '2014-12-03 20:02:16', '2018-09-17 22:05:31', '3fc34ff2-8da7-4a35-8147-f0a2e01392b9');
-INSERT INTO `volumes` VALUES (4, 'User Photos', 'userPhotos', 'craft\\volumes\\Local', 0, NULL, '{\"path\":\"@storage/userphotos\"}', 4, 198, '2018-02-16 22:04:25', '2018-02-16 22:32:04', '1f0ea10d-2be0-4638-88da-105d232f4787');
+INSERT INTO `volumes` VALUES (1, 'Site Assets', 'siteAssets', 'craft\\volumes\\Local', 1, '@assetBaseUrl/site', '{\"path\":\"@assetBasePath/site\"}', 1, 194, '2014-07-30 22:43:56', '2018-09-17 22:04:14', NULL, '0193dc64-5499-4e28-95dd-f8f603154851');
+INSERT INTO `volumes` VALUES (2, 'Company Logos', 'companyLogos', 'craft\\volumes\\Local', 1, '@assetBaseUrl/logos', '{\"path\":\"@assetBasePath/logos\"}', 2, 195, '2014-10-07 03:38:14', '2018-09-17 22:04:38', NULL, '7d6a9bef-727c-4a0c-9791-4f423956de69');
+INSERT INTO `volumes` VALUES (3, 'Service Icons', 'serviceIcons', 'craft\\volumes\\Local', 1, '@assetBaseUrl/images/service-icons', '{\"path\":\"@assetBasePath/site/images/service-icons\"}', 3, 196, '2014-12-03 20:02:16', '2018-09-17 22:05:31', NULL, '3fc34ff2-8da7-4a35-8147-f0a2e01392b9');
+INSERT INTO `volumes` VALUES (4, 'User Photos', 'userPhotos', 'craft\\volumes\\Local', 0, NULL, '{\"path\":\"@storage/userphotos\"}', 4, 198, '2018-02-16 22:04:25', '2018-02-16 22:32:04', NULL, '1f0ea10d-2be0-4638-88da-105d232f4787');
 COMMIT;
 
 -- ----------------------------
@@ -4073,7 +4089,7 @@ CREATE TABLE `widgets` (
   `userId` int(11) NOT NULL,
   `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `sortOrder` smallint(6) unsigned DEFAULT NULL,
-  `colspan` tinyint(4) unsigned DEFAULT NULL,
+  `colspan` tinyint(3) DEFAULT NULL,
   `settings` text COLLATE utf8_unicode_ci,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
