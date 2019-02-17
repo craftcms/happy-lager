@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "712dde027b1fb01da89813c69e098945",
+    "content-hash": "b01a2f7b18f5467e6774677e1a252813",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -504,20 +504,20 @@
         },
         {
             "name": "craftcms/redactor",
-            "version": "2.1.6",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/craftcms/redactor.git",
-                "reference": "86699fb2e9be6c689b3f5da75145acacf9497938"
+                "reference": "1f561397bab4700f36b1393e11aa17c72c3bca0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craftcms/redactor/zipball/86699fb2e9be6c689b3f5da75145acacf9497938",
-                "reference": "86699fb2e9be6c689b3f5da75145acacf9497938",
+                "url": "https://api.github.com/repos/craftcms/redactor/zipball/1f561397bab4700f36b1393e11aa17c72c3bca0b",
+                "reference": "1f561397bab4700f36b1393e11aa17c72c3bca0b",
                 "shasum": ""
             },
             "require": {
-                "craftcms/cms": "^3.0.0-RC15"
+                "craftcms/cms": "^3.1.0"
             },
             "type": "craft-plugin",
             "extra": {
@@ -529,6 +529,7 @@
                     "craft\\redactor\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -540,19 +541,13 @@
             ],
             "description": "Edit rich text content in Craft CMS using Redactor by Imperavi.",
             "keywords": [
+                "Redactor",
                 "cms",
                 "craftcms",
                 "html",
-                "redactor",
                 "yii2"
             ],
-            "support": {
-                "email": "support@craftcms.com",
-                "issues": "https://github.com/craftcms/redactor/issues?state=open",
-                "source": "https://github.com/craftcms/redactor",
-                "docs": "https://github.com/craftcms/redactor"
-            },
-            "time": "2018-08-21T07:54:14+00:00"
+            "time": "2019-01-30T21:53:19+00:00"
         },
         {
             "name": "craftcms/server-check",
