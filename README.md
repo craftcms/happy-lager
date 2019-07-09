@@ -79,20 +79,8 @@ If you want to install the site locally, follow these instructions:
    cd happylager.test
    composer install
    ```
-   
-3. Create a `.env` file at the root of the project with the following contents, and then update the `DB_USER` and `DB_PASSWORD` values to your database user’s credentials.
 
-   ```dotenv
-   ENVIRONMENT="dev"
-   SECURITY_KEY="GoplVO9SzWSYLIvNuDBQP9M-LEJN5EWA"
-   DB_DRIVER="mysql"
-   DB_SERVER="localhost"
-   DB_USER=""
-   DB_PASSWORD=""
-   DB_DATABASE="happylager"
-   DB_TABLE_PREFIX=""
-   DB_PORT="3306"
-   ```
+3. Copy the `.env.example` file at the root of the project to `.env`, and set its `DB_SERVER`, `DB_USER`, and `DB_PASSWORD`  variables to the correct values. (If you’re on a Mac, you may need to type <kbd>Command</kbd> + <kbd>Shift</kbd> + <kbd>.</kbd> in Finder to show hidden files.)
 
 4. Ensure that the following files and directories have permissions that will allow PHP to read and write to them:
 
@@ -108,7 +96,7 @@ If you want to install the site locally, follow these instructions:
 
 6. Create a new virtual host with the hostname `happylager.test` that points to the `happylager.test/web/` folder.
 
-7. Edit your hosts file to resolve `happylager.test` to `127.0.0.1`, if necessary.
+7. Edit your `hosts` file to resolve `happylager.test` to `127.0.0.1`, if necessary.
 
 Now point your browser at `http://happylager.test`. You should see the Happy Lager homepage.
 
