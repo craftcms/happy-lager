@@ -1,4 +1,43 @@
-dateModified: 1574758022
+commerce:
+  orderStatuses:
+    06ef1720-2eca-403e-b182-d907f1d8e4ae:
+      name: Shipped
+      handle: shipped
+      color: blue
+      description: null
+      sortOrder: 99
+      default: false
+    c86bf3a9-9ff5-4d5e-8648-443cd9bcc529:
+      name: New
+      handle: new
+      color: green
+      description: null
+      sortOrder: 99
+      default: true
+  productTypes:
+    3fa3d959-860f-4ad7-8e55-5d33ad17dbcd:
+      name: Clothing
+      handle: clothing
+      hasDimensions: true
+      hasVariants: false
+      hasVariantTitleField: false
+      titleFormat: '{product.title}'
+      skuFormat: ''
+      descriptionFormat: ''
+      siteSettings:
+        06f4e499-3cdc-4d64-aec2-9a7d3a143c75:
+          hasUrls: true
+          uriFormat: 'shop/products/{slug}'
+          template: shop/products/_product
+  gateways:
+    808f7baf-597a-42a6-8e18-2a0dde3d2553:
+      name: Dummy
+      handle: dummy
+      type: craft\commerce\gateways\Dummy
+      sortOrder: 99
+      paymentType: purchase
+      isFrontendEnabled: true
+dateModified: 1574781581
 email:
   fromEmail: admin@happylager.dev
   fromName: Happylager
@@ -1025,6 +1064,14 @@ plugins:
     enabled: '1'
     schemaVersion: 2.3.0
   twigpack:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  commerce:
+    edition: pro
+    enabled: true
+    schemaVersion: 2.2.0
+  klaviyoconnect:
     edition: standard
     enabled: true
     schemaVersion: 1.0.0
