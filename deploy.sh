@@ -1,8 +1,3 @@
-if [ -z "$SITE_DIR" ]
-then
-  SITE_DIR=.
-fi
-
 if [ -z "$GIT_BRANCH" ]
 then
   GIT_BRANCH=master
@@ -13,7 +8,6 @@ then
   PHP_VERSION=7.2
 fi
 
-cd $SITE_DIR
 git fetch --all
 git reset --hard "origin/$GIT_BRANCH"
 git pull origin $GIT_BRANCH
