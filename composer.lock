@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa071df02aaec457007a0438d53f7824",
+    "content-hash": "480084f9f6333f9de9c18ef0ec1cfb30",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -1026,6 +1026,57 @@
                 "klaviyo"
             ],
             "time": "2019-07-29T18:40:22+00:00"
+        },
+        {
+            "name": "fostercommerce/shipstationconnect",
+            "version": "1.2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FosterCommerce/shipstation-connect.git",
+                "reference": "2887d1a49e985febac590204976a3e4ad8047cea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FosterCommerce/shipstation-connect/zipball/2887d1a49e985febac590204976a3e4ad8047cea",
+                "reference": "2887d1a49e985febac590204976a3e4ad8047cea",
+                "shasum": ""
+            },
+            "require": {
+                "craftcms/cms": "^3.0.0",
+                "craftcms/commerce": "^2.0.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.13"
+            },
+            "type": "craft-plugin",
+            "extra": {
+                "handle": "shipstationconnect",
+                "name": "ShipStation Connect",
+                "developer": "Foster Commerce"
+            },
+            "autoload": {
+                "psr-4": {
+                    "fostercommerce\\shipstationconnect\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Foster Commerce",
+                    "homepage": "https://www.fostercommerce.com"
+                }
+            ],
+            "description": "A Craft CMS plugin for integrating Craft Commerce with ShipStation",
+            "homepage": "https://github.com/fostercommerce/shipstation-connect",
+            "keywords": [
+                "Craft",
+                "plugin",
+                "shipstation"
+            ],
+            "time": "2019-11-25T08:21:28+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
