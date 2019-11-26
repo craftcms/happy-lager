@@ -24,7 +24,8 @@
     "vlucas/phpdotenv": "^2.4.0",
     "craftcms/redactor": "^2.0.0",
     "nystudio107/craft-twigpack": "^1.1",
-    "craftcms/commerce": "^2.2"
+    "craftcms/commerce": "^2.2",
+    "fostercommerce/klaviyoconnect": "^3.1"
   },
   "autoload": {
     "psr-4": {

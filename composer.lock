@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3611edc4b79e30699916ce67588f268b",
+    "content-hash": "aa071df02aaec457007a0438d53f7824",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -986,6 +986,46 @@
                 "html"
             ],
             "time": "2019-10-28T03:44:26+00:00"
+        },
+        {
+            "name": "fostercommerce/klaviyoconnect",
+            "version": "3.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FosterCommerce/klaviyoconnect.git",
+                "reference": "5bab1e92d0aebbbb59dca68284972d8cbe4cdbdc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FosterCommerce/klaviyoconnect/zipball/5bab1e92d0aebbbb59dca68284972d8cbe4cdbdc",
+                "reference": "5bab1e92d0aebbbb59dca68284972d8cbe4cdbdc",
+                "shasum": ""
+            },
+            "require": {
+                "craftcms/cms": "^3.0.0",
+                "guzzlehttp/guzzle": "~6.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.13"
+            },
+            "type": "craft-plugin",
+            "extra": {
+                "handle": "klaviyoconnect",
+                "name": "Klaviyo Connect",
+                "developer": "Foster Commerce"
+            },
+            "autoload": {
+                "psr-4": {
+                    "fostercommerce\\klaviyoconnect\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Craft Commerce",
+            "homepage": "https://fostercommerce.com",
+            "keywords": [
+                "klaviyo"
+            ],
+            "time": "2019-07-29T18:40:22+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
