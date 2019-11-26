@@ -25,7 +25,7 @@ return [
 
         // Whether to save the project config out to config/project.yaml
         // (see https://docs.craftcms.com/v3/project-config.html)
-        'useProjectConfigFile' => false,
+        'useProjectConfigFile' => true,
 
         'aliases' => [
             '@assetBasePath' => getenv('ASSET_BASE_PATH'),
