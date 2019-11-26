@@ -31,6 +31,9 @@ return [
             '@assetBasePath' => getenv('ASSET_BASE_PATH'),
             '@assetBaseUrl' => getenv('ASSET_BASE_URL'),
         ],
+
+        // The path to the root directory that should store published CP resources
+        'resourceBasePath' => dirname(__DIR__) . '/web/cpresources',
     ],
 
     // Dev environment settings
