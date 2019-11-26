@@ -534,7 +534,7 @@ $navSpacing: 50px;
     display: inline-block;
     position: relative;
     top: 20px;
-    left: calc(50% - 150px);
+    left: calc(50% - 225px);
 
     @media all and (min-width: $mq4/$base+em) {
       top: 35px;
@@ -609,7 +609,7 @@ $navSpacing: 50px;
             content: '';
             display: block;
             position: absolute;
-            background: url(../images/nav-sel.svg) no-repeat left 100%;
+            background: url($images_path + 'nav-sel.svg') no-repeat left 100%;
             bottom: 0;
             width: 14px;
             height: 14px;
