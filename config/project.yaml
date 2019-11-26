@@ -37,7 +37,7 @@ commerce:
       sortOrder: 99
       paymentType: purchase
       isFrontendEnabled: true
-dateModified: 1574781581
+dateModified: 1574782413
 email:
   fromEmail: admin@happylager.dev
   fromName: Happylager
@@ -1075,6 +1075,10 @@ plugins:
     edition: standard
     enabled: true
     schemaVersion: 1.0.0
+  shipstationconnect:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.1
 routes:
   222c9203-357b-45a9-ab56-ad4df20ad9a0:
     uriParts:
