@@ -69,7 +69,7 @@ module.exports = function(grunt) {
     // Optimize images.
     grunt.registerTask('img', ['imageoptim']);
 
-    // Default task(s).
-    grunt.registerTask('default', ['sass','concat', 'uglify', 'jshint', 'watch']);
+    grunt.registerTask('build', ['sass', 'concat', 'uglify', 'jshint']);
+    grunt.registerTask('default', ['build', 'watch']);
 
 };

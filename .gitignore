@@ -7,3 +7,4 @@ node_modules
 *config.codekit
 web/assets/site/_*
 web/assets/site/*/_*
+web/assets/build/*

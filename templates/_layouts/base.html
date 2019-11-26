@@ -57,12 +57,15 @@
 		<meta charset="utf-8">
 		<title>{% if title is defined %}{{ title }} - {% endif %}{{ siteName }}</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="{{ siteUrl }}assets/fonts/stylesheet.css">
-		<link rel="stylesheet" type="text/css" href="{{ siteUrl }}assets/css/happylager.css">
+    {{ craft.twigpack.includeCssModule("main.css") }}
 	{% endblock %}
 </head>
 <body {% if bodyClass is defined %}class="{{ bodyClass }}"{% endif %}>
+  weee
 	{% block body %}{% endblock %}
 	{% block foot %}{% endblock %}
 </body>
+{{ craft.twigpack.includeJsModule("runtime.js") }}
+{{ craft.twigpack.includeJsModule("vendor.js") }}
+{{ craft.twigpack.includeJsModule("main.js") }}
 </html>
