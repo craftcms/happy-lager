@@ -21,4 +21,4 @@ npm run build
 ./craft project-config/sync
 ./craft clear-caches/all
 
-echo "" | sudo -S service "php${PHP_VERSION}-fpm" reload
+sudo /bin/systemctl reload "php${PHP_VERSION}-fpm.service"
