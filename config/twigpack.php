@@ -26,7 +26,7 @@ return [
     'staging' => [
     ],
     'dev' => [
-        'useDevServer' => false,
+        'useDevServer' => true,
     ],
 ];
 

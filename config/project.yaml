@@ -37,7 +37,7 @@ commerce:
       sortOrder: 99
       paymentType: purchase
       isFrontendEnabled: true
-dateModified: 1574782413
+dateModified: 1575466216
 email:
   fromEmail: admin@happylager.dev
   fromName: Happylager
@@ -372,6 +372,16 @@ fields:
       columnType: string
     fieldGroup: 0815347a-8e73-45fd-93c9-2244ac562559
     contentColumnType: string
+  bc9095b1-4905-4623-911c-1a32d8acec44:
+    name: 'My Klaviyo List'
+    handle: myKlaviyolist
+    instructions: ''
+    searchable: false
+    translationMethod: none
+    translationKeyFormat: null
+    type: fostercommerce\klaviyoconnect\fields\ListField
+    contentColumnType: string
+    fieldGroup: 0d0b7e16-8d7c-4d6f-9059-d11c473058f4
   cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea:
     name: 'Background Color'
     handle: backgroundColor
@@ -439,6 +449,19 @@ globalSets:
               fcf41a5f-68b5-42dd-8ca1-cc457eb749f0:
                 required: false
                 sortOrder: 2
+  dbe716bf-08f6-4302-9a3b-d3ba680d0dcd:
+    name: General
+    handle: general
+    fieldLayouts:
+      bd865b36-af79-4b80-a6b1-0b735d648197:
+        tabs:
+          -
+            name: 'Tab 1'
+            sortOrder: 1
+            fields:
+              bc9095b1-4905-4623-911c-1a32d8acec44:
+                required: false
+                sortOrder: 1
 imageTransforms:
   0f910d7c-0ba2-476a-a7c9-fa489255e601:
     name: Thumb
@@ -1075,6 +1098,23 @@ plugins:
     edition: standard
     enabled: true
     schemaVersion: 1.0.0
+    settings:
+      klaviyoSiteId: $KLAVIYO_SITE_ID
+      klaviyoApiKey: $KLAVIYO_PRIVATE_KEY
+      klaviyoDefaultProfileMapping: formdata_mapping
+      klaviyoAvailableLists:
+        - ''
+        - Nwi5hZ
+      klaviyoListsAll: '0'
+      klaviyoAvailableGroups:
+        - ''
+      cartUrl: /shop/cart
+      productImageField: productImage
+      productImageFieldTransformation: productThumbnail
+      eventPrefix: ''
+      trackSaveUser: true
+      trackCommerceCartUpdated: true
+      trackCommerceOrderCompleted: true
   shipstationconnect:
     edition: standard
     enabled: true
