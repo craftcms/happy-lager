@@ -3,15 +3,15 @@
 
  Source Server         : Homestead (MySQL)
  Source Server Type    : MySQL
- Source Server Version : 50726
+ Source Server Version : 50728
  Source Host           : 127.0.0.1:33060
  Source Schema         : happylager
 
  Target Server Type    : MySQL
- Target Server Version : 50726
+ Target Server Version : 50728
  File Encoding         : 65001
 
- Date: 23/07/2019 08:59:43
+ Date: 17/12/2019 14:23:35
 */
 
 SET NAMES utf8mb4;
@@ -48,6 +48,7 @@ CREATE TABLE `assets` (
   `id` int(11) NOT NULL,
   `volumeId` int(11) DEFAULT NULL,
   `folderId` int(11) NOT NULL,
+  `uploaderId` int(11) DEFAULT NULL,
   `filename` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `kind` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'unknown',
   `width` int(11) unsigned DEFAULT NULL,
@@ -64,6 +65,8 @@ CREATE TABLE `assets` (
   KEY `craft_assets_volumeId_idx` (`volumeId`) USING BTREE,
   KEY `craft_assets_folderId_idx` (`folderId`) USING BTREE,
   KEY `assets_volumeId_keptFile_idx` (`volumeId`,`keptFile`),
+  KEY `assets_uploaderId_fk` (`uploaderId`),
+  CONSTRAINT `assets_uploaderId_fk` FOREIGN KEY (`uploaderId`) REFERENCES `users` (`id`) ON DELETE SET NULL,
   CONSTRAINT `craft_assets_folderId_fk` FOREIGN KEY (`folderId`) REFERENCES `volumefolders` (`id`) ON DELETE CASCADE,
   CONSTRAINT `craft_assets_id_fk` FOREIGN KEY (`id`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
   CONSTRAINT `craft_assets_volumeId_fk` FOREIGN KEY (`volumeId`) REFERENCES `volumes` (`id`) ON DELETE CASCADE
@@ -73,63 +76,63 @@ CREATE TABLE `assets` (
 -- Records of assets
 -- ----------------------------
 BEGIN;
-INSERT INTO `assets` VALUES (6, 1, 1, 'water-barley-hops.jpg', 'image', 1420, 728, 182308, NULL, NULL, NULL, '2014-09-14 15:08:19', '2014-07-30 22:55:13', '2015-02-02 04:40:03', 'a4061a60-44da-4bdd-baeb-5ea173f34024');
-INSERT INTO `assets` VALUES (7, 1, 1, 'laptop-desk.jpg', 'image', 440, 250, 23028, NULL, NULL, NULL, '2014-09-14 15:08:17', '2014-07-30 22:57:57', '2015-02-02 04:39:57', '2c80cb43-4d61-4ce5-9a3d-bfe4b5f4628a');
-INSERT INTO `assets` VALUES (8, 1, 1, 'coffee-shop.jpg', 'image', 1420, 1360, 344802, NULL, NULL, NULL, '2014-09-14 15:08:20', '2014-07-30 23:01:25', '2015-02-02 04:39:53', '374e774f-539c-4d1d-b253-7bd5e70d121d');
-INSERT INTO `assets` VALUES (23, 1, 1, 'augmented-reality.jpg', 'image', 1420, 1020, 121601, NULL, NULL, NULL, '2014-09-14 15:08:18', '2014-07-31 22:02:47', '2015-02-02 04:39:52', '3fcaa874-780d-4d64-bbc6-3939af253f04');
-INSERT INTO `assets` VALUES (28, 1, 1, 'video.jpg', 'image', 440, 250, 10690, NULL, NULL, NULL, '2014-09-14 15:08:17', '2014-07-31 22:08:34', '2015-02-02 04:40:02', '194e3a17-676e-4bb8-b4c7-395f990ad7cc');
-INSERT INTO `assets` VALUES (29, 1, 1, 'augmented-reality-icons.png', 'image', 960, 102, 4733, NULL, NULL, NULL, '2014-09-14 15:08:28', '2014-07-31 22:19:29', '2015-02-02 04:39:52', '7252a798-5d07-4427-977f-81db061b5f01');
-INSERT INTO `assets` VALUES (40, 1, 1, 'awesome-cities.jpg', 'image', 416, 215, 34386, NULL, NULL, NULL, '2014-09-14 15:08:16', '2014-07-31 22:22:21', '2015-02-02 04:39:52', '20d28672-0cbd-4c3e-addb-0af288ea04a4');
-INSERT INTO `assets` VALUES (42, 1, 1, 'fist.jpg', 'image', 1420, 904, 254933, NULL, NULL, NULL, '2014-09-14 15:08:18', '2014-07-31 23:14:44', '2015-02-02 04:39:56', '90b99d72-3104-4e84-9be8-82384c79f524');
-INSERT INTO `assets` VALUES (44, 1, 1, 'pong.png', 'image', 1420, 394, 6575, NULL, NULL, NULL, '2014-09-14 15:09:02', '2014-07-31 23:18:18', '2015-02-02 04:39:59', '676cef56-6788-4b48-87bf-91058001e9f6');
-INSERT INTO `assets` VALUES (59, 1, 1, 'gallery.png', 'image', 1440, 480, 715290, NULL, NULL, NULL, '2014-09-14 15:10:46', '2014-08-06 20:36:49', '2015-02-02 04:39:56', 'a58240ce-a8d4-465c-9545-f128cd84f6b3');
-INSERT INTO `assets` VALUES (60, 1, 1, 'bar.jpg', 'image', 960, 463, 94182, NULL, NULL, NULL, '2014-09-14 15:08:17', '2014-08-06 21:31:46', '2015-02-02 04:39:52', '4c204c73-0ace-4d40-aac0-04e6deeb3840');
-INSERT INTO `assets` VALUES (72, 1, 1, 'macbook.jpg', 'image', 440, 284, 23739, NULL, NULL, NULL, '2014-09-14 15:08:17', '2014-08-06 21:33:56', '2015-02-02 04:39:57', '04cb3cc1-ae5a-4788-82e5-b9ef3176f9c3');
-INSERT INTO `assets` VALUES (82, 1, 1, 'diva-interface-work.jpg', 'image', 1400, 324, 50231, NULL, NULL, NULL, '2014-09-28 16:31:31', '2014-09-23 03:06:38', '2015-02-02 04:39:55', '64c79f89-b616-40c9-b6f8-d580b78bf6a2');
-INSERT INTO `assets` VALUES (83, 1, 1, 'diva-interface-detail.png', 'image', 622, 331, 603612, NULL, NULL, NULL, '2014-09-23 03:10:32', '2014-09-23 03:10:32', '2015-02-02 04:39:54', '0e8847ba-7ed8-42d0-bd87-066eebd39f14');
-INSERT INTO `assets` VALUES (84, 1, 1, 'diva-mobile-detail.png', 'image', 640, 1136, 108139, NULL, NULL, NULL, '2014-09-28 16:31:31', '2014-09-23 03:15:27', '2015-02-02 04:39:55', '74f757f0-4e9b-4f64-86eb-dbd714b2a9ff');
-INSERT INTO `assets` VALUES (98, 1, 1, 'news-link-1-image.jpg', 'image', 283, 204, 369861, NULL, NULL, NULL, '2014-10-03 02:21:34', '2014-10-03 02:21:34', '2015-02-02 04:39:58', '5ca307e8-896c-4c55-9b90-89b9a7219788');
-INSERT INTO `assets` VALUES (100, 1, 1, 'news-link-2-image.jpg', 'image', 283, 204, 367515, NULL, NULL, NULL, '2014-10-03 03:31:00', '2014-10-03 03:31:00', '2015-02-02 04:39:58', 'd59dda1e-5e9a-4eab-a299-81196c160f95');
-INSERT INTO `assets` VALUES (102, 1, 1, 'news-entry-1-image.jpg', 'image', 283, 204, 382424, NULL, NULL, NULL, '2014-10-03 03:33:52', '2014-10-03 03:33:52', '2015-02-02 04:39:58', '09404fd4-7ff5-426a-a77b-8462668fc6d5');
-INSERT INTO `assets` VALUES (104, 1, 1, 'diva-cover.jpg', 'image', 570, 345, 392042, NULL, NULL, NULL, '2014-10-03 03:58:05', '2014-10-03 03:58:05', '2015-02-02 04:39:54', '90f7b27d-5935-47fc-9776-180a9eaca5d7');
-INSERT INTO `assets` VALUES (115, 1, 1, 'email-marketing.jpg', 'image', 284, 204, 352431, NULL, NULL, NULL, '2014-10-04 15:35:41', '2014-10-04 15:35:41', '2015-02-02 04:39:55', '90a30e26-e27f-48ef-bf41-89a715b67424');
-INSERT INTO `assets` VALUES (121, 1, 1, 'seo.jpg', 'image', 284, 204, 356107, NULL, NULL, NULL, '2014-10-04 15:42:04', '2014-10-04 15:42:04', '2015-02-02 04:40:00', '406af95b-527d-4c8e-8205-ca094ae5eb6c');
-INSERT INTO `assets` VALUES (123, 1, 1, 'app-development.jpg', 'image', 284, 204, 354634, NULL, NULL, NULL, '2014-10-04 15:46:51', '2014-10-04 15:46:51', '2015-02-02 04:39:52', '7e9252f2-8d14-4c38-b262-e704edefd378');
-INSERT INTO `assets` VALUES (125, 1, 1, 'strategy.jpg', 'image', 284, 204, 366918, NULL, NULL, NULL, '2014-10-04 15:47:46', '2014-10-04 15:47:46', '2015-02-02 04:40:02', 'aa544a56-175f-402e-a7ff-20ae44d06af3');
-INSERT INTO `assets` VALUES (127, 1, 1, 'development.jpg', 'image', 284, 204, 344439, NULL, NULL, NULL, '2014-10-04 15:48:41', '2014-10-04 15:48:41', '2015-02-02 04:39:54', 'a0988eaf-f4e2-430f-8835-3293c685af0c');
-INSERT INTO `assets` VALUES (131, 1, 1, 'on-track-thumb.jpg', 'image', 284, 204, 140750, NULL, NULL, NULL, '2014-10-05 03:08:45', '2014-10-05 03:08:45', '2015-02-02 04:39:59', '0b4a64c9-9e9d-4e34-b348-96e530258f30');
-INSERT INTO `assets` VALUES (132, 1, 1, 'sports-r-us-thumb.jpg', 'image', 283, 204, 139546, NULL, NULL, NULL, '2014-10-05 03:08:45', '2014-10-05 03:08:45', '2015-02-02 04:40:00', 'e876ba98-1a17-450c-9e63-adc0e790c5c8');
-INSERT INTO `assets` VALUES (134, 1, 1, 'hero-image.jpg', 'image', 1450, 916, 246984, NULL, NULL, NULL, '2014-10-06 01:49:48', '2014-10-06 01:49:48', '2015-02-02 04:39:56', '2fa678ca-6edb-46e6-8b83-02e23bb41dcf');
-INSERT INTO `assets` VALUES (135, 1, 1, 'larry-page.png', 'image', 84, 84, 151220, NULL, NULL, NULL, '2014-10-07 03:41:24', '2014-10-07 03:41:24', '2015-02-04 15:07:12', '9f4d0006-dc9f-411e-b62d-b2a00c4113f1');
-INSERT INTO `assets` VALUES (137, 1, 1, 'ryan-reynolds.png', 'image', 84, 84, 150711, NULL, NULL, NULL, '2014-10-07 03:43:58', '2014-10-07 03:43:58', '2015-02-04 15:13:25', '927eb8d3-348a-4700-8b5e-85648318346e');
-INSERT INTO `assets` VALUES (140, 1, 1, 'bob-guff.png', 'image', 84, 84, 148537, NULL, NULL, NULL, '2014-10-07 03:45:38', '2014-10-07 03:45:39', '2015-02-04 15:08:25', 'a006d888-2772-4873-9958-9fa9588872e6');
-INSERT INTO `assets` VALUES (141, 2, 2, 'logo-coke.png', 'image', 165, 75, 142639, NULL, NULL, NULL, '2014-10-07 03:48:12', '2014-10-07 03:48:12', '2014-10-07 03:48:12', 'b3f0c9ae-90f4-4a51-ba73-b693424572d9');
-INSERT INTO `assets` VALUES (142, 2, 2, 'logo-google.png', 'image', 165, 75, 140641, NULL, NULL, NULL, '2014-10-07 03:48:21', '2014-10-07 03:48:21', '2014-10-07 03:48:21', '5747ab5f-5aee-4b20-a700-a0a2240faf8c');
-INSERT INTO `assets` VALUES (143, 2, 2, 'logo-Jetblue.png', 'image', 165, 75, 139791, NULL, NULL, NULL, '2014-10-07 03:48:30', '2014-10-07 03:48:30', '2014-10-07 03:48:30', 'c4705122-4f12-455a-a9af-763a50f7acbf');
-INSERT INTO `assets` VALUES (144, 2, 2, 'logo-mtv.png', 'image', 165, 75, 139584, NULL, NULL, NULL, '2014-10-07 03:48:40', '2014-10-07 03:48:41', '2014-10-07 03:48:41', '55217bfe-357d-4822-80e1-b863bcf41d29');
-INSERT INTO `assets` VALUES (145, 2, 2, 'logo-newbelgium.png', 'image', 165, 75, 141625, NULL, NULL, NULL, '2014-10-07 03:48:50', '2014-10-07 03:48:50', '2014-10-07 03:48:50', '26ab2e59-2e73-4ef9-817a-91e27662354f');
-INSERT INTO `assets` VALUES (146, 1, 1, 'sportsrus-bigfeature.jpg', 'image', 1513, 446, 382101, NULL, NULL, NULL, '2014-10-09 03:37:12', '2014-10-09 03:37:12', '2015-02-02 04:40:00', 'd3bdbf75-064b-4eae-8f2f-a03946b5b779');
-INSERT INTO `assets` VALUES (147, 1, 1, 'diva-bigimage.jpg', 'image', 1500, 493, 410298, NULL, NULL, NULL, '2014-10-09 03:57:41', '2014-10-09 03:57:41', '2015-02-02 04:39:54', '69cd61b4-86b3-43c5-9aee-da43fe9dbe7c');
-INSERT INTO `assets` VALUES (148, 1, 1, 'ontrack-bigimage.jpg', 'image', 1500, 493, 404370, NULL, NULL, NULL, '2014-10-09 04:20:25', '2014-10-09 04:20:25', '2015-02-02 04:39:59', 'd75826de-637a-472e-be66-ef89721da151');
-INSERT INTO `assets` VALUES (152, 3, 3, 'app-development.svg', 'image', NULL, NULL, 1842, NULL, NULL, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:42', '2014-12-03 20:14:42', '53baf170-4450-46b5-9103-07873d81740d');
-INSERT INTO `assets` VALUES (153, 3, 3, 'design.svg', 'image', NULL, NULL, 2642, NULL, NULL, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:42', '2014-12-03 20:14:42', '6af11d38-1939-4f0c-a66c-3c7e97512b9b');
-INSERT INTO `assets` VALUES (154, 3, 3, 'email-marketing.svg', 'image', NULL, NULL, 2055, NULL, NULL, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:42', '2014-12-03 20:14:42', '3e87c14a-b147-4d0d-b9c2-aec0b64c4b01');
-INSERT INTO `assets` VALUES (155, 3, 3, 'development.svg', 'image', NULL, NULL, 2167, NULL, NULL, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:43', '2014-12-03 20:14:43', '036e2a88-d9bc-4dc8-a418-b71ff55194cd');
-INSERT INTO `assets` VALUES (156, 3, 3, 'seo.svg', 'image', NULL, NULL, 1632, NULL, NULL, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:43', '2014-12-03 20:14:43', 'babaebd8-bbee-4c18-b8d7-065de24e336e');
-INSERT INTO `assets` VALUES (157, 3, 3, 'strategy.svg', 'image', NULL, NULL, 2118, NULL, NULL, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:43', '2014-12-03 20:14:43', 'ea267e86-001a-40c6-b083-210a89aec3c2');
-INSERT INTO `assets` VALUES (163, 1, 1, 'discover.jpg', 'image', 1200, 394, 372014, NULL, NULL, NULL, '2014-12-11 01:24:36', '2014-12-11 01:24:36', '2015-02-02 04:39:54', '301a20b4-a847-4138-b226-71ffe3d1dc56');
-INSERT INTO `assets` VALUES (167, 1, 1, 'explore.jpg', 'image', 1200, 394, 378032, NULL, NULL, NULL, '2014-12-11 01:27:41', '2014-12-11 01:27:41', '2015-02-02 04:39:55', '89819ada-21c0-4791-a4d9-b0b87259e75d');
-INSERT INTO `assets` VALUES (168, 1, 1, 'create-genius.jpg', 'image', 1200, 394, 392282, NULL, NULL, NULL, '2014-12-11 01:28:48', '2014-12-11 01:28:48', '2015-02-02 04:39:53', '36fd3ebb-a0ec-4ba2-9ad5-45ab717dd492');
-INSERT INTO `assets` VALUES (183, 1, 1, 'moosic-app-ui.jpg', 'image', 700, 522, 394407, NULL, NULL, NULL, '2014-12-11 03:33:16', '2014-12-11 03:33:17', '2015-02-02 04:39:58', '7a3aac39-6237-4ae5-b717-870cad8a0468');
-INSERT INTO `assets` VALUES (218, 1, 1, 'chicago-office.jpg', 'image', 700, 424, 408964, NULL, NULL, NULL, '2014-09-14 21:55:35', '2015-02-02 04:39:53', '2015-02-10 19:09:21', 'b608a81b-4d14-4dab-b84a-03594b09d4f1');
-INSERT INTO `assets` VALUES (219, 1, 1, 'macbook-table.jpg', 'image', 363, 255, 385499, NULL, NULL, NULL, '2014-09-14 21:36:43', '2015-02-02 04:39:57', '2015-02-02 04:39:57', 'dedf499b-e0e7-482e-92d0-a4c1a3132e93');
-INSERT INTO `assets` VALUES (220, 1, 4, 'crystal.jpg', 'image', 560, 560, 109638, NULL, NULL, NULL, '2016-08-22 18:34:32', '2015-02-02 04:40:00', '2016-08-22 18:34:32', '275961f1-dfd0-40c7-8cb6-d1d6fe0aec8a');
-INSERT INTO `assets` VALUES (221, 1, 4, 'travis.jpg', 'image', 560, 560, 133092, NULL, NULL, NULL, '2016-08-22 18:34:42', '2015-02-02 04:40:01', '2016-08-22 18:34:42', 'af4861ec-1bea-4c47-9457-17e009c28576');
-INSERT INTO `assets` VALUES (222, 1, 4, 'liz.jpg', 'image', 560, 560, 131415, NULL, NULL, NULL, '2016-08-22 18:34:07', '2015-02-02 04:40:01', '2016-08-22 18:34:07', 'ed385526-c379-4237-b2fd-3c8afc9b0140');
-INSERT INTO `assets` VALUES (223, 1, 1, 'skis.jpg', 'image', 800, 800, 379214, NULL, NULL, NULL, '2015-02-02 16:57:36', '2015-02-02 16:54:59', '2015-02-02 16:57:40', '6999843c-f3e8-4030-a04a-09d1e5317a08');
-INSERT INTO `assets` VALUES (249, 1, 1, 'bike.jpg', 'image', 283, 273, 30193, NULL, NULL, NULL, '2015-02-10 17:22:34', '2015-02-10 17:22:34', '2015-02-10 17:22:34', 'da811e48-5673-495f-b56c-1bdc3c471e5c');
-INSERT INTO `assets` VALUES (250, 1, 1, 'glasses.jpg', 'image', 283, 273, 22694, NULL, NULL, NULL, '2015-02-10 17:23:54', '2015-02-10 17:23:54', '2015-02-10 17:23:54', 'dd094c64-7943-4558-a90d-a0aac84a5b2a');
-INSERT INTO `assets` VALUES (251, 1, 1, 'skateboard.jpg', 'image', 283, 273, 14841, NULL, NULL, NULL, '2015-02-10 17:24:39', '2015-02-10 17:24:39', '2015-02-10 17:24:39', 'adee3d6b-8d52-4e48-9d1c-2e55261cdf47');
+INSERT INTO `assets` VALUES (6, 1, 1, NULL, 'water-barley-hops.jpg', 'image', 1420, 728, 182308, NULL, NULL, NULL, '2014-09-14 15:08:19', '2014-07-30 22:55:13', '2015-02-02 04:40:03', 'a4061a60-44da-4bdd-baeb-5ea173f34024');
+INSERT INTO `assets` VALUES (7, 1, 1, NULL, 'laptop-desk.jpg', 'image', 440, 250, 23028, NULL, NULL, NULL, '2014-09-14 15:08:17', '2014-07-30 22:57:57', '2015-02-02 04:39:57', '2c80cb43-4d61-4ce5-9a3d-bfe4b5f4628a');
+INSERT INTO `assets` VALUES (8, 1, 1, NULL, 'coffee-shop.jpg', 'image', 1420, 1360, 344802, NULL, NULL, NULL, '2014-09-14 15:08:20', '2014-07-30 23:01:25', '2015-02-02 04:39:53', '374e774f-539c-4d1d-b253-7bd5e70d121d');
+INSERT INTO `assets` VALUES (23, 1, 1, NULL, 'augmented-reality.jpg', 'image', 1420, 1020, 121601, NULL, NULL, NULL, '2014-09-14 15:08:18', '2014-07-31 22:02:47', '2015-02-02 04:39:52', '3fcaa874-780d-4d64-bbc6-3939af253f04');
+INSERT INTO `assets` VALUES (28, 1, 1, NULL, 'video.jpg', 'image', 440, 250, 10690, NULL, NULL, NULL, '2014-09-14 15:08:17', '2014-07-31 22:08:34', '2015-02-02 04:40:02', '194e3a17-676e-4bb8-b4c7-395f990ad7cc');
+INSERT INTO `assets` VALUES (29, 1, 1, NULL, 'augmented-reality-icons.png', 'image', 960, 102, 4733, NULL, NULL, NULL, '2014-09-14 15:08:28', '2014-07-31 22:19:29', '2015-02-02 04:39:52', '7252a798-5d07-4427-977f-81db061b5f01');
+INSERT INTO `assets` VALUES (40, 1, 1, NULL, 'awesome-cities.jpg', 'image', 416, 215, 34386, NULL, NULL, NULL, '2014-09-14 15:08:16', '2014-07-31 22:22:21', '2015-02-02 04:39:52', '20d28672-0cbd-4c3e-addb-0af288ea04a4');
+INSERT INTO `assets` VALUES (42, 1, 1, NULL, 'fist.jpg', 'image', 1420, 904, 254933, NULL, NULL, NULL, '2014-09-14 15:08:18', '2014-07-31 23:14:44', '2015-02-02 04:39:56', '90b99d72-3104-4e84-9be8-82384c79f524');
+INSERT INTO `assets` VALUES (44, 1, 1, NULL, 'pong.png', 'image', 1420, 394, 6575, NULL, NULL, NULL, '2014-09-14 15:09:02', '2014-07-31 23:18:18', '2015-02-02 04:39:59', '676cef56-6788-4b48-87bf-91058001e9f6');
+INSERT INTO `assets` VALUES (59, 1, 1, NULL, 'gallery.png', 'image', 1440, 480, 715290, NULL, NULL, NULL, '2014-09-14 15:10:46', '2014-08-06 20:36:49', '2015-02-02 04:39:56', 'a58240ce-a8d4-465c-9545-f128cd84f6b3');
+INSERT INTO `assets` VALUES (60, 1, 1, NULL, 'bar.jpg', 'image', 960, 463, 94182, NULL, NULL, NULL, '2014-09-14 15:08:17', '2014-08-06 21:31:46', '2015-02-02 04:39:52', '4c204c73-0ace-4d40-aac0-04e6deeb3840');
+INSERT INTO `assets` VALUES (72, 1, 1, NULL, 'macbook.jpg', 'image', 440, 284, 23739, NULL, NULL, NULL, '2014-09-14 15:08:17', '2014-08-06 21:33:56', '2015-02-02 04:39:57', '04cb3cc1-ae5a-4788-82e5-b9ef3176f9c3');
+INSERT INTO `assets` VALUES (82, 1, 1, NULL, 'diva-interface-work.jpg', 'image', 1400, 324, 50231, NULL, NULL, NULL, '2014-09-28 16:31:31', '2014-09-23 03:06:38', '2015-02-02 04:39:55', '64c79f89-b616-40c9-b6f8-d580b78bf6a2');
+INSERT INTO `assets` VALUES (83, 1, 1, NULL, 'diva-interface-detail.png', 'image', 622, 331, 603612, NULL, NULL, NULL, '2014-09-23 03:10:32', '2014-09-23 03:10:32', '2015-02-02 04:39:54', '0e8847ba-7ed8-42d0-bd87-066eebd39f14');
+INSERT INTO `assets` VALUES (84, 1, 1, NULL, 'diva-mobile-detail.png', 'image', 640, 1136, 108139, NULL, NULL, NULL, '2014-09-28 16:31:31', '2014-09-23 03:15:27', '2015-02-02 04:39:55', '74f757f0-4e9b-4f64-86eb-dbd714b2a9ff');
+INSERT INTO `assets` VALUES (98, 1, 1, NULL, 'news-link-1-image.jpg', 'image', 283, 204, 369861, NULL, NULL, NULL, '2014-10-03 02:21:34', '2014-10-03 02:21:34', '2015-02-02 04:39:58', '5ca307e8-896c-4c55-9b90-89b9a7219788');
+INSERT INTO `assets` VALUES (100, 1, 1, NULL, 'news-link-2-image.jpg', 'image', 283, 204, 367515, NULL, NULL, NULL, '2014-10-03 03:31:00', '2014-10-03 03:31:00', '2015-02-02 04:39:58', 'd59dda1e-5e9a-4eab-a299-81196c160f95');
+INSERT INTO `assets` VALUES (102, 1, 1, NULL, 'news-entry-1-image.jpg', 'image', 283, 204, 382424, NULL, NULL, NULL, '2014-10-03 03:33:52', '2014-10-03 03:33:52', '2015-02-02 04:39:58', '09404fd4-7ff5-426a-a77b-8462668fc6d5');
+INSERT INTO `assets` VALUES (104, 1, 1, NULL, 'diva-cover.jpg', 'image', 570, 345, 392042, NULL, NULL, NULL, '2014-10-03 03:58:05', '2014-10-03 03:58:05', '2015-02-02 04:39:54', '90f7b27d-5935-47fc-9776-180a9eaca5d7');
+INSERT INTO `assets` VALUES (115, 1, 1, NULL, 'email-marketing.jpg', 'image', 284, 204, 352431, NULL, NULL, NULL, '2014-10-04 15:35:41', '2014-10-04 15:35:41', '2015-02-02 04:39:55', '90a30e26-e27f-48ef-bf41-89a715b67424');
+INSERT INTO `assets` VALUES (121, 1, 1, NULL, 'seo.jpg', 'image', 284, 204, 356107, NULL, NULL, NULL, '2014-10-04 15:42:04', '2014-10-04 15:42:04', '2015-02-02 04:40:00', '406af95b-527d-4c8e-8205-ca094ae5eb6c');
+INSERT INTO `assets` VALUES (123, 1, 1, NULL, 'app-development.jpg', 'image', 284, 204, 354634, NULL, NULL, NULL, '2014-10-04 15:46:51', '2014-10-04 15:46:51', '2015-02-02 04:39:52', '7e9252f2-8d14-4c38-b262-e704edefd378');
+INSERT INTO `assets` VALUES (125, 1, 1, NULL, 'strategy.jpg', 'image', 284, 204, 366918, NULL, NULL, NULL, '2014-10-04 15:47:46', '2014-10-04 15:47:46', '2015-02-02 04:40:02', 'aa544a56-175f-402e-a7ff-20ae44d06af3');
+INSERT INTO `assets` VALUES (127, 1, 1, NULL, 'development.jpg', 'image', 284, 204, 344439, NULL, NULL, NULL, '2014-10-04 15:48:41', '2014-10-04 15:48:41', '2015-02-02 04:39:54', 'a0988eaf-f4e2-430f-8835-3293c685af0c');
+INSERT INTO `assets` VALUES (131, 1, 1, NULL, 'on-track-thumb.jpg', 'image', 284, 204, 140750, NULL, NULL, NULL, '2014-10-05 03:08:45', '2014-10-05 03:08:45', '2015-02-02 04:39:59', '0b4a64c9-9e9d-4e34-b348-96e530258f30');
+INSERT INTO `assets` VALUES (132, 1, 1, NULL, 'sports-r-us-thumb.jpg', 'image', 283, 204, 139546, NULL, NULL, NULL, '2014-10-05 03:08:45', '2014-10-05 03:08:45', '2015-02-02 04:40:00', 'e876ba98-1a17-450c-9e63-adc0e790c5c8');
+INSERT INTO `assets` VALUES (134, 1, 1, NULL, 'hero-image.jpg', 'image', 1450, 916, 246984, NULL, NULL, NULL, '2014-10-06 01:49:48', '2014-10-06 01:49:48', '2015-02-02 04:39:56', '2fa678ca-6edb-46e6-8b83-02e23bb41dcf');
+INSERT INTO `assets` VALUES (135, 1, 1, NULL, 'larry-page.png', 'image', 84, 84, 151220, NULL, NULL, NULL, '2014-10-07 03:41:24', '2014-10-07 03:41:24', '2015-02-04 15:07:12', '9f4d0006-dc9f-411e-b62d-b2a00c4113f1');
+INSERT INTO `assets` VALUES (137, 1, 1, NULL, 'ryan-reynolds.png', 'image', 84, 84, 150711, NULL, NULL, NULL, '2014-10-07 03:43:58', '2014-10-07 03:43:58', '2015-02-04 15:13:25', '927eb8d3-348a-4700-8b5e-85648318346e');
+INSERT INTO `assets` VALUES (140, 1, 1, NULL, 'bob-guff.png', 'image', 84, 84, 148537, NULL, NULL, NULL, '2014-10-07 03:45:38', '2014-10-07 03:45:39', '2015-02-04 15:08:25', 'a006d888-2772-4873-9958-9fa9588872e6');
+INSERT INTO `assets` VALUES (141, 2, 2, NULL, 'logo-coke.png', 'image', 165, 75, 142639, NULL, NULL, NULL, '2014-10-07 03:48:12', '2014-10-07 03:48:12', '2014-10-07 03:48:12', 'b3f0c9ae-90f4-4a51-ba73-b693424572d9');
+INSERT INTO `assets` VALUES (142, 2, 2, NULL, 'logo-google.png', 'image', 165, 75, 140641, NULL, NULL, NULL, '2014-10-07 03:48:21', '2014-10-07 03:48:21', '2014-10-07 03:48:21', '5747ab5f-5aee-4b20-a700-a0a2240faf8c');
+INSERT INTO `assets` VALUES (143, 2, 2, NULL, 'logo-Jetblue.png', 'image', 165, 75, 139791, NULL, NULL, NULL, '2014-10-07 03:48:30', '2014-10-07 03:48:30', '2014-10-07 03:48:30', 'c4705122-4f12-455a-a9af-763a50f7acbf');
+INSERT INTO `assets` VALUES (144, 2, 2, NULL, 'logo-mtv.png', 'image', 165, 75, 139584, NULL, NULL, NULL, '2014-10-07 03:48:40', '2014-10-07 03:48:41', '2014-10-07 03:48:41', '55217bfe-357d-4822-80e1-b863bcf41d29');
+INSERT INTO `assets` VALUES (145, 2, 2, NULL, 'logo-newbelgium.png', 'image', 165, 75, 141625, NULL, NULL, NULL, '2014-10-07 03:48:50', '2014-10-07 03:48:50', '2014-10-07 03:48:50', '26ab2e59-2e73-4ef9-817a-91e27662354f');
+INSERT INTO `assets` VALUES (146, 1, 1, NULL, 'sportsrus-bigfeature.jpg', 'image', 1513, 446, 382101, NULL, NULL, NULL, '2014-10-09 03:37:12', '2014-10-09 03:37:12', '2015-02-02 04:40:00', 'd3bdbf75-064b-4eae-8f2f-a03946b5b779');
+INSERT INTO `assets` VALUES (147, 1, 1, NULL, 'diva-bigimage.jpg', 'image', 1500, 493, 410298, NULL, NULL, NULL, '2014-10-09 03:57:41', '2014-10-09 03:57:41', '2015-02-02 04:39:54', '69cd61b4-86b3-43c5-9aee-da43fe9dbe7c');
+INSERT INTO `assets` VALUES (148, 1, 1, NULL, 'ontrack-bigimage.jpg', 'image', 1500, 493, 404370, NULL, NULL, NULL, '2014-10-09 04:20:25', '2014-10-09 04:20:25', '2015-02-02 04:39:59', 'd75826de-637a-472e-be66-ef89721da151');
+INSERT INTO `assets` VALUES (152, 3, 3, NULL, 'app-development.svg', 'image', NULL, NULL, 1842, NULL, NULL, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:42', '2014-12-03 20:14:42', '53baf170-4450-46b5-9103-07873d81740d');
+INSERT INTO `assets` VALUES (153, 3, 3, NULL, 'design.svg', 'image', NULL, NULL, 2642, NULL, NULL, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:42', '2014-12-03 20:14:42', '6af11d38-1939-4f0c-a66c-3c7e97512b9b');
+INSERT INTO `assets` VALUES (154, 3, 3, NULL, 'email-marketing.svg', 'image', NULL, NULL, 2055, NULL, NULL, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:42', '2014-12-03 20:14:42', '3e87c14a-b147-4d0d-b9c2-aec0b64c4b01');
+INSERT INTO `assets` VALUES (155, 3, 3, NULL, 'development.svg', 'image', NULL, NULL, 2167, NULL, NULL, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:43', '2014-12-03 20:14:43', '036e2a88-d9bc-4dc8-a418-b71ff55194cd');
+INSERT INTO `assets` VALUES (156, 3, 3, NULL, 'seo.svg', 'image', NULL, NULL, 1632, NULL, NULL, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:43', '2014-12-03 20:14:43', 'babaebd8-bbee-4c18-b8d7-065de24e336e');
+INSERT INTO `assets` VALUES (157, 3, 3, NULL, 'strategy.svg', 'image', NULL, NULL, 2118, NULL, NULL, NULL, '2014-11-12 21:42:23', '2014-12-03 20:14:43', '2014-12-03 20:14:43', 'ea267e86-001a-40c6-b083-210a89aec3c2');
+INSERT INTO `assets` VALUES (163, 1, 1, NULL, 'discover.jpg', 'image', 1200, 394, 372014, NULL, NULL, NULL, '2014-12-11 01:24:36', '2014-12-11 01:24:36', '2015-02-02 04:39:54', '301a20b4-a847-4138-b226-71ffe3d1dc56');
+INSERT INTO `assets` VALUES (167, 1, 1, NULL, 'explore.jpg', 'image', 1200, 394, 378032, NULL, NULL, NULL, '2014-12-11 01:27:41', '2014-12-11 01:27:41', '2015-02-02 04:39:55', '89819ada-21c0-4791-a4d9-b0b87259e75d');
+INSERT INTO `assets` VALUES (168, 1, 1, NULL, 'create-genius.jpg', 'image', 1200, 394, 392282, NULL, NULL, NULL, '2014-12-11 01:28:48', '2014-12-11 01:28:48', '2015-02-02 04:39:53', '36fd3ebb-a0ec-4ba2-9ad5-45ab717dd492');
+INSERT INTO `assets` VALUES (183, 1, 1, NULL, 'moosic-app-ui.jpg', 'image', 700, 522, 394407, NULL, NULL, NULL, '2014-12-11 03:33:16', '2014-12-11 03:33:17', '2015-02-02 04:39:58', '7a3aac39-6237-4ae5-b717-870cad8a0468');
+INSERT INTO `assets` VALUES (218, 1, 1, NULL, 'chicago-office.jpg', 'image', 700, 424, 408964, NULL, NULL, NULL, '2014-09-14 21:55:35', '2015-02-02 04:39:53', '2015-02-10 19:09:21', 'b608a81b-4d14-4dab-b84a-03594b09d4f1');
+INSERT INTO `assets` VALUES (219, 1, 1, NULL, 'macbook-table.jpg', 'image', 363, 255, 385499, NULL, NULL, NULL, '2014-09-14 21:36:43', '2015-02-02 04:39:57', '2015-02-02 04:39:57', 'dedf499b-e0e7-482e-92d0-a4c1a3132e93');
+INSERT INTO `assets` VALUES (220, 1, 4, NULL, 'crystal.jpg', 'image', 560, 560, 109638, NULL, NULL, NULL, '2016-08-22 18:34:32', '2015-02-02 04:40:00', '2016-08-22 18:34:32', '275961f1-dfd0-40c7-8cb6-d1d6fe0aec8a');
+INSERT INTO `assets` VALUES (221, 1, 4, NULL, 'travis.jpg', 'image', 560, 560, 133092, NULL, NULL, NULL, '2016-08-22 18:34:42', '2015-02-02 04:40:01', '2016-08-22 18:34:42', 'af4861ec-1bea-4c47-9457-17e009c28576');
+INSERT INTO `assets` VALUES (222, 1, 4, NULL, 'liz.jpg', 'image', 560, 560, 131415, NULL, NULL, NULL, '2016-08-22 18:34:07', '2015-02-02 04:40:01', '2016-08-22 18:34:07', 'ed385526-c379-4237-b2fd-3c8afc9b0140');
+INSERT INTO `assets` VALUES (223, 1, 1, NULL, 'skis.jpg', 'image', 800, 800, 379214, NULL, NULL, NULL, '2015-02-02 16:57:36', '2015-02-02 16:54:59', '2015-02-02 16:57:40', '6999843c-f3e8-4030-a04a-09d1e5317a08');
+INSERT INTO `assets` VALUES (249, 1, 1, NULL, 'bike.jpg', 'image', 283, 273, 30193, NULL, NULL, NULL, '2015-02-10 17:22:34', '2015-02-10 17:22:34', '2015-02-10 17:22:34', 'da811e48-5673-495f-b56c-1bdc3c471e5c');
+INSERT INTO `assets` VALUES (250, 1, 1, NULL, 'glasses.jpg', 'image', 283, 273, 22694, NULL, NULL, NULL, '2015-02-10 17:23:54', '2015-02-10 17:23:54', '2015-02-10 17:23:54', 'dd094c64-7943-4558-a90d-a0aac84a5b2a');
+INSERT INTO `assets` VALUES (251, 1, 1, NULL, 'skateboard.jpg', 'image', 283, 273, 14841, NULL, NULL, NULL, '2015-02-10 17:24:39', '2015-02-10 17:24:39', '2015-02-10 17:24:39', 'adee3d6b-8d52-4e48-9d1c-2e55261cdf47');
 COMMIT;
 
 -- ----------------------------
@@ -252,6 +255,48 @@ CREATE TABLE `categorygroups_sites` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
+-- Table structure for changedattributes
+-- ----------------------------
+DROP TABLE IF EXISTS `changedattributes`;
+CREATE TABLE `changedattributes` (
+  `elementId` int(11) NOT NULL,
+  `siteId` int(11) NOT NULL,
+  `attribute` varchar(255) NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `propagated` tinyint(1) NOT NULL,
+  `userId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`elementId`,`siteId`,`attribute`),
+  KEY `changedattributes_elementId_siteId_dateUpdated_idx` (`elementId`,`siteId`,`dateUpdated`),
+  KEY `changedattributes_siteId_fk` (`siteId`),
+  KEY `changedattributes_userId_fk` (`userId`),
+  CONSTRAINT `changedattributes_elementId_fk` FOREIGN KEY (`elementId`) REFERENCES `elements` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `changedattributes_siteId_fk` FOREIGN KEY (`siteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `changedattributes_userId_fk` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for changedfields
+-- ----------------------------
+DROP TABLE IF EXISTS `changedfields`;
+CREATE TABLE `changedfields` (
+  `elementId` int(11) NOT NULL,
+  `siteId` int(11) NOT NULL,
+  `fieldId` int(11) NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `propagated` tinyint(1) NOT NULL,
+  `userId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`elementId`,`siteId`,`fieldId`),
+  KEY `changedfields_elementId_siteId_dateUpdated_idx` (`elementId`,`siteId`,`dateUpdated`),
+  KEY `changedfields_siteId_fk` (`siteId`),
+  KEY `changedfields_fieldId_fk` (`fieldId`),
+  KEY `changedfields_userId_fk` (`userId`),
+  CONSTRAINT `changedfields_elementId_fk` FOREIGN KEY (`elementId`) REFERENCES `elements` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `changedfields_fieldId_fk` FOREIGN KEY (`fieldId`) REFERENCES `fields` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `changedfields_siteId_fk` FOREIGN KEY (`siteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `changedfields_userId_fk` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
 -- Table structure for content
 -- ----------------------------
 DROP TABLE IF EXISTS `content`;
@@ -281,14 +326,14 @@ CREATE TABLE `content` (
   KEY `craft_content_siteId_idx` (`siteId`) USING BTREE,
   CONSTRAINT `craft_content_elementId_fk` FOREIGN KEY (`elementId`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
   CONSTRAINT `craft_content_siteId_fk` FOREIGN KEY (`siteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=315 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=323 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of content
 -- ----------------------------
 BEGIN;
 INSERT INTO `content` VALUES (1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-29 18:21:32', '2014-07-29 18:21:32', '59077408-b18f-4041-8894-37cc7c7adff4');
-INSERT INTO `content` VALUES (2, 2, 1, 'Homepage', 'Welcome to Happylager.dev!', '<p>It’s true, this site doesn’t have a whole lot of content yet, but don’t worry. Our web developers have just installed the CMS, and they’re setting things up for the content editors this very moment. Soon Happylager.dev will be an oasis of fresh perspectives, sharp analyses, and astute opinions that will keep you coming back again and again.</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-29 18:21:35', '2015-02-04 15:13:27', '73fccf4e-5208-46d9-8f88-99e78ecf855e');
+INSERT INTO `content` VALUES (2, 2, 1, 'Homepage', 'Welcome to Happylager.dev!', '<p>It’s true, this site doesn’t have a whole lot of content yet, but don’t worry. Our web developers have just installed the CMS, and they’re setting things up for the content editors this very moment. Soon Happylager.dev will be an oasis of fresh perspectives, sharp analyses, and astute opinions that will keep you coming back again and again.</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-29 18:21:35', '2019-12-17 22:20:49', '73fccf4e-5208-46d9-8f88-99e78ecf855e');
 INSERT INTO `content` VALUES (4, 4, 1, 'Barrel Aged Digital Natives', 'What’s more important?', NULL, 'Experience or raw skill', NULL, NULL, NULL, NULL, '<p>\r\n	Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis.\r\n</p>', NULL, NULL, NULL, 1, '2014-07-30 21:02:31', '2016-06-03 17:43:25', '8ff26e7c-5c9d-46a7-873b-c74425789122');
 INSERT INTO `content` VALUES (5, 6, 1, 'water-barley-hops', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-30 22:55:13', '2015-02-02 04:40:03', 'a68629d1-4b98-4993-afe5-0c48f6b764ca');
 INSERT INTO `content` VALUES (6, 7, 1, 'laptop-desk', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-30 22:57:57', '2015-02-02 04:39:56', 'a271b7be-317d-4fec-966a-643ef947b8a4');
@@ -305,7 +350,7 @@ INSERT INTO `content` VALUES (25, 59, 1, 'gallery', NULL, NULL, NULL, NULL, NULL
 INSERT INTO `content` VALUES (26, 60, 1, 'bar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-06 21:31:46', '2015-02-02 04:39:52', 'd16c45e0-93f6-4afc-a6b6-037d5679cddd');
 INSERT INTO `content` VALUES (27, 61, 1, 'How Deep the Rabbit Hole Goes', 'Make Complex Layouts', NULL, 'Using Images and Pull Quotes All in the Flow of the Text', NULL, NULL, NULL, NULL, '<p>\r\n	Et harum quidem rerum facilis. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo mus quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut.\r\n</p>', NULL, NULL, NULL, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', '46fd1164-58a6-4604-88d8-4b148d74186e');
 INSERT INTO `content` VALUES (28, 72, 1, 'macbook', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-06 21:33:56', '2015-02-02 04:39:57', '0ddb9a58-9710-4284-968c-455706de870d');
-INSERT INTO `content` VALUES (29, 74, 1, 'About', 'We set out with a simple goal: create the design and products that we would like to see.', '<p>We are a group of highly effective, passionate people ready to take your product to the next level. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae taque earum hic tenetur a sapiente delectus ut aut reiciendis.</p>', NULL, '2701 West Thomas St Chicago, Il 60622', 'info@company.com', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-17 01:15:21', '2015-02-10 18:08:01', '91f0829c-6749-498c-9dd1-96680a3f0799');
+INSERT INTO `content` VALUES (29, 74, 1, 'About', 'We set out with a simple goal: create the design and products that we would like to see.', '<p>We are a group of highly effective, passionate people ready to take your product to the next level. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae taque earum hic tenetur a sapiente delectus ut aut reiciendis.</p>', NULL, '2701 West Thomas St Chicago, Il 60622', 'info@company.com', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-17 01:15:21', '2019-12-17 22:20:49', '91f0829c-6749-498c-9dd1-96680a3f0799');
 INSERT INTO `content` VALUES (36, 81, 1, 'Diva!', 'A Star Is Born', NULL, 'Combining Music with Celebrity gossip has become the winning combination making DIVA! the most downloaded app of 2013', NULL, NULL, '#2f1c54', NULL, '<p>\r\n	In July, we released Diva!, our celebrity music app.\r\n</p>', NULL, NULL, NULL, 0, '2014-09-23 03:01:18', '2015-02-10 17:33:12', '2ee218e1-3eb7-4d7e-83ad-ab713c3ee37f');
 INSERT INTO `content` VALUES (37, 82, 1, 'diva-interface-work', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-23 03:06:38', '2015-02-02 04:39:55', '9c945a08-e0a0-4e77-854d-8161e107b910');
 INSERT INTO `content` VALUES (38, 83, 1, 'diva-interface-detail', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-23 03:10:32', '2015-02-02 04:39:54', 'b31ba700-74ef-43b2-af92-13724fda89e2');
@@ -361,12 +406,20 @@ INSERT INTO `content` VALUES (102, 221, 1, 'Travis Morton', NULL, NULL, NULL, NU
 INSERT INTO `content` VALUES (103, 222, 1, 'Liz Murphy', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '<p><strong>Liz Murphy</strong><br>President and Co-Founder</p>', NULL, NULL, NULL, 0, '2015-02-02 04:40:01', '2016-08-22 18:36:04', 'ee455f67-5465-4070-a012-ccfc7dbdd7d4');
 INSERT INTO `content` VALUES (104, 223, 1, 'skis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2015-02-02 16:54:58', '2015-02-02 16:57:40', '272131db-e7b8-4677-b5df-90e1c19801d6');
 INSERT INTO `content` VALUES (105, 232, 1, NULL, NULL, NULL, NULL, NULL, 'hi@happylager.dev', NULL, NULL, NULL, NULL, '© Copyright Happy Lager {year}', 'Pull up a barstool', 0, '2015-02-04 15:20:19', '2015-02-10 18:31:03', '9813d4b0-ddfd-4133-86f2-fbb248e0f12f');
-INSERT INTO `content` VALUES (106, 233, 1, 'How It’s Made', 'From conception to perfection, we Craft each one of our digital products by hand.', '<p>Some studios have a secret or complex process on how they create great work. Ours is not a secret and it\'s very simple: <strong>Truth.</strong> Here at Happy Lager we believe that every digital product we make speaks to the integrity of our craft. We want to use great products, <strong>so we only create great products</strong>.</p>', NULL, NULL, NULL, NULL, NULL, NULL, '<h3><br></h3><p><br></p>', NULL, NULL, 0, '2015-02-09 17:35:42', '2015-02-09 20:34:54', '9f7d35e0-31f5-4251-b2dc-5da1c2b5f3ec');
-INSERT INTO `content` VALUES (108, 234, 1, 'What’s On Tap', 'Every digital product has a story to tell. It’s our job to find it and tell it well.', '<p>While we were not meaning to rhyme, this statement holds true. The end goal is to connect with humans, and we use the basic principles of story to do just that. Browse our work, enjoy the visuals and discover what it takes to create something great.</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2015-02-09 20:37:32', '2015-02-09 20:38:51', '3c8bb2bc-84c8-4114-81ad-005a0566c123');
+INSERT INTO `content` VALUES (106, 233, 1, 'How It’s Made', 'From conception to perfection, we Craft each one of our digital products by hand.', '<p>Some studios have a secret or complex process on how they create great work. Ours is not a secret and it\'s very simple: <strong>Truth.</strong> Here at Happy Lager we believe that every digital product we make speaks to the integrity of our craft. We want to use great products, <strong>so we only create great products</strong>.</p>', NULL, NULL, NULL, NULL, NULL, NULL, '<h3><br></h3><p><br></p>', NULL, NULL, 0, '2015-02-09 17:35:42', '2019-12-17 22:20:49', '9f7d35e0-31f5-4251-b2dc-5da1c2b5f3ec');
+INSERT INTO `content` VALUES (108, 234, 1, 'What’s On Tap', 'Every digital product has a story to tell. It’s our job to find it and tell it well.', '<p>While we were not meaning to rhyme, this statement holds true. The end goal is to connect with humans, and we use the basic principles of story to do just that. Browse our work, enjoy the visuals and discover what it takes to create something great.</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2015-02-09 20:37:32', '2019-12-17 22:20:49', '3c8bb2bc-84c8-4114-81ad-005a0566c123');
 INSERT INTO `content` VALUES (109, 249, 1, 'bike', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2015-02-10 17:22:34', '2015-02-10 17:22:34', 'ec3f1138-d315-4dc0-92ba-7ed9b0c698d7');
 INSERT INTO `content` VALUES (110, 250, 1, 'glasses', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2015-02-10 17:23:54', '2015-02-10 17:23:54', 'ae914f74-1f8e-4eb6-9981-0f1b0a06d84d');
 INSERT INTO `content` VALUES (111, 251, 1, 'skateboard', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2015-02-10 17:24:39', '2015-02-10 17:24:39', '370a4a69-07e5-49c0-b1b1-73dc13cb8fe6');
 INSERT INTO `content` VALUES (112, 253, 1, 'Happy Lager Chicago', NULL, NULL, NULL, '2701 West Thomas St\r\nChicago, Il 60622', 'chicago@happylager.dev', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2015-02-10 19:09:38', '2015-02-10 19:09:38', 'f57ace0e-1bc3-4757-9b09-25dc50a17735');
+INSERT INTO `content` VALUES (315, 2010, 1, 'Homepage', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '4ef99949-4f3a-4917-9641-35b3910b652d');
+INSERT INTO `content` VALUES (316, 2014, 1, 'Homepage', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '31130658-159b-4690-b2af-21aec3d071d3');
+INSERT INTO `content` VALUES (317, 2018, 1, 'About', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'cf570018-6005-49fc-a1b0-c48724e06b10');
+INSERT INTO `content` VALUES (318, 2029, 1, 'About', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'e8c1006d-3724-46b0-814e-86f726587ad1');
+INSERT INTO `content` VALUES (319, 2040, 1, 'How It’s Made', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'c90dc670-1166-414e-960b-11b25275c2e2');
+INSERT INTO `content` VALUES (320, 2041, 1, 'How It’s Made', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '10236db1-94ca-4de6-b0fc-634be81ec3ea');
+INSERT INTO `content` VALUES (321, 2042, 1, 'What’s On Tap', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '4035e3dd-2914-4b28-a9b0-3a06b02cee2a');
+INSERT INTO `content` VALUES (322, 2043, 1, 'What’s On Tap', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '2106c43d-16af-4e40-b113-222f12f6d67d');
 COMMIT;
 
 -- ----------------------------
@@ -413,13 +466,15 @@ DROP TABLE IF EXISTS `drafts`;
 CREATE TABLE `drafts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sourceId` int(11) DEFAULT NULL,
-  `creatorId` int(11) NOT NULL,
+  `creatorId` int(11) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `notes` text,
+  `trackChanges` tinyint(1) NOT NULL DEFAULT '0',
+  `dateLastMerged` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `drafts_creatorId_fk` (`creatorId`),
   KEY `drafts_sourceId_fk` (`sourceId`),
-  CONSTRAINT `drafts_creatorId_fk` FOREIGN KEY (`creatorId`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `drafts_creatorId_fk` FOREIGN KEY (`creatorId`) REFERENCES `users` (`id`) ON DELETE SET NULL,
   CONSTRAINT `drafts_sourceId_fk` FOREIGN KEY (`sourceId`) REFERENCES `elements` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -472,14 +527,14 @@ CREATE TABLE `elements` (
   CONSTRAINT `craft_elements_fieldLayoutId_fk` FOREIGN KEY (`fieldLayoutId`) REFERENCES `fieldlayouts` (`id`) ON DELETE SET NULL,
   CONSTRAINT `elements_draftId_fk` FOREIGN KEY (`draftId`) REFERENCES `drafts` (`id`) ON DELETE CASCADE,
   CONSTRAINT `elements_revisionId_fk` FOREIGN KEY (`revisionId`) REFERENCES `revisions` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2010 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2044 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of elements
 -- ----------------------------
 BEGIN;
 INSERT INTO `elements` VALUES (1, NULL, NULL, NULL, 'craft\\elements\\User', 1, 0, '2014-07-29 18:21:32', '2014-07-29 18:21:32', NULL, 'b66b2bfe-badb-478a-81ff-1fceb638a019');
-INSERT INTO `elements` VALUES (2, NULL, NULL, 104, 'craft\\elements\\Entry', 1, 0, '2014-07-29 18:21:35', '2015-02-04 15:13:27', NULL, 'f20120a9-7cb6-4c53-8c06-6041a39cc056');
+INSERT INTO `elements` VALUES (2, NULL, NULL, 104, 'craft\\elements\\Entry', 1, 0, '2014-07-29 18:21:35', '2019-12-17 22:20:49', NULL, 'f20120a9-7cb6-4c53-8c06-6041a39cc056');
 INSERT INTO `elements` VALUES (4, NULL, NULL, 197, 'craft\\elements\\Entry', 1, 0, '2014-07-30 21:02:31', '2016-06-03 17:43:25', NULL, '8b6c79cf-8e2a-464d-a50f-833445bab37d');
 INSERT INTO `elements` VALUES (6, NULL, NULL, 194, 'craft\\elements\\Asset', 1, 0, '2014-07-30 22:55:13', '2015-02-02 04:40:03', NULL, 'd1e0a2aa-b87a-492a-9ea4-25bbfa85e261');
 INSERT INTO `elements` VALUES (7, NULL, NULL, 194, 'craft\\elements\\Asset', 1, 0, '2014-07-30 22:57:57', '2015-02-02 04:39:56', NULL, '5d3dbc7c-a2c6-402f-a95a-1c1367e6346c');
@@ -538,7 +593,7 @@ INSERT INTO `elements` VALUES (70, NULL, NULL, 180, 'craft\\elements\\MatrixBloc
 INSERT INTO `elements` VALUES (71, NULL, NULL, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:32:48', '2016-06-03 17:42:53', NULL, 'fba79122-da03-4f0f-8b7f-7c7a91ecd41d');
 INSERT INTO `elements` VALUES (72, NULL, NULL, 194, 'craft\\elements\\Asset', 1, 0, '2014-08-06 21:33:56', '2015-02-02 04:39:57', NULL, 'c85d6702-ead2-483b-b357-55bbdc061056');
 INSERT INTO `elements` VALUES (73, NULL, NULL, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-08-06 21:34:12', '2016-06-03 17:42:53', NULL, 'f1f5b6a6-92a8-464f-ad9f-487cea36d137');
-INSERT INTO `elements` VALUES (74, NULL, NULL, 191, 'craft\\elements\\Entry', 1, 0, '2014-09-17 01:15:21', '2015-02-10 18:08:01', NULL, '990289b0-2685-4293-a526-2962328c9bac');
+INSERT INTO `elements` VALUES (74, NULL, NULL, 191, 'craft\\elements\\Entry', 1, 0, '2014-09-17 01:15:21', '2019-12-17 22:20:49', NULL, '990289b0-2685-4293-a526-2962328c9bac');
 INSERT INTO `elements` VALUES (81, NULL, NULL, 120, 'craft\\elements\\Entry', 1, 0, '2014-09-23 03:01:18', '2015-02-10 17:33:12', NULL, '81dc7a51-0a4a-490c-896d-f8596f6f2434');
 INSERT INTO `elements` VALUES (82, NULL, NULL, 194, 'craft\\elements\\Asset', 1, 0, '2014-09-23 03:06:38', '2015-02-02 04:39:55', NULL, 'd28b57f7-e8b3-439b-8a63-d7806ebff343');
 INSERT INTO `elements` VALUES (83, NULL, NULL, 194, 'craft\\elements\\Asset', 1, 0, '2014-09-23 03:10:32', '2015-02-02 04:39:54', NULL, 'b2d0cf94-1092-45f6-a8fb-68ad94a0abd0');
@@ -651,8 +706,8 @@ INSERT INTO `elements` VALUES (229, NULL, NULL, 180, 'craft\\elements\\MatrixBlo
 INSERT INTO `elements` VALUES (230, NULL, NULL, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 17:04:48', '2016-06-03 17:42:35', NULL, '9fea522f-d5be-4651-a9cc-c235284d1851');
 INSERT INTO `elements` VALUES (231, NULL, NULL, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-02 17:09:37', '2015-02-10 17:33:59', NULL, '2740f6dc-341d-4c48-b9c3-e822a1539ccf');
 INSERT INTO `elements` VALUES (232, NULL, NULL, 187, 'craft\\elements\\GlobalSet', 1, 0, '2015-02-04 15:20:19', '2015-02-10 18:31:03', NULL, '92ba4df9-7269-4adf-9f4d-54552eb4f778');
-INSERT INTO `elements` VALUES (233, NULL, NULL, 130, 'craft\\elements\\Entry', 1, 0, '2015-02-09 17:35:42', '2015-02-09 20:34:54', NULL, 'afaeac1c-57b7-449e-84c6-1dea659b45ab');
-INSERT INTO `elements` VALUES (234, NULL, NULL, 132, 'craft\\elements\\Entry', 1, 0, '2015-02-09 20:37:32', '2015-02-09 20:38:50', NULL, 'a15e09c6-8dee-4d9e-9398-378f98e28fd9');
+INSERT INTO `elements` VALUES (233, NULL, NULL, 130, 'craft\\elements\\Entry', 1, 0, '2015-02-09 17:35:42', '2019-12-17 22:20:49', NULL, 'afaeac1c-57b7-449e-84c6-1dea659b45ab');
+INSERT INTO `elements` VALUES (234, NULL, NULL, 132, 'craft\\elements\\Entry', 1, 0, '2015-02-09 20:37:32', '2019-12-17 22:20:49', NULL, 'a15e09c6-8dee-4d9e-9398-378f98e28fd9');
 INSERT INTO `elements` VALUES (235, NULL, NULL, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-09 21:33:03', '2015-02-10 18:08:01', NULL, 'a4e65f65-e1e7-440f-a7cf-95660598e0e8');
 INSERT INTO `elements` VALUES (236, NULL, NULL, 179, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-09 21:56:10', '2015-02-10 18:08:01', NULL, '02567d99-2c2c-4d79-a906-4e36e6261df0');
 INSERT INTO `elements` VALUES (237, NULL, NULL, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2015-02-09 21:56:10', '2015-02-10 18:08:01', NULL, 'e087f883-300f-4d8e-bfda-5b2978dbd68e');
@@ -2222,6 +2277,40 @@ INSERT INTO `elements` VALUES (2006, NULL, NULL, 181, 'craft\\elements\\MatrixBl
 INSERT INTO `elements` VALUES (2007, NULL, NULL, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', '2019-07-18 08:42:43', 'e818faf9-8c5f-46b5-8d16-31227854ed10');
 INSERT INTO `elements` VALUES (2008, NULL, NULL, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', '2019-07-18 08:42:43', 'bcc08724-95c5-48f6-80e9-d439c5b0115c');
 INSERT INTO `elements` VALUES (2009, NULL, NULL, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2014-07-30 23:02:16', '2016-06-03 17:43:25', '2019-07-18 08:42:43', 'e7e2155a-4741-4041-a4dc-84ef0bcf8ad5');
+INSERT INTO `elements` VALUES (2010, NULL, 1, 104, 'craft\\elements\\Entry', 1, 0, '2015-02-04 15:13:27', '2015-02-04 15:13:27', NULL, '9733c2a7-e7ca-4a7c-afa3-d58a979493d0');
+INSERT INTO `elements` VALUES (2011, NULL, NULL, 121, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-04 15:13:27', NULL, '7bbd26ca-215e-4153-8ed1-b1e1d5e27e61');
+INSERT INTO `elements` VALUES (2012, NULL, NULL, 121, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-04 15:13:27', NULL, '004f0f77-5dc6-43c1-bcbb-845d8dd7d9ef');
+INSERT INTO `elements` VALUES (2013, NULL, NULL, 121, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-04 15:13:28', NULL, 'e98097ed-6c92-4478-8378-1994436086f2');
+INSERT INTO `elements` VALUES (2014, NULL, 2, 104, 'craft\\elements\\Entry', 1, 0, '2019-12-17 22:20:49', '2019-12-17 22:20:49', NULL, '337909c2-1ddd-4c57-b87b-71913c3f5525');
+INSERT INTO `elements` VALUES (2015, NULL, NULL, 121, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-04 15:13:27', NULL, '4e432022-5bad-4af0-8bfd-93683e91cdb6');
+INSERT INTO `elements` VALUES (2016, NULL, NULL, 121, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-04 15:13:27', NULL, '73aae75b-984b-4aa7-a6d9-e6440c35c60d');
+INSERT INTO `elements` VALUES (2017, NULL, NULL, 121, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-04 15:13:28', NULL, 'de84eb1b-9d6f-419b-b6fd-d32d102c26cc');
+INSERT INTO `elements` VALUES (2018, NULL, 3, 191, 'craft\\elements\\Entry', 1, 0, '2015-02-10 18:08:01', '2015-02-10 18:08:01', NULL, '2f0e6bbc-6c85-4dab-9a9f-ddea1129f35d');
+INSERT INTO `elements` VALUES (2019, NULL, NULL, 179, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-10 18:08:01', NULL, 'b063417e-1417-4cbe-b351-7e99b3b76470');
+INSERT INTO `elements` VALUES (2020, NULL, NULL, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-10 18:08:01', NULL, 'd08f51e2-d420-4b0d-858e-183203625f22');
+INSERT INTO `elements` VALUES (2021, NULL, NULL, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-10 18:08:01', NULL, '0e6c9f55-f75d-44e6-ac4c-451e6814c3f2');
+INSERT INTO `elements` VALUES (2022, NULL, NULL, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-10 18:08:01', NULL, '05f9db43-f09d-4a07-8d39-a9602e133ae0');
+INSERT INTO `elements` VALUES (2023, NULL, NULL, 179, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-10 18:08:01', NULL, '53948cd7-a68e-4729-aaa3-2b938f70f9d3');
+INSERT INTO `elements` VALUES (2024, NULL, NULL, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-10 18:08:01', NULL, '22930ef1-5501-4af7-b8a2-361f4c3f0a59');
+INSERT INTO `elements` VALUES (2025, NULL, NULL, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-10 18:08:01', NULL, '54a7a4ba-77c4-490b-9ca4-5823f2d6d5dd');
+INSERT INTO `elements` VALUES (2026, NULL, NULL, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-10 18:08:01', NULL, '00ec7f5f-91a1-400c-8154-a02b5829f18a');
+INSERT INTO `elements` VALUES (2027, NULL, NULL, 179, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-10 18:08:01', NULL, '592ccd72-17d0-4833-b87a-3664f09b10bc');
+INSERT INTO `elements` VALUES (2028, NULL, NULL, 184, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-10 18:08:01', NULL, 'b999174c-787a-40ed-b6e4-327b70dd423c');
+INSERT INTO `elements` VALUES (2029, NULL, 4, 191, 'craft\\elements\\Entry', 1, 0, '2019-12-17 22:20:49', '2019-12-17 22:20:49', NULL, '07078966-37ce-4b91-93c1-ff56058e553c');
+INSERT INTO `elements` VALUES (2030, NULL, NULL, 179, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-10 18:08:01', NULL, 'c678b5c8-b634-4825-a8e5-6acd8cd2bc18');
+INSERT INTO `elements` VALUES (2031, NULL, NULL, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-10 18:08:01', NULL, '110cedc0-cca5-40c4-b26f-ef18eaa93a4a');
+INSERT INTO `elements` VALUES (2032, NULL, NULL, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-10 18:08:01', NULL, 'c137d121-0d73-490b-bcf3-d364d0ab173e');
+INSERT INTO `elements` VALUES (2033, NULL, NULL, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-10 18:08:01', NULL, '70975067-f2fe-4510-845e-f09758e9679a');
+INSERT INTO `elements` VALUES (2034, NULL, NULL, 179, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-10 18:08:01', NULL, 'd81c4a11-220f-486c-a551-4bf72dbdf261');
+INSERT INTO `elements` VALUES (2035, NULL, NULL, 180, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-10 18:08:01', NULL, 'e52d3a1c-56cc-4554-a53d-69697fd9d1a8');
+INSERT INTO `elements` VALUES (2036, NULL, NULL, 183, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-10 18:08:01', NULL, 'c38a3c5f-3176-4293-bd55-a0e20e75762b');
+INSERT INTO `elements` VALUES (2037, NULL, NULL, 181, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-10 18:08:01', NULL, '94cf8825-491c-4b3f-a4de-47ceb7553bea');
+INSERT INTO `elements` VALUES (2038, NULL, NULL, 179, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-10 18:08:01', NULL, '774853f3-4cc0-44a5-87bd-8dd4966cc7ef');
+INSERT INTO `elements` VALUES (2039, NULL, NULL, 184, 'craft\\elements\\MatrixBlock', 1, 0, '2019-12-17 22:20:49', '2015-02-10 18:08:01', NULL, '09d20e90-faca-45e6-89fe-7de95a6ab8ef');
+INSERT INTO `elements` VALUES (2040, NULL, 5, 130, 'craft\\elements\\Entry', 1, 0, '2015-02-09 20:34:54', '2015-02-09 20:34:54', NULL, '5c4c0c84-cd38-4357-82c6-126c1b22503c');
+INSERT INTO `elements` VALUES (2041, NULL, 6, 130, 'craft\\elements\\Entry', 1, 0, '2019-12-17 22:20:49', '2019-12-17 22:20:49', NULL, 'a314e8e8-9e80-4b95-94b4-fa0468e67624');
+INSERT INTO `elements` VALUES (2042, NULL, 7, 132, 'craft\\elements\\Entry', 1, 0, '2015-02-09 20:38:50', '2015-02-09 20:38:50', NULL, '63689d52-2525-4c80-994b-513d255ccd89');
+INSERT INTO `elements` VALUES (2043, NULL, 8, 132, 'craft\\elements\\Entry', 1, 0, '2019-12-17 22:20:49', '2019-12-17 22:20:49', NULL, '5074f349-9266-486a-bac1-4e3fb677fb4d');
 COMMIT;
 
 -- ----------------------------
@@ -2246,7 +2335,7 @@ CREATE TABLE `elements_sites` (
   KEY `elements_sites_uri_siteId_idx` (`uri`,`siteId`) USING BTREE,
   CONSTRAINT `craft_elements_sites_elementId_fk` FOREIGN KEY (`elementId`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
   CONSTRAINT `craft_elements_sites_siteId_fk` FOREIGN KEY (`siteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1999 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2033 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of elements_sites
@@ -3996,6 +4085,40 @@ INSERT INTO `elements_sites` VALUES (1995, 2006, 1, '', NULL, 1, '2019-07-09 10:
 INSERT INTO `elements_sites` VALUES (1996, 2007, 1, '', NULL, 1, '2019-07-09 10:18:34', '2019-07-09 10:18:34', 'dbf83308-5dc7-4afd-b870-ef1cc7177ae6');
 INSERT INTO `elements_sites` VALUES (1997, 2008, 1, '', NULL, 1, '2019-07-09 10:18:34', '2019-07-09 10:18:34', 'eb9375b1-2569-4a43-b0f4-ff9809a387ea');
 INSERT INTO `elements_sites` VALUES (1998, 2009, 1, '', NULL, 1, '2019-07-09 10:18:34', '2019-07-09 10:18:34', '5ec5d1aa-b7e2-4030-b97f-87ebab68f71e');
+INSERT INTO `elements_sites` VALUES (1999, 2010, 1, 'homepage', '__home__', 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '588258ff-1e05-4cb2-87e2-7c8fe531bd35');
+INSERT INTO `elements_sites` VALUES (2000, 2011, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '32e53420-b393-4232-a990-f8771a71acd3');
+INSERT INTO `elements_sites` VALUES (2001, 2012, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '5a378dd7-fe3d-4f13-83f6-87a3fab57918');
+INSERT INTO `elements_sites` VALUES (2002, 2013, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'ec85511c-e436-4911-ae95-9c3f2d723b7e');
+INSERT INTO `elements_sites` VALUES (2003, 2014, 1, 'homepage', '__home__', 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'c7d7ae53-aa6d-45a4-9657-e797f94db529');
+INSERT INTO `elements_sites` VALUES (2004, 2015, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'fac2c893-e689-4031-90e4-59cce8d8b49a');
+INSERT INTO `elements_sites` VALUES (2005, 2016, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '4a573dd0-fde0-48fb-97d8-8c426dbfbf31');
+INSERT INTO `elements_sites` VALUES (2006, 2017, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '53027be4-1ac0-404c-851e-583a43e26011');
+INSERT INTO `elements_sites` VALUES (2007, 2018, 1, 'about', 'about', 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'e84a476b-2de7-4056-9af6-6c78cef3f608');
+INSERT INTO `elements_sites` VALUES (2008, 2019, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '07644b70-0809-4d80-8d15-33975f213ce8');
+INSERT INTO `elements_sites` VALUES (2009, 2020, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'b7866233-d5f3-4cc5-9f38-2f558f4f02cc');
+INSERT INTO `elements_sites` VALUES (2010, 2021, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '5a13c0a0-600f-4e89-af38-56d2f3967f4a');
+INSERT INTO `elements_sites` VALUES (2011, 2022, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '0468e73f-5990-43a4-9638-3b386858554f');
+INSERT INTO `elements_sites` VALUES (2012, 2023, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'd077154f-55e0-48af-a12b-0e05f0a6f52b');
+INSERT INTO `elements_sites` VALUES (2013, 2024, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'ef54ed36-cbc3-4c0f-bb13-43cb122e6a37');
+INSERT INTO `elements_sites` VALUES (2014, 2025, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'f2daf6e8-ba76-4ba4-a9f4-b3294c85d58e');
+INSERT INTO `elements_sites` VALUES (2015, 2026, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '50c988cf-27b0-4bcc-b0c5-f6a0e596da95');
+INSERT INTO `elements_sites` VALUES (2016, 2027, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'efe6eda0-bcd1-4c92-9037-f24b50ee140e');
+INSERT INTO `elements_sites` VALUES (2017, 2028, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '2dc1df46-357a-49bf-8d6b-b0d7cfa499af');
+INSERT INTO `elements_sites` VALUES (2018, 2029, 1, 'about', 'about', 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '4ed9a2a2-6fdd-4965-a305-c2ae0cc20d04');
+INSERT INTO `elements_sites` VALUES (2019, 2030, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '2fa027e9-112e-4e01-b583-1d763ea13b8c');
+INSERT INTO `elements_sites` VALUES (2020, 2031, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '23ccda16-dae4-4d82-9ac0-d18ce9dddbf2');
+INSERT INTO `elements_sites` VALUES (2021, 2032, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'bd993ab1-04b0-488d-afd3-a799553104d0');
+INSERT INTO `elements_sites` VALUES (2022, 2033, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '51d43848-548b-4277-a11f-642eaeb99fba');
+INSERT INTO `elements_sites` VALUES (2023, 2034, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'c18b4f6b-9962-4a05-8986-916406148c21');
+INSERT INTO `elements_sites` VALUES (2024, 2035, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '0e849e92-a977-4779-8a81-e039634957b4');
+INSERT INTO `elements_sites` VALUES (2025, 2036, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '27de372c-9388-4c63-ba8d-57de20ebf65c');
+INSERT INTO `elements_sites` VALUES (2026, 2037, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'af8427e0-7b39-4466-99fa-179e7ea5b064');
+INSERT INTO `elements_sites` VALUES (2027, 2038, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '419554d9-d926-4b6c-b4bb-41962aa67eae');
+INSERT INTO `elements_sites` VALUES (2028, 2039, 1, '', NULL, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'f33d1ae8-9ea0-4050-8479-8b23412a9f55');
+INSERT INTO `elements_sites` VALUES (2029, 2040, 1, 'servicesindex', 'services', 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'd2d7efc9-d230-40e0-9fff-9a82a5902325');
+INSERT INTO `elements_sites` VALUES (2030, 2041, 1, 'servicesindex', 'services', 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '36f45b3c-ed9f-4bb4-8428-b97520fc489a');
+INSERT INTO `elements_sites` VALUES (2031, 2042, 1, 'workindex', 'work', 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '3d247320-214c-426b-9859-2220f30c8d1b');
+INSERT INTO `elements_sites` VALUES (2032, 2043, 1, 'workindex', 'work', 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'b6b95155-78b3-47c3-95fa-70ac30380a02');
 COMMIT;
 
 -- ----------------------------
@@ -4053,6 +4176,14 @@ INSERT INTO `entries` VALUES (133, 3, NULL, 3, 1, '2014-10-06 01:30:00', NULL, N
 INSERT INTO `entries` VALUES (233, 6, NULL, 8, NULL, '2015-02-09 17:48:24', NULL, NULL, '2015-02-09 17:35:42', '2015-02-09 20:34:55', '60f0a70e-9136-416f-a501-0cc43fbc20bf');
 INSERT INTO `entries` VALUES (234, 7, NULL, 9, NULL, '2015-02-09 20:37:32', NULL, NULL, '2015-02-09 20:37:32', '2015-02-09 20:38:51', '9bf20e65-558f-4343-a9a2-9e54320b55c1');
 INSERT INTO `entries` VALUES (253, 8, NULL, 10, 1, '2015-02-10 19:09:38', NULL, NULL, '2015-02-10 19:09:38', '2015-02-10 19:09:38', '1a579582-4a61-4a38-9894-69c9720f79d2');
+INSERT INTO `entries` VALUES (2010, 1, NULL, 1, NULL, '2014-07-29 18:21:35', NULL, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'd91816f9-7fa5-4c68-835b-ddc5c75ff07b');
+INSERT INTO `entries` VALUES (2014, 1, NULL, 1, NULL, '2014-07-29 18:21:35', NULL, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '6cc58c15-0f75-4be3-bff5-63537a240956');
+INSERT INTO `entries` VALUES (2018, 4, NULL, 4, NULL, '2014-09-17 01:15:21', NULL, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '01ffa3a1-e28c-45d0-8f25-95b101dde63f');
+INSERT INTO `entries` VALUES (2029, 4, NULL, 4, NULL, '2014-09-17 01:15:21', NULL, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'bdf1fbfe-3d4b-4aba-a58e-c74f703bade8');
+INSERT INTO `entries` VALUES (2040, 6, NULL, 8, NULL, '2015-02-09 17:48:24', NULL, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '3d28f7c6-5526-4179-922e-d338b24d709f');
+INSERT INTO `entries` VALUES (2041, 6, NULL, 8, NULL, '2015-02-09 17:48:24', NULL, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'b9226f36-207e-4783-8393-eb77520d7d14');
+INSERT INTO `entries` VALUES (2042, 7, NULL, 9, NULL, '2015-02-09 20:37:32', NULL, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '27cfe813-fd4a-4608-863a-219e6df09f9a');
+INSERT INTO `entries` VALUES (2043, 7, NULL, 9, NULL, '2015-02-09 20:37:32', NULL, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'cede1877-1533-4ab4-b2e5-76b9fb7f4cfd');
 COMMIT;
 
 -- ----------------------------
@@ -4410,6 +4541,42 @@ INSERT INTO `globalsets` VALUES (232, 'Footer Content', 'footer', 187, '2015-02-
 COMMIT;
 
 -- ----------------------------
+-- Table structure for gqlschemas
+-- ----------------------------
+DROP TABLE IF EXISTS `gqlschemas`;
+CREATE TABLE `gqlschemas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `scope` text,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  `isPublic` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `gqlschemas_name_unq_idx` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for gqltokens
+-- ----------------------------
+DROP TABLE IF EXISTS `gqltokens`;
+CREATE TABLE `gqltokens` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `accessToken` varchar(255) NOT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT '1',
+  `expiryDate` datetime DEFAULT NULL,
+  `lastUsed` datetime DEFAULT NULL,
+  `schemaId` int(11) DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `gqltokens_schemaId_fk` (`schemaId`),
+  CONSTRAINT `gqltokens_schemaId_fk` FOREIGN KEY (`schemaId`) REFERENCES `gqlschemas` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
 -- Table structure for info
 -- ----------------------------
 DROP TABLE IF EXISTS `info`;
@@ -4418,7 +4585,6 @@ CREATE TABLE `info` (
   `version` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `schemaVersion` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `maintenance` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `config` mediumtext COLLATE utf8_unicode_ci,
   `configMap` mediumtext COLLATE utf8_unicode_ci,
   `fieldVersion` char(12) COLLATE utf8_unicode_ci DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
@@ -4431,7 +4597,7 @@ CREATE TABLE `info` (
 -- Records of info
 -- ----------------------------
 BEGIN;
-INSERT INTO `info` VALUES (1, '3.2.6', '3.2.16', 0, '{\"dateModified\":1563856647,\"siteGroups\":{\"268c3c49-6715-4b6a-a1b9-f27313adabd1\":{\"name\":\"Happy Lager (en)\"}},\"sites\":{\"06f4e499-3cdc-4d64-aec2-9a7d3a143c75\":{\"siteGroup\":\"268c3c49-6715-4b6a-a1b9-f27313adabd1\",\"name\":\"Happy Lager (en)\",\"handle\":\"en\",\"language\":\"en\",\"hasUrls\":true,\"baseUrl\":\"$SITE_URL\",\"sortOrder\":1,\"primary\":true}},\"sections\":{\"f6b0cb16-5df8-4b57-9856-c9c2d6b9699e\":{\"name\":\"Services\",\"handle\":\"services\",\"type\":\"structure\",\"enableVersioning\":true,\"structure\":{\"uid\":\"aa3fe533-8552-43f9-a172-69982d59561d\",\"maxLevels\":1},\"entryTypes\":{\"c09d31ed-3004-484c-89ef-e9d262f31f00\":{\"name\":\"Services\",\"handle\":\"services\",\"hasTitleField\":true,\"titleLabel\":\"Title\",\"titleFormat\":null,\"sortOrder\":0,\"fieldLayouts\":{\"c06e2a9b-cc41-4ff9-ac5e-0d463b45e764\":{\"tabs\":[{\"name\":\"Content\",\"sortOrder\":1,\"fields\":{\"0cbb9736-a84b-4e83-803c-5077f56394a9\":{\"required\":false,\"sortOrder\":1},\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\":{\"required\":false,\"sortOrder\":4},\"9bf9e642-2881-44b4-99ff-2cbed3ccc2d7\":{\"required\":false,\"sortOrder\":5},\"aef80333-1412-4130-bb84-ac3bdbbcbbe2\":{\"required\":false,\"sortOrder\":3},\"d96355a7-1353-4097-bf08-3bd5c44821f8\":{\"required\":false,\"sortOrder\":2}}}]}}}},\"siteSettings\":{\"06f4e499-3cdc-4d64-aec2-9a7d3a143c75\":{\"enabledByDefault\":true,\"hasUrls\":true,\"uriFormat\":\"services/{slug}\",\"template\":\"services/_entry\"}},\"propagationMethod\":\"all\"},\"45d3a977-dc34-4bff-a39f-425e100a5e6f\":{\"name\":\"Locations\",\"handle\":\"locations\",\"type\":\"structure\",\"enableVersioning\":true,\"structure\":{\"uid\":\"3c13606e-11f9-4cbd-bbae-c29608750caf\",\"maxLevels\":1},\"entryTypes\":{\"ae84d93c-8a94-4605-bf08-11ada918f964\":{\"name\":\"Locations\",\"handle\":\"locations\",\"hasTitleField\":true,\"titleLabel\":\"Title\",\"titleFormat\":null,\"sortOrder\":0,\"fieldLayouts\":{\"a8b59f73-6bdb-4ac9-901b-3894585018fb\":{\"tabs\":[{\"name\":\"Content\",\"sortOrder\":1,\"fields\":{\"0cbb9736-a84b-4e83-803c-5077f56394a9\":{\"required\":false,\"sortOrder\":1},\"422c7da9-d3e4-4d0a-8225-bbbc8264f029\":{\"required\":false,\"sortOrder\":2},\"b01498fe-6db2-4b1d-84d2-8cd0cb62f449\":{\"required\":false,\"sortOrder\":3},\"b75266c9-d8d2-42ae-9024-0fecb8bdc994\":{\"required\":false,\"sortOrder\":4}}}]}}}},\"siteSettings\":{\"06f4e499-3cdc-4d64-aec2-9a7d3a143c75\":{\"enabledByDefault\":true,\"hasUrls\":false,\"uriFormat\":null,\"template\":null}},\"propagationMethod\":\"all\"},\"735318f3-e53c-4ce1-8dad-4c7a5c7c5bee\":{\"name\":\"Homepage\",\"handle\":\"homepage\",\"type\":\"single\",\"enableVersioning\":true,\"entryTypes\":{\"1f72a359-0ce9-4415-82dc-88dc833073c3\":{\"name\":\"Homepage\",\"handle\":\"homepage\",\"hasTitleField\":false,\"titleLabel\":null,\"titleFormat\":\"{section.name|raw}\",\"sortOrder\":0,\"fieldLayouts\":{\"31a1e163-6326-436a-9feb-53b372c086e3\":{\"tabs\":[{\"name\":\"Content\",\"sortOrder\":1,\"fields\":{\"8823155c-e84a-4a38-af30-2cb88b705e7b\":{\"required\":false,\"sortOrder\":2},\"950b3c0e-9780-4487-a881-23d96d6075d5\":{\"required\":false,\"sortOrder\":3},\"a2129d62-1d81-4c2f-a92d-81c03ed120dc\":{\"required\":false,\"sortOrder\":1}}}]}}}},\"siteSettings\":{\"06f4e499-3cdc-4d64-aec2-9a7d3a143c75\":{\"enabledByDefault\":true,\"hasUrls\":true,\"uriFormat\":\"__home__\",\"template\":\"index\"}},\"propagationMethod\":\"all\"},\"f5969f9a-8d3f-487e-9695-cc4e5fbe5efd\":{\"name\":\"News\",\"handle\":\"news\",\"type\":\"channel\",\"enableVersioning\":true,\"entryTypes\":{\"b31c607b-b75a-4a78-b14b-d94bf8faa0c3\":{\"name\":\"Link\",\"handle\":\"link\",\"hasTitleField\":true,\"titleLabel\":\"Title\",\"titleFormat\":null,\"sortOrder\":0,\"fieldLayouts\":{\"b89ba12c-3f9b-4e8d-a190-073678e01175\":{\"tabs\":[{\"name\":\"Content\",\"sortOrder\":1,\"fields\":{\"0cbb9736-a84b-4e83-803c-5077f56394a9\":{\"required\":false,\"sortOrder\":2},\"4ca9d3b8-ff02-403a-9010-45763fcdea9f\":{\"required\":false,\"sortOrder\":3},\"aef80333-1412-4130-bb84-ac3bdbbcbbe2\":{\"required\":false,\"sortOrder\":1}}}]}}},\"eba60966-6218-4985-b901-fff1e5f97a49\":{\"name\":\"Article\",\"handle\":\"article\",\"hasTitleField\":true,\"titleLabel\":\"Title\",\"titleFormat\":null,\"sortOrder\":0,\"fieldLayouts\":{\"d45c4454-78e5-415c-8e08-700061feb9b4\":{\"tabs\":[{\"name\":\"Content\",\"sortOrder\":1,\"fields\":{\"0cbb9736-a84b-4e83-803c-5077f56394a9\":{\"required\":false,\"sortOrder\":2},\"674e53a6-d62c-4322-ae09-349765f1ef17\":{\"required\":false,\"sortOrder\":5},\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\":{\"required\":false,\"sortOrder\":6},\"9bb293f8-c659-4035-b5d3-e30dbf8d1c5b\":{\"required\":false,\"sortOrder\":4},\"a171d498-9024-4855-9a6c-b3b96765ab7c\":{\"required\":false,\"sortOrder\":1},\"aef80333-1412-4130-bb84-ac3bdbbcbbe2\":{\"required\":false,\"sortOrder\":3}}}]}}}},\"siteSettings\":{\"06f4e499-3cdc-4d64-aec2-9a7d3a143c75\":{\"enabledByDefault\":true,\"hasUrls\":true,\"uriFormat\":\"news/{slug}\",\"template\":\"news/_entry\"}},\"propagationMethod\":\"all\"},\"b3a9eef3-9444-4995-84e2-6dc6b60aebd2\":{\"name\":\"Work\",\"handle\":\"work\",\"type\":\"channel\",\"enableVersioning\":true,\"entryTypes\":{\"01416786-fb23-483e-9b86-d70279bf18a9\":{\"name\":\"Work\",\"handle\":\"work\",\"hasTitleField\":true,\"titleLabel\":\"Title\",\"titleFormat\":null,\"sortOrder\":0,\"fieldLayouts\":{\"b3e92e12-b415-4a53-b67e-ade9f5fdf5dc\":{\"tabs\":[{\"name\":\"Content\",\"sortOrder\":1,\"fields\":{\"674e53a6-d62c-4322-ae09-349765f1ef17\":{\"required\":false,\"sortOrder\":3},\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\":{\"required\":false,\"sortOrder\":4},\"9bb293f8-c659-4035-b5d3-e30dbf8d1c5b\":{\"required\":false,\"sortOrder\":2},\"a988d6b4-6983-48e6-b08e-8fd72e31e483\":{\"required\":false,\"sortOrder\":6},\"aef80333-1412-4130-bb84-ac3bdbbcbbe2\":{\"required\":false,\"sortOrder\":1}}},{\"name\":\"Design\",\"sortOrder\":2,\"fields\":{\"0305c984-3934-4c7a-9de9-b0162c5b0112\":{\"required\":false,\"sortOrder\":2},\"0cbb9736-a84b-4e83-803c-5077f56394a9\":{\"required\":false,\"sortOrder\":1},\"cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea\":{\"required\":false,\"sortOrder\":3}}}]}}}},\"siteSettings\":{\"06f4e499-3cdc-4d64-aec2-9a7d3a143c75\":{\"enabledByDefault\":true,\"hasUrls\":true,\"uriFormat\":\"work/{slug}\",\"template\":\"work/_entry\"}},\"propagationMethod\":\"all\"},\"1a1f289d-3e32-4409-bfb2-03ec7e7d1b81\":{\"name\":\"About\",\"handle\":\"about\",\"type\":\"single\",\"enableVersioning\":true,\"entryTypes\":{\"6ef72b30-6af9-4545-81e9-b2c900cd08d4\":{\"name\":\"About\",\"handle\":\"about\",\"hasTitleField\":false,\"titleLabel\":null,\"titleFormat\":\"{section.name|raw}\",\"sortOrder\":0,\"fieldLayouts\":{\"4cc2a302-6fe7-4f8b-b01b-517ed624cdf7\":{\"tabs\":[{\"name\":\"Content\",\"sortOrder\":1,\"fields\":{\"08f8ec90-f7ad-4d40-9880-3c96304f1e4e\":{\"required\":false,\"sortOrder\":2},\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\":{\"required\":false,\"sortOrder\":3},\"9bb293f8-c659-4035-b5d3-e30dbf8d1c5b\":{\"required\":false,\"sortOrder\":1}}}]}}}},\"siteSettings\":{\"06f4e499-3cdc-4d64-aec2-9a7d3a143c75\":{\"enabledByDefault\":true,\"hasUrls\":true,\"uriFormat\":\"about\",\"template\":\"about\"}},\"propagationMethod\":\"all\"},\"5fa323b7-9755-4174-bed2-0f2b11c05701\":{\"name\":\"Services Index\",\"handle\":\"servicesIndex\",\"type\":\"single\",\"enableVersioning\":true,\"entryTypes\":{\"7f0d6d70-ed28-45f1-88c0-4463e96f110f\":{\"name\":\"Services Index\",\"handle\":\"servicesIndex\",\"hasTitleField\":true,\"titleLabel\":\"Title\",\"titleFormat\":null,\"sortOrder\":0,\"fieldLayouts\":{\"423d0eb9-9236-47c9-a98a-30fc46947c71\":{\"tabs\":[{\"name\":\"Content\",\"sortOrder\":1,\"fields\":{\"08f8ec90-f7ad-4d40-9880-3c96304f1e4e\":{\"required\":false,\"sortOrder\":2},\"9bb293f8-c659-4035-b5d3-e30dbf8d1c5b\":{\"required\":false,\"sortOrder\":1}}}]}}}},\"siteSettings\":{\"06f4e499-3cdc-4d64-aec2-9a7d3a143c75\":{\"enabledByDefault\":true,\"hasUrls\":true,\"uriFormat\":\"services\",\"template\":\"services/_index\"}},\"propagationMethod\":\"all\"},\"1ff1d4d0-499c-41b9-b071-77031c901052\":{\"name\":\"Work Index\",\"handle\":\"workIndex\",\"type\":\"single\",\"enableVersioning\":true,\"entryTypes\":{\"261c3cde-2d6c-4b23-b6cd-6def95992cf8\":{\"name\":\"Work Index\",\"handle\":\"workIndex\",\"hasTitleField\":true,\"titleLabel\":\"Title\",\"titleFormat\":null,\"sortOrder\":0,\"fieldLayouts\":{\"e3a26917-97ba-4590-a8f3-bb08b01991f3\":{\"tabs\":[{\"name\":\"Content\",\"sortOrder\":1,\"fields\":{\"08f8ec90-f7ad-4d40-9880-3c96304f1e4e\":{\"required\":false,\"sortOrder\":2},\"9bb293f8-c659-4035-b5d3-e30dbf8d1c5b\":{\"required\":false,\"sortOrder\":1}}}]}}}},\"siteSettings\":{\"06f4e499-3cdc-4d64-aec2-9a7d3a143c75\":{\"enabledByDefault\":true,\"hasUrls\":true,\"uriFormat\":\"work\",\"template\":\"work/_index\"}},\"propagationMethod\":\"all\"}},\"fieldGroups\":{\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\":{\"name\":\"General\"},\"8b4aae04-76ef-48c2-a294-e81064a470ed\":{\"name\":\"Services\"},\"d58a1faa-0bf6-46b2-b880-b0c14bebca75\":{\"name\":\"Homepage\"},\"f00e1793-0757-46e5-99e9-016b21359ac7\":{\"name\":\"Work\"},\"f7189ca2-4b93-4661-830a-a71aff8aa3cd\":{\"name\":\"Footer\"},\"0815347a-8e73-45fd-93c9-2244ac562559\":{\"name\":\"Contact Info\"}},\"fields\":{\"9bb293f8-c659-4035-b5d3-e30dbf8d1c5b\":{\"name\":\"Heading\",\"handle\":\"heading\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\PlainText\",\"settings\":{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"},\"fieldGroup\":\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\",\"contentColumnType\":\"string\"},\"08f8ec90-f7ad-4d40-9880-3c96304f1e4e\":{\"name\":\"Body\",\"handle\":\"body\",\"instructions\":null,\"searchable\":true,\"translationMethod\":\"site\",\"translationKeyFormat\":null,\"type\":\"craft\\\\redactor\\\\Field\",\"settings\":{\"redactorConfig\":\"Standard.json\",\"removeInlineStyles\":true,\"removeEmptyTags\":true,\"removeNbsp\":true,\"purifyHtml\":\"1\",\"columnType\":\"text\"},\"fieldGroup\":\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\",\"contentColumnType\":\"text\"},\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\":{\"name\":\"Article Body\",\"handle\":\"articleBody\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\Matrix\",\"settings\":{\"maxBlocks\":null,\"localizeBlocks\":false,\"contentTable\":\"{{%matrixcontent_articlebody}}\"},\"fieldGroup\":\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\",\"contentColumnType\":\"string\"},\"674e53a6-d62c-4322-ae09-349765f1ef17\":{\"name\":\"Subheading\",\"handle\":\"subheading\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\PlainText\",\"settings\":{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"},\"fieldGroup\":\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\",\"contentColumnType\":\"string\"},\"0cbb9736-a84b-4e83-803c-5077f56394a9\":{\"name\":\"Featured Image\",\"handle\":\"featuredImage\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\Assets\",\"settings\":{\"useSingleFolder\":\"\",\"sources\":[\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"],\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"1\",\"allowedKinds\":[\"image\"],\"limit\":\"2\",\"localizeRelations\":false},\"fieldGroup\":\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\",\"contentColumnType\":\"string\"},\"422c7da9-d3e4-4d0a-8225-bbbc8264f029\":{\"name\":\"Address\",\"handle\":\"address\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\PlainText\",\"settings\":{\"placeholder\":\"\",\"multiline\":\"1\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"},\"fieldGroup\":\"0815347a-8e73-45fd-93c9-2244ac562559\",\"contentColumnType\":\"text\"},\"b75266c9-d8d2-42ae-9024-0fecb8bdc994\":{\"name\":\"Email\",\"handle\":\"email\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\PlainText\",\"settings\":{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"},\"fieldGroup\":\"0815347a-8e73-45fd-93c9-2244ac562559\",\"contentColumnType\":\"string\"},\"cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea\":{\"name\":\"Background Color\",\"handle\":\"backgroundColor\",\"instructions\":\"Hex value for alternate background color.\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\Color\",\"fieldGroup\":\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\",\"contentColumnType\":\"string(7)\"},\"4ca9d3b8-ff02-403a-9010-45763fcdea9f\":{\"name\":\"Link URL\",\"handle\":\"linkUrl\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\PlainText\",\"settings\":{\"placeholder\":\"e.g. http://example.com\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"},\"fieldGroup\":\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\",\"contentColumnType\":\"string\"},\"aef80333-1412-4130-bb84-ac3bdbbcbbe2\":{\"name\":\"Short Description\",\"handle\":\"shortDescription\",\"instructions\":\"Short description for use in index regions.\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\redactor\\\\Field\",\"settings\":{\"purifyHtml\":\"1\",\"columnType\":\"text\",\"redactorConfig\":\"Simple.json\",\"removeInlineStyles\":true,\"removeEmptyTags\":true,\"removeNbsp\":true},\"fieldGroup\":\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\",\"contentColumnType\":\"text\"},\"67ff16f0-04e2-492b-b999-a7d364331d80\":{\"name\":\"Index Heading\",\"handle\":\"indexHeading\",\"instructions\":\"Page heading for services structure index page.\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\redactor\\\\Field\",\"settings\":{\"purifyHtml\":\"1\",\"columnType\":\"text\",\"redactorConfig\":\"\",\"removeInlineStyles\":\"\",\"removeEmptyTags\":\"\",\"removeNbsp\":\"\"},\"fieldGroup\":\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\",\"contentColumnType\":\"text\"},\"0305c984-3934-4c7a-9de9-b0162c5b0112\":{\"name\":\"Featured Thumb\",\"handle\":\"featuredThumb\",\"instructions\":\"Thumb image for use on home page or archives.\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\Assets\",\"settings\":{\"useSingleFolder\":\"\",\"sources\":\"*\",\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"1\",\"localizeRelations\":false},\"fieldGroup\":\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\",\"contentColumnType\":\"string\"},\"a2129d62-1d81-4c2f-a92d-81c03ed120dc\":{\"name\":\"Hero Image\",\"handle\":\"heroImage\",\"instructions\":\"Choose the big homepage hero image. The image should be at least 1450×916 for best results.\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\Assets\",\"settings\":{\"useSingleFolder\":\"\",\"sources\":[\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"],\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"1\",\"localizeRelations\":false},\"fieldGroup\":\"d58a1faa-0bf6-46b2-b880-b0c14bebca75\",\"contentColumnType\":\"string\"},\"8823155c-e84a-4a38-af30-2cb88b705e7b\":{\"name\":\"Testimonials\",\"handle\":\"testimonials\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\Matrix\",\"settings\":{\"maxBlocks\":\"3\",\"localizeBlocks\":false,\"contentTable\":\"{{%matrixcontent_testimonials}}\"},\"fieldGroup\":\"d58a1faa-0bf6-46b2-b880-b0c14bebca75\",\"contentColumnType\":\"string\"},\"950b3c0e-9780-4487-a881-23d96d6075d5\":{\"name\":\"Client Logos\",\"handle\":\"clientLogos\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\Assets\",\"settings\":{\"useSingleFolder\":\"\",\"sources\":[\"volume:7d6a9bef-727c-4a0c-9791-4f423956de69\"],\"defaultUploadLocationSource\":\"volume:7d6a9bef-727c-4a0c-9791-4f423956de69\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"\",\"localizeRelations\":false},\"fieldGroup\":\"d58a1faa-0bf6-46b2-b880-b0c14bebca75\",\"contentColumnType\":\"string\"},\"d96355a7-1353-4097-bf08-3bd5c44821f8\":{\"name\":\"Service Icon\",\"handle\":\"serviceIcon\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\Assets\",\"settings\":{\"useSingleFolder\":\"\",\"sources\":[\"volume:3fc34ff2-8da7-4a35-8147-f0a2e01392b9\"],\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"1\",\"localizeRelations\":false},\"fieldGroup\":\"8b4aae04-76ef-48c2-a294-e81064a470ed\",\"contentColumnType\":\"string\"},\"9bf9e642-2881-44b4-99ff-2cbed3ccc2d7\":{\"name\":\"Service Body\",\"handle\":\"serviceBody\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\Matrix\",\"settings\":{\"maxBlocks\":null,\"localizeBlocks\":false,\"contentTable\":\"{{%matrixcontent_servicebody}}\"},\"fieldGroup\":\"8b4aae04-76ef-48c2-a294-e81064a470ed\",\"contentColumnType\":\"string\"},\"a988d6b4-6983-48e6-b08e-8fd72e31e483\":{\"name\":\"Services Performed\",\"handle\":\"servicesPerformed\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\Entries\",\"settings\":{\"sources\":[\"section:f6b0cb16-5df8-4b57-9856-c9c2d6b9699e\"],\"limit\":\"\",\"localizeRelations\":false},\"fieldGroup\":\"f00e1793-0757-46e5-99e9-016b21359ac7\",\"contentColumnType\":\"string\"},\"5095500e-4962-429c-9b9c-7a4d0d4f930c\":{\"name\":\"Copyright Notice\",\"handle\":\"copyrightNotice\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\PlainText\",\"settings\":{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"},\"fieldGroup\":\"f7189ca2-4b93-4661-830a-a71aff8aa3cd\",\"contentColumnType\":\"string\"},\"fcf41a5f-68b5-42dd-8ca1-cc457eb749f0\":{\"name\":\"Contact Us Label\",\"handle\":\"contactUsLabel\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\PlainText\",\"settings\":{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"},\"fieldGroup\":\"f7189ca2-4b93-4661-830a-a71aff8aa3cd\",\"contentColumnType\":\"string\"},\"b01498fe-6db2-4b1d-84d2-8cd0cb62f449\":{\"name\":\"Contact Methods\",\"handle\":\"contactMethods\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\Matrix\",\"settings\":{\"maxBlocks\":null,\"localizeBlocks\":false,\"contentTable\":\"{{%matrixcontent_contactmethods}}\"},\"fieldGroup\":\"0815347a-8e73-45fd-93c9-2244ac562559\",\"contentColumnType\":\"string\"},\"a171d498-9024-4855-9a6c-b3b96765ab7c\":{\"name\":\"Featured?\",\"handle\":\"featuredEntry\",\"instructions\":\"Should this entry be featured on the listing page?\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\Lightswitch\",\"settings\":{\"default\":\"\"},\"fieldGroup\":\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\",\"contentColumnType\":\"boolean\"}},\"matrixBlockTypes\":{\"070be8db-f9b0-4605-98ae-e9b54b1af3f6\":{\"name\":\"Text\",\"handle\":\"text\",\"sortOrder\":3,\"field\":\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\",\"fieldLayouts\":{\"4ade673e-0245-430b-b932-c8ea86e36773\":{\"tabs\":[{\"name\":\"Content\",\"sortOrder\":1,\"fields\":{\"e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c\":{\"required\":false,\"sortOrder\":1},\"cc6a4697-6d1c-4342-b9de-bce13295a885\":{\"required\":false,\"sortOrder\":2}}}]}},\"fields\":{\"e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c\":{\"name\":\"Text\",\"handle\":\"text\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\redactor\\\\Field\",\"settings\":{\"purifyHtml\":\"1\",\"columnType\":\"text\",\"redactorConfig\":\"Standard.json\",\"removeInlineStyles\":true,\"removeEmptyTags\":true,\"removeNbsp\":true},\"fieldGroup\":null,\"contentColumnType\":\"text\"},\"cc6a4697-6d1c-4342-b9de-bce13295a885\":{\"name\":\"Position\",\"handle\":\"position\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\Dropdown\",\"settings\":{\"options\":[{\"label\":\"Left\",\"value\":\"left\",\"default\":\"\"},{\"label\":\"Center\",\"value\":\"center\",\"default\":\"\"},{\"label\":\"Right\",\"value\":\"right\",\"default\":\"\"}]},\"fieldGroup\":null,\"contentColumnType\":\"string\"}}},\"daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890\":{\"name\":\"Pull Quote\",\"handle\":\"pullQuote\",\"sortOrder\":4,\"field\":\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\",\"fieldLayouts\":{\"83f7b1de-657b-45bb-94e4-57d10973c78c\":{\"tabs\":[{\"name\":\"Content\",\"sortOrder\":1,\"fields\":{\"a8a6d843-bec1-4882-98ec-30cb74f5b16f\":{\"required\":false,\"sortOrder\":1},\"a88d73a8-c75f-4c72-aa70-a39dfbbff0fe\":{\"required\":false,\"sortOrder\":2}}}]}},\"fields\":{\"a8a6d843-bec1-4882-98ec-30cb74f5b16f\":{\"name\":\"Pull Quote\",\"handle\":\"pullQuote\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\PlainText\",\"settings\":{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"},\"fieldGroup\":null,\"contentColumnType\":\"text\"},\"a88d73a8-c75f-4c72-aa70-a39dfbbff0fe\":{\"name\":\"Position\",\"handle\":\"position\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\Dropdown\",\"settings\":{\"options\":[{\"label\":\"Left\",\"value\":\"left\",\"default\":\"\"},{\"label\":\"Center\",\"value\":\"center\",\"default\":\"\"},{\"label\":\"Right\",\"value\":\"right\",\"default\":\"\"}]},\"fieldGroup\":null,\"contentColumnType\":\"string\"}}},\"1d5e20da-bc96-4a33-b045-8d1fa5870e74\":{\"name\":\"Heading\",\"handle\":\"heading\",\"sortOrder\":2,\"field\":\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\",\"fieldLayouts\":{\"0189a187-131f-46a8-b494-cd94c82d6aae\":{\"tabs\":[{\"name\":\"Content\",\"sortOrder\":1,\"fields\":{\"631f668a-3658-48a4-89fd-8da5af0a60cc\":{\"required\":false,\"sortOrder\":1}}}]}},\"fields\":{\"631f668a-3658-48a4-89fd-8da5af0a60cc\":{\"name\":\"Heading\",\"handle\":\"heading\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\PlainText\",\"settings\":{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"},\"fieldGroup\":null,\"contentColumnType\":\"string\"}}},\"9123201b-837c-4269-9d7c-d5e11bba1e2b\":{\"name\":\"Image\",\"handle\":\"image\",\"sortOrder\":5,\"field\":\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\",\"fieldLayouts\":{\"327aba6f-b81c-4179-9e58-208d34322ced\":{\"tabs\":[{\"name\":\"Content\",\"sortOrder\":1,\"fields\":{\"964a1aba-15ac-413f-86c1-03fbf37f30c7\":{\"required\":false,\"sortOrder\":1},\"7ca32393-f78c-4de0-9f8f-52b64e09584f\":{\"required\":false,\"sortOrder\":2},\"f87a6243-5b7f-4456-9106-ccfb6e03b754\":{\"required\":false,\"sortOrder\":3}}}]}},\"fields\":{\"964a1aba-15ac-413f-86c1-03fbf37f30c7\":{\"name\":\"Image\",\"handle\":\"image\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\Assets\",\"settings\":{\"useSingleFolder\":\"\",\"sources\":[\"folder:20095f95-422a-46cc-a5d0-3bc6b0a4da20\"],\"defaultUploadLocationSource\":\"folder:20095f95-422a-46cc-a5d0-3bc6b0a4da20\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"folder:20095f95-422a-46cc-a5d0-3bc6b0a4da20\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"1\",\"allowedKinds\":[\"image\"],\"limit\":\"1\",\"localizeRelations\":false},\"fieldGroup\":null,\"contentColumnType\":\"string\"},\"f87a6243-5b7f-4456-9106-ccfb6e03b754\":{\"name\":\"Position\",\"handle\":\"position\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\Dropdown\",\"settings\":{\"options\":[{\"label\":\"Left\",\"value\":\"left\",\"default\":\"\"},{\"label\":\"Center\",\"value\":\"center\",\"default\":\"\"},{\"label\":\"Right\",\"value\":\"right\",\"default\":\"\"},{\"label\":\"Full\",\"value\":\"full\",\"default\":\"\"}]},\"fieldGroup\":null,\"contentColumnType\":\"string\"},\"7ca32393-f78c-4de0-9f8f-52b64e09584f\":{\"name\":\"Caption\",\"handle\":\"caption\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\redactor\\\\Field\",\"settings\":{\"purifyHtml\":\"1\",\"columnType\":\"text\",\"redactorConfig\":\"Simple.json\",\"removeInlineStyles\":true,\"removeEmptyTags\":true,\"removeNbsp\":true},\"fieldGroup\":null,\"contentColumnType\":\"text\"}}},\"97ff3c80-2398-4ca5-9d03-c3b8727c6eb2\":{\"name\":\"Quote\",\"handle\":\"quote\",\"sortOrder\":7,\"field\":\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\",\"fieldLayouts\":{\"b82a12f2-e814-4b74-9b32-bd1a90497a65\":{\"tabs\":[{\"name\":\"Content\",\"sortOrder\":1,\"fields\":{\"35200549-df46-4092-994a-a8015c5810ba\":{\"required\":false,\"sortOrder\":1},\"41e6fac7-12d7-45c9-ac83-0aa59793d872\":{\"required\":false,\"sortOrder\":2},\"a5b4b046-1178-45f9-b4cf-3e3bef86e067\":{\"required\":false,\"sortOrder\":3}}}]}},\"fields\":{\"35200549-df46-4092-994a-a8015c5810ba\":{\"name\":\"Quote\",\"handle\":\"quote\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\PlainText\",\"settings\":{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"},\"fieldGroup\":null,\"contentColumnType\":\"text\"},\"41e6fac7-12d7-45c9-ac83-0aa59793d872\":{\"name\":\"Attribution\",\"handle\":\"attribution\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\PlainText\",\"settings\":{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"},\"fieldGroup\":null,\"contentColumnType\":\"text\"},\"a5b4b046-1178-45f9-b4cf-3e3bef86e067\":{\"name\":\"Position\",\"handle\":\"position\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\Dropdown\",\"settings\":{\"options\":[{\"label\":\"Center\",\"value\":\"center\",\"default\":\"\"},{\"label\":\"Full\",\"value\":\"full\",\"default\":\"\"}]},\"fieldGroup\":null,\"contentColumnType\":\"string\"}}},\"e1c6c95e-a19b-4cd8-9a83-935e91f862c0\":{\"name\":\"New Section\",\"handle\":\"newSection\",\"sortOrder\":1,\"field\":\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\",\"fieldLayouts\":{\"8d01ea64-38fa-43f7-be8a-43e4e460bfbd\":{\"tabs\":[{\"name\":\"Content\",\"sortOrder\":1,\"fields\":{\"8cd6b011-5271-484d-85d9-6a6b731137e9\":{\"required\":false,\"sortOrder\":1}}}]}},\"fields\":{\"8cd6b011-5271-484d-85d9-6a6b731137e9\":{\"name\":\"Section Heading\",\"handle\":\"sectionHeading\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\PlainText\",\"settings\":{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"},\"fieldGroup\":null,\"contentColumnType\":\"string\"}}},\"0f3ede99-8b78-4042-85c9-422f57f5b01b\":{\"name\":\"Gallery\",\"handle\":\"gallery\",\"sortOrder\":6,\"field\":\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\",\"fieldLayouts\":{\"0964c39a-7c91-4ac2-a9e6-584a7c845d32\":{\"tabs\":[{\"name\":\"Content\",\"sortOrder\":1,\"fields\":{\"ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7\":{\"required\":false,\"sortOrder\":1}}}]}},\"fields\":{\"ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7\":{\"name\":\"Images\",\"handle\":\"images\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\Assets\",\"settings\":{\"useSingleFolder\":\"\",\"sources\":[\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"],\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"3\",\"localizeRelations\":false},\"fieldGroup\":null,\"contentColumnType\":\"string\"}}},\"b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3\":{\"name\":\"Testimonial\",\"handle\":\"testimonial\",\"sortOrder\":1,\"field\":\"8823155c-e84a-4a38-af30-2cb88b705e7b\",\"fieldLayouts\":{\"569a9c10-0657-4dbf-87c9-005afb784b54\":{\"tabs\":[{\"name\":\"Content\",\"sortOrder\":1,\"fields\":{\"39b59166-9d91-4d17-baf9-229aca6174c2\":{\"required\":false,\"sortOrder\":1},\"4ed4bf91-bcf9-45a9-84f7-d5d768103a09\":{\"required\":false,\"sortOrder\":2},\"a418bde2-f4cc-4ed2-a358-44362a0cb3a9\":{\"required\":false,\"sortOrder\":3}}}]}},\"fields\":{\"39b59166-9d91-4d17-baf9-229aca6174c2\":{\"name\":\"Quote\",\"handle\":\"quote\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\PlainText\",\"settings\":{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"},\"fieldGroup\":null,\"contentColumnType\":\"text\"},\"4ed4bf91-bcf9-45a9-84f7-d5d768103a09\":{\"name\":\"Cite\",\"handle\":\"cite\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\PlainText\",\"settings\":{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"},\"fieldGroup\":null,\"contentColumnType\":\"text\"},\"a418bde2-f4cc-4ed2-a358-44362a0cb3a9\":{\"name\":\"Photo\",\"handle\":\"photo\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\Assets\",\"settings\":{\"useSingleFolder\":\"\",\"sources\":[\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"],\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"1\",\"localizeRelations\":false},\"fieldGroup\":null,\"contentColumnType\":\"string\"}}},\"aa39e3a4-2d2c-4ed2-a9b5-74122ece5947\":{\"name\":\"Service Point\",\"handle\":\"servicesPoint\",\"sortOrder\":1,\"field\":\"9bf9e642-2881-44b4-99ff-2cbed3ccc2d7\",\"fieldLayouts\":{\"65bf26e9-50b3-4580-88a4-7a622077d8fb\":{\"tabs\":[{\"name\":\"Content\",\"sortOrder\":1,\"fields\":{\"3285a611-4363-43f2-82b5-97e2d253cab3\":{\"required\":false,\"sortOrder\":1},\"c9ccf068-4ace-4b21-9356-68f3faa96cf3\":{\"required\":false,\"sortOrder\":2},\"9ce53ce9-939b-4760-97f4-545ef2c388eb\":{\"required\":false,\"sortOrder\":3}}}]}},\"fields\":{\"3285a611-4363-43f2-82b5-97e2d253cab3\":{\"name\":\"Heading\",\"handle\":\"heading\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\PlainText\",\"settings\":{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"},\"fieldGroup\":null,\"contentColumnType\":\"text\"},\"c9ccf068-4ace-4b21-9356-68f3faa96cf3\":{\"name\":\"Text\",\"handle\":\"text\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\redactor\\\\Field\",\"settings\":{\"purifyHtml\":\"1\",\"columnType\":\"text\",\"redactorConfig\":\"\",\"removeInlineStyles\":true,\"removeEmptyTags\":true,\"removeNbsp\":true},\"fieldGroup\":null,\"contentColumnType\":\"text\"},\"9ce53ce9-939b-4760-97f4-545ef2c388eb\":{\"name\":\"Image\",\"handle\":\"image\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\Assets\",\"settings\":{\"useSingleFolder\":\"\",\"sources\":[\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"],\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"1\",\"localizeRelations\":false},\"fieldGroup\":null,\"contentColumnType\":\"string\"}}},\"ecd6fdce-8d11-4aa6-a167-e731757515c6\":{\"name\":\"Contact Method\",\"handle\":\"contactMethod\",\"sortOrder\":1,\"field\":\"b01498fe-6db2-4b1d-84d2-8cd0cb62f449\",\"fieldLayouts\":{\"3c4c697e-cb6b-4704-bee5-9a2bae9da8f7\":{\"tabs\":[{\"name\":\"Content\",\"sortOrder\":1,\"fields\":{\"aad31ad0-0405-41b5-aff0-4ec567b557a0\":{\"required\":false,\"sortOrder\":1},\"0275193a-3c51-46a3-afd0-49e55a93bfd3\":{\"required\":false,\"sortOrder\":2}}}]}},\"fields\":{\"aad31ad0-0405-41b5-aff0-4ec567b557a0\":{\"name\":\"Label\",\"handle\":\"label\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\PlainText\",\"settings\":{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"},\"fieldGroup\":null,\"contentColumnType\":\"string\"},\"0275193a-3c51-46a3-afd0-49e55a93bfd3\":{\"name\":\"Value\",\"handle\":\"value\",\"instructions\":\"\",\"searchable\":true,\"translationMethod\":\"none\",\"translationKeyFormat\":null,\"type\":\"craft\\\\fields\\\\PlainText\",\"settings\":{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\",\"columnType\":\"string\"},\"fieldGroup\":null,\"contentColumnType\":\"string\"}}}},\"volumes\":{\"0193dc64-5499-4e28-95dd-f8f603154851\":{\"name\":\"Site Assets\",\"handle\":\"siteAssets\",\"type\":\"craft\\\\volumes\\\\Local\",\"hasUrls\":true,\"url\":\"@assetBaseUrl/site\",\"settings\":{\"path\":\"@assetBasePath/site\"},\"sortOrder\":1,\"fieldLayouts\":{\"e4360fb7-190d-42c5-bde0-e01c03bd127c\":{\"tabs\":[{\"name\":\"Content\",\"sortOrder\":1,\"fields\":{\"aef80333-1412-4130-bb84-ac3bdbbcbbe2\":{\"required\":false,\"sortOrder\":1}}}]}}},\"7d6a9bef-727c-4a0c-9791-4f423956de69\":{\"name\":\"Company Logos\",\"handle\":\"companyLogos\",\"type\":\"craft\\\\volumes\\\\Local\",\"hasUrls\":true,\"url\":\"@assetBaseUrl/logos\",\"settings\":{\"path\":\"@assetBasePath/logos\"},\"sortOrder\":2},\"3fc34ff2-8da7-4a35-8147-f0a2e01392b9\":{\"name\":\"Service Icons\",\"handle\":\"serviceIcons\",\"type\":\"craft\\\\volumes\\\\Local\",\"hasUrls\":true,\"url\":\"@assetBaseUrl/images/service-icons\",\"settings\":{\"path\":\"@assetBasePath/site/images/service-icons\"},\"sortOrder\":3},\"1f0ea10d-2be0-4638-88da-105d232f4787\":{\"name\":\"User Photos\",\"handle\":\"userPhotos\",\"type\":\"craft\\\\volumes\\\\Local\",\"hasUrls\":false,\"url\":null,\"settings\":{\"path\":\"@storage/userphotos\"},\"sortOrder\":4}},\"categoryGroups\":[],\"tagGroups\":[],\"users\":{\"requireEmailVerification\":true,\"allowPublicRegistration\":false,\"defaultGroup\":null,\"photoVolumeUid\":\"1f0ea10d-2be0-4638-88da-105d232f4787\",\"photoSubpath\":\"\",\"fieldLayouts\":{\"b89ba12c-3f9b-4e8d-a190-073678e01175\":{\"tabs\":[{\"name\":\"Content\",\"sortOrder\":1,\"fields\":{\"aef80333-1412-4130-bb84-ac3bdbbcbbe2\":{\"required\":false,\"sortOrder\":1},\"0cbb9736-a84b-4e83-803c-5077f56394a9\":{\"required\":false,\"sortOrder\":2},\"4ca9d3b8-ff02-403a-9010-45763fcdea9f\":{\"required\":false,\"sortOrder\":3}}}]}}},\"globalSets\":{\"8dbeba09-2202-4eb4-8f3c-b15633a4830d\":{\"name\":\"Footer Content\",\"handle\":\"footer\",\"fieldLayouts\":{\"ba0a8885-3474-4231-9827-b6a6da467937\":{\"tabs\":[{\"name\":\"Content\",\"sortOrder\":1,\"fields\":{\"5095500e-4962-429c-9b9c-7a4d0d4f930c\":{\"required\":false,\"sortOrder\":1},\"fcf41a5f-68b5-42dd-8ca1-cc457eb749f0\":{\"required\":false,\"sortOrder\":2},\"b75266c9-d8d2-42ae-9024-0fecb8bdc994\":{\"required\":false,\"sortOrder\":3}}}]}}}},\"plugins\":{\"redactor\":{\"settings\":null,\"licenseKey\":null,\"enabled\":\"1\",\"schemaVersion\":\"2.3.0\"}},\"email\":{\"fromEmail\":\"admin@happylager.dev\",\"fromName\":\"Happylager\",\"template\":null,\"transportType\":\"craft\\\\mail\\\\transportadapters\\\\Sendmail\"},\"system\":{\"edition\":\"pro\",\"live\":true,\"name\":\"Happy Lager\",\"timeZone\":\"UTC\",\"schemaVersion\":\"3.2.16\"},\"imageTransforms\":{\"726664b6-90aa-4fa9-9d03-23be4ba628bc\":{\"name\":\"Small\",\"handle\":\"small\",\"mode\":\"crop\",\"position\":\"center-center\",\"width\":400,\"height\":339,\"format\":null,\"quality\":null,\"interlace\":\"none\"},\"36f99c8f-0ba4-4e4c-af7d-a07dee715ac1\":{\"name\":\"Medium\",\"handle\":\"medium\",\"mode\":\"crop\",\"position\":\"center-center\",\"width\":700,\"height\":424,\"format\":null,\"quality\":null,\"interlace\":\"none\"},\"0f910d7c-0ba2-476a-a7c9-fa489255e601\":{\"name\":\"Thumb\",\"handle\":\"thumb\",\"mode\":\"crop\",\"position\":\"center-center\",\"width\":280,\"height\":204,\"format\":null,\"quality\":null,\"interlace\":\"none\"}},\"routes\":{\"222c9203-357b-45a9-ab56-ad4df20ad9a0\":{\"uriParts\":[\"about\"],\"uriPattern\":\"about\",\"template\":\"about\",\"sortOrder\":\"1\",\"siteUid\":null},\"f2315ceb-90c3-45fe-b6c1-0b847b577a68\":{\"uriParts\":[\"search/results\"],\"uriPattern\":\"search/results\",\"template\":\"search/_results\",\"sortOrder\":\"2\",\"siteUid\":null}}}', NULL, '1', '2014-07-29 18:21:29', '2019-07-09 10:17:08', '3ebb42f0-5296-4d41-b31e-4dc4882dd453');
+INSERT INTO `info` VALUES (1, '3.4.0-beta.4', '3.4.5', 0, NULL, '1', '2019-12-17 22:20:51', '2019-12-17 22:20:51', 'a3dbe1b0-9219-4f3c-a463-15855bbe3567');
 COMMIT;
 
 -- ----------------------------
@@ -4576,6 +4742,32 @@ INSERT INTO `matrixblocks` VALUES (252, 45, 4, 10, 2, NULL, '2015-02-10 17:25:04
 INSERT INTO `matrixblocks` VALUES (254, 253, 72, 11, 1, NULL, '2015-02-10 19:09:38', '2015-02-10 19:09:38', '59853d25-3671-405e-8c8e-fb8569377b23');
 INSERT INTO `matrixblocks` VALUES (255, 253, 72, 11, 2, NULL, '2015-02-10 19:09:38', '2015-02-10 19:09:38', '6284d3c8-c9cf-4d63-b108-dff0ff82ed3e');
 INSERT INTO `matrixblocks` VALUES (256, 253, 72, 11, 3, NULL, '2015-02-10 19:09:38', '2015-02-10 19:09:38', '8e2691a7-2d7e-4ca7-9c09-b91707f68f39');
+INSERT INTO `matrixblocks` VALUES (2011, 2010, 51, 6, 1, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'a03fcec5-432c-4ab4-ab6b-9436baec4e4f');
+INSERT INTO `matrixblocks` VALUES (2012, 2010, 51, 6, 2, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '0a2cf84d-3b05-41a9-948c-e5cb7229693a');
+INSERT INTO `matrixblocks` VALUES (2013, 2010, 51, 6, 3, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '7b5ce19e-17d3-42f6-9994-cc9a74a9fb7b');
+INSERT INTO `matrixblocks` VALUES (2015, 2014, 51, 6, 1, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '00c821fe-02cc-481c-9ff4-14d12ba550ce');
+INSERT INTO `matrixblocks` VALUES (2016, 2014, 51, 6, 2, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '6f75b912-54e6-43d5-8cc4-cb25b789276d');
+INSERT INTO `matrixblocks` VALUES (2017, 2014, 51, 6, 3, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '0816b65e-880f-40dd-8792-f9dd81b781d5');
+INSERT INTO `matrixblocks` VALUES (2019, 2018, 4, 9, 1, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'e0731473-3d6c-4bad-9eaf-69914a195e45');
+INSERT INTO `matrixblocks` VALUES (2020, 2018, 4, 3, 2, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '41cf2f25-3c6c-40ed-9d24-94f25d662b57');
+INSERT INTO `matrixblocks` VALUES (2021, 2018, 4, 1, 3, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'b9800e21-b4d3-4868-bb7b-cb41a8839118');
+INSERT INTO `matrixblocks` VALUES (2022, 2018, 4, 1, 4, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'bc6135a9-7869-4252-ad38-5a3487091f2e');
+INSERT INTO `matrixblocks` VALUES (2023, 2018, 4, 9, 5, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '1cf083ab-2702-419d-b701-26120d1e0f4c');
+INSERT INTO `matrixblocks` VALUES (2024, 2018, 4, 3, 6, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '8a680789-663f-4402-89c6-f174a6c0de7d');
+INSERT INTO `matrixblocks` VALUES (2025, 2018, 4, 4, 7, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '703591ac-ae2b-4603-ab3e-9658c0cf2651');
+INSERT INTO `matrixblocks` VALUES (2026, 2018, 4, 1, 8, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'f31eda50-837d-48c2-afe2-2d8b526fbc73');
+INSERT INTO `matrixblocks` VALUES (2027, 2018, 4, 9, 9, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'bf4326e8-e96e-4884-b175-3fe371f878f3');
+INSERT INTO `matrixblocks` VALUES (2028, 2018, 4, 10, 10, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '2ecca417-547f-451a-9b4e-c9a97aec984d');
+INSERT INTO `matrixblocks` VALUES (2030, 2029, 4, 9, 1, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '9628e0f6-2d3a-41a4-80d7-8bddc2e6e0cc');
+INSERT INTO `matrixblocks` VALUES (2031, 2029, 4, 3, 2, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'c4e4b9e4-c1b6-4ee4-b9b5-4092ee33fb13');
+INSERT INTO `matrixblocks` VALUES (2032, 2029, 4, 1, 3, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '54a2951b-6604-4148-986e-32c42d32c566');
+INSERT INTO `matrixblocks` VALUES (2033, 2029, 4, 1, 4, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'b50aa5bb-86ee-442a-ba6c-a4fc2ecf64e9');
+INSERT INTO `matrixblocks` VALUES (2034, 2029, 4, 9, 5, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '184f0683-a58f-44e6-9712-95d4a2c2eaf7');
+INSERT INTO `matrixblocks` VALUES (2035, 2029, 4, 3, 6, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '11176698-e729-4d54-88d1-0323770f1525');
+INSERT INTO `matrixblocks` VALUES (2036, 2029, 4, 4, 7, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '30a37bb9-0fa8-409c-9415-a8efad2f6359');
+INSERT INTO `matrixblocks` VALUES (2037, 2029, 4, 1, 8, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '3392b78b-a529-42bf-9c60-0f3290ccc6ae');
+INSERT INTO `matrixblocks` VALUES (2038, 2029, 4, 9, 9, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '9a4863db-8ccb-4313-9960-0bc1e8a47644');
+INSERT INTO `matrixblocks` VALUES (2039, 2029, 4, 10, 10, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'f4ac266c-d06c-4be6-b79c-75a8a716d0b4');
 COMMIT;
 
 -- ----------------------------
@@ -4644,7 +4836,7 @@ CREATE TABLE `matrixcontent_articlebody` (
   KEY `craft_matrixcontent_articlebody_siteId_fk` (`siteId`) USING BTREE,
   CONSTRAINT `craft_matrixcontent_articlebody_elementId_fk` FOREIGN KEY (`elementId`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
   CONSTRAINT `craft_matrixcontent_articlebody_siteId_fk` FOREIGN KEY (`siteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1514 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=1534 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of matrixcontent_articlebody
@@ -6135,6 +6327,26 @@ INSERT INTO `matrixcontent_articlebody` VALUES (1510, 2006, 1, '<p>\n	Et harum q
 INSERT INTO `matrixcontent_articlebody` VALUES (1511, 2007, 1, NULL, NULL, NULL, NULL, 'full', NULL, NULL, NULL, NULL, NULL, NULL, '2019-07-09 10:18:34', '2019-07-09 10:18:34', 'd95ccbf1-75f4-472f-b70b-d066b086f638');
 INSERT INTO `matrixcontent_articlebody` VALUES (1512, 2008, 1, NULL, NULL, NULL, 'In the End', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-07-09 10:18:34', '2019-07-09 10:18:34', '47ca5577-6be8-48eb-a4f4-ef1213da0721');
 INSERT INTO `matrixcontent_articlebody` VALUES (1513, 2009, 1, '<p>\n	Vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.\n</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'center', '2019-07-09 10:18:34', '2019-07-09 10:18:34', '28b9264e-ab96-4855-8018-e7d53853929e');
+INSERT INTO `matrixcontent_articlebody` VALUES (1514, 2019, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'How We Think', NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'a9a394b9-d473-45a6-ac50-bedbaeab2aca');
+INSERT INTO `matrixcontent_articlebody` VALUES (1515, 2020, 1, NULL, NULL, NULL, 'The philosophy of Happy Lager is One Third Working Hard and Two Thirds Happy Accidents.', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'a877f723-e70e-41d4-9d90-d35ccc826528');
+INSERT INTO `matrixcontent_articlebody` VALUES (1516, 2021, 1, '<p>Serendipity is a core part of how we work. Et iusto odio dignissimos ducimus qui blanditii raesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis.</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'left', '2019-12-17 22:20:49', '2019-12-17 22:20:49', '41bea021-da1b-407c-853c-7c64ac106f7a');
+INSERT INTO `matrixcontent_articlebody` VALUES (1517, 2022, 1, '<p>Deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit. Luptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in.</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'right', '2019-12-17 22:20:49', '2019-12-17 22:20:49', '774f0947-a5ea-4717-85fa-510aa131c248');
+INSERT INTO `matrixcontent_articlebody` VALUES (1518, 2023, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Our Story', NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '335395f5-6f68-42e7-8bc5-981c757fc3ba');
+INSERT INTO `matrixcontent_articlebody` VALUES (1519, 2024, 1, NULL, NULL, NULL, 'It all begins in a living room with a six pack and A Clamshell iBook.', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '680bb8f1-e612-4680-b942-50d6f3c88318');
+INSERT INTO `matrixcontent_articlebody` VALUES (1520, 2025, 1, NULL, NULL, NULL, NULL, 'left', NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '6da821fe-1625-4d05-98cb-1ecd462a61ba');
+INSERT INTO `matrixcontent_articlebody` VALUES (1521, 2026, 1, '<p>Small beginnings is the starting point of every hero\'s story. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis.</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'right', '2019-12-17 22:20:49', '2019-12-17 22:20:49', '58cf4a06-f26c-4942-b2a0-9246f5be3b16');
+INSERT INTO `matrixcontent_articlebody` VALUES (1522, 2027, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Our People', NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '67af022d-1fbf-420c-b6d6-9d7d7a6e2a19');
+INSERT INTO `matrixcontent_articlebody` VALUES (1523, 2028, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '985efec8-ee34-47e2-9b32-cd3c05362384');
+INSERT INTO `matrixcontent_articlebody` VALUES (1524, 2030, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'How We Think', NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '4419b5ac-a7d5-454f-91ba-db232a2993a1');
+INSERT INTO `matrixcontent_articlebody` VALUES (1525, 2031, 1, NULL, NULL, NULL, 'The philosophy of Happy Lager is One Third Working Hard and Two Thirds Happy Accidents.', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'a08dc7fd-5dd5-47d4-9bfc-5a7a9472ba24');
+INSERT INTO `matrixcontent_articlebody` VALUES (1526, 2032, 1, '<p>Serendipity is a core part of how we work. Et iusto odio dignissimos ducimus qui blanditii raesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis.</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'left', '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'a454f62c-c48a-48c3-8cff-fa5f6bb775ba');
+INSERT INTO `matrixcontent_articlebody` VALUES (1527, 2033, 1, '<p>Deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit. Luptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in.</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'right', '2019-12-17 22:20:49', '2019-12-17 22:20:49', '7b4c8388-d024-4b50-a5fb-68c54d451b22');
+INSERT INTO `matrixcontent_articlebody` VALUES (1528, 2034, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Our Story', NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'dbd0bea3-49c1-40d6-916b-aa520cae2845');
+INSERT INTO `matrixcontent_articlebody` VALUES (1529, 2035, 1, NULL, NULL, NULL, 'It all begins in a living room with a six pack and A Clamshell iBook.', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'e7bf3bcd-3672-4b01-8f1d-5dccbc459ec1');
+INSERT INTO `matrixcontent_articlebody` VALUES (1530, 2036, 1, NULL, NULL, NULL, NULL, 'left', NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'e04593ed-08c3-4234-ae10-3eb1fa83aad3');
+INSERT INTO `matrixcontent_articlebody` VALUES (1531, 2037, 1, '<p>Small beginnings is the starting point of every hero\'s story. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis.</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'right', '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'f989cd60-fe11-4407-8870-5d403809ca53');
+INSERT INTO `matrixcontent_articlebody` VALUES (1532, 2038, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Our People', NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'bd24a0ff-e3d0-4951-b486-434c034d2eee');
+INSERT INTO `matrixcontent_articlebody` VALUES (1533, 2039, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'd08ddaf2-3bc4-43fa-9bff-a7694dc5c5cb');
 COMMIT;
 
 -- ----------------------------
@@ -6356,7 +6568,7 @@ CREATE TABLE `matrixcontent_testimonials` (
   KEY `craft_matrixcontent_testimonials_siteId_fk` (`siteId`) USING BTREE,
   CONSTRAINT `craft_matrixcontent_testimonials_elementId_fk` FOREIGN KEY (`elementId`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
   CONSTRAINT `craft_matrixcontent_testimonials_siteId_fk` FOREIGN KEY (`siteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of matrixcontent_testimonials
@@ -6392,6 +6604,12 @@ INSERT INTO `matrixcontent_testimonials` VALUES (27, 1319, 1, 'Happy Lager sells
 INSERT INTO `matrixcontent_testimonials` VALUES (28, 1321, 1, 'Happy Lager delivered the most comprehensive strategy from a boutique company that I’ve ever seen.', 'Larry Page', '2019-07-09 10:18:12', '2019-07-09 10:18:13', 'dc562347-3f55-4b97-b64e-d6b4f2327327');
 INSERT INTO `matrixcontent_testimonials` VALUES (29, 1322, 1, 'I don’t know where to begin. I can’t recommend Happy Lager highly enough.', 'Ryan Reynolds', '2019-07-09 10:18:13', '2019-07-09 10:18:13', 'de3ab902-8427-46d6-b224-6f88fa47c04e');
 INSERT INTO `matrixcontent_testimonials` VALUES (30, 1323, 1, 'Happy Lager sells the good stuff.', 'Bob Guff', '2019-07-09 10:18:13', '2019-07-09 10:18:13', '1f51826c-186a-4072-bb2c-b450baa511e7');
+INSERT INTO `matrixcontent_testimonials` VALUES (31, 2011, 1, 'Happy Lager delivered the most comprehensive strategy from a boutique company that I’ve ever seen.', 'Larry Page', '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'b0013b96-2d3e-4fc4-926f-686e834b3a86');
+INSERT INTO `matrixcontent_testimonials` VALUES (32, 2012, 1, 'I don’t know where to begin. I can’t recommend Happy Lager highly enough.', 'Ryan Reynolds', '2019-12-17 22:20:49', '2019-12-17 22:20:49', '72799071-b71f-4406-a9f4-df496b212c48');
+INSERT INTO `matrixcontent_testimonials` VALUES (33, 2013, 1, 'Happy Lager sells the good stuff.', 'Bob Guff', '2019-12-17 22:20:49', '2019-12-17 22:20:49', '1f721011-772e-4975-bb8f-d373dacf9af1');
+INSERT INTO `matrixcontent_testimonials` VALUES (34, 2015, 1, 'Happy Lager delivered the most comprehensive strategy from a boutique company that I’ve ever seen.', 'Larry Page', '2019-12-17 22:20:49', '2019-12-17 22:20:49', '062a2410-2111-4b27-9412-9dc9181ccbf5');
+INSERT INTO `matrixcontent_testimonials` VALUES (35, 2016, 1, 'I don’t know where to begin. I can’t recommend Happy Lager highly enough.', 'Ryan Reynolds', '2019-12-17 22:20:49', '2019-12-17 22:20:49', '0567c0a0-94a0-4153-b695-6b1a6972ff26');
+INSERT INTO `matrixcontent_testimonials` VALUES (36, 2017, 1, 'Happy Lager sells the good stuff.', 'Bob Guff', '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'b072c0fb-befb-46f4-830e-41711e2d9371');
 COMMIT;
 
 -- ----------------------------
@@ -6411,7 +6629,7 @@ CREATE TABLE `migrations` (
   KEY `craft_migrations_pluginId_idx` (`pluginId`) USING BTREE,
   KEY `craft_migrations_type_pluginId_idx` (`type`,`pluginId`) USING BTREE,
   CONSTRAINT `craft_migrations_pluginId_fk` FOREIGN KEY (`pluginId`) REFERENCES `plugins` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=238 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=247 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of migrations
@@ -6654,6 +6872,15 @@ INSERT INTO `migrations` VALUES (234, NULL, 'app', 'm190709_111144_nullable_revi
 INSERT INTO `migrations` VALUES (235, NULL, 'app', 'm190711_153020_drop_snapshots', '2019-07-18 08:38:09', '2019-07-18 08:38:09', '2019-07-18 08:38:09', 'c06eb92b-578f-4648-b1a1-172ef5c62ebc');
 INSERT INTO `migrations` VALUES (236, NULL, 'app', 'm190712_195914_no_draft_revisions', '2019-07-18 08:38:09', '2019-07-18 08:38:09', '2019-07-18 08:38:09', '65ee9987-7e09-411f-a297-8c255544f4d9');
 INSERT INTO `migrations` VALUES (237, NULL, 'app', 'm190723_140314_fix_preview_targets_column', '2019-07-23 04:37:27', '2019-07-23 04:37:27', '2019-07-23 04:37:27', '3c7ca7f9-af8b-4347-8339-2289c75daf75');
+INSERT INTO `migrations` VALUES (238, NULL, 'app', 'm180521_172900_project_config_table', '2019-12-17 22:20:48', '2019-12-17 22:20:48', '2019-12-17 22:20:48', '6f6785b7-55bd-4508-9c21-48ffb65b2171');
+INSERT INTO `migrations` VALUES (239, NULL, 'app', 'm190617_164400_add_gqlschemas_table', '2019-12-17 22:20:48', '2019-12-17 22:20:48', '2019-12-17 22:20:48', 'e0001716-32f7-4e14-b8cf-bbeb144a799b');
+INSERT INTO `migrations` VALUES (240, NULL, 'app', 'm190820_003519_flush_compiled_templates', '2019-12-17 22:20:48', '2019-12-17 22:20:48', '2019-12-17 22:20:48', 'e362554e-3f1d-4c06-95d2-781bf82a10f1');
+INSERT INTO `migrations` VALUES (241, NULL, 'app', 'm190823_020339_optional_draft_creators', '2019-12-17 22:20:48', '2019-12-17 22:20:48', '2019-12-17 22:20:48', '6d20718e-5192-4f14-ae38-a696815debd4');
+INSERT INTO `migrations` VALUES (242, NULL, 'app', 'm190913_152146_update_preview_targets', '2019-12-17 22:20:49', '2019-12-17 22:20:49', '2019-12-17 22:20:49', '9bed72d3-7795-48b3-8074-85098b507d34');
+INSERT INTO `migrations` VALUES (243, NULL, 'app', 'm191107_122000_add_gql_project_config_support', '2019-12-17 22:20:50', '2019-12-17 22:20:50', '2019-12-17 22:20:50', '3c9b1bb6-673d-4903-806f-c8a42ed6f27a');
+INSERT INTO `migrations` VALUES (244, NULL, 'app', 'm191204_085100_pack_savable_component_settings', '2019-12-17 22:20:50', '2019-12-17 22:20:50', '2019-12-17 22:20:50', 'cd1edd5f-ccc1-4703-9376-f63c273a0525');
+INSERT INTO `migrations` VALUES (245, NULL, 'app', 'm191206_001148_change_tracking', '2019-12-17 22:20:51', '2019-12-17 22:20:51', '2019-12-17 22:20:51', 'c286d9d7-59f4-479d-ad19-eb41e15c1da2');
+INSERT INTO `migrations` VALUES (246, NULL, 'app', 'm191216_191635_asset_upload_tracking', '2019-12-17 22:20:51', '2019-12-17 22:20:51', '2019-12-17 22:20:51', 'e8fb35a7-4c6d-416f-a101-d4358f53fcff');
 COMMIT;
 
 -- ----------------------------
@@ -6679,7 +6906,1125 @@ CREATE TABLE `plugins` (
 -- Records of plugins
 -- ----------------------------
 BEGIN;
-INSERT INTO `plugins` VALUES (1, 'redactor', '2.3.3.2', '2.3.0', 'unknown', NULL, '2018-02-16 22:20:38', '2018-02-16 22:20:38', '2019-07-09 10:17:31', '2466ee8f-7fab-45ad-b6ec-10d86c18543b');
+INSERT INTO `plugins` VALUES (1, 'redactor', '2.5.x-dev', '2.3.0', 'unknown', NULL, '2018-02-16 22:20:38', '2018-02-16 22:20:38', '2019-12-17 22:20:46', '2466ee8f-7fab-45ad-b6ec-10d86c18543b');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for projectconfig
+-- ----------------------------
+DROP TABLE IF EXISTS `projectconfig`;
+CREATE TABLE `projectconfig` (
+  `path` varchar(255) NOT NULL,
+  `value` text NOT NULL,
+  PRIMARY KEY (`path`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of projectconfig
+-- ----------------------------
+BEGIN;
+INSERT INTO `projectconfig` VALUES ('dateModified', '1576621249');
+INSERT INTO `projectconfig` VALUES ('email.fromEmail', '\"admin@happylager.dev\"');
+INSERT INTO `projectconfig` VALUES ('email.fromName', '\"Happylager\"');
+INSERT INTO `projectconfig` VALUES ('email.template', 'null');
+INSERT INTO `projectconfig` VALUES ('email.transportType', '\"craft\\\\mail\\\\transportadapters\\\\Sendmail\"');
+INSERT INTO `projectconfig` VALUES ('fieldGroups.0815347a-8e73-45fd-93c9-2244ac562559.name', '\"Contact Info\"');
+INSERT INTO `projectconfig` VALUES ('fieldGroups.0d0b7e16-8d7c-4d6f-9059-d11c473058f4.name', '\"General\"');
+INSERT INTO `projectconfig` VALUES ('fieldGroups.8b4aae04-76ef-48c2-a294-e81064a470ed.name', '\"Services\"');
+INSERT INTO `projectconfig` VALUES ('fieldGroups.d58a1faa-0bf6-46b2-b880-b0c14bebca75.name', '\"Homepage\"');
+INSERT INTO `projectconfig` VALUES ('fieldGroups.f00e1793-0757-46e5-99e9-016b21359ac7.name', '\"Work\"');
+INSERT INTO `projectconfig` VALUES ('fieldGroups.f7189ca2-4b93-4661-830a-a71aff8aa3cd.name', '\"Footer\"');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.fieldGroup', '\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\"');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.handle', '\"featuredThumb\"');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.instructions', '\"Thumb image for use on home page or archives.\"');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.name', '\"Featured Thumb\"');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.defaultUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.defaultUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.limit', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.localizeRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.restrictFiles', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.singleUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.singleUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.sources', '\"*\"');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.useSingleFolder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.type', '\"craft\\\\fields\\\\Assets\"');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.contentColumnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.fieldGroup', '\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\"');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.handle', '\"body\"');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.instructions', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.name', '\"Body\"');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.settings.columnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.settings.purifyHtml', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.settings.redactorConfig', '\"Standard.json\"');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.settings.removeEmptyTags', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.settings.removeInlineStyles', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.settings.removeNbsp', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.translationMethod', '\"site\"');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.type', '\"craft\\\\redactor\\\\Field\"');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.fieldGroup', '\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\"');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.handle', '\"featuredImage\"');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.name', '\"Featured Image\"');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.allowedKinds.0', '\"image\"');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.defaultUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.defaultUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.limit', '\"2\"');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.localizeRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.restrictFiles', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.singleUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.singleUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.sources.0', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.useSingleFolder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.type', '\"craft\\\\fields\\\\Assets\"');
+INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.contentColumnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.fieldGroup', '\"0815347a-8e73-45fd-93c9-2244ac562559\"');
+INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.handle', '\"address\"');
+INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.name', '\"Address\"');
+INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.settings.charLimit', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.settings.columnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.settings.initialRows', '\"4\"');
+INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.settings.multiline', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.type', '\"craft\\\\fields\\\\PlainText\"');
+INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.fieldGroup', '\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\"');
+INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.handle', '\"linkUrl\"');
+INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.name', '\"Link URL\"');
+INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.settings.charLimit', '\"255\"');
+INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.settings.columnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.settings.initialRows', '\"4\"');
+INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.settings.multiline', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.settings.placeholder', '\"e.g. http://example.com\"');
+INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.type', '\"craft\\\\fields\\\\PlainText\"');
+INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.fieldGroup', '\"f7189ca2-4b93-4661-830a-a71aff8aa3cd\"');
+INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.handle', '\"copyrightNotice\"');
+INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.name', '\"Copyright Notice\"');
+INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.settings.charLimit', '\"255\"');
+INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.settings.columnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.settings.initialRows', '\"4\"');
+INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.settings.multiline', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.type', '\"craft\\\\fields\\\\PlainText\"');
+INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.fieldGroup', '\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\"');
+INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.handle', '\"subheading\"');
+INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.name', '\"Subheading\"');
+INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.settings.charLimit', '\"255\"');
+INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.settings.columnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.settings.initialRows', '\"4\"');
+INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.settings.multiline', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.type', '\"craft\\\\fields\\\\PlainText\"');
+INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.contentColumnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.fieldGroup', '\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\"');
+INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.handle', '\"indexHeading\"');
+INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.instructions', '\"Page heading for services structure index page.\"');
+INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.name', '\"Index Heading\"');
+INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.settings.columnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.settings.purifyHtml', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.settings.redactorConfig', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.settings.removeEmptyTags', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.settings.removeInlineStyles', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.settings.removeNbsp', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.type', '\"craft\\\\redactor\\\\Field\"');
+INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.fieldGroup', '\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\"');
+INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.handle', '\"articleBody\"');
+INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.name', '\"Article Body\"');
+INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.settings.contentTable', '\"{{%matrixcontent_articlebody}}\"');
+INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.settings.localizeBlocks', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.settings.maxBlocks', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.type', '\"craft\\\\fields\\\\Matrix\"');
+INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.fieldGroup', '\"d58a1faa-0bf6-46b2-b880-b0c14bebca75\"');
+INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.handle', '\"testimonials\"');
+INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.name', '\"Testimonials\"');
+INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.settings.contentTable', '\"{{%matrixcontent_testimonials}}\"');
+INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.settings.localizeBlocks', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.settings.maxBlocks', '\"3\"');
+INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.type', '\"craft\\\\fields\\\\Matrix\"');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.fieldGroup', '\"d58a1faa-0bf6-46b2-b880-b0c14bebca75\"');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.handle', '\"clientLogos\"');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.name', '\"Client Logos\"');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.defaultUploadLocationSource', '\"volume:7d6a9bef-727c-4a0c-9791-4f423956de69\"');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.defaultUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.limit', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.localizeRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.restrictFiles', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.singleUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.singleUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.sources.0', '\"volume:7d6a9bef-727c-4a0c-9791-4f423956de69\"');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.useSingleFolder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.type', '\"craft\\\\fields\\\\Assets\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.fieldGroup', '\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.handle', '\"heading\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.name', '\"Heading\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.settings.charLimit', '\"255\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.settings.columnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.settings.initialRows', '\"4\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.settings.multiline', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.type', '\"craft\\\\fields\\\\PlainText\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.fieldGroup', '\"8b4aae04-76ef-48c2-a294-e81064a470ed\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.handle', '\"serviceBody\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.name', '\"Service Body\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.settings.contentTable', '\"{{%matrixcontent_servicebody}}\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.settings.localizeBlocks', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.settings.maxBlocks', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.type', '\"craft\\\\fields\\\\Matrix\"');
+INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c.contentColumnType', '\"boolean\"');
+INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c.fieldGroup', '\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\"');
+INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c.handle', '\"featuredEntry\"');
+INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c.instructions', '\"Should this entry be featured on the listing page?\"');
+INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c.name', '\"Featured?\"');
+INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c.settings.default', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c.type', '\"craft\\\\fields\\\\Lightswitch\"');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.fieldGroup', '\"d58a1faa-0bf6-46b2-b880-b0c14bebca75\"');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.handle', '\"heroImage\"');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.instructions', '\"Choose the big homepage hero image. The image should be at least 1450×916 for best results.\"');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.name', '\"Hero Image\"');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.defaultUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.defaultUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.limit', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.localizeRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.restrictFiles', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.singleUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.singleUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.sources.0', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.useSingleFolder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.type', '\"craft\\\\fields\\\\Assets\"');
+INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.fieldGroup', '\"f00e1793-0757-46e5-99e9-016b21359ac7\"');
+INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.handle', '\"servicesPerformed\"');
+INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.name', '\"Services Performed\"');
+INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.settings.limit', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.settings.localizeRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.settings.sources.0', '\"section:f6b0cb16-5df8-4b57-9856-c9c2d6b9699e\"');
+INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.type', '\"craft\\\\fields\\\\Entries\"');
+INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.contentColumnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.fieldGroup', '\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\"');
+INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.handle', '\"shortDescription\"');
+INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.instructions', '\"Short description for use in index regions.\"');
+INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.name', '\"Short Description\"');
+INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.settings.columnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.settings.purifyHtml', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.settings.redactorConfig', '\"Simple.json\"');
+INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.settings.removeEmptyTags', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.settings.removeInlineStyles', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.settings.removeNbsp', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.type', '\"craft\\\\redactor\\\\Field\"');
+INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.fieldGroup', '\"0815347a-8e73-45fd-93c9-2244ac562559\"');
+INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.handle', '\"contactMethods\"');
+INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.name', '\"Contact Methods\"');
+INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.settings.contentTable', '\"{{%matrixcontent_contactmethods}}\"');
+INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.settings.localizeBlocks', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.settings.maxBlocks', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.type', '\"craft\\\\fields\\\\Matrix\"');
+INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.fieldGroup', '\"0815347a-8e73-45fd-93c9-2244ac562559\"');
+INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.handle', '\"email\"');
+INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.name', '\"Email\"');
+INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.settings.charLimit', '\"255\"');
+INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.settings.columnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.settings.initialRows', '\"4\"');
+INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.settings.multiline', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.type', '\"craft\\\\fields\\\\PlainText\"');
+INSERT INTO `projectconfig` VALUES ('fields.cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea.contentColumnType', '\"string(7)\"');
+INSERT INTO `projectconfig` VALUES ('fields.cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea.fieldGroup', '\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\"');
+INSERT INTO `projectconfig` VALUES ('fields.cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea.handle', '\"backgroundColor\"');
+INSERT INTO `projectconfig` VALUES ('fields.cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea.instructions', '\"Hex value for alternate background color.\"');
+INSERT INTO `projectconfig` VALUES ('fields.cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea.name', '\"Background Color\"');
+INSERT INTO `projectconfig` VALUES ('fields.cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea.type', '\"craft\\\\fields\\\\Color\"');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.fieldGroup', '\"8b4aae04-76ef-48c2-a294-e81064a470ed\"');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.handle', '\"serviceIcon\"');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.name', '\"Service Icon\"');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.defaultUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.defaultUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.limit', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.localizeRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.restrictFiles', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.singleUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.singleUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.sources.0', '\"volume:3fc34ff2-8da7-4a35-8147-f0a2e01392b9\"');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.useSingleFolder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.type', '\"craft\\\\fields\\\\Assets\"');
+INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.fieldGroup', '\"f7189ca2-4b93-4661-830a-a71aff8aa3cd\"');
+INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.handle', '\"contactUsLabel\"');
+INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.name', '\"Contact Us Label\"');
+INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.settings.charLimit', '\"255\"');
+INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.settings.columnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.settings.initialRows', '\"4\"');
+INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.settings.multiline', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.type', '\"craft\\\\fields\\\\PlainText\"');
+INSERT INTO `projectconfig` VALUES ('globalSets.8dbeba09-2202-4eb4-8f3c-b15633a4830d.fieldLayouts.ba0a8885-3474-4231-9827-b6a6da467937.tabs.0.fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.required', 'false');
+INSERT INTO `projectconfig` VALUES ('globalSets.8dbeba09-2202-4eb4-8f3c-b15633a4830d.fieldLayouts.ba0a8885-3474-4231-9827-b6a6da467937.tabs.0.fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('globalSets.8dbeba09-2202-4eb4-8f3c-b15633a4830d.fieldLayouts.ba0a8885-3474-4231-9827-b6a6da467937.tabs.0.fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.required', 'false');
+INSERT INTO `projectconfig` VALUES ('globalSets.8dbeba09-2202-4eb4-8f3c-b15633a4830d.fieldLayouts.ba0a8885-3474-4231-9827-b6a6da467937.tabs.0.fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.sortOrder', '3');
+INSERT INTO `projectconfig` VALUES ('globalSets.8dbeba09-2202-4eb4-8f3c-b15633a4830d.fieldLayouts.ba0a8885-3474-4231-9827-b6a6da467937.tabs.0.fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.required', 'false');
+INSERT INTO `projectconfig` VALUES ('globalSets.8dbeba09-2202-4eb4-8f3c-b15633a4830d.fieldLayouts.ba0a8885-3474-4231-9827-b6a6da467937.tabs.0.fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('globalSets.8dbeba09-2202-4eb4-8f3c-b15633a4830d.fieldLayouts.ba0a8885-3474-4231-9827-b6a6da467937.tabs.0.name', '\"Content\"');
+INSERT INTO `projectconfig` VALUES ('globalSets.8dbeba09-2202-4eb4-8f3c-b15633a4830d.fieldLayouts.ba0a8885-3474-4231-9827-b6a6da467937.tabs.0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('globalSets.8dbeba09-2202-4eb4-8f3c-b15633a4830d.handle', '\"footer\"');
+INSERT INTO `projectconfig` VALUES ('globalSets.8dbeba09-2202-4eb4-8f3c-b15633a4830d.name', '\"Footer Content\"');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.0f910d7c-0ba2-476a-a7c9-fa489255e601.format', 'null');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.0f910d7c-0ba2-476a-a7c9-fa489255e601.handle', '\"thumb\"');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.0f910d7c-0ba2-476a-a7c9-fa489255e601.height', '204');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.0f910d7c-0ba2-476a-a7c9-fa489255e601.interlace', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.0f910d7c-0ba2-476a-a7c9-fa489255e601.mode', '\"crop\"');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.0f910d7c-0ba2-476a-a7c9-fa489255e601.name', '\"Thumb\"');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.0f910d7c-0ba2-476a-a7c9-fa489255e601.position', '\"center-center\"');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.0f910d7c-0ba2-476a-a7c9-fa489255e601.quality', 'null');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.0f910d7c-0ba2-476a-a7c9-fa489255e601.width', '280');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.36f99c8f-0ba4-4e4c-af7d-a07dee715ac1.format', 'null');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.36f99c8f-0ba4-4e4c-af7d-a07dee715ac1.handle', '\"medium\"');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.36f99c8f-0ba4-4e4c-af7d-a07dee715ac1.height', '424');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.36f99c8f-0ba4-4e4c-af7d-a07dee715ac1.interlace', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.36f99c8f-0ba4-4e4c-af7d-a07dee715ac1.mode', '\"crop\"');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.36f99c8f-0ba4-4e4c-af7d-a07dee715ac1.name', '\"Medium\"');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.36f99c8f-0ba4-4e4c-af7d-a07dee715ac1.position', '\"center-center\"');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.36f99c8f-0ba4-4e4c-af7d-a07dee715ac1.quality', 'null');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.36f99c8f-0ba4-4e4c-af7d-a07dee715ac1.width', '700');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.726664b6-90aa-4fa9-9d03-23be4ba628bc.format', 'null');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.726664b6-90aa-4fa9-9d03-23be4ba628bc.handle', '\"small\"');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.726664b6-90aa-4fa9-9d03-23be4ba628bc.height', '339');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.726664b6-90aa-4fa9-9d03-23be4ba628bc.interlace', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.726664b6-90aa-4fa9-9d03-23be4ba628bc.mode', '\"crop\"');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.726664b6-90aa-4fa9-9d03-23be4ba628bc.name', '\"Small\"');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.726664b6-90aa-4fa9-9d03-23be4ba628bc.position', '\"center-center\"');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.726664b6-90aa-4fa9-9d03-23be4ba628bc.quality', 'null');
+INSERT INTO `projectconfig` VALUES ('imageTransforms.726664b6-90aa-4fa9-9d03-23be4ba628bc.width', '400');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.field', '\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fieldLayouts.4ade673e-0245-430b-b932-c8ea86e36773.tabs.0.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.required', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fieldLayouts.4ade673e-0245-430b-b932-c8ea86e36773.tabs.0.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fieldLayouts.4ade673e-0245-430b-b932-c8ea86e36773.tabs.0.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.required', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fieldLayouts.4ade673e-0245-430b-b932-c8ea86e36773.tabs.0.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fieldLayouts.4ade673e-0245-430b-b932-c8ea86e36773.tabs.0.name', '\"Content\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fieldLayouts.4ade673e-0245-430b-b932-c8ea86e36773.tabs.0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.fieldGroup', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.handle', '\"position\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.name', '\"Position\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.0.default', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.0.label', '\"Left\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.0.value', '\"left\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.1.default', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.1.label', '\"Center\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.1.value', '\"center\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.2.default', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.2.label', '\"Right\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.2.value', '\"right\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.type', '\"craft\\\\fields\\\\Dropdown\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.contentColumnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.fieldGroup', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.handle', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.name', '\"Text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.settings.columnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.settings.purifyHtml', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.settings.redactorConfig', '\"Standard.json\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.settings.removeEmptyTags', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.settings.removeInlineStyles', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.settings.removeNbsp', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.type', '\"craft\\\\redactor\\\\Field\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.handle', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.name', '\"Text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.sortOrder', '3');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.field', '\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fieldLayouts.0964c39a-7c91-4ac2-a9e6-584a7c845d32.tabs.0.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.required', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fieldLayouts.0964c39a-7c91-4ac2-a9e6-584a7c845d32.tabs.0.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fieldLayouts.0964c39a-7c91-4ac2-a9e6-584a7c845d32.tabs.0.name', '\"Content\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fieldLayouts.0964c39a-7c91-4ac2-a9e6-584a7c845d32.tabs.0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.fieldGroup', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.handle', '\"images\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.name', '\"Images\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.defaultUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.defaultUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.limit', '\"3\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.localizeRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.restrictFiles', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.singleUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.singleUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.sources.0', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.useSingleFolder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.type', '\"craft\\\\fields\\\\Assets\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.handle', '\"gallery\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.name', '\"Gallery\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.sortOrder', '6');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.field', '\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fieldLayouts.0189a187-131f-46a8-b494-cd94c82d6aae.tabs.0.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.required', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fieldLayouts.0189a187-131f-46a8-b494-cd94c82d6aae.tabs.0.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fieldLayouts.0189a187-131f-46a8-b494-cd94c82d6aae.tabs.0.name', '\"Content\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fieldLayouts.0189a187-131f-46a8-b494-cd94c82d6aae.tabs.0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.fieldGroup', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.handle', '\"heading\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.name', '\"Heading\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.settings.charLimit', '\"255\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.settings.columnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.settings.initialRows', '\"4\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.settings.multiline', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.type', '\"craft\\\\fields\\\\PlainText\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.handle', '\"heading\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.name', '\"Heading\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.field', '\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fieldLayouts.327aba6f-b81c-4179-9e58-208d34322ced.tabs.0.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.required', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fieldLayouts.327aba6f-b81c-4179-9e58-208d34322ced.tabs.0.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fieldLayouts.327aba6f-b81c-4179-9e58-208d34322ced.tabs.0.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.required', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fieldLayouts.327aba6f-b81c-4179-9e58-208d34322ced.tabs.0.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fieldLayouts.327aba6f-b81c-4179-9e58-208d34322ced.tabs.0.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.required', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fieldLayouts.327aba6f-b81c-4179-9e58-208d34322ced.tabs.0.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.sortOrder', '3');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fieldLayouts.327aba6f-b81c-4179-9e58-208d34322ced.tabs.0.name', '\"Content\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fieldLayouts.327aba6f-b81c-4179-9e58-208d34322ced.tabs.0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.contentColumnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.fieldGroup', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.handle', '\"caption\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.name', '\"Caption\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.settings.columnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.settings.purifyHtml', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.settings.redactorConfig', '\"Simple.json\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.settings.removeEmptyTags', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.settings.removeInlineStyles', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.settings.removeNbsp', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.type', '\"craft\\\\redactor\\\\Field\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.fieldGroup', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.handle', '\"image\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.name', '\"Image\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.allowedKinds.0', '\"image\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.defaultUploadLocationSource', '\"folder:20095f95-422a-46cc-a5d0-3bc6b0a4da20\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.defaultUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.limit', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.localizeRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.restrictFiles', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.singleUploadLocationSource', '\"folder:20095f95-422a-46cc-a5d0-3bc6b0a4da20\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.singleUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.sources.0', '\"folder:20095f95-422a-46cc-a5d0-3bc6b0a4da20\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.useSingleFolder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.type', '\"craft\\\\fields\\\\Assets\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.fieldGroup', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.handle', '\"position\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.name', '\"Position\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.0.default', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.0.label', '\"Left\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.0.value', '\"left\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.1.default', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.1.label', '\"Center\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.1.value', '\"center\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.2.default', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.2.label', '\"Right\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.2.value', '\"right\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.3.default', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.3.label', '\"Full\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.3.value', '\"full\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.type', '\"craft\\\\fields\\\\Dropdown\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.handle', '\"image\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.name', '\"Image\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.sortOrder', '5');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.field', '\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fieldLayouts.b82a12f2-e814-4b74-9b32-bd1a90497a65.tabs.0.fields.35200549-df46-4092-994a-a8015c5810ba.required', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fieldLayouts.b82a12f2-e814-4b74-9b32-bd1a90497a65.tabs.0.fields.35200549-df46-4092-994a-a8015c5810ba.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fieldLayouts.b82a12f2-e814-4b74-9b32-bd1a90497a65.tabs.0.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.required', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fieldLayouts.b82a12f2-e814-4b74-9b32-bd1a90497a65.tabs.0.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fieldLayouts.b82a12f2-e814-4b74-9b32-bd1a90497a65.tabs.0.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.required', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fieldLayouts.b82a12f2-e814-4b74-9b32-bd1a90497a65.tabs.0.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.sortOrder', '3');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fieldLayouts.b82a12f2-e814-4b74-9b32-bd1a90497a65.tabs.0.name', '\"Content\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fieldLayouts.b82a12f2-e814-4b74-9b32-bd1a90497a65.tabs.0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.contentColumnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.fieldGroup', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.handle', '\"quote\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.name', '\"Quote\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.settings.charLimit', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.settings.columnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.settings.initialRows', '\"4\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.settings.multiline', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.type', '\"craft\\\\fields\\\\PlainText\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.contentColumnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.fieldGroup', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.handle', '\"attribution\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.name', '\"Attribution\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.settings.charLimit', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.settings.columnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.settings.initialRows', '\"4\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.settings.multiline', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.type', '\"craft\\\\fields\\\\PlainText\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.fieldGroup', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.handle', '\"position\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.name', '\"Position\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.0.default', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.0.label', '\"Center\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.0.value', '\"center\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.1.default', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.1.label', '\"Full\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.1.value', '\"full\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.type', '\"craft\\\\fields\\\\Dropdown\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.handle', '\"quote\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.name', '\"Quote\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.sortOrder', '7');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.field', '\"9bf9e642-2881-44b4-99ff-2cbed3ccc2d7\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fieldLayouts.65bf26e9-50b3-4580-88a4-7a622077d8fb.tabs.0.fields.3285a611-4363-43f2-82b5-97e2d253cab3.required', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fieldLayouts.65bf26e9-50b3-4580-88a4-7a622077d8fb.tabs.0.fields.3285a611-4363-43f2-82b5-97e2d253cab3.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fieldLayouts.65bf26e9-50b3-4580-88a4-7a622077d8fb.tabs.0.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.required', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fieldLayouts.65bf26e9-50b3-4580-88a4-7a622077d8fb.tabs.0.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.sortOrder', '3');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fieldLayouts.65bf26e9-50b3-4580-88a4-7a622077d8fb.tabs.0.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.required', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fieldLayouts.65bf26e9-50b3-4580-88a4-7a622077d8fb.tabs.0.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fieldLayouts.65bf26e9-50b3-4580-88a4-7a622077d8fb.tabs.0.name', '\"Content\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fieldLayouts.65bf26e9-50b3-4580-88a4-7a622077d8fb.tabs.0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.contentColumnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.fieldGroup', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.handle', '\"heading\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.name', '\"Heading\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.settings.charLimit', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.settings.columnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.settings.initialRows', '\"4\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.settings.multiline', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.type', '\"craft\\\\fields\\\\PlainText\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.fieldGroup', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.handle', '\"image\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.name', '\"Image\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.defaultUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.defaultUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.limit', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.localizeRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.restrictFiles', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.singleUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.singleUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.sources.0', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.useSingleFolder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.type', '\"craft\\\\fields\\\\Assets\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.contentColumnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.fieldGroup', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.handle', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.name', '\"Text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.settings.columnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.settings.purifyHtml', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.settings.redactorConfig', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.settings.removeEmptyTags', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.settings.removeInlineStyles', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.settings.removeNbsp', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.type', '\"craft\\\\redactor\\\\Field\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.handle', '\"servicesPoint\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.name', '\"Service Point\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.field', '\"8823155c-e84a-4a38-af30-2cb88b705e7b\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fieldLayouts.569a9c10-0657-4dbf-87c9-005afb784b54.tabs.0.fields.39b59166-9d91-4d17-baf9-229aca6174c2.required', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fieldLayouts.569a9c10-0657-4dbf-87c9-005afb784b54.tabs.0.fields.39b59166-9d91-4d17-baf9-229aca6174c2.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fieldLayouts.569a9c10-0657-4dbf-87c9-005afb784b54.tabs.0.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.required', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fieldLayouts.569a9c10-0657-4dbf-87c9-005afb784b54.tabs.0.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fieldLayouts.569a9c10-0657-4dbf-87c9-005afb784b54.tabs.0.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.required', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fieldLayouts.569a9c10-0657-4dbf-87c9-005afb784b54.tabs.0.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.sortOrder', '3');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fieldLayouts.569a9c10-0657-4dbf-87c9-005afb784b54.tabs.0.name', '\"Content\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fieldLayouts.569a9c10-0657-4dbf-87c9-005afb784b54.tabs.0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.contentColumnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.fieldGroup', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.handle', '\"quote\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.name', '\"Quote\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.settings.charLimit', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.settings.columnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.settings.initialRows', '\"4\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.settings.multiline', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.type', '\"craft\\\\fields\\\\PlainText\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.contentColumnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.fieldGroup', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.handle', '\"cite\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.name', '\"Cite\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.settings.charLimit', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.settings.columnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.settings.initialRows', '\"4\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.settings.multiline', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.type', '\"craft\\\\fields\\\\PlainText\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.fieldGroup', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.handle', '\"photo\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.name', '\"Photo\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.defaultUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.defaultUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.limit', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.localizeRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.restrictFiles', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.singleUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.singleUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.sources.0', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.useSingleFolder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.type', '\"craft\\\\fields\\\\Assets\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.handle', '\"testimonial\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.name', '\"Testimonial\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.field', '\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fieldLayouts.83f7b1de-657b-45bb-94e4-57d10973c78c.tabs.0.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.required', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fieldLayouts.83f7b1de-657b-45bb-94e4-57d10973c78c.tabs.0.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fieldLayouts.83f7b1de-657b-45bb-94e4-57d10973c78c.tabs.0.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.required', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fieldLayouts.83f7b1de-657b-45bb-94e4-57d10973c78c.tabs.0.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fieldLayouts.83f7b1de-657b-45bb-94e4-57d10973c78c.tabs.0.name', '\"Content\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fieldLayouts.83f7b1de-657b-45bb-94e4-57d10973c78c.tabs.0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.fieldGroup', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.handle', '\"position\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.name', '\"Position\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.0.default', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.0.label', '\"Left\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.0.value', '\"left\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.1.default', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.1.label', '\"Center\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.1.value', '\"center\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.2.default', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.2.label', '\"Right\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.2.value', '\"right\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.type', '\"craft\\\\fields\\\\Dropdown\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.contentColumnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.fieldGroup', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.handle', '\"pullQuote\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.name', '\"Pull Quote\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.settings.charLimit', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.settings.columnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.settings.initialRows', '\"4\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.settings.multiline', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.type', '\"craft\\\\fields\\\\PlainText\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.handle', '\"pullQuote\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.name', '\"Pull Quote\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.sortOrder', '4');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.field', '\"82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fieldLayouts.8d01ea64-38fa-43f7-be8a-43e4e460bfbd.tabs.0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.required', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fieldLayouts.8d01ea64-38fa-43f7-be8a-43e4e460bfbd.tabs.0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fieldLayouts.8d01ea64-38fa-43f7-be8a-43e4e460bfbd.tabs.0.name', '\"Content\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fieldLayouts.8d01ea64-38fa-43f7-be8a-43e4e460bfbd.tabs.0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.fieldGroup', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.handle', '\"sectionHeading\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.name', '\"Section Heading\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.settings.charLimit', '\"255\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.settings.columnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.settings.initialRows', '\"4\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.settings.multiline', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.type', '\"craft\\\\fields\\\\PlainText\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.handle', '\"newSection\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.name', '\"New Section\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.field', '\"b01498fe-6db2-4b1d-84d2-8cd0cb62f449\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fieldLayouts.3c4c697e-cb6b-4704-bee5-9a2bae9da8f7.tabs.0.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.required', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fieldLayouts.3c4c697e-cb6b-4704-bee5-9a2bae9da8f7.tabs.0.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fieldLayouts.3c4c697e-cb6b-4704-bee5-9a2bae9da8f7.tabs.0.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.required', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fieldLayouts.3c4c697e-cb6b-4704-bee5-9a2bae9da8f7.tabs.0.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fieldLayouts.3c4c697e-cb6b-4704-bee5-9a2bae9da8f7.tabs.0.name', '\"Content\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fieldLayouts.3c4c697e-cb6b-4704-bee5-9a2bae9da8f7.tabs.0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.fieldGroup', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.handle', '\"value\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.name', '\"Value\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.settings.charLimit', '\"255\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.settings.columnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.settings.initialRows', '\"4\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.settings.multiline', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.type', '\"craft\\\\fields\\\\PlainText\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.fieldGroup', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.handle', '\"label\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.instructions', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.name', '\"Label\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.settings.charLimit', '\"255\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.settings.columnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.settings.initialRows', '\"4\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.settings.multiline', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.translationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.type', '\"craft\\\\fields\\\\PlainText\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.handle', '\"contactMethod\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.name', '\"Contact Method\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('plugins.redactor.enabled', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('plugins.redactor.licenseKey', 'null');
+INSERT INTO `projectconfig` VALUES ('plugins.redactor.schemaVersion', '\"2.3.0\"');
+INSERT INTO `projectconfig` VALUES ('plugins.redactor.settings', 'null');
+INSERT INTO `projectconfig` VALUES ('routes.222c9203-357b-45a9-ab56-ad4df20ad9a0.siteUid', 'null');
+INSERT INTO `projectconfig` VALUES ('routes.222c9203-357b-45a9-ab56-ad4df20ad9a0.sortOrder', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('routes.222c9203-357b-45a9-ab56-ad4df20ad9a0.template', '\"about\"');
+INSERT INTO `projectconfig` VALUES ('routes.222c9203-357b-45a9-ab56-ad4df20ad9a0.uriParts.0', '\"about\"');
+INSERT INTO `projectconfig` VALUES ('routes.222c9203-357b-45a9-ab56-ad4df20ad9a0.uriPattern', '\"about\"');
+INSERT INTO `projectconfig` VALUES ('routes.f2315ceb-90c3-45fe-b6c1-0b847b577a68.siteUid', 'null');
+INSERT INTO `projectconfig` VALUES ('routes.f2315ceb-90c3-45fe-b6c1-0b847b577a68.sortOrder', '\"2\"');
+INSERT INTO `projectconfig` VALUES ('routes.f2315ceb-90c3-45fe-b6c1-0b847b577a68.template', '\"search/_results\"');
+INSERT INTO `projectconfig` VALUES ('routes.f2315ceb-90c3-45fe-b6c1-0b847b577a68.uriParts.0', '\"search/results\"');
+INSERT INTO `projectconfig` VALUES ('routes.f2315ceb-90c3-45fe-b6c1-0b847b577a68.uriPattern', '\"search/results\"');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.enableVersioning', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.fieldLayouts.4cc2a302-6fe7-4f8b-b01b-517ed624cdf7.tabs.0.fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.fieldLayouts.4cc2a302-6fe7-4f8b-b01b-517ed624cdf7.tabs.0.fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.fieldLayouts.4cc2a302-6fe7-4f8b-b01b-517ed624cdf7.tabs.0.fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.fieldLayouts.4cc2a302-6fe7-4f8b-b01b-517ed624cdf7.tabs.0.fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.sortOrder', '3');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.fieldLayouts.4cc2a302-6fe7-4f8b-b01b-517ed624cdf7.tabs.0.fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.fieldLayouts.4cc2a302-6fe7-4f8b-b01b-517ed624cdf7.tabs.0.fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.fieldLayouts.4cc2a302-6fe7-4f8b-b01b-517ed624cdf7.tabs.0.name', '\"Content\"');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.fieldLayouts.4cc2a302-6fe7-4f8b-b01b-517ed624cdf7.tabs.0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.handle', '\"about\"');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.hasTitleField', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.name', '\"About\"');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.sortOrder', '0');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.titleFormat', '\"{section.name|raw}\"');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.titleLabel', 'null');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.handle', '\"about\"');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.name', '\"About\"');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.previewTargets.0.label', '\"Primary entry page\"');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.previewTargets.0.urlFormat', '\"{url}\"');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.propagationMethod', '\"all\"');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.enabledByDefault', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.hasUrls', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.template', '\"about\"');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.uriFormat', '\"about\"');
+INSERT INTO `projectconfig` VALUES ('sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81.type', '\"single\"');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.enableVersioning', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.fieldLayouts.e3a26917-97ba-4590-a8f3-bb08b01991f3.tabs.0.fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.fieldLayouts.e3a26917-97ba-4590-a8f3-bb08b01991f3.tabs.0.fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.fieldLayouts.e3a26917-97ba-4590-a8f3-bb08b01991f3.tabs.0.fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.fieldLayouts.e3a26917-97ba-4590-a8f3-bb08b01991f3.tabs.0.fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.fieldLayouts.e3a26917-97ba-4590-a8f3-bb08b01991f3.tabs.0.name', '\"Content\"');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.fieldLayouts.e3a26917-97ba-4590-a8f3-bb08b01991f3.tabs.0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.handle', '\"workIndex\"');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.hasTitleField', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.name', '\"Work Index\"');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.sortOrder', '0');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.titleFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.titleLabel', '\"Title\"');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.handle', '\"workIndex\"');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.name', '\"Work Index\"');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.previewTargets.0.label', '\"Primary entry page\"');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.previewTargets.0.urlFormat', '\"{url}\"');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.propagationMethod', '\"all\"');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.enabledByDefault', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.hasUrls', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.template', '\"work/_index\"');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.uriFormat', '\"work\"');
+INSERT INTO `projectconfig` VALUES ('sections.1ff1d4d0-499c-41b9-b071-77031c901052.type', '\"single\"');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.enableVersioning', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.fields.0cbb9736-a84b-4e83-803c-5077f56394a9.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.fields.0cbb9736-a84b-4e83-803c-5077f56394a9.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.sortOrder', '3');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.sortOrder', '4');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.name', '\"Content\"');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.handle', '\"locations\"');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.hasTitleField', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.name', '\"Locations\"');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.sortOrder', '0');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.titleFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.titleLabel', '\"Title\"');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.handle', '\"locations\"');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.name', '\"Locations\"');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.propagationMethod', '\"all\"');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.enabledByDefault', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.hasUrls', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.template', 'null');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.uriFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.structure.maxLevels', '1');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.structure.uid', '\"3c13606e-11f9-4cbd-bbae-c29608750caf\"');
+INSERT INTO `projectconfig` VALUES ('sections.45d3a977-dc34-4bff-a39f-425e100a5e6f.type', '\"structure\"');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.enableVersioning', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.fieldLayouts.423d0eb9-9236-47c9-a98a-30fc46947c71.tabs.0.fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.fieldLayouts.423d0eb9-9236-47c9-a98a-30fc46947c71.tabs.0.fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.fieldLayouts.423d0eb9-9236-47c9-a98a-30fc46947c71.tabs.0.fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.fieldLayouts.423d0eb9-9236-47c9-a98a-30fc46947c71.tabs.0.fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.fieldLayouts.423d0eb9-9236-47c9-a98a-30fc46947c71.tabs.0.name', '\"Content\"');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.fieldLayouts.423d0eb9-9236-47c9-a98a-30fc46947c71.tabs.0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.handle', '\"servicesIndex\"');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.hasTitleField', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.name', '\"Services Index\"');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.sortOrder', '0');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.titleFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.titleLabel', '\"Title\"');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.handle', '\"servicesIndex\"');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.name', '\"Services Index\"');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.previewTargets.0.label', '\"Primary entry page\"');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.previewTargets.0.urlFormat', '\"{url}\"');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.propagationMethod', '\"all\"');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.enabledByDefault', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.hasUrls', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.template', '\"services/_index\"');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.uriFormat', '\"services\"');
+INSERT INTO `projectconfig` VALUES ('sections.5fa323b7-9755-4174-bed2-0f2b11c05701.type', '\"single\"');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.enableVersioning', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.fieldLayouts.31a1e163-6326-436a-9feb-53b372c086e3.tabs.0.fields.8823155c-e84a-4a38-af30-2cb88b705e7b.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.fieldLayouts.31a1e163-6326-436a-9feb-53b372c086e3.tabs.0.fields.8823155c-e84a-4a38-af30-2cb88b705e7b.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.fieldLayouts.31a1e163-6326-436a-9feb-53b372c086e3.tabs.0.fields.950b3c0e-9780-4487-a881-23d96d6075d5.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.fieldLayouts.31a1e163-6326-436a-9feb-53b372c086e3.tabs.0.fields.950b3c0e-9780-4487-a881-23d96d6075d5.sortOrder', '3');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.fieldLayouts.31a1e163-6326-436a-9feb-53b372c086e3.tabs.0.fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.fieldLayouts.31a1e163-6326-436a-9feb-53b372c086e3.tabs.0.fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.fieldLayouts.31a1e163-6326-436a-9feb-53b372c086e3.tabs.0.name', '\"Content\"');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.fieldLayouts.31a1e163-6326-436a-9feb-53b372c086e3.tabs.0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.handle', '\"homepage\"');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.hasTitleField', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.name', '\"Homepage\"');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.sortOrder', '0');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.titleFormat', '\"{section.name|raw}\"');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.titleLabel', 'null');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.handle', '\"homepage\"');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.name', '\"Homepage\"');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.previewTargets.0.label', '\"Primary entry page\"');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.previewTargets.0.urlFormat', '\"{url}\"');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.propagationMethod', '\"all\"');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.enabledByDefault', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.hasUrls', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.template', '\"index\"');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.uriFormat', '\"__home__\"');
+INSERT INTO `projectconfig` VALUES ('sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee.type', '\"single\"');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.enableVersioning', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.fields.674e53a6-d62c-4322-ae09-349765f1ef17.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.fields.674e53a6-d62c-4322-ae09-349765f1ef17.sortOrder', '3');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.sortOrder', '4');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.sortOrder', '6');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.name', '\"Content\"');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.1.fields.0305c984-3934-4c7a-9de9-b0162c5b0112.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.1.fields.0305c984-3934-4c7a-9de9-b0162c5b0112.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.1.fields.0cbb9736-a84b-4e83-803c-5077f56394a9.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.1.fields.0cbb9736-a84b-4e83-803c-5077f56394a9.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.1.fields.cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.1.fields.cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea.sortOrder', '3');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.1.name', '\"Design\"');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.1.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.handle', '\"work\"');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.hasTitleField', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.name', '\"Work\"');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.sortOrder', '0');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.titleFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.titleLabel', '\"Title\"');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.handle', '\"work\"');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.name', '\"Work\"');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.previewTargets.0.label', '\"Primary entry page\"');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.previewTargets.0.urlFormat', '\"{url}\"');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.propagationMethod', '\"all\"');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.enabledByDefault', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.hasUrls', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.template', '\"work/_entry\"');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.uriFormat', '\"work/{slug}\"');
+INSERT INTO `projectconfig` VALUES ('sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2.type', '\"channel\"');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.enableVersioning', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.fields.0cbb9736-a84b-4e83-803c-5077f56394a9.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.fields.0cbb9736-a84b-4e83-803c-5077f56394a9.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.sortOrder', '3');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.name', '\"Content\"');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.handle', '\"link\"');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.hasTitleField', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.name', '\"Link\"');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.sortOrder', '0');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.titleFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.titleLabel', '\"Title\"');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.fields.0cbb9736-a84b-4e83-803c-5077f56394a9.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.fields.0cbb9736-a84b-4e83-803c-5077f56394a9.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.fields.674e53a6-d62c-4322-ae09-349765f1ef17.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.fields.674e53a6-d62c-4322-ae09-349765f1ef17.sortOrder', '5');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.sortOrder', '6');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.sortOrder', '4');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.fields.a171d498-9024-4855-9a6c-b3b96765ab7c.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.fields.a171d498-9024-4855-9a6c-b3b96765ab7c.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.sortOrder', '3');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.name', '\"Content\"');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.handle', '\"article\"');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.hasTitleField', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.name', '\"Article\"');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.sortOrder', '0');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.titleFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.titleLabel', '\"Title\"');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.handle', '\"news\"');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.name', '\"News\"');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.previewTargets.0.label', '\"Primary entry page\"');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.previewTargets.0.urlFormat', '\"{url}\"');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.propagationMethod', '\"all\"');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.enabledByDefault', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.hasUrls', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.template', '\"news/_entry\"');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.uriFormat', '\"news/{slug}\"');
+INSERT INTO `projectconfig` VALUES ('sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd.type', '\"channel\"');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.enableVersioning', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.fields.0cbb9736-a84b-4e83-803c-5077f56394a9.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.fields.0cbb9736-a84b-4e83-803c-5077f56394a9.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.sortOrder', '4');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.sortOrder', '5');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.sortOrder', '3');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.fields.d96355a7-1353-4097-bf08-3bd5c44821f8.required', 'false');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.fields.d96355a7-1353-4097-bf08-3bd5c44821f8.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.name', '\"Content\"');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.handle', '\"services\"');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.hasTitleField', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.name', '\"Services\"');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.sortOrder', '0');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.titleFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.titleLabel', '\"Title\"');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.handle', '\"services\"');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.name', '\"Services\"');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.previewTargets.0.label', '\"Primary entry page\"');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.previewTargets.0.urlFormat', '\"{url}\"');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.propagationMethod', '\"all\"');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.enabledByDefault', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.hasUrls', 'true');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.template', '\"services/_entry\"');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.siteSettings.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.uriFormat', '\"services/{slug}\"');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.structure.maxLevels', '1');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.structure.uid', '\"aa3fe533-8552-43f9-a172-69982d59561d\"');
+INSERT INTO `projectconfig` VALUES ('sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e.type', '\"structure\"');
+INSERT INTO `projectconfig` VALUES ('siteGroups.268c3c49-6715-4b6a-a1b9-f27313adabd1.name', '\"Happy Lager (en)\"');
+INSERT INTO `projectconfig` VALUES ('sites.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.baseUrl', '\"$SITE_URL\"');
+INSERT INTO `projectconfig` VALUES ('sites.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.handle', '\"en\"');
+INSERT INTO `projectconfig` VALUES ('sites.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.hasUrls', 'true');
+INSERT INTO `projectconfig` VALUES ('sites.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.language', '\"en\"');
+INSERT INTO `projectconfig` VALUES ('sites.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.name', '\"Happy Lager (en)\"');
+INSERT INTO `projectconfig` VALUES ('sites.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.primary', 'true');
+INSERT INTO `projectconfig` VALUES ('sites.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.siteGroup', '\"268c3c49-6715-4b6a-a1b9-f27313adabd1\"');
+INSERT INTO `projectconfig` VALUES ('sites.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('system.edition', '\"pro\"');
+INSERT INTO `projectconfig` VALUES ('system.live', 'true');
+INSERT INTO `projectconfig` VALUES ('system.name', '\"Happy Lager\"');
+INSERT INTO `projectconfig` VALUES ('system.schemaVersion', '\"3.4.5\"');
+INSERT INTO `projectconfig` VALUES ('system.timeZone', '\"UTC\"');
+INSERT INTO `projectconfig` VALUES ('users.allowPublicRegistration', 'false');
+INSERT INTO `projectconfig` VALUES ('users.defaultGroup', 'null');
+INSERT INTO `projectconfig` VALUES ('users.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.fields.0cbb9736-a84b-4e83-803c-5077f56394a9.required', 'false');
+INSERT INTO `projectconfig` VALUES ('users.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.fields.0cbb9736-a84b-4e83-803c-5077f56394a9.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('users.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.required', 'false');
+INSERT INTO `projectconfig` VALUES ('users.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.sortOrder', '3');
+INSERT INTO `projectconfig` VALUES ('users.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.required', 'false');
+INSERT INTO `projectconfig` VALUES ('users.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('users.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.name', '\"Content\"');
+INSERT INTO `projectconfig` VALUES ('users.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('users.photoSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('users.photoVolumeUid', '\"1f0ea10d-2be0-4638-88da-105d232f4787\"');
+INSERT INTO `projectconfig` VALUES ('users.requireEmailVerification', 'true');
+INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.fieldLayouts.e4360fb7-190d-42c5-bde0-e01c03bd127c.tabs.0.fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.required', 'false');
+INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.fieldLayouts.e4360fb7-190d-42c5-bde0-e01c03bd127c.tabs.0.fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.fieldLayouts.e4360fb7-190d-42c5-bde0-e01c03bd127c.tabs.0.name', '\"Content\"');
+INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.fieldLayouts.e4360fb7-190d-42c5-bde0-e01c03bd127c.tabs.0.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.handle', '\"siteAssets\"');
+INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.hasUrls', 'true');
+INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.name', '\"Site Assets\"');
+INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.settings.path', '\"@assetBasePath/site\"');
+INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.type', '\"craft\\\\volumes\\\\Local\"');
+INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.url', '\"@assetBaseUrl/site\"');
+INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.handle', '\"userPhotos\"');
+INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.hasUrls', 'false');
+INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.name', '\"User Photos\"');
+INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.settings.path', '\"@storage/userphotos\"');
+INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.sortOrder', '4');
+INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.type', '\"craft\\\\volumes\\\\Local\"');
+INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.url', 'null');
+INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.handle', '\"serviceIcons\"');
+INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.hasUrls', 'true');
+INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.name', '\"Service Icons\"');
+INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.settings.path', '\"@assetBasePath/site/images/service-icons\"');
+INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.sortOrder', '3');
+INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.type', '\"craft\\\\volumes\\\\Local\"');
+INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.url', '\"@assetBaseUrl/images/service-icons\"');
+INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.handle', '\"companyLogos\"');
+INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.hasUrls', 'true');
+INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.name', '\"Company Logos\"');
+INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.settings.path', '\"@assetBasePath/logos\"');
+INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.type', '\"craft\\\\volumes\\\\Local\"');
+INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.url', '\"@assetBaseUrl/logos\"');
 COMMIT;
 
 -- ----------------------------
@@ -6730,7 +8075,7 @@ CREATE TABLE `relations` (
   CONSTRAINT `craft_relations_sourceId_fk` FOREIGN KEY (`sourceId`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
   CONSTRAINT `craft_relations_sourceSiteId_fk` FOREIGN KEY (`sourceSiteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `craft_relations_targetId_fk` FOREIGN KEY (`targetId`) REFERENCES `elements` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2573 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2599 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of relations
@@ -7283,6 +8628,32 @@ INSERT INTO `relations` VALUES (2567, 9, 1990, NULL, 7, 1, '2019-07-09 10:18:34'
 INSERT INTO `relations` VALUES (2568, 9, 1995, NULL, 8, 1, '2019-07-09 10:18:34', '2019-07-09 10:18:34', 'aebdf111-881f-40cf-9042-cb3c34b6c71c');
 INSERT INTO `relations` VALUES (2571, 9, 2002, NULL, 7, 1, '2019-07-09 10:18:34', '2019-07-09 10:18:34', '9a1efb2d-89b7-40ce-b6a5-57dbe455772c');
 INSERT INTO `relations` VALUES (2572, 9, 2007, NULL, 8, 1, '2019-07-09 10:18:34', '2019-07-09 10:18:34', '92f2651e-9830-4bc3-95f9-49ca4edcf771');
+INSERT INTO `relations` VALUES (2573, 50, 2010, NULL, 134, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'd5c2cb12-2c2f-477d-a4f1-3a4e7ab7bb27');
+INSERT INTO `relations` VALUES (2574, 55, 2010, NULL, 141, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'd8ef5ac5-8ef2-4ccd-af27-5ad82b685e6e');
+INSERT INTO `relations` VALUES (2575, 55, 2010, NULL, 142, 2, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '73b37798-c215-4f1e-8c61-4a96b1378d76');
+INSERT INTO `relations` VALUES (2576, 55, 2010, NULL, 143, 3, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'dd57fa27-575f-4657-9e9b-4f9d35fb6270');
+INSERT INTO `relations` VALUES (2577, 55, 2010, NULL, 144, 4, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '6fd2ebb4-6bb2-428b-b3e6-7d1666441494');
+INSERT INTO `relations` VALUES (2578, 55, 2010, NULL, 145, 5, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '3b73d20d-dd9c-4f6f-ae8c-ba8e5fdda3f7');
+INSERT INTO `relations` VALUES (2579, 54, 2011, NULL, 135, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'e2f011a5-2ca8-4185-843e-7303943be0fb');
+INSERT INTO `relations` VALUES (2580, 54, 2012, NULL, 137, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '7b59a09a-4915-4d28-ad72-b41cb40b7c59');
+INSERT INTO `relations` VALUES (2581, 54, 2013, NULL, 140, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '3bf11cde-d97c-4779-bf4d-72405c92da33');
+INSERT INTO `relations` VALUES (2582, 50, 2014, NULL, 134, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '8d96e7b8-c971-4fff-911f-1100574254c0');
+INSERT INTO `relations` VALUES (2583, 55, 2014, NULL, 141, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'e4d1686c-5ac4-4600-87f8-5399418eab98');
+INSERT INTO `relations` VALUES (2584, 55, 2014, NULL, 142, 2, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '901bf1ab-9bfb-433b-befd-674f05aba75a');
+INSERT INTO `relations` VALUES (2585, 55, 2014, NULL, 143, 3, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '6947f232-6f18-40d8-b2ba-0fde115ab3b2');
+INSERT INTO `relations` VALUES (2586, 55, 2014, NULL, 144, 4, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '7af9420e-40a6-4ac1-b0e7-4b8fa665136c');
+INSERT INTO `relations` VALUES (2587, 55, 2014, NULL, 145, 5, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'ec773929-ce97-401e-9116-0ee21657cc9c');
+INSERT INTO `relations` VALUES (2588, 54, 2015, NULL, 135, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'c76186eb-7900-4920-bdd8-aa50d3075e80');
+INSERT INTO `relations` VALUES (2589, 54, 2016, NULL, 137, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '7140a45f-45b1-4a39-96c7-c364896e3407');
+INSERT INTO `relations` VALUES (2590, 54, 2017, NULL, 140, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'aa84f2f9-9145-4ed5-90d1-1bb52c5fb810');
+INSERT INTO `relations` VALUES (2591, 9, 2025, NULL, 219, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '4c01b061-aae9-4673-aa1e-3ac743eb8821');
+INSERT INTO `relations` VALUES (2592, 69, 2028, NULL, 222, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '9f7f74ba-ef77-462a-b799-cba34e9ddff1');
+INSERT INTO `relations` VALUES (2593, 69, 2028, NULL, 220, 2, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '5a2fcf38-11f0-48bc-a906-8d369a17c774');
+INSERT INTO `relations` VALUES (2594, 69, 2028, NULL, 221, 3, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '9c2783b5-3e90-435a-af63-99954229be38');
+INSERT INTO `relations` VALUES (2595, 9, 2036, NULL, 219, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '7e0a24ee-5404-4b73-b33a-a8e6e301d563');
+INSERT INTO `relations` VALUES (2596, 69, 2039, NULL, 222, 1, '2019-12-17 22:20:49', '2019-12-17 22:20:49', 'e4c52413-ca44-47c1-ac62-dc27908ba83b');
+INSERT INTO `relations` VALUES (2597, 69, 2039, NULL, 220, 2, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '2c818ac6-199a-4180-8f2a-08a1be7732b5');
+INSERT INTO `relations` VALUES (2598, 69, 2039, NULL, 221, 3, '2019-12-17 22:20:49', '2019-12-17 22:20:49', '3abf9490-a960-4517-ba6f-7a7a927b1af4');
 COMMIT;
 
 -- ----------------------------
@@ -7308,9 +8679,23 @@ CREATE TABLE `revisions` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `revisions_sourceId_num_unq_idx` (`sourceId`,`num`),
   KEY `revisions_creatorId_fk` (`creatorId`),
-  CONSTRAINT `revisions_creatorId_fk` FOREIGN KEY (`creatorId`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `revisions_creatorId_fk` FOREIGN KEY (`creatorId`) REFERENCES `users` (`id`) ON DELETE SET NULL,
   CONSTRAINT `revisions_sourceId_fk` FOREIGN KEY (`sourceId`) REFERENCES `elements` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of revisions
+-- ----------------------------
+BEGIN;
+INSERT INTO `revisions` VALUES (1, 2, NULL, 1, 'Revision from Feb 4, 2015, 3:13:27 PM');
+INSERT INTO `revisions` VALUES (2, 2, NULL, 2, NULL);
+INSERT INTO `revisions` VALUES (3, 74, NULL, 1, 'Revision from Feb 10, 2015, 6:08:01 PM');
+INSERT INTO `revisions` VALUES (4, 74, NULL, 2, NULL);
+INSERT INTO `revisions` VALUES (5, 233, NULL, 1, 'Revision from Feb 9, 2015, 8:34:54 PM');
+INSERT INTO `revisions` VALUES (6, 233, NULL, 2, NULL);
+INSERT INTO `revisions` VALUES (7, 234, NULL, 1, 'Revision from Feb 9, 2015, 8:38:50 PM');
+INSERT INTO `revisions` VALUES (8, 234, NULL, 2, NULL);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for searchindex
@@ -7336,10 +8721,8 @@ INSERT INTO `searchindex` VALUES (1, 'lastname', 0, 1, '');
 INSERT INTO `searchindex` VALUES (1, 'fullname', 0, 1, '');
 INSERT INTO `searchindex` VALUES (1, 'email', 0, 1, ' admin happylager dev ');
 INSERT INTO `searchindex` VALUES (1, 'slug', 0, 1, '');
-INSERT INTO `searchindex` VALUES (2, 'field', 1, 1, ' welcome to happylager dev ');
-INSERT INTO `searchindex` VALUES (2, 'field', 2, 1, ' it s true this site doesn t have a whole lot of content yet but don t worry our web developers have just installed the cms and they re setting things up for the content editors this very moment soon happylager dev will be an oasis of fresh perspectives sharp analyses and astute opinions that will keep you coming back again and again ');
-INSERT INTO `searchindex` VALUES (2, 'slug', 0, 1, ' homepage ');
 INSERT INTO `searchindex` VALUES (2, 'title', 0, 1, ' homepage ');
+INSERT INTO `searchindex` VALUES (2, 'slug', 0, 1, ' homepage ');
 INSERT INTO `searchindex` VALUES (3, 'field', 2, 1, ' craft is the cms that s powering happylager dev it s beautiful powerful flexible and easy to use and it s made by pixel tonic we can t wait to dive in and see what it s capable of this is even more captivating content which you couldn t see on the news index page because it was entered after a page break and the news index template only likes to show the content on the first page craft a nice alternative to word if you re making a website ');
 INSERT INTO `searchindex` VALUES (3, 'field', 3, 1, '');
 INSERT INTO `searchindex` VALUES (3, 'slug', 0, 1, ' we just installed craft ');
@@ -7607,68 +8990,39 @@ INSERT INTO `searchindex` VALUES (72, 'extension', 0, 1, ' jpg ');
 INSERT INTO `searchindex` VALUES (72, 'kind', 0, 1, ' image ');
 INSERT INTO `searchindex` VALUES (72, 'slug', 0, 1, ' macbook ');
 INSERT INTO `searchindex` VALUES (72, 'title', 0, 1, ' macbook ');
-INSERT INTO `searchindex` VALUES (74, 'extension', 0, 1, ' png ');
-INSERT INTO `searchindex` VALUES (74, 'kind', 0, 1, ' image ');
-INSERT INTO `searchindex` VALUES (74, 'slug', 0, 1, ' about ');
+INSERT INTO `searchindex` VALUES (74, 'field', 1, 1, '');
 INSERT INTO `searchindex` VALUES (74, 'title', 0, 1, ' about ');
+INSERT INTO `searchindex` VALUES (74, 'slug', 0, 1, ' about ');
 INSERT INTO `searchindex` VALUES (73, 'field', 9, 1, ' macbook ');
 INSERT INTO `searchindex` VALUES (73, 'field', 10, 1, ' right ');
 INSERT INTO `searchindex` VALUES (73, 'slug', 0, 1, '');
-INSERT INTO `searchindex` VALUES (74, 'filename', 0, 1, ' gallery_1 png ');
-INSERT INTO `searchindex` VALUES (74, 'field', 16, 1, '');
-INSERT INTO `searchindex` VALUES (74, 'field', 17, 1, '');
-INSERT INTO `searchindex` VALUES (74, 'field', 4, 1, ' how we think the philosophy of happy lager is one third working hard and two thirds happy accidents left serendipity is a core part of how we work et iusto odio dignissimos ducimus qui blanditii raesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident similique sunt in culpa qui officia deserunt mollitia animi id est laborum et dolorum fuga deserunt mollitia animi id est laborum et dolorum fuga et harum quidem rerum facilis right deserunt mollitia animi id est laborum et dolorum fuga et harum quidem rerum facilis est et expedita distinctio nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit luptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident similique sunt in our story it all begins in a living room with a six pack and a clamshell ibook macbook table left right small beginnings is the starting point of every hero s story at vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident similique sunt in culpa qui officia deserunt mollitia animi id est laborum et dolorum fuga deserunt mollitia animi id est laborum et dolorum fuga et harum quidem rerum facilis our people robin richards christopher robinson jonathan abbot ');
+INSERT INTO `searchindex` VALUES (74, 'field', 2, 1, '');
 INSERT INTO `searchindex` VALUES (235, 'field', 8, 1, ' the philosophy of happy lager is one third working hard and two thirds happy accidents ');
 INSERT INTO `searchindex` VALUES (235, 'slug', 0, 1, '');
 INSERT INTO `searchindex` VALUES (244, 'slug', 0, 1, '');
-INSERT INTO `searchindex` VALUES (74, 'field', 18, 1, '');
-INSERT INTO `searchindex` VALUES (74, 'field', 19, 1, '');
 INSERT INTO `searchindex` VALUES (239, 'slug', 0, 1, '');
 INSERT INTO `searchindex` VALUES (240, 'field', 9, 1, ' macbook table ');
-INSERT INTO `searchindex` VALUES (74, 'field', 24, 1, '');
 INSERT INTO `searchindex` VALUES (237, 'field', 68, 1, ' left ');
 INSERT INTO `searchindex` VALUES (243, 'field', 5, 1, ' deserunt mollitia animi id est laborum et dolorum fuga et harum quidem rerum facilis est et expedita distinctio nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit luptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident similique sunt in ');
 INSERT INTO `searchindex` VALUES (237, 'slug', 0, 1, '');
 INSERT INTO `searchindex` VALUES (238, 'field', 67, 1, ' our story ');
 INSERT INTO `searchindex` VALUES (238, 'slug', 0, 1, '');
 INSERT INTO `searchindex` VALUES (239, 'field', 8, 1, ' it all begins in a living room with a six pack and a clamshell ibook ');
-INSERT INTO `searchindex` VALUES (74, 'field', 25, 1, '');
-INSERT INTO `searchindex` VALUES (74, 'field', 20, 1, '');
-INSERT INTO `searchindex` VALUES (74, 'field', 21, 1, '');
-INSERT INTO `searchindex` VALUES (74, 'field', 26, 1, '');
 INSERT INTO `searchindex` VALUES (236, 'field', 67, 1, ' how we think ');
 INSERT INTO `searchindex` VALUES (236, 'slug', 0, 1, '');
 INSERT INTO `searchindex` VALUES (237, 'field', 5, 1, ' serendipity is a core part of how we work et iusto odio dignissimos ducimus qui blanditii raesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident similique sunt in culpa qui officia deserunt mollitia animi id est laborum et dolorum fuga deserunt mollitia animi id est laborum et dolorum fuga et harum quidem rerum facilis ');
-INSERT INTO `searchindex` VALUES (74, 'field', 22, 1, '');
-INSERT INTO `searchindex` VALUES (74, 'field', 23, 1, '');
 INSERT INTO `searchindex` VALUES (220, 'field', 47, 1, ' crystal stevensonceo and co founder ');
 INSERT INTO `searchindex` VALUES (222, 'field', 47, 1, ' liz murphypresident and co founder ');
 INSERT INTO `searchindex` VALUES (221, 'field', 47, 1, ' travis mortoncreative director ');
 INSERT INTO `searchindex` VALUES (237, 'field', 70, 1, ' left ');
 INSERT INTO `searchindex` VALUES (243, 'field', 70, 1, ' right ');
 INSERT INTO `searchindex` VALUES (241, 'field', 70, 1, ' right ');
-INSERT INTO `searchindex` VALUES (74, 'field', 27, 1, '');
-INSERT INTO `searchindex` VALUES (74, 'field', 30, 1, '');
-INSERT INTO `searchindex` VALUES (74, 'field', 33, 1, '');
-INSERT INTO `searchindex` VALUES (74, 'field', 28, 1, '');
-INSERT INTO `searchindex` VALUES (74, 'field', 31, 1, '');
-INSERT INTO `searchindex` VALUES (74, 'field', 34, 1, '');
-INSERT INTO `searchindex` VALUES (74, 'field', 29, 1, '');
-INSERT INTO `searchindex` VALUES (74, 'field', 32, 1, '');
-INSERT INTO `searchindex` VALUES (74, 'field', 35, 1, '');
 INSERT INTO `searchindex` VALUES (255, 'field', 73, 1, ' sales ');
 INSERT INTO `searchindex` VALUES (255, 'field', 74, 1, ' 312 985 4500 ');
 INSERT INTO `searchindex` VALUES (254, 'slug', 0, 1, '');
 INSERT INTO `searchindex` VALUES (254, 'field', 74, 1, ' 312 900 2356 ');
 INSERT INTO `searchindex` VALUES (254, 'field', 73, 1, ' main office ');
-INSERT INTO `searchindex` VALUES (74, 'field', 36, 1, ' chicago office ');
-INSERT INTO `searchindex` VALUES (74, 'field', 37, 1, ' 2701 west thomas st chicago il 60622 ');
-INSERT INTO `searchindex` VALUES (74, 'field', 38, 1, ' main office 312 900 2356 ');
-INSERT INTO `searchindex` VALUES (74, 'field', 39, 1, ' creative lab 312 985 4500 ');
-INSERT INTO `searchindex` VALUES (74, 'field', 40, 1, ' happy lager pub 312 229 1122 ');
-INSERT INTO `searchindex` VALUES (74, 'field', 41, 1, ' info company com ');
-INSERT INTO `searchindex` VALUES (74, 'field', 42, 1, ' google com ');
-INSERT INTO `searchindex` VALUES (74, 'field', 43, 1, ' contact building ');
+INSERT INTO `searchindex` VALUES (74, 'field', 4, 1, ' how we think the philosophy of happy lager is one third working hard and two thirds happy accidents left serendipity is a core part of how we work et iusto odio dignissimos ducimus qui blanditii raesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident similique sunt in culpa qui officia deserunt mollitia animi id est laborum et dolorum fuga deserunt mollitia animi id est laborum et dolorum fuga et harum quidem rerum facilis right deserunt mollitia animi id est laborum et dolorum fuga et harum quidem rerum facilis est et expedita distinctio nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit luptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident similique sunt in our story it all begins in a living room with a six pack and a clamshell ibook macbooktable left right small beginnings is the starting point of every heros story at vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident similique sunt in culpa qui officia deserunt mollitia animi id est laborum et dolorum fuga deserunt mollitia animi id est laborum et dolorum fuga et harum quidem rerum facilis our people liz murphy crystal stevenson travis morton ');
 INSERT INTO `searchindex` VALUES (80, 'slug', 0, 1, ' app development ');
 INSERT INTO `searchindex` VALUES (80, 'title', 0, 1, ' app development ');
 INSERT INTO `searchindex` VALUES (81, 'slug', 0, 1, ' diva ');
@@ -7801,8 +9155,6 @@ INSERT INTO `searchindex` VALUES (37, 'field', 44, 1, '');
 INSERT INTO `searchindex` VALUES (113, 'field', 48, 1, '');
 INSERT INTO `searchindex` VALUES (113, 'slug', 0, 1, ' how its made ');
 INSERT INTO `searchindex` VALUES (113, 'title', 0, 1, ' how it s made ');
-INSERT INTO `searchindex` VALUES (234, 'field', 1, 1, ' every digital product has a story to tell it s our job to find it and tell it well ');
-INSERT INTO `searchindex` VALUES (234, 'field', 2, 1, ' while we were not meaning to rhyme this statement holds true the end goal is to connect with humans and we use the basic principles of story to do just that browse our work enjoy the visuals and discover what it takes to create something great ');
 INSERT INTO `searchindex` VALUES (115, 'filename', 0, 1, ' email marketing jpg ');
 INSERT INTO `searchindex` VALUES (115, 'extension', 0, 1, ' jpg ');
 INSERT INTO `searchindex` VALUES (115, 'kind', 0, 1, ' image ');
@@ -7903,13 +9255,12 @@ INSERT INTO `searchindex` VALUES (134, 'extension', 0, 1, ' jpg ');
 INSERT INTO `searchindex` VALUES (134, 'kind', 0, 1, ' image ');
 INSERT INTO `searchindex` VALUES (134, 'slug', 0, 1, ' hero image ');
 INSERT INTO `searchindex` VALUES (134, 'title', 0, 1, ' hero image ');
-INSERT INTO `searchindex` VALUES (2, 'field', 50, 1, ' hero image ');
+INSERT INTO `searchindex` VALUES (2, 'field', 55, 1, ' logocoke logogoogle logojetblue logomtv logonewbelgium ');
 INSERT INTO `searchindex` VALUES (135, 'filename', 0, 1, ' larry page png ');
 INSERT INTO `searchindex` VALUES (135, 'extension', 0, 1, ' png ');
 INSERT INTO `searchindex` VALUES (135, 'kind', 0, 1, ' image ');
 INSERT INTO `searchindex` VALUES (135, 'slug', 0, 1, ' portrait larry page ');
 INSERT INTO `searchindex` VALUES (135, 'title', 0, 1, ' larry page ');
-INSERT INTO `searchindex` VALUES (2, 'field', 51, 1, ' larry page larry page happy lager delivered the most comprehensive strategy from a boutique company that i ve ever seen ryan reynolds ryan reynolds i don t know where to begin i can t recommend happy lager highly enough bob guff bob guff happy lager sells the good stuff ');
 INSERT INTO `searchindex` VALUES (232, 'slug', 0, 1, '');
 INSERT INTO `searchindex` VALUES (232, 'field', 65, 1, ' pull up a barstool ');
 INSERT INTO `searchindex` VALUES (136, 'field', 52, 1, ' happy lager delivered the most comprehensive strategy from a boutique company that i ve ever seen ');
@@ -7960,7 +9311,8 @@ INSERT INTO `searchindex` VALUES (145, 'extension', 0, 1, ' png ');
 INSERT INTO `searchindex` VALUES (145, 'kind', 0, 1, ' image ');
 INSERT INTO `searchindex` VALUES (145, 'slug', 0, 1, '');
 INSERT INTO `searchindex` VALUES (145, 'title', 0, 1, ' logo newbelgium ');
-INSERT INTO `searchindex` VALUES (2, 'field', 55, 1, ' logo coke logo google logo jetblue logo mtv logo newbelgium ');
+INSERT INTO `searchindex` VALUES (2, 'field', 50, 1, ' heroimage ');
+INSERT INTO `searchindex` VALUES (2, 'field', 51, 1, ' larry page larry page happy lager delivered the most comprehensive strategy from a boutique company that ive ever seen ryan reynolds ryan reynolds i dont know where to begin i cant recommend happy lager highly enough bob guff bob guff happy lager sells the good stuff ');
 INSERT INTO `searchindex` VALUES (146, 'filename', 0, 1, ' sportsrus bigfeature jpg ');
 INSERT INTO `searchindex` VALUES (146, 'extension', 0, 1, ' jpg ');
 INSERT INTO `searchindex` VALUES (146, 'kind', 0, 1, ' image ');
@@ -8272,15 +9624,14 @@ INSERT INTO `searchindex` VALUES (231, 'field', 5, 1, ' vero eos et accusamus et
 INSERT INTO `searchindex` VALUES (231, 'slug', 0, 1, '');
 INSERT INTO `searchindex` VALUES (81, 'field', 63, 1, ' design strategy development ');
 INSERT INTO `searchindex` VALUES (133, 'field', 63, 1, ' seo email marketing strategy ');
-INSERT INTO `searchindex` VALUES (233, 'field', 48, 1, '');
-INSERT INTO `searchindex` VALUES (233, 'field', 1, 1, ' from conception to perfection we craft each one of our digital products by hand ');
-INSERT INTO `searchindex` VALUES (233, 'field', 2, 1, ' some studios have a secret or complex process on how they create great work ours is not a secret and it s very simple truth here at happy lager we believe that every digital product we make speaks to the integrity of our craft we want to use great products so we only create great products ');
+INSERT INTO `searchindex` VALUES (233, 'field', 1, 1, '');
+INSERT INTO `searchindex` VALUES (233, 'field', 2, 1, '');
+INSERT INTO `searchindex` VALUES (233, 'title', 0, 1, ' how its made ');
 INSERT INTO `searchindex` VALUES (233, 'slug', 0, 1, ' servicesindex ');
-INSERT INTO `searchindex` VALUES (233, 'title', 0, 1, ' how it s made ');
 INSERT INTO `searchindex` VALUES (234, 'slug', 0, 1, ' workindex ');
-INSERT INTO `searchindex` VALUES (234, 'title', 0, 1, ' what s on tap ');
-INSERT INTO `searchindex` VALUES (74, 'field', 1, 1, ' we set out with a simple goal create the design and products that we would like to see ');
-INSERT INTO `searchindex` VALUES (74, 'field', 2, 1, ' we are a group of highly effective passionate people ready to take your product to the next level temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae taque earum hic tenetur a sapiente delectus ut aut reiciendis ');
+INSERT INTO `searchindex` VALUES (234, 'title', 0, 1, ' whats on tap ');
+INSERT INTO `searchindex` VALUES (234, 'field', 1, 1, '');
+INSERT INTO `searchindex` VALUES (234, 'field', 2, 1, '');
 INSERT INTO `searchindex` VALUES (244, 'field', 69, 1, ' robin richards christopher robinson jonathan abbot ');
 INSERT INTO `searchindex` VALUES (240, 'field', 44, 1, '');
 INSERT INTO `searchindex` VALUES (240, 'field', 10, 1, ' left ');
@@ -8342,13 +9693,13 @@ CREATE TABLE `sections` (
 -- Records of sections
 -- ----------------------------
 BEGIN;
-INSERT INTO `sections` VALUES (1, NULL, 'Homepage', 'homepage', 'single', 1, 'all', NULL, '2014-07-29 18:21:35', '2014-07-29 18:21:35', NULL, '735318f3-e53c-4ce1-8dad-4c7a5c7c5bee');
-INSERT INTO `sections` VALUES (2, NULL, 'News', 'news', 'channel', 1, 'all', NULL, '2014-07-29 18:21:35', '2014-07-30 23:20:45', NULL, 'f5969f9a-8d3f-487e-9695-cc4e5fbe5efd');
-INSERT INTO `sections` VALUES (3, NULL, 'Work', 'work', 'channel', 1, 'all', NULL, '2014-09-16 19:33:06', '2014-09-16 19:33:06', NULL, 'b3a9eef3-9444-4995-84e2-6dc6b60aebd2');
-INSERT INTO `sections` VALUES (4, NULL, 'About', 'about', 'single', 1, 'all', NULL, '2014-09-17 01:15:20', '2014-09-17 01:15:20', NULL, '1a1f289d-3e32-4409-bfb2-03ec7e7d1b81');
-INSERT INTO `sections` VALUES (5, 1, 'Services', 'services', 'structure', 1, 'all', NULL, '2014-09-17 04:13:31', '2015-02-09 17:39:16', NULL, 'f6b0cb16-5df8-4b57-9856-c9c2d6b9699e');
-INSERT INTO `sections` VALUES (6, NULL, 'Services Index', 'servicesIndex', 'single', 1, 'all', NULL, '2015-02-09 17:35:42', '2015-02-09 17:48:24', NULL, '5fa323b7-9755-4174-bed2-0f2b11c05701');
-INSERT INTO `sections` VALUES (7, NULL, 'Work Index', 'workIndex', 'single', 1, 'all', NULL, '2015-02-09 20:37:32', '2015-02-09 20:37:32', NULL, '1ff1d4d0-499c-41b9-b071-77031c901052');
+INSERT INTO `sections` VALUES (1, NULL, 'Homepage', 'homepage', 'single', 1, 'all', '[{\"label\":\"Primary entry page\",\"urlFormat\":\"{url}\"}]', '2014-07-29 18:21:35', '2019-12-17 22:20:49', NULL, '735318f3-e53c-4ce1-8dad-4c7a5c7c5bee');
+INSERT INTO `sections` VALUES (2, NULL, 'News', 'news', 'channel', 1, 'all', '[{\"label\":\"Primary entry page\",\"urlFormat\":\"{url}\"}]', '2014-07-29 18:21:35', '2019-12-17 22:20:49', NULL, 'f5969f9a-8d3f-487e-9695-cc4e5fbe5efd');
+INSERT INTO `sections` VALUES (3, NULL, 'Work', 'work', 'channel', 1, 'all', '[{\"label\":\"Primary entry page\",\"urlFormat\":\"{url}\"}]', '2014-09-16 19:33:06', '2019-12-17 22:20:49', NULL, 'b3a9eef3-9444-4995-84e2-6dc6b60aebd2');
+INSERT INTO `sections` VALUES (4, NULL, 'About', 'about', 'single', 1, 'all', '[{\"label\":\"Primary entry page\",\"urlFormat\":\"{url}\"}]', '2014-09-17 01:15:20', '2019-12-17 22:20:49', NULL, '1a1f289d-3e32-4409-bfb2-03ec7e7d1b81');
+INSERT INTO `sections` VALUES (5, 1, 'Services', 'services', 'structure', 1, 'all', '[{\"label\":\"Primary entry page\",\"urlFormat\":\"{url}\"}]', '2014-09-17 04:13:31', '2019-12-17 22:20:49', NULL, 'f6b0cb16-5df8-4b57-9856-c9c2d6b9699e');
+INSERT INTO `sections` VALUES (6, NULL, 'Services Index', 'servicesIndex', 'single', 1, 'all', '[{\"label\":\"Primary entry page\",\"urlFormat\":\"{url}\"}]', '2015-02-09 17:35:42', '2019-12-17 22:20:49', NULL, '5fa323b7-9755-4174-bed2-0f2b11c05701');
+INSERT INTO `sections` VALUES (7, NULL, 'Work Index', 'workIndex', 'single', 1, 'all', '[{\"label\":\"Primary entry page\",\"urlFormat\":\"{url}\"}]', '2015-02-09 20:37:32', '2019-12-17 22:20:49', NULL, '1ff1d4d0-499c-41b9-b071-77031c901052');
 INSERT INTO `sections` VALUES (8, 2, 'Locations', 'locations', 'structure', 1, 'all', NULL, '2015-02-10 18:32:00', '2015-02-10 18:32:00', NULL, '45d3a977-dc34-4bff-a39f-425e100a5e6f');
 COMMIT;
 
