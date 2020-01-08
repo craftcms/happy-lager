@@ -11,7 +11,7 @@
  Target Server Version : 50728
  File Encoding         : 65001
 
- Date: 17/12/2019 14:23:35
+ Date: 08/01/2020 15:32:40
 */
 
 SET NAMES utf8mb4;
@@ -4597,7 +4597,7 @@ CREATE TABLE `info` (
 -- Records of info
 -- ----------------------------
 BEGIN;
-INSERT INTO `info` VALUES (1, '3.4.0-beta.4', '3.4.5', 0, NULL, '1', '2019-12-17 22:20:51', '2019-12-17 22:20:51', 'a3dbe1b0-9219-4f3c-a463-15855bbe3567');
+INSERT INTO `info` VALUES (1, '3.4.0-beta.5', '3.4.6', 0, NULL, '1', '2019-12-17 22:20:51', '2020-01-08 23:32:03', 'a3dbe1b0-9219-4f3c-a463-15855bbe3567');
 COMMIT;
 
 -- ----------------------------
@@ -6629,7 +6629,7 @@ CREATE TABLE `migrations` (
   KEY `craft_migrations_pluginId_idx` (`pluginId`) USING BTREE,
   KEY `craft_migrations_type_pluginId_idx` (`type`,`pluginId`) USING BTREE,
   CONSTRAINT `craft_migrations_pluginId_fk` FOREIGN KEY (`pluginId`) REFERENCES `plugins` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=247 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=248 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of migrations
@@ -6881,6 +6881,7 @@ INSERT INTO `migrations` VALUES (243, NULL, 'app', 'm191107_122000_add_gql_proje
 INSERT INTO `migrations` VALUES (244, NULL, 'app', 'm191204_085100_pack_savable_component_settings', '2019-12-17 22:20:50', '2019-12-17 22:20:50', '2019-12-17 22:20:50', 'cd1edd5f-ccc1-4703-9376-f63c273a0525');
 INSERT INTO `migrations` VALUES (245, NULL, 'app', 'm191206_001148_change_tracking', '2019-12-17 22:20:51', '2019-12-17 22:20:51', '2019-12-17 22:20:51', 'c286d9d7-59f4-479d-ad19-eb41e15c1da2');
 INSERT INTO `migrations` VALUES (246, NULL, 'app', 'm191216_191635_asset_upload_tracking', '2019-12-17 22:20:51', '2019-12-17 22:20:51', '2019-12-17 22:20:51', 'e8fb35a7-4c6d-416f-a101-d4358f53fcff');
+INSERT INTO `migrations` VALUES (247, NULL, 'app', 'm191222_002848_peer_asset_permissions', '2020-01-08 23:32:03', '2020-01-08 23:32:03', '2020-01-08 23:32:03', '5fed00e9-c59e-4a9b-a947-fb50fc685dd2');
 COMMIT;
 
 -- ----------------------------
@@ -6923,7 +6924,7 @@ CREATE TABLE `projectconfig` (
 -- Records of projectconfig
 -- ----------------------------
 BEGIN;
-INSERT INTO `projectconfig` VALUES ('dateModified', '1576621249');
+INSERT INTO `projectconfig` VALUES ('dateModified', '1578526323');
 INSERT INTO `projectconfig` VALUES ('email.fromEmail', '\"admin@happylager.dev\"');
 INSERT INTO `projectconfig` VALUES ('email.fromName', '\"Happylager\"');
 INSERT INTO `projectconfig` VALUES ('email.template', 'null');
@@ -7978,7 +7979,7 @@ INSERT INTO `projectconfig` VALUES ('sites.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.
 INSERT INTO `projectconfig` VALUES ('system.edition', '\"pro\"');
 INSERT INTO `projectconfig` VALUES ('system.live', 'true');
 INSERT INTO `projectconfig` VALUES ('system.name', '\"Happy Lager\"');
-INSERT INTO `projectconfig` VALUES ('system.schemaVersion', '\"3.4.5\"');
+INSERT INTO `projectconfig` VALUES ('system.schemaVersion', '\"3.4.6\"');
 INSERT INTO `projectconfig` VALUES ('system.timeZone', '\"UTC\"');
 INSERT INTO `projectconfig` VALUES ('users.allowPublicRegistration', 'false');
 INSERT INTO `projectconfig` VALUES ('users.defaultGroup', 'null');
