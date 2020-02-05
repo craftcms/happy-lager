@@ -11,7 +11,7 @@
  Target Server Version : 50728
  File Encoding         : 65001
 
- Date: 08/01/2020 15:32:40
+ Date: 04/02/2020 16:03:20
 */
 
 SET NAMES utf8mb4;
@@ -4597,7 +4597,7 @@ CREATE TABLE `info` (
 -- Records of info
 -- ----------------------------
 BEGIN;
-INSERT INTO `info` VALUES (1, '3.4.0-beta.5', '3.4.6', 0, NULL, '1', '2019-12-17 22:20:51', '2020-01-08 23:32:03', 'a3dbe1b0-9219-4f3c-a463-15855bbe3567');
+INSERT INTO `info` VALUES (1, '3.4.3', '3.4.7', 0, NULL, '1', '2019-12-17 22:20:51', '2020-02-05 00:02:46', 'a3dbe1b0-9219-4f3c-a463-15855bbe3567');
 COMMIT;
 
 -- ----------------------------
@@ -6629,7 +6629,7 @@ CREATE TABLE `migrations` (
   KEY `craft_migrations_pluginId_idx` (`pluginId`) USING BTREE,
   KEY `craft_migrations_type_pluginId_idx` (`type`,`pluginId`) USING BTREE,
   CONSTRAINT `craft_migrations_pluginId_fk` FOREIGN KEY (`pluginId`) REFERENCES `plugins` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=248 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=249 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of migrations
@@ -6882,6 +6882,7 @@ INSERT INTO `migrations` VALUES (244, NULL, 'app', 'm191204_085100_pack_savable_
 INSERT INTO `migrations` VALUES (245, NULL, 'app', 'm191206_001148_change_tracking', '2019-12-17 22:20:51', '2019-12-17 22:20:51', '2019-12-17 22:20:51', 'c286d9d7-59f4-479d-ad19-eb41e15c1da2');
 INSERT INTO `migrations` VALUES (246, NULL, 'app', 'm191216_191635_asset_upload_tracking', '2019-12-17 22:20:51', '2019-12-17 22:20:51', '2019-12-17 22:20:51', 'e8fb35a7-4c6d-416f-a101-d4358f53fcff');
 INSERT INTO `migrations` VALUES (247, NULL, 'app', 'm191222_002848_peer_asset_permissions', '2020-01-08 23:32:03', '2020-01-08 23:32:03', '2020-01-08 23:32:03', '5fed00e9-c59e-4a9b-a947-fb50fc685dd2');
+INSERT INTO `migrations` VALUES (248, NULL, 'app', 'm200127_172522_queue_channels', '2020-02-05 00:02:46', '2020-02-05 00:02:46', '2020-02-05 00:02:46', '04852ad3-617e-4c23-879f-075a051d5f79');
 COMMIT;
 
 -- ----------------------------
@@ -6907,7 +6908,7 @@ CREATE TABLE `plugins` (
 -- Records of plugins
 -- ----------------------------
 BEGIN;
-INSERT INTO `plugins` VALUES (1, 'redactor', '2.5.x-dev', '2.3.0', 'unknown', NULL, '2018-02-16 22:20:38', '2018-02-16 22:20:38', '2019-12-17 22:20:46', '2466ee8f-7fab-45ad-b6ec-10d86c18543b');
+INSERT INTO `plugins` VALUES (1, 'redactor', '2.5.0', '2.3.0', 'unknown', NULL, '2018-02-16 22:20:38', '2018-02-16 22:20:38', '2020-02-05 00:02:45', '2466ee8f-7fab-45ad-b6ec-10d86c18543b');
 COMMIT;
 
 -- ----------------------------
@@ -6924,7 +6925,7 @@ CREATE TABLE `projectconfig` (
 -- Records of projectconfig
 -- ----------------------------
 BEGIN;
-INSERT INTO `projectconfig` VALUES ('dateModified', '1578526323');
+INSERT INTO `projectconfig` VALUES ('dateModified', '1580860966');
 INSERT INTO `projectconfig` VALUES ('email.fromEmail', '\"admin@happylager.dev\"');
 INSERT INTO `projectconfig` VALUES ('email.fromName', '\"Happylager\"');
 INSERT INTO `projectconfig` VALUES ('email.template', 'null');
@@ -7979,7 +7980,7 @@ INSERT INTO `projectconfig` VALUES ('sites.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.
 INSERT INTO `projectconfig` VALUES ('system.edition', '\"pro\"');
 INSERT INTO `projectconfig` VALUES ('system.live', 'true');
 INSERT INTO `projectconfig` VALUES ('system.name', '\"Happy Lager\"');
-INSERT INTO `projectconfig` VALUES ('system.schemaVersion', '\"3.4.6\"');
+INSERT INTO `projectconfig` VALUES ('system.schemaVersion', '\"3.4.7\"');
 INSERT INTO `projectconfig` VALUES ('system.timeZone', '\"UTC\"');
 INSERT INTO `projectconfig` VALUES ('users.allowPublicRegistration', 'false');
 INSERT INTO `projectconfig` VALUES ('users.defaultGroup', 'null');
@@ -8034,6 +8035,7 @@ COMMIT;
 DROP TABLE IF EXISTS `queue`;
 CREATE TABLE `queue` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `channel` varchar(255) NOT NULL DEFAULT 'queue',
   `job` longblob NOT NULL,
   `description` text,
   `timePushed` int(11) NOT NULL,
@@ -8049,8 +8051,8 @@ CREATE TABLE `queue` (
   `dateFailed` datetime DEFAULT NULL,
   `error` text,
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `craft_queue_fail_timeUpdated_timePushed_idx` (`fail`,`timeUpdated`,`timePushed`) USING BTREE,
-  KEY `craft_queue_fail_timeUpdated_delay_idx` (`fail`,`timeUpdated`,`delay`) USING BTREE
+  KEY `queue_channel_fail_timeUpdated_timePushed_idx` (`channel`,`fail`,`timeUpdated`,`timePushed`),
+  KEY `queue_channel_fail_timeUpdated_delay_idx` (`channel`,`fail`,`timeUpdated`,`delay`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
