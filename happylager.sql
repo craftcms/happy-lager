@@ -11,7 +11,7 @@
  Target Server Version : 50728
  File Encoding         : 65001
 
- Date: 04/02/2020 16:03:20
+ Date: 05/02/2020 06:19:48
 */
 
 SET NAMES utf8mb4;
@@ -305,18 +305,18 @@ CREATE TABLE `content` (
   `elementId` int(11) NOT NULL,
   `siteId` int(11) NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `field_heading` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `field_heading` varchar(1020) COLLATE utf8_unicode_ci DEFAULT NULL,
   `field_body` text COLLATE utf8_unicode_ci,
-  `field_subheading` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `field_subheading` varchar(1020) COLLATE utf8_unicode_ci DEFAULT NULL,
   `field_address` text COLLATE utf8_unicode_ci,
-  `field_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `field_backgroundColor` char(7) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `field_linkUrl` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `field_email` varchar(1020) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `field_backgroundColor` varchar(7) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `field_linkUrl` varchar(1020) COLLATE utf8_unicode_ci DEFAULT NULL,
   `field_shortDescription` text COLLATE utf8_unicode_ci,
   `field_indexHeading` text COLLATE utf8_unicode_ci,
-  `field_copyrightNotice` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `field_contactUsLabel` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `field_featuredEntry` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `field_copyrightNotice` varchar(1020) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `field_contactUsLabel` varchar(1020) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `field_featuredEntry` tinyint(1) DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
@@ -4468,48 +4468,48 @@ CREATE TABLE `fields` (
 -- Records of fields
 -- ----------------------------
 BEGIN;
-INSERT INTO `fields` VALUES (1, 1, 'Heading', 'heading', 'global', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\"}', '2014-07-29 18:21:34', '2018-02-16 22:04:30', '9bb293f8-c659-4035-b5d3-e30dbf8d1c5b');
-INSERT INTO `fields` VALUES (2, 1, 'Body', 'body', 'global', NULL, 1, 'site', NULL, 'craft\\redactor\\Field', '{\"purifyHtml\":\"1\",\"columnType\":\"text\",\"redactorConfig\":\"Standard.json\",\"removeInlineStyles\":true,\"removeEmptyTags\":true,\"removeNbsp\":true}', '2014-07-29 18:21:34', '2019-05-03 12:18:58', '08f8ec90-f7ad-4d40-9880-3c96304f1e4e');
-INSERT INTO `fields` VALUES (4, 1, 'Article Body', 'articleBody', 'global', '', 1, 'none', NULL, 'craft\\fields\\Matrix', '{\"maxBlocks\":null,\"localizeBlocks\":false,\"contentTable\":\"{{%matrixcontent_articlebody}}\"}', '2014-07-30 20:59:37', '2015-02-10 17:39:37', '82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e');
-INSERT INTO `fields` VALUES (5, NULL, 'Text', 'text', 'matrixBlockType:070be8db-f9b0-4605-98ae-e9b54b1af3f6', '', 1, 'none', NULL, 'craft\\redactor\\Field', '{\"purifyHtml\":\"1\",\"columnType\":\"text\",\"redactorConfig\":\"Standard.json\",\"removeInlineStyles\":true,\"removeEmptyTags\":true,\"removeNbsp\":true}', '2014-07-30 20:59:37', '2019-05-03 12:18:59', 'e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c');
-INSERT INTO `fields` VALUES (6, NULL, 'Pull Quote', 'pullQuote', 'matrixBlockType:daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"}', '2014-07-30 21:01:11', '2018-02-16 22:04:30', 'a8a6d843-bec1-4882-98ec-30cb74f5b16f');
-INSERT INTO `fields` VALUES (7, NULL, 'Position', 'position', 'matrixBlockType:daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890', '', 1, 'none', NULL, 'craft\\fields\\Dropdown', '{\"options\":[{\"label\":\"Left\",\"value\":\"left\",\"default\":\"\"},{\"label\":\"Center\",\"value\":\"center\",\"default\":\"\"},{\"label\":\"Right\",\"value\":\"right\",\"default\":\"\"}]}', '2014-07-30 21:01:11', '2019-02-17 16:23:57', 'a88d73a8-c75f-4c72-aa70-a39dfbbff0fe');
-INSERT INTO `fields` VALUES (8, NULL, 'Heading', 'heading', 'matrixBlockType:1d5e20da-bc96-4a33-b045-8d1fa5870e74', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\"}', '2014-07-30 22:37:57', '2019-02-17 16:23:57', '631f668a-3658-48a4-89fd-8da5af0a60cc');
-INSERT INTO `fields` VALUES (9, NULL, 'Image', 'image', 'matrixBlockType:9123201b-837c-4269-9d7c-d5e11bba1e2b', '', 1, 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"folder:20095f95-422a-46cc-a5d0-3bc6b0a4da20\"],\"defaultUploadLocationSource\":\"folder:20095f95-422a-46cc-a5d0-3bc6b0a4da20\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"folder:20095f95-422a-46cc-a5d0-3bc6b0a4da20\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"1\",\"allowedKinds\":[\"image\"],\"limit\":\"1\",\"localizeRelations\":false}', '2014-07-30 22:37:57', '2018-02-16 22:04:30', '964a1aba-15ac-413f-86c1-03fbf37f30c7');
-INSERT INTO `fields` VALUES (10, NULL, 'Position', 'position', 'matrixBlockType:9123201b-837c-4269-9d7c-d5e11bba1e2b', '', 1, 'none', NULL, 'craft\\fields\\Dropdown', '{\"options\":[{\"label\":\"Left\",\"value\":\"left\",\"default\":\"\"},{\"label\":\"Center\",\"value\":\"center\",\"default\":\"\"},{\"label\":\"Right\",\"value\":\"right\",\"default\":\"\"},{\"label\":\"Full\",\"value\":\"full\",\"default\":\"\"}]}', '2014-07-30 22:37:57', '2018-02-16 22:04:33', 'f87a6243-5b7f-4456-9106-ccfb6e03b754');
-INSERT INTO `fields` VALUES (11, NULL, 'Quote', 'quote', 'matrixBlockType:97ff3c80-2398-4ca5-9d03-c3b8727c6eb2', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"}', '2014-07-30 22:37:57', '2018-02-16 22:04:30', '35200549-df46-4092-994a-a8015c5810ba');
-INSERT INTO `fields` VALUES (12, NULL, 'Attribution', 'attribution', 'matrixBlockType:97ff3c80-2398-4ca5-9d03-c3b8727c6eb2', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"}', '2014-07-30 22:37:57', '2018-02-16 22:04:30', '41e6fac7-12d7-45c9-ac83-0aa59793d872');
-INSERT INTO `fields` VALUES (13, NULL, 'Position', 'position', 'matrixBlockType:97ff3c80-2398-4ca5-9d03-c3b8727c6eb2', '', 1, 'none', NULL, 'craft\\fields\\Dropdown', '{\"options\":[{\"label\":\"Center\",\"value\":\"center\",\"default\":\"\"},{\"label\":\"Full\",\"value\":\"full\",\"default\":\"\"}]}', '2014-07-30 22:37:57', '2019-02-17 16:23:57', 'a5b4b046-1178-45f9-b4cf-3e3bef86e067');
-INSERT INTO `fields` VALUES (14, 1, 'Subheading', 'subheading', 'global', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\"}', '2014-07-30 22:42:02', '2018-02-16 22:04:30', '674e53a6-d62c-4322-ae09-349765f1ef17');
-INSERT INTO `fields` VALUES (15, 1, 'Featured Image', 'featuredImage', 'global', '', 1, 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"],\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"1\",\"allowedKinds\":[\"image\"],\"limit\":\"2\",\"localizeRelations\":false}', '2014-07-30 22:47:26', '2019-02-17 16:23:57', '0cbb9736-a84b-4e83-803c-5077f56394a9');
-INSERT INTO `fields` VALUES (37, 7, 'Address', 'address', 'global', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"1\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"}', '2014-09-17 02:24:38', '2018-02-16 22:04:30', '422c7da9-d3e4-4d0a-8225-bbbc8264f029');
-INSERT INTO `fields` VALUES (41, 7, 'Email', 'email', 'global', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\"}', '2014-09-17 02:25:59', '2018-02-16 22:04:30', 'b75266c9-d8d2-42ae-9024-0fecb8bdc994');
-INSERT INTO `fields` VALUES (44, NULL, 'Caption', 'caption', 'matrixBlockType:9123201b-837c-4269-9d7c-d5e11bba1e2b', '', 1, 'none', NULL, 'craft\\redactor\\Field', '{\"purifyHtml\":\"1\",\"columnType\":\"text\",\"redactorConfig\":\"Simple.json\",\"removeInlineStyles\":true,\"removeEmptyTags\":true,\"removeNbsp\":true}', '2014-09-25 13:33:39', '2019-05-03 12:18:59', '7ca32393-f78c-4de0-9f8f-52b64e09584f');
-INSERT INTO `fields` VALUES (45, 1, 'Background Color', 'backgroundColor', 'global', 'Hex value for alternate background color.', 1, 'none', NULL, 'craft\\fields\\Color', '[]', '2014-09-28 16:42:04', '2015-02-02 04:29:55', 'cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea');
-INSERT INTO `fields` VALUES (46, 1, 'Link URL', 'linkUrl', 'global', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"e.g. http://example.com\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\"}', '2014-10-03 02:13:50', '2018-02-16 22:04:30', '4ca9d3b8-ff02-403a-9010-45763fcdea9f');
-INSERT INTO `fields` VALUES (47, 1, 'Short Description', 'shortDescription', 'global', 'Short description for use in index regions.', 1, 'none', NULL, 'craft\\redactor\\Field', '{\"purifyHtml\":\"1\",\"columnType\":\"text\",\"redactorConfig\":\"Simple.json\",\"removeInlineStyles\":true,\"removeEmptyTags\":true,\"removeNbsp\":true}', '2014-10-03 02:15:14', '2019-05-03 12:18:59', 'aef80333-1412-4130-bb84-ac3bdbbcbbe2');
-INSERT INTO `fields` VALUES (48, 1, 'Index Heading', 'indexHeading', 'global', 'Page heading for services structure index page.', 1, 'none', NULL, 'craft\\redactor\\Field', '{\"purifyHtml\":\"1\",\"columnType\":\"text\",\"redactorConfig\":\"\",\"removeInlineStyles\":\"\",\"removeEmptyTags\":\"\",\"removeNbsp\":\"\"}', '2014-10-03 15:40:45', '2019-05-03 12:18:59', '67ff16f0-04e2-492b-b999-a7d364331d80');
-INSERT INTO `fields` VALUES (49, 1, 'Featured Thumb', 'featuredThumb', 'global', 'Thumb image for use on home page or archives.', 1, 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":\"*\",\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"1\",\"localizeRelations\":false}', '2014-10-05 03:01:09', '2019-02-17 16:23:57', '0305c984-3934-4c7a-9de9-b0162c5b0112');
-INSERT INTO `fields` VALUES (50, 4, 'Hero Image', 'heroImage', 'global', 'Choose the big homepage hero image. The image should be at least 1450×916 for best results.', 1, 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"],\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"1\",\"localizeRelations\":false}', '2014-10-06 01:48:43', '2019-02-17 16:23:57', 'a2129d62-1d81-4c2f-a92d-81c03ed120dc');
-INSERT INTO `fields` VALUES (51, 4, 'Testimonials', 'testimonials', 'global', '', 1, 'none', NULL, 'craft\\fields\\Matrix', '{\"maxBlocks\":\"3\",\"localizeBlocks\":false,\"contentTable\":\"{{%matrixcontent_testimonials}}\"}', '2014-10-07 03:36:07', '2015-02-04 14:17:43', '8823155c-e84a-4a38-af30-2cb88b705e7b');
-INSERT INTO `fields` VALUES (52, NULL, 'Quote', 'quote', 'matrixBlockType:b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"}', '2014-10-07 03:36:07', '2018-02-16 22:04:30', '39b59166-9d91-4d17-baf9-229aca6174c2');
-INSERT INTO `fields` VALUES (53, NULL, 'Cite', 'cite', 'matrixBlockType:b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"}', '2014-10-07 03:36:07', '2018-02-16 22:04:30', '4ed4bf91-bcf9-45a9-84f7-d5d768103a09');
-INSERT INTO `fields` VALUES (54, NULL, 'Photo', 'photo', 'matrixBlockType:b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3', '', 1, 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"],\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"1\",\"localizeRelations\":false}', '2014-10-07 03:36:07', '2019-02-17 16:23:57', 'a418bde2-f4cc-4ed2-a358-44362a0cb3a9');
-INSERT INTO `fields` VALUES (55, 4, 'Client Logos', 'clientLogos', 'global', '', 1, 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"volume:7d6a9bef-727c-4a0c-9791-4f423956de69\"],\"defaultUploadLocationSource\":\"volume:7d6a9bef-727c-4a0c-9791-4f423956de69\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"\",\"localizeRelations\":false}', '2014-10-07 03:40:02', '2019-02-17 16:23:57', '950b3c0e-9780-4487-a881-23d96d6075d5');
-INSERT INTO `fields` VALUES (58, 3, 'Service Icon', 'serviceIcon', 'global', '', 1, 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"volume:3fc34ff2-8da7-4a35-8147-f0a2e01392b9\"],\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"1\",\"localizeRelations\":false}', '2014-12-03 20:01:25', '2019-02-17 16:23:57', 'd96355a7-1353-4097-bf08-3bd5c44821f8');
-INSERT INTO `fields` VALUES (59, 3, 'Service Body', 'serviceBody', 'global', '', 1, 'none', NULL, 'craft\\fields\\Matrix', '{\"maxBlocks\":null,\"localizeBlocks\":false,\"contentTable\":\"{{%matrixcontent_servicebody}}\"}', '2014-12-11 01:59:32', '2015-02-10 21:47:22', '9bf9e642-2881-44b4-99ff-2cbed3ccc2d7');
-INSERT INTO `fields` VALUES (60, NULL, 'Heading', 'heading', 'matrixBlockType:aa39e3a4-2d2c-4ed2-a9b5-74122ece5947', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"\",\"columnType\":\"text\"}', '2014-12-11 01:59:32', '2018-02-16 22:04:30', '3285a611-4363-43f2-82b5-97e2d253cab3');
-INSERT INTO `fields` VALUES (61, NULL, 'Text', 'text', 'matrixBlockType:aa39e3a4-2d2c-4ed2-a9b5-74122ece5947', '', 1, 'none', NULL, 'craft\\redactor\\Field', '{\"purifyHtml\":\"1\",\"columnType\":\"text\",\"redactorConfig\":\"\",\"removeInlineStyles\":true,\"removeEmptyTags\":true,\"removeNbsp\":true}', '2014-12-11 01:59:32', '2019-05-03 12:18:59', 'c9ccf068-4ace-4b21-9356-68f3faa96cf3');
-INSERT INTO `fields` VALUES (62, NULL, 'Image', 'image', 'matrixBlockType:aa39e3a4-2d2c-4ed2-a9b5-74122ece5947', '', 1, 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"],\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"1\",\"localizeRelations\":false}', '2014-12-11 01:59:32', '2019-02-17 16:23:57', '9ce53ce9-939b-4760-97f4-545ef2c388eb');
-INSERT INTO `fields` VALUES (63, 5, 'Services Performed', 'servicesPerformed', 'global', '', 1, 'none', NULL, 'craft\\fields\\Entries', '{\"sources\":[\"section:f6b0cb16-5df8-4b57-9856-c9c2d6b9699e\"],\"limit\":\"\",\"localizeRelations\":false}', '2015-02-04 13:48:32', '2015-02-04 13:53:08', 'a988d6b4-6983-48e6-b08e-8fd72e31e483');
-INSERT INTO `fields` VALUES (64, 6, 'Copyright Notice', 'copyrightNotice', 'global', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\"}', '2015-02-04 15:21:00', '2018-02-16 22:04:30', '5095500e-4962-429c-9b9c-7a4d0d4f930c');
-INSERT INTO `fields` VALUES (65, 6, 'Contact Us Label', 'contactUsLabel', 'global', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\"}', '2015-02-04 15:22:02', '2018-02-16 22:04:30', 'fcf41a5f-68b5-42dd-8ca1-cc457eb749f0');
-INSERT INTO `fields` VALUES (67, NULL, 'Section Heading', 'sectionHeading', 'matrixBlockType:e1c6c95e-a19b-4cd8-9a83-935e91f862c0', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\"}', '2015-02-09 21:38:01', '2019-02-17 16:23:57', '8cd6b011-5271-484d-85d9-6a6b731137e9');
-INSERT INTO `fields` VALUES (69, NULL, 'Images', 'images', 'matrixBlockType:0f3ede99-8b78-4042-85c9-422f57f5b01b', '', 1, 'none', NULL, 'craft\\fields\\Assets', '{\"useSingleFolder\":\"\",\"sources\":[\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"],\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"restrictFiles\":\"\",\"limit\":\"3\",\"localizeRelations\":false}', '2015-02-10 01:21:43', '2019-02-17 16:23:57', 'ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7');
-INSERT INTO `fields` VALUES (70, NULL, 'Position', 'position', 'matrixBlockType:070be8db-f9b0-4605-98ae-e9b54b1af3f6', '', 1, 'none', NULL, 'craft\\fields\\Dropdown', '{\"options\":[{\"label\":\"Left\",\"value\":\"left\",\"default\":\"\"},{\"label\":\"Center\",\"value\":\"center\",\"default\":\"\"},{\"label\":\"Right\",\"value\":\"right\",\"default\":\"\"}]}', '2015-02-10 01:28:28', '2019-02-17 16:23:57', 'cc6a4697-6d1c-4342-b9de-bce13295a885');
-INSERT INTO `fields` VALUES (72, 7, 'Contact Methods', 'contactMethods', 'global', '', 1, 'none', NULL, 'craft\\fields\\Matrix', '{\"maxBlocks\":null,\"localizeBlocks\":false,\"contentTable\":\"{{%matrixcontent_contactmethods}}\"}', '2015-02-10 19:04:15', '2015-02-10 19:04:15', 'b01498fe-6db2-4b1d-84d2-8cd0cb62f449');
-INSERT INTO `fields` VALUES (73, NULL, 'Label', 'label', 'matrixBlockType:ecd6fdce-8d11-4aa6-a167-e731757515c6', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\"}', '2015-02-10 19:04:16', '2018-02-16 22:04:30', 'aad31ad0-0405-41b5-aff0-4ec567b557a0');
-INSERT INTO `fields` VALUES (74, NULL, 'Value', 'value', 'matrixBlockType:ecd6fdce-8d11-4aa6-a167-e731757515c6', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"placeholder\":\"\",\"multiline\":\"\",\"initialRows\":\"4\",\"charLimit\":\"255\"}', '2015-02-10 19:04:16', '2019-02-17 16:23:57', '0275193a-3c51-46a3-afd0-49e55a93bfd3');
+INSERT INTO `fields` VALUES (1, 1, 'Heading', 'heading', 'global', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"byteLimit\":null,\"charLimit\":255,\"code\":\"\",\"columnType\":null,\"initialRows\":\"4\",\"multiline\":\"\",\"placeholder\":\"\"}', '2014-07-29 18:21:34', '2020-02-05 14:16:52', '9bb293f8-c659-4035-b5d3-e30dbf8d1c5b');
+INSERT INTO `fields` VALUES (2, 1, 'Body', 'body', 'global', '', 1, 'none', NULL, 'craft\\redactor\\Field', '{\"availableTransforms\":\"*\",\"availableVolumes\":\"*\",\"cleanupHtml\":true,\"columnType\":\"text\",\"purifierConfig\":\"\",\"purifyHtml\":\"1\",\"redactorConfig\":\"Standard.json\",\"removeEmptyTags\":\"1\",\"removeInlineStyles\":\"1\",\"removeNbsp\":\"1\"}', '2014-07-29 18:21:34', '2020-02-05 14:14:25', '08f8ec90-f7ad-4d40-9880-3c96304f1e4e');
+INSERT INTO `fields` VALUES (4, 1, 'Article Body', 'articleBody', 'global', '', 1, 'site', NULL, 'craft\\fields\\Matrix', '{\"contentTable\":\"{{%matrixcontent_articlebody}}\",\"maxBlocks\":\"\",\"minBlocks\":\"\",\"propagationMethod\":\"all\"}', '2014-07-30 20:59:37', '2020-02-05 14:14:16', '82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e');
+INSERT INTO `fields` VALUES (5, NULL, 'Text', 'text', 'matrixBlockType:070be8db-f9b0-4605-98ae-e9b54b1af3f6', '', 1, 'none', NULL, 'craft\\redactor\\Field', '{\"availableTransforms\":\"*\",\"availableVolumes\":\"*\",\"cleanupHtml\":true,\"columnType\":\"text\",\"purifierConfig\":\"\",\"purifyHtml\":\"1\",\"redactorConfig\":\"Standard.json\",\"removeEmptyTags\":\"1\",\"removeInlineStyles\":\"1\",\"removeNbsp\":\"1\"}', '2014-07-30 20:59:37', '2020-02-05 14:14:16', 'e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c');
+INSERT INTO `fields` VALUES (6, NULL, 'Pull Quote', 'pullQuote', 'matrixBlockType:daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"byteLimit\":null,\"charLimit\":null,\"code\":\"\",\"columnType\":\"text\",\"initialRows\":\"4\",\"multiline\":\"\",\"placeholder\":\"\"}', '2014-07-30 21:01:11', '2020-02-05 14:14:16', 'a8a6d843-bec1-4882-98ec-30cb74f5b16f');
+INSERT INTO `fields` VALUES (7, NULL, 'Position', 'position', 'matrixBlockType:daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890', '', 1, 'none', NULL, 'craft\\fields\\Dropdown', '{\"optgroups\":true,\"options\":[{\"label\":\"Left\",\"value\":\"left\",\"default\":\"\"},{\"label\":\"Center\",\"value\":\"center\",\"default\":\"\"},{\"label\":\"Right\",\"value\":\"right\",\"default\":\"\"}]}', '2014-07-30 21:01:11', '2020-02-05 14:14:16', 'a88d73a8-c75f-4c72-aa70-a39dfbbff0fe');
+INSERT INTO `fields` VALUES (8, NULL, 'Heading', 'heading', 'matrixBlockType:1d5e20da-bc96-4a33-b045-8d1fa5870e74', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"byteLimit\":null,\"charLimit\":255,\"code\":\"\",\"columnType\":null,\"initialRows\":\"4\",\"multiline\":\"\",\"placeholder\":\"\"}', '2014-07-30 22:37:57', '2020-02-05 14:14:16', '631f668a-3658-48a4-89fd-8da5af0a60cc');
+INSERT INTO `fields` VALUES (9, NULL, 'Image', 'image', 'matrixBlockType:9123201b-837c-4269-9d7c-d5e11bba1e2b', '', 1, 'site', NULL, 'craft\\fields\\Assets', '{\"allowedKinds\":[\"image\"],\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"limit\":\"1\",\"localizeRelations\":false,\"restrictFiles\":\"1\",\"selectionLabel\":\"\",\"showUnpermittedFiles\":false,\"showUnpermittedVolumes\":true,\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"source\":null,\"sources\":[\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"],\"targetSiteId\":null,\"useSingleFolder\":false,\"validateRelatedElements\":\"\",\"viewMode\":\"list\"}', '2014-07-30 22:37:57', '2020-02-05 14:14:16', '964a1aba-15ac-413f-86c1-03fbf37f30c7');
+INSERT INTO `fields` VALUES (10, NULL, 'Position', 'position', 'matrixBlockType:9123201b-837c-4269-9d7c-d5e11bba1e2b', '', 1, 'none', NULL, 'craft\\fields\\Dropdown', '{\"optgroups\":true,\"options\":[{\"label\":\"Left\",\"value\":\"left\",\"default\":\"\"},{\"label\":\"Center\",\"value\":\"center\",\"default\":\"\"},{\"label\":\"Right\",\"value\":\"right\",\"default\":\"\"},{\"label\":\"Full\",\"value\":\"full\",\"default\":\"\"}]}', '2014-07-30 22:37:57', '2020-02-05 14:14:16', 'f87a6243-5b7f-4456-9106-ccfb6e03b754');
+INSERT INTO `fields` VALUES (11, NULL, 'Quote', 'quote', 'matrixBlockType:97ff3c80-2398-4ca5-9d03-c3b8727c6eb2', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"byteLimit\":null,\"charLimit\":null,\"code\":\"\",\"columnType\":\"text\",\"initialRows\":\"4\",\"multiline\":\"\",\"placeholder\":\"\"}', '2014-07-30 22:37:57', '2020-02-05 14:14:16', '35200549-df46-4092-994a-a8015c5810ba');
+INSERT INTO `fields` VALUES (12, NULL, 'Attribution', 'attribution', 'matrixBlockType:97ff3c80-2398-4ca5-9d03-c3b8727c6eb2', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"byteLimit\":null,\"charLimit\":null,\"code\":\"\",\"columnType\":\"text\",\"initialRows\":\"4\",\"multiline\":\"\",\"placeholder\":\"\"}', '2014-07-30 22:37:57', '2020-02-05 14:14:16', '41e6fac7-12d7-45c9-ac83-0aa59793d872');
+INSERT INTO `fields` VALUES (13, NULL, 'Position', 'position', 'matrixBlockType:97ff3c80-2398-4ca5-9d03-c3b8727c6eb2', '', 1, 'none', NULL, 'craft\\fields\\Dropdown', '{\"optgroups\":true,\"options\":[{\"label\":\"Center\",\"value\":\"center\",\"default\":\"\"},{\"label\":\"Full\",\"value\":\"full\",\"default\":\"\"}]}', '2014-07-30 22:37:57', '2020-02-05 14:14:16', 'a5b4b046-1178-45f9-b4cf-3e3bef86e067');
+INSERT INTO `fields` VALUES (14, 1, 'Subheading', 'subheading', 'global', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"byteLimit\":null,\"charLimit\":255,\"code\":\"\",\"columnType\":null,\"initialRows\":\"4\",\"multiline\":\"\",\"placeholder\":\"\"}', '2014-07-30 22:42:02', '2020-02-05 14:17:11', '674e53a6-d62c-4322-ae09-349765f1ef17');
+INSERT INTO `fields` VALUES (15, 1, 'Featured Image', 'featuredImage', 'global', '', 1, 'site', NULL, 'craft\\fields\\Assets', '{\"allowedKinds\":[\"image\"],\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"limit\":\"2\",\"localizeRelations\":false,\"restrictFiles\":\"1\",\"selectionLabel\":\"\",\"showUnpermittedFiles\":false,\"showUnpermittedVolumes\":true,\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"source\":null,\"sources\":[\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"],\"targetSiteId\":null,\"useSingleFolder\":false,\"validateRelatedElements\":\"\",\"viewMode\":\"list\"}', '2014-07-30 22:47:26', '2020-02-05 14:16:45', '0cbb9736-a84b-4e83-803c-5077f56394a9');
+INSERT INTO `fields` VALUES (37, 7, 'Address', 'address', 'global', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"byteLimit\":null,\"charLimit\":null,\"code\":\"\",\"columnType\":\"text\",\"initialRows\":\"4\",\"multiline\":\"1\",\"placeholder\":\"\"}', '2014-09-17 02:24:38', '2020-02-05 14:14:13', '422c7da9-d3e4-4d0a-8225-bbbc8264f029');
+INSERT INTO `fields` VALUES (41, 7, 'Email', 'email', 'global', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"byteLimit\":null,\"charLimit\":255,\"code\":\"\",\"columnType\":null,\"initialRows\":\"4\",\"multiline\":\"\",\"placeholder\":\"\"}', '2014-09-17 02:25:59', '2020-02-05 14:16:42', 'b75266c9-d8d2-42ae-9024-0fecb8bdc994');
+INSERT INTO `fields` VALUES (44, NULL, 'Caption', 'caption', 'matrixBlockType:9123201b-837c-4269-9d7c-d5e11bba1e2b', '', 1, 'none', NULL, 'craft\\redactor\\Field', '{\"availableTransforms\":\"*\",\"availableVolumes\":\"*\",\"cleanupHtml\":true,\"columnType\":\"text\",\"purifierConfig\":\"\",\"purifyHtml\":\"1\",\"redactorConfig\":\"Simple.json\",\"removeEmptyTags\":\"1\",\"removeInlineStyles\":\"1\",\"removeNbsp\":\"1\"}', '2014-09-25 13:33:39', '2020-02-05 14:14:16', '7ca32393-f78c-4de0-9f8f-52b64e09584f');
+INSERT INTO `fields` VALUES (45, 1, 'Background Color', 'backgroundColor', 'global', 'Hex value for alternate background color.', 1, 'none', NULL, 'craft\\fields\\Color', '{\"defaultColor\":\"\"}', '2014-09-28 16:42:04', '2020-02-05 14:14:22', 'cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea');
+INSERT INTO `fields` VALUES (46, 1, 'Link URL', 'linkUrl', 'global', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"byteLimit\":null,\"charLimit\":255,\"code\":\"\",\"columnType\":null,\"initialRows\":\"4\",\"multiline\":\"\",\"placeholder\":\"e.g. http://example.com\"}', '2014-10-03 02:13:50', '2020-02-05 14:16:59', '4ca9d3b8-ff02-403a-9010-45763fcdea9f');
+INSERT INTO `fields` VALUES (47, 1, 'Short Description', 'shortDescription', 'global', 'Short description for use in index regions.', 1, 'none', NULL, 'craft\\redactor\\Field', '{\"availableTransforms\":\"*\",\"availableVolumes\":\"*\",\"cleanupHtml\":true,\"columnType\":\"text\",\"purifierConfig\":\"\",\"purifyHtml\":\"1\",\"redactorConfig\":\"Simple.json\",\"removeEmptyTags\":\"1\",\"removeInlineStyles\":\"1\",\"removeNbsp\":\"1\"}', '2014-10-03 02:15:14', '2020-02-05 14:17:09', 'aef80333-1412-4130-bb84-ac3bdbbcbbe2');
+INSERT INTO `fields` VALUES (48, 1, 'Index Heading', 'indexHeading', 'global', 'Page heading for services structure index page.', 1, 'none', NULL, 'craft\\redactor\\Field', '{\"availableTransforms\":\"*\",\"availableVolumes\":\"*\",\"cleanupHtml\":true,\"columnType\":\"text\",\"purifierConfig\":\"\",\"purifyHtml\":\"1\",\"redactorConfig\":\"\",\"removeEmptyTags\":\"\",\"removeInlineStyles\":\"\",\"removeNbsp\":\"\"}', '2014-10-03 15:40:45', '2020-02-05 14:16:57', '67ff16f0-04e2-492b-b999-a7d364331d80');
+INSERT INTO `fields` VALUES (49, 1, 'Featured Thumb', 'featuredThumb', 'global', 'Thumb image for use on home page or archives.', 1, 'site', NULL, 'craft\\fields\\Assets', '{\"allowedKinds\":null,\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"limit\":\"1\",\"localizeRelations\":false,\"restrictFiles\":\"\",\"selectionLabel\":\"\",\"showUnpermittedFiles\":false,\"showUnpermittedVolumes\":true,\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"source\":null,\"sources\":\"*\",\"targetSiteId\":null,\"useSingleFolder\":false,\"validateRelatedElements\":\"\",\"viewMode\":\"list\"}', '2014-10-05 03:01:09', '2020-02-05 14:16:47', '0305c984-3934-4c7a-9de9-b0162c5b0112');
+INSERT INTO `fields` VALUES (50, 4, 'Hero Image', 'heroImage', 'global', 'Choose the big homepage hero image. The image should be at least 1450×916 for best results.', 1, 'site', NULL, 'craft\\fields\\Assets', '{\"allowedKinds\":null,\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"limit\":\"1\",\"localizeRelations\":false,\"restrictFiles\":\"\",\"selectionLabel\":\"\",\"showUnpermittedFiles\":false,\"showUnpermittedVolumes\":true,\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"source\":null,\"sources\":[\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"],\"targetSiteId\":null,\"useSingleFolder\":false,\"validateRelatedElements\":\"\",\"viewMode\":\"list\"}', '2014-10-06 01:48:43', '2020-02-05 14:16:54', 'a2129d62-1d81-4c2f-a92d-81c03ed120dc');
+INSERT INTO `fields` VALUES (51, 4, 'Testimonials', 'testimonials', 'global', '', 1, 'site', NULL, 'craft\\fields\\Matrix', '{\"contentTable\":\"{{%matrixcontent_testimonials}}\",\"maxBlocks\":\"3\",\"minBlocks\":\"\",\"propagationMethod\":\"all\"}', '2014-10-07 03:36:07', '2020-02-05 14:17:13', '8823155c-e84a-4a38-af30-2cb88b705e7b');
+INSERT INTO `fields` VALUES (52, NULL, 'Quote', 'quote', 'matrixBlockType:b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"byteLimit\":null,\"charLimit\":null,\"code\":\"\",\"columnType\":\"text\",\"initialRows\":\"4\",\"multiline\":\"\",\"placeholder\":\"\"}', '2014-10-07 03:36:07', '2020-02-05 14:17:13', '39b59166-9d91-4d17-baf9-229aca6174c2');
+INSERT INTO `fields` VALUES (53, NULL, 'Cite', 'cite', 'matrixBlockType:b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"byteLimit\":null,\"charLimit\":null,\"code\":\"\",\"columnType\":\"text\",\"initialRows\":\"4\",\"multiline\":\"\",\"placeholder\":\"\"}', '2014-10-07 03:36:07', '2020-02-05 14:17:13', '4ed4bf91-bcf9-45a9-84f7-d5d768103a09');
+INSERT INTO `fields` VALUES (54, NULL, 'Photo', 'photo', 'matrixBlockType:b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3', '', 1, 'site', NULL, 'craft\\fields\\Assets', '{\"allowedKinds\":null,\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"limit\":\"1\",\"localizeRelations\":false,\"restrictFiles\":\"\",\"selectionLabel\":\"\",\"showUnpermittedFiles\":false,\"showUnpermittedVolumes\":true,\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"source\":null,\"sources\":[\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"],\"targetSiteId\":null,\"useSingleFolder\":false,\"validateRelatedElements\":\"\",\"viewMode\":\"list\"}', '2014-10-07 03:36:07', '2020-02-05 14:17:13', 'a418bde2-f4cc-4ed2-a358-44362a0cb3a9');
+INSERT INTO `fields` VALUES (55, 4, 'Client Logos', 'clientLogos', 'global', '', 1, 'site', NULL, 'craft\\fields\\Assets', '{\"allowedKinds\":null,\"defaultUploadLocationSource\":\"volume:7d6a9bef-727c-4a0c-9791-4f423956de69\",\"defaultUploadLocationSubpath\":\"\",\"limit\":\"\",\"localizeRelations\":false,\"restrictFiles\":\"\",\"selectionLabel\":\"\",\"showUnpermittedFiles\":false,\"showUnpermittedVolumes\":true,\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"source\":null,\"sources\":[\"volume:7d6a9bef-727c-4a0c-9791-4f423956de69\"],\"targetSiteId\":null,\"useSingleFolder\":false,\"validateRelatedElements\":\"\",\"viewMode\":\"list\"}', '2014-10-07 03:40:02', '2020-02-05 14:14:29', '950b3c0e-9780-4487-a881-23d96d6075d5');
+INSERT INTO `fields` VALUES (58, 3, 'Service Icon', 'serviceIcon', 'global', '', 1, 'site', NULL, 'craft\\fields\\Assets', '{\"allowedKinds\":null,\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"limit\":\"1\",\"localizeRelations\":false,\"restrictFiles\":\"\",\"selectionLabel\":\"\",\"showUnpermittedFiles\":false,\"showUnpermittedVolumes\":true,\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"source\":null,\"sources\":[\"volume:3fc34ff2-8da7-4a35-8147-f0a2e01392b9\"],\"targetSiteId\":null,\"useSingleFolder\":false,\"validateRelatedElements\":\"\",\"viewMode\":\"list\"}', '2014-12-03 20:01:25', '2020-02-05 14:17:04', 'd96355a7-1353-4097-bf08-3bd5c44821f8');
+INSERT INTO `fields` VALUES (59, 3, 'Service Body', 'serviceBody', 'global', '', 1, 'site', NULL, 'craft\\fields\\Matrix', '{\"contentTable\":\"{{%matrixcontent_servicebody}}\",\"maxBlocks\":\"\",\"minBlocks\":\"\",\"propagationMethod\":\"all\"}', '2014-12-11 01:59:32', '2020-02-05 14:17:02', '9bf9e642-2881-44b4-99ff-2cbed3ccc2d7');
+INSERT INTO `fields` VALUES (60, NULL, 'Heading', 'heading', 'matrixBlockType:aa39e3a4-2d2c-4ed2-a9b5-74122ece5947', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"byteLimit\":null,\"charLimit\":null,\"code\":\"\",\"columnType\":\"text\",\"initialRows\":\"4\",\"multiline\":\"\",\"placeholder\":\"\"}', '2014-12-11 01:59:32', '2020-02-05 14:17:02', '3285a611-4363-43f2-82b5-97e2d253cab3');
+INSERT INTO `fields` VALUES (61, NULL, 'Text', 'text', 'matrixBlockType:aa39e3a4-2d2c-4ed2-a9b5-74122ece5947', '', 1, 'none', NULL, 'craft\\redactor\\Field', '{\"availableTransforms\":\"*\",\"availableVolumes\":\"*\",\"cleanupHtml\":true,\"columnType\":\"text\",\"purifierConfig\":\"\",\"purifyHtml\":\"1\",\"redactorConfig\":\"\",\"removeEmptyTags\":\"1\",\"removeInlineStyles\":\"1\",\"removeNbsp\":\"1\"}', '2014-12-11 01:59:32', '2020-02-05 14:17:02', 'c9ccf068-4ace-4b21-9356-68f3faa96cf3');
+INSERT INTO `fields` VALUES (62, NULL, 'Image', 'image', 'matrixBlockType:aa39e3a4-2d2c-4ed2-a9b5-74122ece5947', '', 1, 'site', NULL, 'craft\\fields\\Assets', '{\"allowedKinds\":null,\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"limit\":\"1\",\"localizeRelations\":false,\"restrictFiles\":\"\",\"selectionLabel\":\"\",\"showUnpermittedFiles\":false,\"showUnpermittedVolumes\":true,\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"source\":null,\"sources\":[\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"],\"targetSiteId\":null,\"useSingleFolder\":false,\"validateRelatedElements\":\"\",\"viewMode\":\"list\"}', '2014-12-11 01:59:32', '2020-02-05 14:17:02', '9ce53ce9-939b-4760-97f4-545ef2c388eb');
+INSERT INTO `fields` VALUES (63, 5, 'Services Performed', 'servicesPerformed', 'global', '', 1, 'site', NULL, 'craft\\fields\\Entries', '{\"limit\":\"\",\"localizeRelations\":false,\"selectionLabel\":\"\",\"source\":null,\"sources\":[\"section:f6b0cb16-5df8-4b57-9856-c9c2d6b9699e\"],\"targetSiteId\":null,\"validateRelatedElements\":\"\",\"viewMode\":null}', '2015-02-04 13:48:32', '2020-02-05 14:17:06', 'a988d6b4-6983-48e6-b08e-8fd72e31e483');
+INSERT INTO `fields` VALUES (64, 6, 'Copyright Notice', 'copyrightNotice', 'global', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"byteLimit\":null,\"charLimit\":255,\"code\":\"\",\"columnType\":null,\"initialRows\":\"4\",\"multiline\":\"\",\"placeholder\":\"\"}', '2015-02-04 15:21:00', '2020-02-05 14:16:40', '5095500e-4962-429c-9b9c-7a4d0d4f930c');
+INSERT INTO `fields` VALUES (65, 6, 'Contact Us Label', 'contactUsLabel', 'global', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"byteLimit\":null,\"charLimit\":255,\"code\":\"\",\"columnType\":null,\"initialRows\":\"4\",\"multiline\":\"\",\"placeholder\":\"\"}', '2015-02-04 15:22:02', '2020-02-05 14:16:31', 'fcf41a5f-68b5-42dd-8ca1-cc457eb749f0');
+INSERT INTO `fields` VALUES (67, NULL, 'Section Heading', 'sectionHeading', 'matrixBlockType:e1c6c95e-a19b-4cd8-9a83-935e91f862c0', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"byteLimit\":null,\"charLimit\":255,\"code\":\"\",\"columnType\":null,\"initialRows\":\"4\",\"multiline\":\"\",\"placeholder\":\"\"}', '2015-02-09 21:38:01', '2020-02-05 14:14:16', '8cd6b011-5271-484d-85d9-6a6b731137e9');
+INSERT INTO `fields` VALUES (69, NULL, 'Images', 'images', 'matrixBlockType:0f3ede99-8b78-4042-85c9-422f57f5b01b', '', 1, 'site', NULL, 'craft\\fields\\Assets', '{\"allowedKinds\":null,\"defaultUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"defaultUploadLocationSubpath\":\"\",\"limit\":\"3\",\"localizeRelations\":false,\"restrictFiles\":\"\",\"selectionLabel\":\"\",\"showUnpermittedFiles\":false,\"showUnpermittedVolumes\":true,\"singleUploadLocationSource\":\"volume:0193dc64-5499-4e28-95dd-f8f603154851\",\"singleUploadLocationSubpath\":\"\",\"source\":null,\"sources\":[\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"],\"targetSiteId\":null,\"useSingleFolder\":false,\"validateRelatedElements\":\"\",\"viewMode\":\"list\"}', '2015-02-10 01:21:43', '2020-02-05 14:14:16', 'ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7');
+INSERT INTO `fields` VALUES (70, NULL, 'Position', 'position', 'matrixBlockType:070be8db-f9b0-4605-98ae-e9b54b1af3f6', '', 1, 'none', NULL, 'craft\\fields\\Dropdown', '{\"optgroups\":true,\"options\":[{\"label\":\"Left\",\"value\":\"left\",\"default\":\"\"},{\"label\":\"Center\",\"value\":\"center\",\"default\":\"\"},{\"label\":\"Right\",\"value\":\"right\",\"default\":\"\"}]}', '2015-02-10 01:28:28', '2020-02-05 14:14:16', 'cc6a4697-6d1c-4342-b9de-bce13295a885');
+INSERT INTO `fields` VALUES (72, 7, 'Contact Methods', 'contactMethods', 'global', '', 1, 'site', NULL, 'craft\\fields\\Matrix', '{\"contentTable\":\"{{%matrixcontent_contactmethods}}\",\"maxBlocks\":\"\",\"minBlocks\":\"\",\"propagationMethod\":\"all\"}', '2015-02-10 19:04:15', '2020-02-05 14:15:39', 'b01498fe-6db2-4b1d-84d2-8cd0cb62f449');
+INSERT INTO `fields` VALUES (73, NULL, 'Label', 'label', 'matrixBlockType:ecd6fdce-8d11-4aa6-a167-e731757515c6', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"byteLimit\":null,\"charLimit\":255,\"code\":\"\",\"columnType\":null,\"initialRows\":\"4\",\"multiline\":\"\",\"placeholder\":\"\"}', '2015-02-10 19:04:16', '2020-02-05 14:15:39', 'aad31ad0-0405-41b5-aff0-4ec567b557a0');
+INSERT INTO `fields` VALUES (74, NULL, 'Value', 'methodValue', 'matrixBlockType:ecd6fdce-8d11-4aa6-a167-e731757515c6', '', 1, 'none', NULL, 'craft\\fields\\PlainText', '{\"byteLimit\":null,\"charLimit\":255,\"code\":\"\",\"columnType\":null,\"initialRows\":\"4\",\"multiline\":\"\",\"placeholder\":\"\"}', '2015-02-10 19:04:16', '2020-02-05 14:15:39', '0275193a-3c51-46a3-afd0-49e55a93bfd3');
 INSERT INTO `fields` VALUES (75, 1, 'Featured?', 'featuredEntry', 'global', 'Should this entry be featured on the listing page?', 1, 'none', NULL, 'craft\\fields\\Lightswitch', '{\"default\":\"\"}', '2016-06-03 17:36:43', '2016-06-03 17:44:08', 'a171d498-9024-4855-9a6c-b3b96765ab7c');
 COMMIT;
 
@@ -4597,7 +4597,7 @@ CREATE TABLE `info` (
 -- Records of info
 -- ----------------------------
 BEGIN;
-INSERT INTO `info` VALUES (1, '3.4.3', '3.4.7', 0, NULL, '1', '2019-12-17 22:20:51', '2020-02-05 00:02:46', 'a3dbe1b0-9219-4f3c-a463-15855bbe3567');
+INSERT INTO `info` VALUES (1, '3.4.3', '3.4.7', 0, NULL, 'UEsejHDX01Jh', '2019-12-17 22:20:51', '2020-02-05 14:17:13', 'a3dbe1b0-9219-4f3c-a463-15855bbe3567');
 COMMIT;
 
 -- ----------------------------
@@ -4820,13 +4820,13 @@ CREATE TABLE `matrixcontent_articlebody` (
   `field_text_text` text COLLATE utf8_unicode_ci,
   `field_pullQuote_pullQuote` text COLLATE utf8_unicode_ci,
   `field_pullQuote_position` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `field_heading_heading` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `field_heading_heading` varchar(1020) COLLATE utf8_unicode_ci DEFAULT NULL,
   `field_image_position` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `field_quote_quote` text COLLATE utf8_unicode_ci,
   `field_quote_attribution` text COLLATE utf8_unicode_ci,
   `field_quote_position` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `field_image_caption` text COLLATE utf8_unicode_ci,
-  `field_newSection_sectionHeading` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `field_newSection_sectionHeading` varchar(1020) COLLATE utf8_unicode_ci DEFAULT NULL,
   `field_text_position` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
@@ -6357,8 +6357,8 @@ CREATE TABLE `matrixcontent_contactmethods` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `elementId` int(11) NOT NULL,
   `siteId` int(11) NOT NULL,
-  `field_contactMethod_label` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `field_contactMethod_value` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `field_contactMethod_label` varchar(1020) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `field_contactMethod_methodValue` varchar(1020) COLLATE utf8_unicode_ci DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
@@ -6908,7 +6908,7 @@ CREATE TABLE `plugins` (
 -- Records of plugins
 -- ----------------------------
 BEGIN;
-INSERT INTO `plugins` VALUES (1, 'redactor', '2.5.0', '2.3.0', 'unknown', NULL, '2018-02-16 22:20:38', '2018-02-16 22:20:38', '2020-02-05 00:02:45', '2466ee8f-7fab-45ad-b6ec-10d86c18543b');
+INSERT INTO `plugins` VALUES (1, 'redactor', '2.5.0', '2.3.0', 'unknown', NULL, '2018-02-16 22:20:38', '2018-02-16 22:20:38', '2020-02-05 14:13:41', '2466ee8f-7fab-45ad-b6ec-10d86c18543b');
 COMMIT;
 
 -- ----------------------------
@@ -6925,7 +6925,7 @@ CREATE TABLE `projectconfig` (
 -- Records of projectconfig
 -- ----------------------------
 BEGIN;
-INSERT INTO `projectconfig` VALUES ('dateModified', '1580860966');
+INSERT INTO `projectconfig` VALUES ('dateModified', '1580912233');
 INSERT INTO `projectconfig` VALUES ('email.fromEmail', '\"admin@happylager.dev\"');
 INSERT INTO `projectconfig` VALUES ('email.fromName', '\"Happylager\"');
 INSERT INTO `projectconfig` VALUES ('email.template', 'null');
@@ -6942,32 +6942,44 @@ INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.instructions', '\"Thumb image for use on home page or archives.\"');
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.name', '\"Featured Thumb\"');
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.allowedKinds', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.defaultUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.defaultUploadLocationSubpath', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.limit', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.localizeRelations', 'false');
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.restrictFiles', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.selectionLabel', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.showUnpermittedFiles', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.showUnpermittedVolumes', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.singleUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.singleUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.source', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.sources', '\"*\"');
-INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.useSingleFolder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.targetSiteId', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.useSingleFolder', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.validateRelatedElements', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.viewMode', '\"list\"');
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.translationKeyFormat', 'null');
-INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.translationMethod', '\"site\"');
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.type', '\"craft\\\\fields\\\\Assets\"');
 INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.contentColumnType', '\"text\"');
 INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.fieldGroup', '\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\"');
 INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.handle', '\"body\"');
-INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.instructions', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.name', '\"Body\"');
 INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.settings.availableTransforms', '\"*\"');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.settings.availableVolumes', '\"*\"');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.settings.cleanupHtml', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.settings.columnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.settings.purifierConfig', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.settings.purifyHtml', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.settings.redactorConfig', '\"Standard.json\"');
-INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.settings.removeEmptyTags', 'true');
-INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.settings.removeInlineStyles', 'true');
-INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.settings.removeNbsp', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.settings.removeEmptyTags', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.settings.removeInlineStyles', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.settings.removeNbsp', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.translationKeyFormat', 'null');
-INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.translationMethod', '\"site\"');
+INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.translationMethod', '\"none\"');
 INSERT INTO `projectconfig` VALUES ('fields.08f8ec90-f7ad-4d40-9880-3c96304f1e4e.type', '\"craft\\\\redactor\\\\Field\"');
 INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.contentColumnType', '\"string\"');
 INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.fieldGroup', '\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\"');
@@ -6981,12 +6993,19 @@ INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9
 INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.limit', '\"2\"');
 INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.localizeRelations', 'false');
 INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.restrictFiles', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.selectionLabel', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.showUnpermittedFiles', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.showUnpermittedVolumes', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.singleUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.singleUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.source', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.sources.0', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
-INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.useSingleFolder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.targetSiteId', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.useSingleFolder', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.validateRelatedElements', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.viewMode', '\"list\"');
 INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.translationKeyFormat', 'null');
-INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.translationMethod', '\"site\"');
 INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.type', '\"craft\\\\fields\\\\Assets\"');
 INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.contentColumnType', '\"text\"');
 INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.fieldGroup', '\"0815347a-8e73-45fd-93c9-2244ac562559\"');
@@ -6994,7 +7013,9 @@ INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029
 INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.name', '\"Address\"');
 INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.searchable', 'true');
-INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.settings.charLimit', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.settings.byteLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.settings.charLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.settings.code', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.settings.columnType', '\"text\"');
 INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.settings.multiline', '\"1\"');
@@ -7002,42 +7023,48 @@ INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029
 INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.translationMethod', '\"none\"');
 INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.type', '\"craft\\\\fields\\\\PlainText\"');
-INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.contentColumnType', '\"string(1020)\"');
 INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.fieldGroup', '\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\"');
 INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.handle', '\"linkUrl\"');
 INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.name', '\"Link URL\"');
 INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.searchable', 'true');
-INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.settings.charLimit', '\"255\"');
-INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.settings.columnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.settings.byteLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.settings.charLimit', '255');
+INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.settings.code', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.settings.columnType', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.settings.multiline', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.settings.placeholder', '\"e.g. http://example.com\"');
 INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.translationMethod', '\"none\"');
 INSERT INTO `projectconfig` VALUES ('fields.4ca9d3b8-ff02-403a-9010-45763fcdea9f.type', '\"craft\\\\fields\\\\PlainText\"');
-INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.contentColumnType', '\"string(1020)\"');
 INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.fieldGroup', '\"f7189ca2-4b93-4661-830a-a71aff8aa3cd\"');
 INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.handle', '\"copyrightNotice\"');
 INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.name', '\"Copyright Notice\"');
 INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.searchable', 'true');
-INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.settings.charLimit', '\"255\"');
-INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.settings.columnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.settings.byteLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.settings.charLimit', '255');
+INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.settings.code', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.settings.columnType', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.settings.multiline', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.settings.placeholder', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.translationMethod', '\"none\"');
 INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.type', '\"craft\\\\fields\\\\PlainText\"');
-INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.contentColumnType', '\"string(1020)\"');
 INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.fieldGroup', '\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\"');
 INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.handle', '\"subheading\"');
 INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.name', '\"Subheading\"');
 INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.searchable', 'true');
-INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.settings.charLimit', '\"255\"');
-INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.settings.columnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.settings.byteLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.settings.charLimit', '255');
+INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.settings.code', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.settings.columnType', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.settings.multiline', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.settings.placeholder', '\"\"');
@@ -7050,7 +7077,11 @@ INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80
 INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.instructions', '\"Page heading for services structure index page.\"');
 INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.name', '\"Index Heading\"');
 INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.settings.availableTransforms', '\"*\"');
+INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.settings.availableVolumes', '\"*\"');
+INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.settings.cleanupHtml', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.settings.columnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.settings.purifierConfig', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.settings.purifyHtml', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.settings.redactorConfig', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.67ff16f0-04e2-492b-b999-a7d364331d80.settings.removeEmptyTags', '\"\"');
@@ -7066,10 +7097,11 @@ INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e
 INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.name', '\"Article Body\"');
 INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.searchable', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.settings.contentTable', '\"{{%matrixcontent_articlebody}}\"');
-INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.settings.localizeBlocks', 'false');
-INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.settings.maxBlocks', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.settings.maxBlocks', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.settings.minBlocks', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.settings.propagationMethod', '\"all\"');
 INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.translationKeyFormat', 'null');
-INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.translationMethod', '\"site\"');
 INSERT INTO `projectconfig` VALUES ('fields.82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e.type', '\"craft\\\\fields\\\\Matrix\"');
 INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.contentColumnType', '\"string\"');
 INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.fieldGroup', '\"d58a1faa-0bf6-46b2-b880-b0c14bebca75\"');
@@ -7078,10 +7110,11 @@ INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b
 INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.name', '\"Testimonials\"');
 INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.searchable', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.settings.contentTable', '\"{{%matrixcontent_testimonials}}\"');
-INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.settings.localizeBlocks', 'false');
 INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.settings.maxBlocks', '\"3\"');
+INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.settings.minBlocks', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.settings.propagationMethod', '\"all\"');
 INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.translationKeyFormat', 'null');
-INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.translationMethod', '\"site\"');
 INSERT INTO `projectconfig` VALUES ('fields.8823155c-e84a-4a38-af30-2cb88b705e7b.type', '\"craft\\\\fields\\\\Matrix\"');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.contentColumnType', '\"string\"');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.fieldGroup', '\"d58a1faa-0bf6-46b2-b880-b0c14bebca75\"');
@@ -7089,26 +7122,36 @@ INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.name', '\"Client Logos\"');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.allowedKinds', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.defaultUploadLocationSource', '\"volume:7d6a9bef-727c-4a0c-9791-4f423956de69\"');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.defaultUploadLocationSubpath', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.limit', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.localizeRelations', 'false');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.restrictFiles', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.selectionLabel', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.showUnpermittedFiles', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.showUnpermittedVolumes', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.singleUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.singleUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.source', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.sources.0', '\"volume:7d6a9bef-727c-4a0c-9791-4f423956de69\"');
-INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.useSingleFolder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.targetSiteId', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.useSingleFolder', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.validateRelatedElements', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.viewMode', '\"list\"');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.translationKeyFormat', 'null');
-INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.translationMethod', '\"site\"');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.type', '\"craft\\\\fields\\\\Assets\"');
-INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.contentColumnType', '\"string(1020)\"');
 INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.fieldGroup', '\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\"');
 INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.handle', '\"heading\"');
 INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.name', '\"Heading\"');
 INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.searchable', 'true');
-INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.settings.charLimit', '\"255\"');
-INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.settings.columnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.settings.byteLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.settings.charLimit', '255');
+INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.settings.code', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.settings.columnType', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.settings.multiline', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.settings.placeholder', '\"\"');
@@ -7122,10 +7165,11 @@ INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7
 INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.name', '\"Service Body\"');
 INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.searchable', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.settings.contentTable', '\"{{%matrixcontent_servicebody}}\"');
-INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.settings.localizeBlocks', 'false');
-INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.settings.maxBlocks', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.settings.maxBlocks', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.settings.minBlocks', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.settings.propagationMethod', '\"all\"');
 INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.translationKeyFormat', 'null');
-INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.translationMethod', '\"site\"');
 INSERT INTO `projectconfig` VALUES ('fields.9bf9e642-2881-44b4-99ff-2cbed3ccc2d7.type', '\"craft\\\\fields\\\\Matrix\"');
 INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c.contentColumnType', '\"boolean\"');
 INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c.fieldGroup', '\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\"');
@@ -7143,17 +7187,25 @@ INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.instructions', '\"Choose the big homepage hero image. The image should be at least 1450×916 for best results.\"');
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.name', '\"Hero Image\"');
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.allowedKinds', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.defaultUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.defaultUploadLocationSubpath', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.limit', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.localizeRelations', 'false');
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.restrictFiles', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.selectionLabel', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.showUnpermittedFiles', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.showUnpermittedVolumes', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.singleUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.singleUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.source', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.sources.0', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
-INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.useSingleFolder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.targetSiteId', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.useSingleFolder', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.validateRelatedElements', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.viewMode', '\"list\"');
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.translationKeyFormat', 'null');
-INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.translationMethod', '\"site\"');
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.type', '\"craft\\\\fields\\\\Assets\"');
 INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.contentColumnType', '\"string\"');
 INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.fieldGroup', '\"f00e1793-0757-46e5-99e9-016b21359ac7\"');
@@ -7163,9 +7215,14 @@ INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483
 INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.searchable', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.settings.limit', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.settings.localizeRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.settings.selectionLabel', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.settings.source', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.settings.sources.0', '\"section:f6b0cb16-5df8-4b57-9856-c9c2d6b9699e\"');
+INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.settings.targetSiteId', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.settings.validateRelatedElements', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.settings.viewMode', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.translationKeyFormat', 'null');
-INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.translationMethod', '\"site\"');
 INSERT INTO `projectconfig` VALUES ('fields.a988d6b4-6983-48e6-b08e-8fd72e31e483.type', '\"craft\\\\fields\\\\Entries\"');
 INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.contentColumnType', '\"text\"');
 INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.fieldGroup', '\"0d0b7e16-8d7c-4d6f-9059-d11c473058f4\"');
@@ -7173,12 +7230,16 @@ INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2
 INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.instructions', '\"Short description for use in index regions.\"');
 INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.name', '\"Short Description\"');
 INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.settings.availableTransforms', '\"*\"');
+INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.settings.availableVolumes', '\"*\"');
+INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.settings.cleanupHtml', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.settings.columnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.settings.purifierConfig', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.settings.purifyHtml', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.settings.redactorConfig', '\"Simple.json\"');
-INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.settings.removeEmptyTags', 'true');
-INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.settings.removeInlineStyles', 'true');
-INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.settings.removeNbsp', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.settings.removeEmptyTags', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.settings.removeInlineStyles', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.settings.removeNbsp', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.translationMethod', '\"none\"');
 INSERT INTO `projectconfig` VALUES ('fields.aef80333-1412-4130-bb84-ac3bdbbcbbe2.type', '\"craft\\\\redactor\\\\Field\"');
@@ -7189,19 +7250,22 @@ INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449
 INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.name', '\"Contact Methods\"');
 INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.searchable', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.settings.contentTable', '\"{{%matrixcontent_contactmethods}}\"');
-INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.settings.localizeBlocks', 'false');
-INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.settings.maxBlocks', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.settings.maxBlocks', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.settings.minBlocks', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.settings.propagationMethod', '\"all\"');
 INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.translationKeyFormat', 'null');
-INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.translationMethod', '\"site\"');
 INSERT INTO `projectconfig` VALUES ('fields.b01498fe-6db2-4b1d-84d2-8cd0cb62f449.type', '\"craft\\\\fields\\\\Matrix\"');
-INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.contentColumnType', '\"string(1020)\"');
 INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.fieldGroup', '\"0815347a-8e73-45fd-93c9-2244ac562559\"');
 INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.handle', '\"email\"');
 INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.name', '\"Email\"');
 INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.searchable', 'true');
-INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.settings.charLimit', '\"255\"');
-INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.settings.columnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.settings.byteLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.settings.charLimit', '255');
+INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.settings.code', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.settings.columnType', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.settings.multiline', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.settings.placeholder', '\"\"');
@@ -7214,6 +7278,7 @@ INSERT INTO `projectconfig` VALUES ('fields.cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea
 INSERT INTO `projectconfig` VALUES ('fields.cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea.instructions', '\"Hex value for alternate background color.\"');
 INSERT INTO `projectconfig` VALUES ('fields.cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea.name', '\"Background Color\"');
 INSERT INTO `projectconfig` VALUES ('fields.cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea.settings.defaultColor', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea.translationMethod', '\"none\"');
 INSERT INTO `projectconfig` VALUES ('fields.cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea.type', '\"craft\\\\fields\\\\Color\"');
@@ -7223,26 +7288,36 @@ INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.name', '\"Service Icon\"');
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.allowedKinds', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.defaultUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.defaultUploadLocationSubpath', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.limit', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.localizeRelations', 'false');
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.restrictFiles', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.selectionLabel', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.showUnpermittedFiles', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.showUnpermittedVolumes', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.singleUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.singleUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.source', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.sources.0', '\"volume:3fc34ff2-8da7-4a35-8147-f0a2e01392b9\"');
-INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.useSingleFolder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.targetSiteId', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.useSingleFolder', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.validateRelatedElements', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.viewMode', '\"list\"');
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.translationKeyFormat', 'null');
-INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.translationMethod', '\"site\"');
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.type', '\"craft\\\\fields\\\\Assets\"');
-INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.contentColumnType', '\"string(1020)\"');
 INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.fieldGroup', '\"f7189ca2-4b93-4661-830a-a71aff8aa3cd\"');
 INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.handle', '\"contactUsLabel\"');
 INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.name', '\"Contact Us Label\"');
 INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.searchable', 'true');
-INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.settings.charLimit', '\"255\"');
-INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.settings.columnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.settings.byteLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.settings.charLimit', '255');
+INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.settings.code', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.settings.columnType', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.settings.multiline', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.settings.placeholder', '\"\"');
@@ -7299,15 +7374,25 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.name', '\"Position\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.searchable', 'true');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.0.default', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.0.label', '\"Left\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.0.value', '\"left\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.1.default', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.1.label', '\"Center\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.1.value', '\"center\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.2.default', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.2.label', '\"Right\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.2.value', '\"right\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.optgroups', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.0.__assoc__.0.0', '\"label\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.0.__assoc__.0.1', '\"Left\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.0.__assoc__.1.0', '\"value\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.0.__assoc__.1.1', '\"left\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.0.__assoc__.2.0', '\"default\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.0.__assoc__.2.1', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.1.__assoc__.0.0', '\"label\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.1.__assoc__.0.1', '\"Center\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.1.__assoc__.1.0', '\"value\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.1.__assoc__.1.1', '\"center\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.1.__assoc__.2.0', '\"default\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.1.__assoc__.2.1', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.2.__assoc__.0.0', '\"label\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.2.__assoc__.0.1', '\"Right\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.2.__assoc__.1.0', '\"value\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.2.__assoc__.1.1', '\"right\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.2.__assoc__.2.0', '\"default\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.settings.options.2.__assoc__.2.1', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.translationMethod', '\"none\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.cc6a4697-6d1c-4342-b9de-bce13295a885.type', '\"craft\\\\fields\\\\Dropdown\"');
@@ -7317,12 +7402,16 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.name', '\"Text\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.settings.availableTransforms', '\"*\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.settings.availableVolumes', '\"*\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.settings.cleanupHtml', 'true');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.settings.columnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.settings.purifierConfig', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.settings.purifyHtml', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.settings.redactorConfig', '\"Standard.json\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.settings.removeEmptyTags', 'true');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.settings.removeInlineStyles', 'true');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.settings.removeNbsp', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.settings.removeEmptyTags', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.settings.removeInlineStyles', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.settings.removeNbsp', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.translationMethod', '\"none\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.070be8db-f9b0-4605-98ae-e9b54b1af3f6.fields.e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c.type', '\"craft\\\\redactor\\\\Field\"');
@@ -7340,17 +7429,25 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-42
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.name', '\"Images\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.allowedKinds', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.defaultUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.defaultUploadLocationSubpath', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.limit', '\"3\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.localizeRelations', 'false');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.restrictFiles', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.selectionLabel', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.showUnpermittedFiles', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.showUnpermittedVolumes', 'true');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.singleUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.singleUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.source', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.sources.0', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.useSingleFolder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.targetSiteId', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.useSingleFolder', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.validateRelatedElements', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.viewMode', '\"list\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.translationKeyFormat', 'null');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.translationMethod', '\"site\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.type', '\"craft\\\\fields\\\\Assets\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.handle', '\"gallery\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.name', '\"Gallery\"');
@@ -7360,14 +7457,16 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fieldLayouts.0189a187-131f-46a8-b494-cd94c82d6aae.tabs.0.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.sortOrder', '1');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fieldLayouts.0189a187-131f-46a8-b494-cd94c82d6aae.tabs.0.name', '\"Content\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fieldLayouts.0189a187-131f-46a8-b494-cd94c82d6aae.tabs.0.sortOrder', '1');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.contentColumnType', '\"string(1020)\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.fieldGroup', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.handle', '\"heading\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.name', '\"Heading\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.searchable', 'true');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.settings.charLimit', '\"255\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.settings.columnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.settings.byteLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.settings.charLimit', '255');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.settings.code', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.settings.columnType', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.settings.multiline', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.settings.placeholder', '\"\"');
@@ -7392,12 +7491,16 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.name', '\"Caption\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.settings.availableTransforms', '\"*\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.settings.availableVolumes', '\"*\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.settings.cleanupHtml', 'true');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.settings.columnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.settings.purifierConfig', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.settings.purifyHtml', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.settings.redactorConfig', '\"Simple.json\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.settings.removeEmptyTags', 'true');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.settings.removeInlineStyles', 'true');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.settings.removeNbsp', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.settings.removeEmptyTags', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.settings.removeInlineStyles', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.settings.removeNbsp', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.translationMethod', '\"none\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.7ca32393-f78c-4de0-9f8f-52b64e09584f.type', '\"craft\\\\redactor\\\\Field\"');
@@ -7408,17 +7511,24 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.name', '\"Image\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.searchable', 'true');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.allowedKinds.0', '\"image\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.defaultUploadLocationSource', '\"folder:20095f95-422a-46cc-a5d0-3bc6b0a4da20\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.defaultUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.defaultUploadLocationSubpath', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.limit', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.localizeRelations', 'false');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.restrictFiles', '\"1\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.singleUploadLocationSource', '\"folder:20095f95-422a-46cc-a5d0-3bc6b0a4da20\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.selectionLabel', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.showUnpermittedFiles', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.showUnpermittedVolumes', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.singleUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.singleUploadLocationSubpath', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.sources.0', '\"folder:20095f95-422a-46cc-a5d0-3bc6b0a4da20\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.useSingleFolder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.source', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.sources.0', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.targetSiteId', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.useSingleFolder', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.validateRelatedElements', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.viewMode', '\"list\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.translationKeyFormat', 'null');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.translationMethod', '\"site\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.type', '\"craft\\\\fields\\\\Assets\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.contentColumnType', '\"string\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.fieldGroup', 'null');
@@ -7426,18 +7536,31 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.name', '\"Position\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.searchable', 'true');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.0.default', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.0.label', '\"Left\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.0.value', '\"left\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.1.default', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.1.label', '\"Center\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.1.value', '\"center\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.2.default', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.2.label', '\"Right\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.2.value', '\"right\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.3.default', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.3.label', '\"Full\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.3.value', '\"full\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.optgroups', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.0.__assoc__.0.0', '\"label\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.0.__assoc__.0.1', '\"Left\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.0.__assoc__.1.0', '\"value\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.0.__assoc__.1.1', '\"left\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.0.__assoc__.2.0', '\"default\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.0.__assoc__.2.1', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.1.__assoc__.0.0', '\"label\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.1.__assoc__.0.1', '\"Center\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.1.__assoc__.1.0', '\"value\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.1.__assoc__.1.1', '\"center\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.1.__assoc__.2.0', '\"default\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.1.__assoc__.2.1', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.2.__assoc__.0.0', '\"label\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.2.__assoc__.0.1', '\"Right\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.2.__assoc__.1.0', '\"value\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.2.__assoc__.1.1', '\"right\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.2.__assoc__.2.0', '\"default\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.2.__assoc__.2.1', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.3.__assoc__.0.0', '\"label\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.3.__assoc__.0.1', '\"Full\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.3.__assoc__.1.0', '\"value\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.3.__assoc__.1.1', '\"full\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.3.__assoc__.2.0', '\"default\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.settings.options.3.__assoc__.2.1', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.translationMethod', '\"none\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.f87a6243-5b7f-4456-9106-ccfb6e03b754.type', '\"craft\\\\fields\\\\Dropdown\"');
@@ -7459,7 +7582,9 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.name', '\"Quote\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.searchable', 'true');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.settings.charLimit', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.settings.byteLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.settings.charLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.settings.code', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.settings.columnType', '\"text\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.settings.multiline', '\"\"');
@@ -7473,7 +7598,9 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.name', '\"Attribution\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.searchable', 'true');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.settings.charLimit', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.settings.byteLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.settings.charLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.settings.code', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.settings.columnType', '\"text\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.settings.multiline', '\"\"');
@@ -7487,12 +7614,19 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.name', '\"Position\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.searchable', 'true');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.0.default', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.0.label', '\"Center\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.0.value', '\"center\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.1.default', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.1.label', '\"Full\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.1.value', '\"full\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.optgroups', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.0.__assoc__.0.0', '\"label\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.0.__assoc__.0.1', '\"Center\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.0.__assoc__.1.0', '\"value\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.0.__assoc__.1.1', '\"center\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.0.__assoc__.2.0', '\"default\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.0.__assoc__.2.1', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.1.__assoc__.0.0', '\"label\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.1.__assoc__.0.1', '\"Full\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.1.__assoc__.1.0', '\"value\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.1.__assoc__.1.1', '\"full\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.1.__assoc__.2.0', '\"default\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.settings.options.1.__assoc__.2.1', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.translationMethod', '\"none\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.a5b4b046-1178-45f9-b4cf-3e3bef86e067.type', '\"craft\\\\fields\\\\Dropdown\"');
@@ -7514,7 +7648,9 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.name', '\"Heading\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.searchable', 'true');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.settings.charLimit', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.settings.byteLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.settings.charLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.settings.code', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.settings.columnType', '\"text\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.settings.multiline', '\"\"');
@@ -7528,17 +7664,25 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.name', '\"Image\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.allowedKinds', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.defaultUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.defaultUploadLocationSubpath', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.limit', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.localizeRelations', 'false');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.restrictFiles', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.selectionLabel', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.showUnpermittedFiles', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.showUnpermittedVolumes', 'true');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.singleUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.singleUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.source', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.sources.0', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.useSingleFolder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.targetSiteId', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.useSingleFolder', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.validateRelatedElements', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.viewMode', '\"list\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.translationKeyFormat', 'null');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.translationMethod', '\"site\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.type', '\"craft\\\\fields\\\\Assets\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.contentColumnType', '\"text\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.fieldGroup', 'null');
@@ -7546,12 +7690,16 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.name', '\"Text\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.settings.availableTransforms', '\"*\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.settings.availableVolumes', '\"*\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.settings.cleanupHtml', 'true');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.settings.columnType', '\"text\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.settings.purifierConfig', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.settings.purifyHtml', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.settings.redactorConfig', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.settings.removeEmptyTags', 'true');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.settings.removeInlineStyles', 'true');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.settings.removeNbsp', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.settings.removeEmptyTags', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.settings.removeInlineStyles', '\"1\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.settings.removeNbsp', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.translationMethod', '\"none\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.c9ccf068-4ace-4b21-9356-68f3faa96cf3.type', '\"craft\\\\redactor\\\\Field\"');
@@ -7573,7 +7721,9 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a3
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.name', '\"Quote\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.searchable', 'true');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.settings.charLimit', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.settings.byteLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.settings.charLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.settings.code', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.settings.columnType', '\"text\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.settings.multiline', '\"\"');
@@ -7587,7 +7737,9 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a3
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.name', '\"Cite\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.searchable', 'true');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.settings.charLimit', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.settings.byteLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.settings.charLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.settings.code', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.settings.columnType', '\"text\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.settings.multiline', '\"\"');
@@ -7601,17 +7753,25 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a3
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.name', '\"Photo\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.searchable', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.allowedKinds', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.defaultUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.defaultUploadLocationSubpath', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.limit', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.localizeRelations', 'false');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.restrictFiles', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.selectionLabel', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.showUnpermittedFiles', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.showUnpermittedVolumes', 'true');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.singleUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.singleUploadLocationSubpath', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.source', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.sources.0', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.useSingleFolder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.targetSiteId', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.useSingleFolder', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.validateRelatedElements', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.viewMode', '\"list\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.translationKeyFormat', 'null');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.translationMethod', '\"none\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.translationMethod', '\"site\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.type', '\"craft\\\\fields\\\\Assets\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.handle', '\"testimonial\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.name', '\"Testimonial\"');
@@ -7629,15 +7789,25 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-02
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.name', '\"Position\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.searchable', 'true');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.0.default', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.0.label', '\"Left\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.0.value', '\"left\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.1.default', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.1.label', '\"Center\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.1.value', '\"center\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.2.default', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.2.label', '\"Right\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.2.value', '\"right\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.optgroups', 'true');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.0.__assoc__.0.0', '\"label\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.0.__assoc__.0.1', '\"Left\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.0.__assoc__.1.0', '\"value\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.0.__assoc__.1.1', '\"left\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.0.__assoc__.2.0', '\"default\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.0.__assoc__.2.1', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.1.__assoc__.0.0', '\"label\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.1.__assoc__.0.1', '\"Center\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.1.__assoc__.1.0', '\"value\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.1.__assoc__.1.1', '\"center\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.1.__assoc__.2.0', '\"default\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.1.__assoc__.2.1', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.2.__assoc__.0.0', '\"label\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.2.__assoc__.0.1', '\"Right\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.2.__assoc__.1.0', '\"value\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.2.__assoc__.1.1', '\"right\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.2.__assoc__.2.0', '\"default\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.settings.options.2.__assoc__.2.1', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.translationMethod', '\"none\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a88d73a8-c75f-4c72-aa70-a39dfbbff0fe.type', '\"craft\\\\fields\\\\Dropdown\"');
@@ -7647,7 +7817,9 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-02
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.name', '\"Pull Quote\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.searchable', 'true');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.settings.charLimit', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.settings.byteLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.settings.charLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.settings.code', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.settings.columnType', '\"text\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.settings.multiline', '\"\"');
@@ -7663,14 +7835,16 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-93
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fieldLayouts.8d01ea64-38fa-43f7-be8a-43e4e460bfbd.tabs.0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.sortOrder', '1');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fieldLayouts.8d01ea64-38fa-43f7-be8a-43e4e460bfbd.tabs.0.name', '\"Content\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fieldLayouts.8d01ea64-38fa-43f7-be8a-43e4e460bfbd.tabs.0.sortOrder', '1');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.contentColumnType', '\"string(1020)\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.fieldGroup', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.handle', '\"sectionHeading\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.name', '\"Section Heading\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.searchable', 'true');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.settings.charLimit', '\"255\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.settings.columnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.settings.byteLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.settings.charLimit', '255');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.settings.code', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.settings.columnType', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.settings.multiline', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.settings.placeholder', '\"\"');
@@ -7687,28 +7861,32 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e7
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fieldLayouts.3c4c697e-cb6b-4704-bee5-9a2bae9da8f7.tabs.0.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.sortOrder', '1');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fieldLayouts.3c4c697e-cb6b-4704-bee5-9a2bae9da8f7.tabs.0.name', '\"Content\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fieldLayouts.3c4c697e-cb6b-4704-bee5-9a2bae9da8f7.tabs.0.sortOrder', '1');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.contentColumnType', '\"string(1020)\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.fieldGroup', 'null');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.handle', '\"value\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.handle', '\"methodValue\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.name', '\"Value\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.searchable', 'true');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.settings.charLimit', '\"255\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.settings.columnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.settings.byteLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.settings.charLimit', '255');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.settings.code', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.settings.columnType', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.settings.multiline', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.settings.placeholder', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.translationMethod', '\"none\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.type', '\"craft\\\\fields\\\\PlainText\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.contentColumnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.contentColumnType', '\"string(1020)\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.fieldGroup', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.handle', '\"label\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.instructions', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.name', '\"Label\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.searchable', 'true');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.settings.charLimit', '\"255\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.settings.columnType', '\"string\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.settings.byteLimit', 'null');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.settings.charLimit', '255');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.settings.code', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.settings.columnType', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.settings.multiline', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.settings.placeholder', '\"\"');

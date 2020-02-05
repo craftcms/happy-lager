@@ -49,7 +49,7 @@
 						<dl class="inline">
 							{% for block in locationEntry.contactMethods.all() %}
 								<dt>{{ block.label }}</dt>
-								<dd>{{ block.value }}</dd>
+								<dd>{{ block.methodValue }}</dd>
 							{% endfor %}
 						</dl>
 					{% endif %}
