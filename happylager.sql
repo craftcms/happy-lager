@@ -11,7 +11,7 @@
  Target Server Version : 50728
  File Encoding         : 65001
 
- Date: 05/02/2020 06:19:48
+ Date: 28/02/2020 12:38:07
 */
 
 SET NAMES utf8mb4;
@@ -450,7 +450,7 @@ CREATE TABLE `deprecationerrors` (
   `lastOccurrence` datetime NOT NULL,
   `file` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `line` smallint(6) unsigned DEFAULT NULL,
-  `message` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `message` text COLLATE utf8_unicode_ci,
   `traces` text COLLATE utf8_unicode_ci,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
@@ -524,6 +524,7 @@ CREATE TABLE `elements` (
   KEY `elements_dateDeleted_idx` (`dateDeleted`),
   KEY `elements_draftId_fk` (`draftId`),
   KEY `elements_revisionId_fk` (`revisionId`),
+  KEY `elements_archived_dateDeleted_draftId_revisionId_idx` (`archived`,`dateDeleted`,`draftId`,`revisionId`),
   CONSTRAINT `craft_elements_fieldLayoutId_fk` FOREIGN KEY (`fieldLayoutId`) REFERENCES `fieldlayouts` (`id`) ON DELETE SET NULL,
   CONSTRAINT `elements_draftId_fk` FOREIGN KEY (`draftId`) REFERENCES `drafts` (`id`) ON DELETE CASCADE,
   CONSTRAINT `elements_revisionId_fk` FOREIGN KEY (`revisionId`) REFERENCES `revisions` (`id`) ON DELETE CASCADE
@@ -4597,7 +4598,7 @@ CREATE TABLE `info` (
 -- Records of info
 -- ----------------------------
 BEGIN;
-INSERT INTO `info` VALUES (1, '3.4.3', '3.4.7', 0, NULL, 'UEsejHDX01Jh', '2019-12-17 22:20:51', '2020-02-05 14:17:13', 'a3dbe1b0-9219-4f3c-a463-15855bbe3567');
+INSERT INTO `info` VALUES (1, '3.4.9', '3.4.10', 0, NULL, 'UEsejHDX01Jh', '2019-12-17 22:20:51', '2020-02-28 20:37:23', 'a3dbe1b0-9219-4f3c-a463-15855bbe3567');
 COMMIT;
 
 -- ----------------------------
@@ -6629,7 +6630,7 @@ CREATE TABLE `migrations` (
   KEY `craft_migrations_pluginId_idx` (`pluginId`) USING BTREE,
   KEY `craft_migrations_type_pluginId_idx` (`type`,`pluginId`) USING BTREE,
   CONSTRAINT `craft_migrations_pluginId_fk` FOREIGN KEY (`pluginId`) REFERENCES `plugins` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=249 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=252 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of migrations
@@ -6883,6 +6884,9 @@ INSERT INTO `migrations` VALUES (245, NULL, 'app', 'm191206_001148_change_tracki
 INSERT INTO `migrations` VALUES (246, NULL, 'app', 'm191216_191635_asset_upload_tracking', '2019-12-17 22:20:51', '2019-12-17 22:20:51', '2019-12-17 22:20:51', 'e8fb35a7-4c6d-416f-a101-d4358f53fcff');
 INSERT INTO `migrations` VALUES (247, NULL, 'app', 'm191222_002848_peer_asset_permissions', '2020-01-08 23:32:03', '2020-01-08 23:32:03', '2020-01-08 23:32:03', '5fed00e9-c59e-4a9b-a947-fb50fc685dd2');
 INSERT INTO `migrations` VALUES (248, NULL, 'app', 'm200127_172522_queue_channels', '2020-02-05 00:02:46', '2020-02-05 00:02:46', '2020-02-05 00:02:46', '04852ad3-617e-4c23-879f-075a051d5f79');
+INSERT INTO `migrations` VALUES (249, NULL, 'app', 'm200211_175048_truncate_element_query_cache', '2020-02-28 20:37:23', '2020-02-28 20:37:23', '2020-02-28 20:37:23', '0503d21c-fa42-4faf-9f8f-3bf7b719b8a9');
+INSERT INTO `migrations` VALUES (250, NULL, 'app', 'm200213_172522_new_elements_index', '2020-02-28 20:37:23', '2020-02-28 20:37:23', '2020-02-28 20:37:23', 'c8c97409-8f61-4e30-b4e3-8d7a2ffcfa25');
+INSERT INTO `migrations` VALUES (251, NULL, 'app', 'm200228_195211_long_deprecation_messages', '2020-02-28 20:37:23', '2020-02-28 20:37:23', '2020-02-28 20:37:23', 'e429b95f-29a6-480f-8d93-44b78bfbb4f1');
 COMMIT;
 
 -- ----------------------------
@@ -6908,7 +6912,7 @@ CREATE TABLE `plugins` (
 -- Records of plugins
 -- ----------------------------
 BEGIN;
-INSERT INTO `plugins` VALUES (1, 'redactor', '2.5.0', '2.3.0', 'unknown', NULL, '2018-02-16 22:20:38', '2018-02-16 22:20:38', '2020-02-05 14:13:41', '2466ee8f-7fab-45ad-b6ec-10d86c18543b');
+INSERT INTO `plugins` VALUES (1, 'redactor', '2.6.0.1', '2.3.0', 'unknown', NULL, '2018-02-16 22:20:38', '2018-02-16 22:20:38', '2020-02-28 20:37:21', '2466ee8f-7fab-45ad-b6ec-10d86c18543b');
 COMMIT;
 
 -- ----------------------------
@@ -6925,7 +6929,7 @@ CREATE TABLE `projectconfig` (
 -- Records of projectconfig
 -- ----------------------------
 BEGIN;
-INSERT INTO `projectconfig` VALUES ('dateModified', '1580912233');
+INSERT INTO `projectconfig` VALUES ('dateModified', '1582922243');
 INSERT INTO `projectconfig` VALUES ('email.fromEmail', '\"admin@happylager.dev\"');
 INSERT INTO `projectconfig` VALUES ('email.fromName', '\"Happylager\"');
 INSERT INTO `projectconfig` VALUES ('email.template', 'null');
@@ -8158,7 +8162,7 @@ INSERT INTO `projectconfig` VALUES ('sites.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.
 INSERT INTO `projectconfig` VALUES ('system.edition', '\"pro\"');
 INSERT INTO `projectconfig` VALUES ('system.live', 'true');
 INSERT INTO `projectconfig` VALUES ('system.name', '\"Happy Lager\"');
-INSERT INTO `projectconfig` VALUES ('system.schemaVersion', '\"3.4.7\"');
+INSERT INTO `projectconfig` VALUES ('system.schemaVersion', '\"3.4.10\"');
 INSERT INTO `projectconfig` VALUES ('system.timeZone', '\"UTC\"');
 INSERT INTO `projectconfig` VALUES ('users.allowPublicRegistration', 'false');
 INSERT INTO `projectconfig` VALUES ('users.defaultGroup', 'null');
