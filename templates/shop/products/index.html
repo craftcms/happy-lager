@@ -1,0 +1,127 @@
+{% extends 'shop/_layouts/main' %}
+
+{% set products = craft.products.limit(5).all() %}
+
+{% block main %}
+    <h1>Products</h1>
+
+    <form method="POST" class="text-center">
+        <input type="hidden" name="action" value="commerce/cart/update-cart">
+        <input type="hidden" name="cartUpdatedNotice" value="Multiple items added to the cart.">
+        {{ redirectInput('shop/cart') }}
+        {{ csrfInput() }}
+        {% for product in products if product.defaultVariant.isAvailable %}
+            <input type="hidden" name="purchasables[{{ loop.index }}][id]" value="{{ product.defaultVariant.id }}">
+            <input type="hidden" name="purchasables[{{ loop.index }}][qty]" value="1">
+            <input type="hidden" name="purchasables[{{ loop.index }}][note]" value="">
+            <input type="hidden" name="purchasables[{{ loop.index }}][options]" value="">
+        {% endfor %}
+        <input type="submit" value="Add all products to cart" />
+    </form>
+
+    {% for product in products %}
+        <div class="md:flex product bg-white mb-4 p-8 rounded items-center text-center md:text-left">
+            <div class="md:w-1/6 md:p-4">
+                {% include "shop/_images/product" with { number: '3' } %}
+            </div>
+            <div class="md:w-2/6 md:p-4">
+                <h3>{% if product.url %}{{ product.link }}{% else %}{{ product.title }}{% endif %}</h3>
+                {% if product.getVariants()|length %}
+                    <form method="POST" class="add-to-cart-form">
+                        <input type="hidden" name="action" value="commerce/cart/update-cart">
+                        <input type="hidden" name="cartUpdatedNotice" value="Added {{ product.title}} to the cart.">
+                        {{ redirectInput('shop/cart') }}
+                        <input type="hidden" name="qty" value="1">
+                        {{ csrfInput() }}
+
+                        <select name="purchasableId" class="purchasableId">
+                            {%- for purchasable in product.getVariants() -%}
+                                <option {% if not purchasable.isAvailable %}disabled {% endif %}
+                                        data-info="product-{{ product.id }}-purchasable-{{ purchasable.id }}"
+                                        value="{{ purchasable.id }}">
+                                        {{ purchasable.description }} {{ purchasable.salePrice|commerceCurrency(cart.currency) }}
+                                </option>
+                            {%- endfor -%}
+                        </select>
+
+                        <select name="options[giftWrapped]">
+                            <option value="no">No gift wrap.</option>
+                            <option value="yes">Gift wrapped.</option>
+                        </select>
+                        {% if product.hasUnlimitedStock or (product.hasUnlimitedStock == false and product.totalStock > 0 ) %}
+                            <button class="add-to-cart-button" type="submit">{{ "Add to cart"|t }}</button>
+                        {% else %}
+                            {{ "Out of Stock"|t }}
+                        {% endif %}
+                    </form>
+
+                    {% if currentUser %}
+                    {% set order = craft.orders.user(currentUser).isCompleted(true).hasPurchasables(product.defaultVariant).all() %}
+                    {% if order|length %}
+                        <strong>I already own this product: </strong> <a href="/shop/customer/order?number={{ order[0].number }}">Order #{{ order[0].shortNumber }}</a>
+                    {% endif %}
+                    {% endif %}
+
+                    {%- for purchasable in product.getVariants() -%}
+                        <div id="product-{{ product.id }}-purchasable-{{ purchasable.id }}" class="purchasableInfo" style="display:none;">
+                            <strong>Regular Price: </strong><strike>{{ purchasable.price|commerceCurrency(cart.currency) }}</strike><br>
+                            <strong>Now: </strong>{{ purchasable.salePrice|commerceCurrency(cart.currency) }}<br>
+                            {% if purchasable.sales %}<strong>Sales Applied:</strong><br>{% endif %}
+                            <ul>
+                                {% for sale in purchasable.sales  %}
+                                <li><strong>{{ sale.name }}</strong> {{ sale.description }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {%- endfor -%}
+
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+
+
+    {% set donation = craft.commerce.donation %}
+    {% if donation and donation.isAvailable %}
+    <h1>Donations</h1>
+    <form method="POST" class="pt-2 pb-8 text-center">
+        <input type="hidden" name="action" value="commerce/cart/update-cart">
+        {{ redirectInput('shop/cart') }}
+        {{ csrfInput() }}
+        <input type="hidden" name="purchasableId" value="{{ craft.commerce.donation.id }}">
+        <input type="text" name="options[donationAmount]" value="" placeholder="Donation">
+        <input type="submit" value="Donate Now" />
+    </form>
+    {% endif %}
+
+    {% js %}
+        $( ".purchasableId" ).change(function(e) {
+            $(".purchasableInfo").hide();
+            $("#"+($(this).find(":selected").data('info'))).toggle();
+        });
+
+
+        $('form.add-to-cart-form').submit(function(e){
+            e.preventDefault();
+            var purchasable = $(this).find('.purchasableId').val();
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                headers: {
+                    "X-CSRF-Token" : '{{ craft.app.request.csrfToken }}',
+                },
+                url: '',
+                data: {
+                    'action' : 'commerce/cart/update-cart',
+                    'purchasableId': purchasable,
+                    'note' : 'from ajax'
+                },
+                success: function(data){
+                    console.log(data);
+                }
+            });
+        });
+
+    {% endjs %}
+
+{% endblock %}

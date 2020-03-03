@@ -1,0 +1,80 @@
+{% if showShippingAddress is not defined %}
+    {% set showShippingAddress = false %}
+{% endif %}
+
+{% if showShippingMethod is not defined %}
+    {% set showShippingMethod = false %}
+{% endif %}
+
+<div class="order-review mt-8">
+    <h3 class="mt-0">Order Review</h3>
+
+    {% if showShippingAddress %}
+        <h4>Shipping to</h4>
+        {% if cart.shippingAddress %}
+            <div class="address-select border-0">
+                {% include 'shop/_includes/addresses/address' with {'address': cart.shippingAddress} %}
+            </div>
+        {% else %}
+            <p>No shipping address selected.</p>
+        {% endif %}
+
+        {% if currentUser %}<a class="edit" href="{{ url('shop/checkout/addresses') }}">Edit</a>{% endif %}
+
+        <hr>
+    {% endif %}
+
+    {% if showShippingMethod %}
+        <h4>Shipping method</h4>
+
+        <p>
+            {% if cart.shippingMethod %}
+                {{ cart.shippingMethod.name }}
+            {% else %}
+                No shipping method selected.
+            {% endif %}
+        </p>
+
+        <hr>
+    {% endif %}
+
+    <h4>Items</h4>
+    <ul class="list-reset leading-normal">
+        {% for item in cart.lineItems %}
+            <li>
+                <span>{{ item.description }}</span><span class="float-right">{{ item.subtotal|commerceCurrency(cart.currency) }}</span>
+            </li>
+        {% endfor %}
+
+
+        {% for adjustment in cart.adjustments %}
+            <li>
+                <strong>{{ adjustment.name }}</strong> <span class="float-right">{{ adjustment.amount|commerceCurrency(cart.currency) }}
+                    ({{ adjustment.description }})</span>
+            </li>
+        {% endfor %}
+
+
+        {% if not cart.shippingMethod %}
+
+            {#
+            If the order requires a shipping method be selected, you could redirect back to the shipping page until one is applied to the order.
+            {% redirect "shop/checkout/shipping" %}
+            You might also want to add a php plugin hook to require
+            #}
+
+            <li>
+                <strong>Shipping</strong> None selected. <a href="{{ url('shop/checkout/shipping') }}">Choose a shipping method.</a>
+            </li>
+        {% endif %}
+
+        <li>
+            <strong>Total {{ cart.currency }}:</strong> <span class="float-right">{{ cart.totalPrice|commerceCurrency(cart.currency) }}</span>
+        </li>
+        {% if cart.currency != cart.paymentCurrency %}
+            <li>
+                <strong>Payment {{ cart.paymentCurrency }}:</strong> <span class="float-right">{{ cart.totalPrice|commerceCurrency(cart.paymentCurrency,convert=true) }}</span>
+            </li>
+        {% endif %}
+    </ul>
+</div>

@@ -1,0 +1,47 @@
+<div class="address-fieldset {{ class }}">
+    <h2>{{ title }}</h2>
+    {% if addresses and currentUser%}
+        {% for address in addresses %}
+            <div class="address-select" data-address-id="{{ address.id }}">
+                <div class="actions">
+                    <ul>
+                        <li><a class="edit" href="{{ url('shop/customer/addresses/edit?addressId='~ address.id ~'&redirect='~craft.app.request.fullPath)}}">Edit</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="radio">
+                    <input type="radio" name="{{ name }}Id"
+                        {% if attribute(cart,name~'Id') == address.id %}checked="checked"{% endif %} value="{{ address.id }}"/>
+                        {% include 'shop/_includes/addresses/address' %}
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="address-select">
+
+        {% if attribute(cart, name~'Id') %}
+            {% set addressHasErrors = attribute(cart, name).hasErrors() %}
+        {% else %}
+            {% set addressHasErrors = false %}
+        {% endif %}
+
+        {% if currentUser %}
+            <div class="radio">
+                {# If we have no addresses expand the 'New Address" fields by default it to being checked. If we have errors on the address also check and expand. #}
+                <input type="radio" name="{{ name }}Id"
+                       {% if not addresses|length or addressHasErrors %}checked="checked"{% endif %} value=""/>
+                <strong>{{ "New"|t }} {{ title }}</strong>
+            </div>
+        {% endif %}
+
+        <div class="body {% if currentUser %}hidden{% endif %}">
+            {% if addressHasErrors %}<span class="flash">{{ cart.getErrors(name)|join }}</span><br>{% endif %}
+            {% include 'shop/_includes/addresses/form' with {
+            'modelName': name,
+            'address': attribute(cart, name)
+            } %}
+
+        </div>
+    </div>
+</div>

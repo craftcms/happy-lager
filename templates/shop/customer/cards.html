@@ -1,0 +1,97 @@
+{% extends 'shop/_layouts/main' %}
+
+{% if not currentUser %}
+    {% exit 404 %}
+{% endif %}
+
+
+{% block main %}
+    {% set paymentSources = craft.commerce.paymentSources.getAllPaymentSourcesByUserId(currentUser.id) %}
+    {% if paymentSources|length %}
+        <h1>Manage Cards</h1>
+        {% for paymentSource in paymentSources %}
+            <div class="card flex justify-between">
+                <div>
+                    <strong>{{ paymentSource.description }}</strong>
+                    <div class="text-grey-dark">{{ paymentSource.gateway.name }}</div>
+                </div>
+
+                <div>
+                    <form method="POST">
+                        {{ csrfInput() }}
+                        {{ redirectInput('/shop/customer/cards') }}
+                        <input type="hidden" name="action" value="commerce/payment-sources/delete">
+                        <input type="hidden" name="id" value="{{ paymentSource.id }}"/>
+                        <input type="submit" value="Delete"/>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <h1>Add Card</h1>
+    <div class="card column">
+        <div class="one-half column">
+            <div class="field">
+                <select id="gatewayId">
+                    <option value="">---</option>
+
+                    {% set gateways = craft.commerce.gateways.allCustomerEnabledGateways %}
+                    {% set supportedGateways = {} %}
+
+                    {% for gateway in gateways %}
+                        {% if gateway.supportsPaymentSources() %}
+                            <option value="{{ gateway.id }}">{{ gateway.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="one-half column">
+            {% for gateway in gateways %}
+                {% if gateway.supportsPaymentSources() %}
+                    <div id="fields-{{ gateway.id }}" class="gateway-fields hidden">
+                        <form method="POST" class="form-horizontal paymentSource-form max-w-md" id="gateway-{{ gateway.id }}">
+                            <input type="hidden" name="action" value="commerce/payment-sources/add"/>
+                            <input type="hidden" name="gatewayId" value="{{ gateway.id }}"/>
+                            <input type="hidden" name="cancelUrl" value="{{ '/shop/customer/cards'|hash }}"/>
+                            {{ redirectInput('/shop/customer/cards') }}
+                            {{ csrfInput() }}
+
+                            {{ gateway.getPaymentFormHtml({})|raw }}
+
+                            <div class="field" data-colspan="1">
+                                <input class="text description w-full" type="text" name="description" value="" maxlength="70" autocomplete="off" placeholder="Card description">
+                            </div>
+
+                            <div class="buttons">
+                                <button class="button button-primary" type="submit">Add card</button>
+                            </div>
+                        </form>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    {% js %}
+        $('#gatewayId').change(function(ev){
+            $('.gateway-fields').addClass('hidden');
+            $('#fields-'+ev.currentTarget.value).removeClass('hidden');
+        });
+    {% endjs %}
+
+    {% js %}
+        $('.paymentSource-form').on('submit', function (ev) {
+            $form = $(this);
+
+            if ($form.data('processing')) {
+                ev.preventDefault();
+
+                return false;
+            }
+
+            $form.data('processing', true);
+        });
+    {% endjs %}
+{% endblock %}

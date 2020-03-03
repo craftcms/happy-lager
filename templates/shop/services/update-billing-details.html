@@ -1,0 +1,43 @@
+{% extends 'shop/_layouts/main' %}
+{% block main %}
+    {% set subscriptionUid = craft.app.request.getParam('subscription') %}
+    {% set subscription = craft.subscriptions.anyStatus().uid(subscriptionUid).one() %}
+
+    {% if currentUser is null or not subscriptionUid or not subscription %}
+        {# Can't find it #}
+        {% exit 404 %}
+    {% endif %}
+
+    {% if subscription.subscriber.id != currentUser.id %}
+        {# Can't touch it #}
+        {% exit 404 %}
+    {% endif %}
+
+    {% if subscription.isExpired == true %}
+        {# It has expired, no helping here #}
+        {% exit 404 %}
+    {% endif %}
+
+    {% if subscription.isCanceled == true %}
+        {# It has canceled, redirect to subscription manage page #}
+        {% exit 404 %}
+    {% endif %}
+
+    <div class="flex -mx-8">
+        <div class="w-2/3 px-8">
+            {% if subscription.isSuspended and subscription.hasBillingIssues %}
+                <h1>Billing issue for subscription to {{ subscription.getPlan().name}}</h1>
+
+                <div>{{ subscription.getBillingIssueDescription() }}</div>
+
+                <fieldset>
+                    <form>
+                        {{ subscription.getBillingIssueResolveFormHtml()|raw }}
+                    </form>
+                </fieldset>
+            {% else %}
+                <h1>No issues with subscription to {{ subscription.getPlan().name}}</h1>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

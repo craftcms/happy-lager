@@ -1,0 +1,45 @@
+{% extends 'shop/_layouts/main' %}
+
+{% set extraHead %}
+{# We don't want the order info indexed by search engines. #}
+<meta name="robots" content="noindex">
+{% endset %}
+
+{% block main %}
+    {% if currentUser %}
+        {% set orders = craft.orders.customer(craft.commerce.customers.customer).isCompleted(true).all() %}
+
+        <h1 class="text-center">My Orders</h1>
+
+        <hr>
+
+        {% if orders|length %}
+            <table class="w-full mb-8">
+                <thead>
+                <tr>
+                    <th>{{ "Order"|t }}</th>
+                    <th>{{ "Date"|t }}</th>
+                    <th>{{ "Total Quantity"|t }}</th>
+                    <th>{{ "Total"|t }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {# Get completed orders for the current customer.#}
+                {% for order in craft.orders.customer(craft.commerce.customers.customer).isCompleted(true).all() %}
+                    <tr>
+                        <td><a href="{{ url('shop/customer/order', { number: order.number }) }}">Order {{ order.reference }}</a></td>
+                        <td>{{ order.dateOrdered|date }}</td>
+                        <td>{{ order.totalQty }} items</td>
+                        <td>{{ order.totalPrice|commerceCurrency(cart.currency) }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="empty-index">
+                <i class="fas fa-box-open"></i>
+                <p>You don’t have any orders yet. <br /><a href="{{ url('shop/products') }}">Continue shopping</a></p>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock %}

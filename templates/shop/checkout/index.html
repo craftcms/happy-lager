@@ -1,0 +1,37 @@
+{% if currentUser %}
+    {% redirect 'shop/checkout/addresses' %}
+{% endif %}
+
+{% extends 'shop/_layouts/checkout' %}
+
+{% block content %}
+    <h1>Let’s grab your email to get started</h1>
+    <div class="flex -mx-8 mt-6">
+        <div class="w-1/2 px-8 border-r border-grey-lighter">
+            <form method="POST">
+                <input type="hidden" name="action" value="commerce/cart/update-cart">
+                {{ redirectInput('shop/checkout/register-signin') }}
+                {{ csrfInput() }}
+
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input id="email" class="w-full" type="text" value="{{ cart.email }}" name="email"
+                           placeholder="email@site.com"/>
+                </div>
+
+                {% set emailErrors = cart.getErrors('email') %}
+                {% if emailErrors|length %}
+                <span class="text-red">{{ emailErrors|join }}</span><br>
+                {% endif %}
+
+                <div class="buttons">
+                    <input type="submit" value="Continue" class="button button-primary"/>
+                </div>
+            </form>
+        </div>
+
+        <div class="w-1/2 px-8">
+
+        </div>
+    </div>
+{% endblock %}

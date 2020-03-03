@@ -1,0 +1,121 @@
+{% if currentUser %}
+    {% redirect 'shop/checkout/addresses' %}
+{% endif %}
+
+{% extends 'shop/_layouts/checkout' %}
+
+{% block content %}
+
+    {% if not cart.email %}
+        {% redirect 'shop/checkout' %}
+    {% endif %}
+
+    {# Does a user exist with this email address? #}
+
+    {% set userExistsButCantLogin = craft.users.email(cart.email).status(['locked','suspended','pending']).one() %}
+
+    {% if userExistsButCantLogin %}
+            {% redirect 'shop/checkout/addresses' %}
+    {% endif %}
+
+    {% set userExists = craft.users.email(cart.email).one() %}
+
+    <h1>Account</h1>
+    <div class="flex -mx-8 mt-6 pt-8">
+        <div class="w-1/2 px-8 border-r border-grey-lighter">
+            {% if userExists %}
+            <h2 class="mt-0">Sign In</h2>
+
+            <form method="post" accept-charset="UTF-8">
+                {{ csrfInput() }}
+                <input type="hidden" name="action" value="users/login">
+                {{ redirectInput('shop/checkout/addresses') }}
+
+                <div class="field">
+                    <label for="loginName">Email</label>
+                    <input id="loginName" class="w-full" type="text" name="loginName" placeholder="email@site.com"
+                           value="{{ craft.app.user.getRememberedUsername() }}">
+                </div>
+
+                <div class="field">
+                    <label for="loginPassword">Password</label>
+                    <input id="loginPassword" class="w-full" type="password" name="password">
+                </div>
+
+                <div class="field">
+                    <label>
+                        <input type="checkbox" name="rememberMe" value="1">
+                        Remember me
+                    </label>
+                </div>
+
+                <div class="buttons">
+                    <input type="submit" value="Login" class="button button-primary"/>
+                </div>
+            </form>
+
+            <p><a href="{{ url('forgotpassword') }}">Forgot your password?</a></p>
+            {% else %}
+            <h2 class="mt-0">Register</h2>
+
+            <form method="post" accept-charset="UTF-8">
+                {{ csrfInput() }}
+                <input type="hidden" name="action" value="users/save-user">
+                {{ redirectInput('shop/checkout/addresses') }}
+
+                {% macro errorList(errors) %}
+                {% if errors %}
+                <ul class="errors">
+                    {% for error in errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endmacro %}
+
+                {% from _self import errorList %}
+
+                <div class="field">
+                <label for="username">Username</label>
+                <input id="username" type="text" name="username"
+                       {%- if user is defined %} value="{{ user.username }}"{% endif -%}>
+
+                {% if user is defined %}
+                {{ errorList(user.getErrors('username')) }}
+                {% endif %}
+                </div>
+
+                <div class="field">
+                <label for="email">Email</label>
+                <input id="email" type="text" name="email"
+                       {%- if user is defined %} value="{{ user.email }}"{% endif %}
+                       {%- if user is not defined and cart.email %} value="{{ cart.email }}"{% endif %}>
+
+                {% if user is defined %}
+                {{ errorList(user.getErrors('email')) }}
+                {% endif %}
+                </div>
+
+                <div class="field">
+                <label for="savePassword">Password</label>
+                <input id="savePassword" type="password" name="password">
+
+                {% if user is defined %}
+                {{ errorList(user.getErrors('password')) }}
+                {% endif %}
+                </div>
+
+                <div class="buttons">
+                    <input type="submit" value="Register" class="button button-primary"/>
+                </div>
+            </form>
+
+
+            {% endif %}
+        </div>
+        <div class="w-1/2 px-8">
+            <h2 class="mt-0">Checkout</h2>
+            <a href="{{ url('shop/checkout/addresses')}}">Or, just continue as guest &rarr;</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Receipt</title>
+
+    <style type="text/css">
+        * {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+        table{
+            font-size: x-small;
+        }
+        tfoot tr td{
+            font-weight: bold;
+            font-size: x-small;
+        }
+
+        .gray {
+            background-color: lightgray
+        }
+    </style>
+
+</head>
+<body>
+
+{% if not order is defined %}
+    {% if craft.app.config.general.devMode %} {# we do not want to load an example order when not in devmode #}
+        {% set order = craft.orders.isCompleted(true).id(random(craft.orders.isCompleted(true).ids())).one() %}
+    {% else %}
+        {% set order = null %}
+    {% endif %}
+{% endif %}
+
+{% if order %}
+
+<table width="100%">
+    <tr>
+        <td valign="top"><img src="" alt="Logo" width="150" /></td>
+        <td align="right">
+            <h3>{{craft.app.systemName}}</h3>
+            {% if order.shippingAddress %}
+                {% include 'shop/_includes/addresses/address' with { address: order.shippingAddress } %}
+            {% endif %}
+        </td>
+    </tr>
+
+</table>
+
+<table width="100%">
+    <tr>
+        <td><strong>Order Reference: </strong>{{ order.reference }}</td>
+    </tr>
+    <tr>
+        <td><strong>Date Ordered: </strong>{{ order.dateOrdered|date }}</td>
+    </tr>
+    <tr>
+        <td><strong>Order Status: </strong>{{ order.orderStatus|title }}</td>
+    </tr>
+    <tr>
+        <td><strong>Paid Status: </strong>{{ order.paidStatus|title }}</td>
+    </tr>
+    {% if order.couponCode %}
+    <tr>
+        <td><strong>Coupon Code: </strong>{{ order.couponCode }}</td>
+    </tr>
+    {% endif %}
+</table>
+
+<table width="100%">
+    <thead style="background-color: lightgray;">
+    <tr>
+        <th>#</th>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+        <th>Amount</th>
+        <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for lineItem in order.lineItems %}
+    <tr>
+        <th scope="row">{{ loop.index }}</th>
+        <td>{{ lineItem.description }}</td>
+        <td align="right">{{ lineItem.qty }}</td>
+        <td align="right">{{ lineItem.salePrice|commerceCurrency(order.currency) }}</td>
+        <td align="right">{{ lineItem.subtotal|commerceCurrency(order.currency) }}</td>
+        <td align="right"></td>
+    </tr>
+        {% for lineItemAdjustment in lineItem.adjustments %}
+        <tr>
+            <th scope="row"></th>
+            <td><strong>{{ lineItemAdjustment.type|title }}</strong> {{ lineItemAdjustment.name }} - {{ lineItemAdjustment.description }}</td>
+            <td></td>
+            <td></td>
+            <td align="right">{{ lineItemAdjustment.amount|commerceCurrency(order.currency) }} {{ lineItemAdjustment.included ? '(included)' }} {{ lineItemAdjustment.isEstimated ? '(estimated)' }}</td>
+        </tr>
+        {% endfor %}
+    <tr>
+        <th scope="row"></th>
+        <td align="right" colspan="5">{{ lineItem.total|commerceCurrency(order.currency) }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+
+    <tfoot>
+    <tr>
+        <td colspan="4"></td>
+        <td align="right">Item Subtotal $</td>
+        <td align="right">{{ order.total|commerceCurrency(order.currency) }}</td>
+    </tr>
+    {% for orderAdjustment in order.orderAdjustments %}
+    <tr>
+        <th scope="row"></th>
+        <td><strong>{{ orderAdjustment.type|title }}</strong> {{ orderAdjustment.name }} - {{ orderAdjustment.description }}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td align="right">{{ orderAdjustment.amount|commerceCurrency(order.currency) }} {{ orderAdjustment.included ? '(included)' }} {{ orderAdjustment.isEstimated ? '(estimated)' }}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td colspan="4"></td>
+        <td align="right">Total</td>
+        <td align="right" class="gray">{{ order.totalPrice|commerceCurrency(order.currency) }}</td>
+    </tr>
+    <tr>
+        <td colspan="4"></td>
+        <td align="right">Paid</td>
+        <td align="right" class="gray">{{ order.totalPaid|commerceCurrency(order.currency) }}</td>
+    </tr>
+    <tr>
+        <td colspan="4"></td>
+        <td align="right">Balance</td>
+        <td align="right" class="gray">{{ order.outstandingBalance|commerceCurrency(order.currency) }}</td>
+    </tr>
+    </tfoot>
+</table>
+{% else %}
+Can not find order.
+{% endif %}
+
+</body>
+</html>

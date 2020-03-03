@@ -1,0 +1,86 @@
+{% extends 'shop/_layouts/main' %}
+{% block main %}
+
+{% set plans = craft.commerce.getPlans().getAllEnabledPlans() %}
+
+  {% if currentUser and plans|length %}
+    {% for plan in plans %}
+      <div class="md:flex service">
+        <div class="md:w-1/4">
+          <h2 class="mt-8">{{ plan.name }}</h2>
+          {% set information = plan.getInformation() ?? null %}
+          {% if information %}
+            <div>
+              <h4>{{ 'Plan Information Entry'|t('commerce') }}</h4>
+              <ul>
+                <li>{{ 'ID'|t }}: {{ information.id }}</li>
+                <li>{{ 'Title'|t }}: {{ information.title }}</li>
+              </ul>
+              <br>
+            </div>
+          {% endif %}
+        </div>
+        <div class="md:w-3/4 md:mt-8 md:pt-4">
+          {% set subscriptions = plan.getActiveUserSubscriptions(currentUser.id) %}
+          {% if subscriptions|length == 0 %}
+            <p><strong>You have no subscriptions to this plan.</strong></p>
+          {% endif %}
+          {% if subscriptions|length > 1 %}
+            <p><strong>You have multiple subscriptions to this plan.</strong></p>
+          {% endif %}
+          {% for subscription in subscriptions %}
+            {% if subscription.isCanceled %}
+              Your subscription was canceled on {{ subscription.dateCanceled|date('Y-m-d') }} and will expire on {{ subscription.nextPaymentDate|date('Y-m-d') }}
+            {% else %}
+              You are subscribed and your next payment is due on {{ subscription.nextPaymentDate|date('Y-m-d') }}
+            {% endif %}
+            <br/><br/>
+
+            <a href="{{ url('/shop/services/subscription', {subscription: subscription.id}) }}">Manage subscription</a>
+            <br/><br/>
+          {% endfor %}
+        </div>
+      </div>
+      {% if loop.last %}
+        <hr/>
+      {% endif %}
+    {% endfor %}
+    <div class="md:flex">
+      <div class="md:w-1/4">
+        <h2>Available plans</h2>
+      </div>
+      <div class="md:w-3/4 md:pt-4">
+        {% for plan in plans %}
+          <form method="POST">
+            <input type="hidden" name="action" value="commerce/subscriptions/subscribe">
+            <input type="hidden" name="planUid" value="{{ plan.uid|hash }}">
+            {{ redirectInput('shop/services') }}
+            {{ csrfInput() }}
+
+            <h4>{{ plan.name }}</h4>
+
+            <select name="trialDays" data-plan="{{ plan.id }}">
+              {% for i in [0, 3, 7, 14] %}
+                {% if i == 0 %}
+                  <option value="{{ (plan.uid~':0')|hash }}">No trial period.</option>
+                {% else %}
+                  <option value="{{ (plan.uid~':'~i)|hash }}">Trial for {{ i }} days</option>
+                {% endif %}
+              {% endfor %}
+            </select>
+
+            {% set paymentSources = craft.commerce.getPaymentSources().getAllGatewayPaymentSourcesByUserId(plan.gateway.id, currentUser.id ?? null) %}
+
+            {% if not paymentSources|length %}
+              <div class="paymentForm">
+                {{ plan.gateway.getPaymentFormHtml({})|raw }}
+              </div>
+            {% endif %}
+
+            <button type="submit">{{ "Subscribe"|t }}</button>
+          </form>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

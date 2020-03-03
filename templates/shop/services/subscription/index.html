@@ -1,0 +1,82 @@
+{% extends 'shop/_layouts/main' %}
+
+{% block main %}
+
+    {% set subscriptionId = craft.app.request.param('subscription') %}
+    {% set subscription = craft.subscriptions.id(subscriptionId).first() %}
+
+    {% if not subscription or currentUser is null or subscription.userId != currentUser.id %}
+        {% redirect 'shop/services' %}
+    {% endif %}
+
+    <h1>Manage subscription</h1>
+
+    <div><strong>Subscribed to {{ subscription.plan.name }}</strong></div>
+
+    {% set information = subscription.plan.getInformation() ?? null %}
+    {% if information %}
+        <div>
+            <h4>{{ 'Plan Information Entry'|t('commerce') }}</h4>
+            <ul>
+                <li>{{ 'ID'|t }}: {{ information.id }}</li>
+                <li>{{ 'Title'|t }}: {{ information.title }}</li>
+            </ul>
+            <br>
+        </div>
+    {% endif %}
+
+    {% if subscription.isExpired %}
+        <div>Your subscription expired on {{ subscription.dateExpired|date('Y-m-d') }}</div>
+    {% else %}
+        {% if subscription.isCanceled %}
+            <div>Your subscription was canceled on {{ subscription.dateCanceled|date('Y-m-d') }} and will expire on {{ subscription.nextPaymentDate|date('Y-m-d') }}.</div>
+
+            {% if subscription.canReactivate() %}
+                <form method="POST">
+                    <input type="hidden" name="action" value="commerce/subscriptions/reactivate">
+                    <input type="hidden" name="subscriptionUid" value="{{ subscription.uid|hash }}">
+                    {{ redirectInput('shop/services') }}
+                    {{ csrfInput() }}
+
+                    <button type="submit" class="button link">{{ "Reactivate"|t }}</button>
+                </form>
+            {% endif %}
+
+        {% else %}
+            <p>Your next payment of {{ subscription.getNextPaymentAmount() }} is due on {{ subscription.nextPaymentDate|date('Y-m-d') }}</p>
+
+            {% for plan in subscription.alternativePlans %}
+                <div><strong>Switch to {{ plan.name }}</strong></div>
+                <form method="POST">
+                    <input type="hidden" name="action" value="commerce/subscriptions/switch">
+                    <input type="hidden" name="planUid" value="{{ plan.uid|hash }}">
+                    <input type="hidden" name="subscriptionUid" value="{{ subscription.uid|hash }}">
+                    {{ redirectInput('shop/services') }}
+                    {{ csrfInput() }}
+
+                    {{ plan.gateway.getSwitchPlansFormHtml(subscription.plan, plan)|raw }}
+                    <button type="submit" class="button link">{{ "Switch"|t }}</button>
+                </form>
+                <hr />
+            {% endfor %}
+
+            <form method="POST">
+                <input type="hidden" name="action" value="commerce/subscriptions/cancel">
+                <input type="hidden" name="subscriptionUid" value="{{ subscription.uid|hash }}" />
+                {{ redirectInput('shop/services') }}
+                {{ csrfInput() }}
+
+                {{ subscription.plan.getGateway().getCancelSubscriptionFormHtml(subscription)|raw }}
+
+                <button type="submit">{{ "Unsubscribe"|t }}</button>
+            </form>
+        {% endif %}
+    {% endif %}
+
+    <h2>Payment history</h2>
+    {% set payments = subscription.getAllPayments() %}
+
+    {% for payment in payments %}
+        <div>{{ payment.paymentDate|date("Y-m-d H:i") }} - {{ payment.paymentCurrency }} {{ payment.paymentAmount }}</div>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,269 @@
+{% extends 'buy/_layout/main' %}
+
+{% block title %}
+Buy your hand-crafted free-range coastal artisan t-shirt.
+{% endblock %}
+
+{% block content %}
+{% if cart.isEmpty %}
+{% redirect 'buy/add' %}
+{% endif %}
+
+{# Do we have have more than 1 line item? If so, we are likely on Pro, let's use the main cart checkout example template #}
+{% if cart.lineItems|length > 1 %}
+    {% redirect '/shop/cart' %}
+{% endif %}
+
+{% set step = craft.app.request.param('step') %}
+
+{% if not step %}
+    {% redirect 'buy?step=1' %}
+{% endif %}
+
+{% set showEmailForm = (step == 1) %}
+{% set showEmailInfo = (not showEmailForm and cart.email) %}
+
+{% set showShippingForm = (step == 2) %}
+{% set showShippingInfo = (not showShippingForm and cart.shippingAddress) %}
+
+{% set showPaymentForm = (step == 3) %}
+
+{% if showPaymentForm and not cart.email %}
+{% redirect 'buy?step=1' %}
+{% endif %}
+
+{% if showPaymentForm and not cart.shippingAddress %}
+{% redirect 'buy?step=2' %}
+{% endif %}
+
+<div class="p-10 pt-8 border-b border-solid border-grey-light">
+
+    <div class="flex items-center mb-4">
+        <div class="border-2 border-solid border-red-commerce py-2 px-3 rounded-full font-bold mr-2 text-red-commerce">1</div>
+        <h2 class="text-lg">Your Email</h2>
+    </div>
+
+    {% if showEmailForm %}
+        <form method="POST" class="add-to-cart-form">
+            <input type="hidden" name="action" value="commerce/cart/update-cart">
+            {{ redirectInput('buy?step=2') }}
+            {{ csrfInput() }}
+            <div class="flex">
+            <div class="w-full/2 w-full">
+                <label for="email" class="block text-sm mb-2">E-mail</label>
+                <input id="email" name="email" type="email" value="{{cart.email}}" {% if currentUser %}}disabled{% endif %}} class="w-full text-sm bg-grey-light text-grey-darkest rounded px-3 py-3 outline-0">
+            </div>
+            <div class="w-1/2 w-full">
+            <button type="submit" class="bg-blue-commerce text-white w-full rounded px-3 py-3 ml-1 mt-6 text-sm hover:bg-blue-dark outline-0">
+                Next
+            </button>
+            </div>
+            </div>
+        </form>
+    {% endif  %}
+    {% if showEmailInfo %}
+        {{ cart.email }}
+        {% if not currentUser %}<a href="buy?step=1" class="text-blue block mt-5">Edit</a>{% endif %}
+    {% endif %}
+
+</div>
+
+<div class="p-10 pt-8 border-b border-solid border-grey-light">
+
+    <div class="flex items-center mb-4">
+        <div class="border-2 border-solid border-red-commerce py-2 px-3 rounded-full font-bold mr-2 text-red-commerce">2</div>
+        <h2 class="text-lg">Your Address</h2>
+    </div>
+
+    {% if showShippingForm %}
+    <form method="POST" class="add-to-cart-form">
+        <input type="hidden" name="action" value="commerce/cart/update-cart">
+        {{ redirectInput('buy?step=3') }}
+        {{ csrfInput() }}
+        <div class="flex mb-4">
+            <div class="w-1/2 mr-2">
+                <label for="firstName" class="block text-sm mb-2 {% if cart.shippingAddress and cart.shippingAddress.getFirstError('firstName') %}text-red{% endif %}">First Name</label>
+                <input id="firstName" name="shippingAddress[firstName]" type="text" value="{{cart.shippingAddress.firstName ?? ''}}" class="w-full text-sm bg-grey-light text-grey-darkest rounded px-3 py-3 outline-0">
+            </div>
+            <div class="w-1/2 ">
+                <label for="addressLastName" class="block text-sm mb-2 {% if cart.shippingAddress and cart.shippingAddress.getFirstError('lastName') %}text-red{% endif %}">Last Name</label>
+                <input id="addressLastName" name="shippingAddress[lastName]" type="text" value="{{cart.shippingAddress.lastName ?? ''}}" class="w-full text-sm bg-grey-light text-grey-darkest rounded px-3 py-3 outline-0">
+            </div>
+        </div>
+        <div class="flex mb-4">
+            <div class="w-1/2 mr-2">
+                <label for="address1" class="block text-sm mb-2 {% if cart.shippingAddress and cart.shippingAddress.getFirstError('address1') %}text-red{% endif %}">Address1</label>
+                <input id="address1" name="shippingAddress[address1]" type="text" value="{{cart.shippingAddress.address1 ?? ''}}" class="w-full text-sm bg-grey-light text-grey-darkest rounded px-3 py-3 outline-0">
+            </div>
+            <div class="w-1/2">
+                <label for="address2" class="block text-sm mb-2 {% if cart.shippingAddress and cart.shippingAddress.getFirstError('address2') %}text-red{% endif %}">Address2</label>
+                <input id="address2" name="shippingAddress[address2]" type="text" value="{{cart.shippingAddress.address2 ?? ''}}" class="w-full text-sm bg-grey-light text-grey-darkest rounded px-3 py-3 outline-0">
+            </div>
+        </div>
+        <div class="flex mb-4">
+            <div class="w-1/2 mr-2">
+                <label for="city" class="block text-sm mb-2 {% if cart.shippingAddress and cart.shippingAddress.getFirstError('city') %}text-red{% endif %}">City</label>
+                <input id="city" name="shippingAddress[city]" type="text" value="{{cart.shippingAddress.city ?? ''}}" class="w-full text-sm bg-grey-light text-grey-darkest rounded px-3 py-3 outline-0">
+            </div>
+            <div class="w-1/2">
+                <label for="zipCode" class="block text-sm mb-2 {% if cart.shippingAddress and cart.shippingAddress.getFirstError('zipCode') %}text-red{% endif %}">Zip</label>
+                <input id="zipCode" name="shippingAddress[zipCode]" type="text" value="{{cart.shippingAddress.zipCode ?? ''}}" class="w-full text-sm bg-grey-light text-grey-darkest rounded px-3 py-3 outline-0">
+            </div>
+        </div>
+        <div class="flex mb-4">
+            <div class="w-1/2 mr-2">
+                <label for="stateValue" class="block text-sm mb-2 {% if cart.shippingAddress and cart.shippingAddress.getFirstError('stateValue') %}text-red{% endif %}">State</label>
+                <input id="stateValue" name="shippingAddress[stateValue]" type="text" value="{{cart.shippingAddress.stateValue ?? ''}}" class="w-full text-sm bg-grey-light text-grey-darkest rounded px-3 py-3 outline-0">
+            </div>
+            <div class="w-1/2">
+                <label for="country" class="block text-sm mb-2 {% if cart.shippingAddress and cart.shippingAddress.getFirstError('countryId') %}text-red{% endif %}">Country</label>
+                <select id="country" name="shippingAddress[countryId]" class="w-full text-sm bg-grey-light text-grey-darkest rounded px-3 py-3 outline-0">
+                    <option value="233">USA</option>
+                </select>
+            </div>
+        </div>
+        <div class="flex">
+            <div class="w-1/2">
+                <input type="hidden" name="billingAddressSameAsShipping" value="1"/>
+            </div>
+            <div class="w-1/2">
+                <button type="submit" class="bg-blue-commerce text-white w-full rounded px-3 py-3 ml-1 mt-6 text-sm hover:bg-blue-dark outline-0">
+                    Next
+                </button>
+            </div>
+        </div>
+    </form>
+    {% endif %}
+
+    {% if showShippingInfo %}
+        {{ cart.shippingAddress.firstName ?? ''}} {{ cart.shippingAddress.lastName ?? ''}}<br>
+        {{ cart.shippingAddress.address1 ?? ''}}<br>
+        {{ cart.shippingAddress.address2 ?? ''}}<br>
+        {{ cart.shippingAddress.city ?? ''}}, {{ cart.shippingAddress.zipCode ?? ''}}<br>
+        {{ cart.shippingAddress.stateValue ?? ''}} {{ cart.shippingAddress.countryText ?? ''}}<br>
+        <a href="buy?step=2" class="text-blue block mt-5">Edit</a>
+    {% endif %}
+
+
+</div>
+
+
+    <form method="POST" class="add-to-cart-form">
+        <input type="hidden" name="action" value="commerce/payments/pay">
+        <input type="hidden" name="gatewayId" value="1"> {# the dummy gateway ID #}
+        {{ redirectInput('buy/confirm?number={number}') }}
+        {{ csrfInput() }}
+    <div class="p-10 pt-8">
+        <div class="flex items-center mb-4">
+            <div class="border-2 border-solid border-red-commerce py-2 px-3 rounded-full font-bold mr-2 text-red-commerce">
+                3
+            </div>
+            <h2 class="text-lg">Your Payment Information</h2>
+        </div>
+        {% if showPaymentForm %}
+        <div class="flex flex-wrap">
+            <div class="w-3/4 md:w-1/2-almost mb-4 md:mb-0">
+                <label for="payment" class="block text-sm mb-2">First Name</label>
+                <input id="payment" type="text" name="firstName" value="{{ paymentForm.firstName ?? '' }}"
+                       class="w-full text-sm bg-grey-light text-grey-darkest rounded px-3 py-3 outline-0 {% if paymentForm is defined and paymentForm.getFirstError('firstName') %}border border-red-500{% endif %}">
+                {% if paymentForm is defined and paymentForm.getFirstError('firstName') %}<span class="text-red-500">{{ paymentForm.getFirstError('firstName') }}</span>{% endif %}
+            </div>
+            <div class="w-3/4 md:w-1/2-almost mb-4 ml-0 md:ml-4">
+                <label for="lastName" class="block text-sm mb-2}">Last Name</label>
+                <input id="lastName" type="text" name="lastName" value="{{ paymentForm.lastName ?? '' }}"
+                       class="w-full text-sm bg-grey-light text-grey-darkest rounded px-3 py-3 outline-0 {% if paymentForm is defined and paymentForm.getFirstError('lastName') %}border border-red-500{% endif %}">
+                {% if paymentForm is defined and paymentForm.getFirstError('firstName') %}<span class="text-red-500">{{ paymentForm.getFirstError('lastName') }}</span>{% endif %}
+            </div>
+
+            <div class="w-3/4 md:w-1/2-almost mb-4 md:mb-0">
+                <label for="number" class="block text-sm mb-2">Credit Card</label>
+                <input id="number" type="text" name="number"
+                       class="w-full text-sm bg-grey-light text-grey-darkest rounded px-3 py-3 outline-0 {% if paymentForm is defined and paymentForm.getFirstError('number') %}border border-red-500{% endif %}">
+                {% if paymentForm is defined and paymentForm.getFirstError('firstName') %}<span class="text-red-500">{{ paymentForm.getFirstError('number') }}</span>{% endif %}
+            </div>
+            <div class="w-3/4 md:w-1/2-almost mb-4 ml-0 md:ml-4">
+                <label for="cvv" class="block text-sm mb-2 {% if paymentForm is defined and paymentForm.getFirstError('cvv') %}text-red{% endif %}">CVV</label>
+                <input id="cvv" type="text" name="cvv"
+                       class="w-full text-sm bg-grey-light text-grey-darkest rounded px-3 py-3 outline-0 {% if paymentForm is defined and paymentForm.getFirstError('cvv') %}border border-red-500{% endif %}">
+                {% if paymentForm is defined and paymentForm.getFirstError('cvv') %}<span class="text-red-500">{{ paymentForm.getFirstError('cvv') }}</span>{% endif %}
+            </div>
+
+            <div class="w-3/4 md:w-1/2-almost mb-4 md:mb-0">
+                <label for="exp_month" class="block text-sm mb-2">Expiry</label>
+                <input id="exp_month" type="text" name="expiry" placeholder="02/2021"
+                       class="w-full text-sm bg-grey-light text-grey-darkest rounded px-3 py-3 outline-0 {% if paymentForm is defined and paymentForm.getFirstError('cvv') %}border border-red-500{% endif %}">
+                {% if paymentForm is defined and paymentForm.getFirstError('month') %}<span class="text-red-500">{{ paymentForm.getFirstError('month') }}</span>{% endif %}
+                {% if paymentForm is defined and paymentForm.getFirstError('year') %}<span class="text-red-500">{{ paymentForm.getFirstError('year') }}</span>{% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <div class="pl-10 pr-10 pt-5 pb-0">
+        {% if showPaymentForm %}
+        <button type="submit"
+                class="bg-blue-commerce text-white w-full rounded px-4 py-4 mb-2 text-lg hover:bg-blue-dark">
+            Buy ${{ cart.totalPrice }}
+        </button>
+        <div class="text-grey text-right">
+            Includes {{ cart.getTotalShippingCost()|commerceCurrency(cart.currency) }} shipping and
+            {% if cart.getTotalTax() %}
+                {{ cart.getTotalTax()|commerceCurrency(cart.currency) }} taxes.
+            {% endif %}
+            {% if cart.getTotalTaxIncluded() %}
+                {{ cart.getTotalTaxIncluded()|commerceCurrency(cart.currency) }} included taxes.
+            {% endif %}
+        </div>
+
+        <div class="flex items-center justify-center mb-8 mt-10">
+            <div>
+                <span class="font-bold">Need any help?</span>
+                <span class="text-grey-darker">Don't hesitate to <a href="#" class="text-grey-darker underline">contact support</a>!</span>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    </form>
+
+
+{% endblock %}
+{% block sidebar %}
+
+<h2 class="font-bold text-xl mb-4">{{
+    cart.lineitems[0].description }}</h2>
+<div class="mb-4">
+    <span class="text-2xl align-top">$</span>
+    <span class="text-5.5xl font-light lh-fix">{{ cart.itemTotal }}</span>
+</div>
+<div class="italic w-3/4 leading-normal mb-8">
+    Authentic Craft t-shirt
+</div>
+<div class="list-items mb-8">
+    <div class="flex items-center mb-4">
+        {% include 'buy/_components/checkboxicon' %}
+        <div>Made of <span class="font-bold">real</span>
+            material
+        </div>
+    </div>
+    <div class="flex items-center mb-4">
+        {% include 'buy/_components/checkboxicon' %}
+        <div>You will look cool</div>
+    </div>
+    <div class="flex items-center mb-4">
+        {% include 'buy/_components/checkboxicon' %}
+        <div>Fully supported</div>
+    </div>
+</div> <!-- end list-items -->
+
+<div class="border-b border-solid border-grey-light"></div>
+
+<div class="testimonial pt-10 text-lg italic leading-normal mb-4">
+    "Buying this will bring you true happiness."
+</div>
+
+<div class="flex items-center">
+    <img src="https://avatars.io/twitter/angrybrad" alt="avatar"
+         width="48" class="rounded-full mr-2">
+    <div class="text-lg font-bold">Brad Bell</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,357 @@
+{% extends "shop/_layouts/main" %}
+
+{% block main %}
+    <h1>Here’s what’s in your cart</h1>
+
+    {% if cart.lineItems|length %}
+        <table class="cart w-full">
+            <thead>
+            <tr>
+                <th>Product</th>
+                <th>Qty</th>
+                <th class="text-right">Price</th>
+            </tr>
+            </thead>
+            <form method="POST">
+                <input type="hidden" name="action" value="commerce/cart/update-cart">
+                <input type="hidden" name="cartUpdatedNotice" value="The cart was updated.">
+                {{ redirectInput('shop/cart') }}
+                {{ csrfInput() }}
+            <tbody>
+                {% set lineItemHasErrors = false %}
+                {% for item in cart.lineItems %}
+                    {% if item.hasErrors() %}
+                        {# if the line item has errors lets record it so we can hide totals later (since they wont make sense) #}
+                        {% set lineItemHasErrors = true %}
+                    {% endif %}
+                    <tr class="item" {% if item.hasErrors() %}style="background-color:rgba(255, 0, 0, .1);"{% endif %}>
+                        <td>
+                            <strong>{{ item.description }}</strong><br>
+                            ({{ item.sku }})
+                            <br>
+                            <code>{{ item.options|json_encode }}</code>
+                            <br>
+                            <label>
+                            <input type="checkbox"
+                                   name="lineItems[{{ item.id }}][remove]"
+                                   value="1"> Remove Line
+                            </label>
+                        </td>
+                        <td>
+                            {% if item.options.giftWrapped is defined %}
+                            <select name="lineItems[{{ item.id }}][options][giftWrapped]">
+                                <option value="no"
+                                        {% if item.options.giftWrapped == 'no' %}selected{% endif %}>
+                                    No gift wrap
+                                </option>
+                                <option value="yes"
+                                        {% if item.options.giftWrapped == 'yes' %}selected{% endif %}>
+                                    Gift wrapped.
+                                </option>
+                            </select>
+                            {% endif %}
+
+                            {% if item.options.donationAmount is defined %}
+                            <input type="text" name="lineItems[{{ item.id }}][options][donationAmount]" placeholder="Donation" value="{{item.options.donationAmount}}">
+                            {% endif %}
+
+                            <input type="text" placeholder="My Note"
+                                   size="20"
+                                   name="lineItems[{{ item.id }}][note]"
+                                   value="{{ item.note }}">
+
+                            <span {% if item.getFirstError('qty') %}class="has-error"{% endif %}>
+                            <input type="{% if item.options.donationAmount is defined %}hidden{%else%}number{%endif%}" name="lineItems[{{ item.id }}][qty]" min="0" value="{{ item.qty }}">
+                        </span>
+
+                        </td>
+
+                        <td class="text-right">
+                            {% if not lineItemHasErrors %}
+                                {% if item.onSale %}
+                                    <span title="{{ item.price}}"><s>Price: {{ item.price|commerceCurrency(cart.currency) }}</s></span>
+                                    <br>
+                                    <span title="{{ item.saleAmount}}">Sale Off: {{ item.saleAmount|commerceCurrency(cart.currency) }}</span>
+                                    <br>
+                                    {% set itemSales = item.snapshot.sales ?? [] %}
+                                    {% for sale in itemSales %}
+                                    {% if loop.first %}
+                                    Sales Applied:
+                                    {% endif %}
+                                    {{ sale.name }}<br>
+                                    {% endfor %}
+                                    <span title="{{ item.salePrice}}">Sale Price {{ item.salePrice|commerceCurrency(cart.currency) }}</span>
+                                    <br>
+                                    <span title="{{ item.subtotal}}">Sale Price Subtotal: {{ item.subtotal|commerceCurrency(cart.currency) }}</span>
+                                    <br>
+                                {% else %}
+                                    <span title="{{ item.price}}">Price: {{ item.price|commerceCurrency(cart.currency) }}</span>
+                                    <br>
+                                    <span title="{{ item.subtotal}}">Price Subtotal: {{ item.subtotal|commerceCurrency(cart.currency) }}</span>
+                                    <br>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% if not lineItemHasErrors %}
+                        {% for adjustment in item.adjustments %}
+                            <tr class="adjustment">
+                                <td></td>
+                                <td>
+                                  <strong>{{ adjustment.type|upper }}</strong> {{ adjustment.name|title }}
+                                  {% if adjustment.isEstimated %}<i class="text-sm text-grey-dark">{{ 'Estimated'|t('commerce') }}</i>{% endif %}<br>
+                                  {{ adjustment.description }}
+                                </td>
+                              <td class="text-right">
+                                <span title="{{ adjustment.amount}}}"> {{ adjustment.amount|commerceCurrency(cart.currency) }}</span>
+                              </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+
+                {% if not lineItemHasErrors %}
+                    {% for adjustment in cart.orderAdjustments %}
+                        <tr class="adjustment">
+                            <td>{{ adjustment.type }}</td>
+                            <td>
+                                <strong>{{ adjustment.name }}</strong>{% if adjustment.isEstimated %}<br><i class="text-sm text-grey-dark">{{ 'Estimated'|t('commerce') }}</i>{% endif %}<br>({{ adjustment.description }}
+                                )
+                            </td>
+                            <td class="text-right"><span title="{{ adjustment.amount }}">{{ adjustment.amount|commerceCurrency(cart.currency) }}</span></td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                <tr>
+                    <td colspan="2">
+                      {% if not cart.getShippingAddress() %}
+                      <div class="p-6 bg-grey-lightest max-w-sm">
+                        <h5 class="mt-0">{{ 'Shipping Estimate'|t('commerce') }}</h5>
+
+                        <div class="estimate-fields text-sm">
+                          {% set countries = craft.commerce.countries.allEnabledCountriesAsList %}
+                          {% set states = craft.commerce.states.allEnabledStatesAsListGroupedByCountryId %}
+                          <label class="m-0" for="estimatedShippingAddress-countryId">{{ 'Country'|t('commerce') }}</label>
+                          <select class="address-country w-full estimate-country" name="estimatedShippingAddress[countryId]" data-modelname="estimatedShippingAddress">
+                            {% for key, option in countries %}
+                              {% set optionValue = (cart.estimatedShippingAddress ? cart.estimatedShippingAddress.countryId : '') %}
+                              <option value="{{ key }}" {% if key == optionValue %} selected{% endif %}>{{ option }}</option>
+                            {% endfor %}
+                          </select>
+
+                          <div class="estimate-state-box" data-modelname="estimatedShippingAddress">
+                            <label class="mb-0 mt-2" for="estimatedShippingAddress-state">{{ 'State'|t('commerce') }}</label>
+                            {% set options = (cart.estimatedShippingAddress and states[cart.estimatedShippingAddress.countryId] is defined ? states[cart.estimatedShippingAddress.countryId] : []) %}
+                            <select id="estimatedShippingAddress-stateId" data-modelname="estimatedShippingAddress" class="address-stateId w-full {% if options|length == 0 %}hidden{% endif %}" name="estimatedShippingAddress[stateValue]">
+                              {% for key, option in options %}
+                                {% set optionValue = (cart.estimatedShippingAddress ? cart.estimatedShippingAddress.stateId : '') %}
+                                <option value="{{ key }}" {% if key == optionValue %}selected{% endif %}>{{ option }}</option>
+                              {% endfor %}
+                            </select>
+                            <input type="text" data-modelname="estimatedShippingAddress" id="estimatedShippingAddress-stateName" class="address-stateName {% if options|length > 0 %}hidden{% endif %} w-full" {% if options|length == 0 %}name="estimatedShippingAddress[stateValue]"{% endif %} value="{{ cart.estimatedShippingAddress ? cart.estimatedShippingAddress.stateName : '' }}">
+                          </div>
+
+                          <label class="mb-0 mt-2" for="estimatedShippingAddress-zipCode">{{ 'Zip Code'|t('commerce') }}</label>
+                          <input type="text" id="estimatedShippingAddress-zipCode" class="w-full" name="estimatedShippingAddress[zipCode]" value="{{ cart.estimatedShippingAddress ? cart.estimatedShippingAddress.zipCode : '' }}">
+
+                          <div class="mt-6">
+                            <label class="m-0">
+                              <input type="checkbox" name="estimatedBillingAddressSameAsShipping" value="1" {% if cart.estimatedShippingAddressId == cart.estimatedBillingAddressId %}checked{% endif %}> {{ 'Billing Same as Shipping'|t('commerce') }}
+                            </label>
+                          </div>
+
+                          <div class="estimate-billing mt-6 text-sm">
+                            <h5 class="mt-0">{{ 'Tax Estimate'|t('commerce') }}</h5>
+                            <label class="mb-0 mt-2" for="estimatedBillingAddress-countryId">{{ 'Country'|t('commerce') }}</label>
+                            <select class="address-country w-full estimate-country" name="estimatedBillingAddress[countryId]" data-modelname="estimatedBillingAddress">
+                              {% for key, option in countries %}
+                                {% set optionValue = (cart.estimatedBillingAddress ? cart.estimatedBillingAddress.countryId : '') %}
+                                <option value="{{ key }}" {% if key == optionValue %} selected{% endif %}>{{ option }}</option>
+                              {% endfor %}
+                            </select>
+
+                            <div class="estimate-state-box" data-modelname="estimatedBillingAddress">
+                              <label class="mb-0 mt-2" for="estimatedBillingAddress-state">{{ 'State'|t('commerce') }}</label>
+                              {% set options = (cart.estimatedBillingAddress and states[cart.estimatedBillingAddress.countryId] is defined ? states[cart.estimatedBillingAddress.countryId] : []) %}
+                              <select id="estimatedBillingAddress-stateId" data-modelname="estimatedBillingAddress" class="address-stateId w-full {% if options|length == 0 %}hidden{% endif %}" name="estimatedBillingAddress[stateValue]">
+                                {% for key, option in options %}
+                                  {% set optionValue = (cart.estimatedBillingAddress ? cart.estimatedBillingAddress.stateId : '') %}
+                                  <option value="{{ key }}" {% if key == optionValue %}selected{% endif %}>{{ option }}</option>
+                                {% endfor %}
+                              </select>
+                              <input type="text" data-modelname="estimatedBillingAddress" id="estimatedBillingAddress-stateName" class="address-stateName {% if options|length > 0 %}hidden{% endif %} w-full" {% if options|length == 0 %}name="estimatedBillingAddress[stateValue]"{% endif %} value="{{ cart.estimatedBillingAddress ? cart.estimatedBillingAddress.stateName : '' }}">
+                            </div>
+
+                            <label class="mb-0 mt-2" for="estimatedBillingAddress-zipCode">{{ 'Zip Code'|t('commerce') }}</label>
+                            <input type="text" id="estimatedBillingAddress-zipCode" class="w-full" name="estimatedBillingAddress[zipCode]" value="{{ cart.estimatedBillingAddress ? cart.estimatedBillingAddress.zipCode : '' }}">
+                          </div>
+                        </div>
+
+                        {# Shipping Methods #}
+                          <div class="estimate-shipping-methods text-sm">
+                            {% if cart.availableShippingMethods|length and cart.estimatedShippingAddressId %}
+                              <div class="mt-3">
+                                {% for handle, method in cart.availableShippingMethods %}
+                                  <div class="shipping-select">
+                                    <label>
+                                      <input type="radio" name="shippingMethodHandle" value="{{ handle }}" {% if handle == cart.shippingMethodHandle %}checked{% endif %} />
+                                      <strong>{{ method.name }}</strong>
+                                      <span class="price"><span title="{{ method.priceForOrder(cart) }}"></span> {{ method.priceForOrder(cart)|commerceCurrency(cart.currency) }}</span>
+                                    </label>
+                                  </div>
+                                {% endfor %}
+                              </div>
+                              <div class="mt-6">
+                                <a class="estimate-show-fields" href="#">{{ 'Show Estimate Fields'|t('commerce') }}</a>
+                              </div>
+                            {% endif %}
+                          </div>
+                      </div>
+                      {% endif %}
+                    </td>
+                    <td class="text-right align-text-top">
+                        {% if not lineItemHasErrors %}
+                      Item Sub Total: <span title="{{ cart.itemSubTotal }}">{{ cart.itemSubTotal|commerceCurrency(cart.currency) }}</span>
+                            <br>
+
+                            <br>
+                            <strong>Adjustment Totals</strong>
+                            <br>
+                            <span title="{{cart.getTotalDiscount()}}"> Total Discount: {{ cart.getTotalDiscount()|commerceCurrency(cart.currency) }}</span>
+                            <br>
+                            <span title="{{cart.getTotalShippingCost()}}"> Total Shipping: {{ cart.getTotalShippingCost()|commerceCurrency(cart.currency) }}</span>
+                            <br>
+                            <span title="{{cart.getTotalTax()}}"> Total Tax: {{ cart.getTotalTax()|commerceCurrency(cart.currency) }}</span>
+                            <br>
+                            <span title="{{cart.getTotalTaxIncluded()}}"> Total Tax (inc): {{ cart.getTotalTaxIncluded()|commerceCurrency(cart.currency) }}</span>
+                            <br>
+
+                            <h4 title="{{ cart.totalPrice }}">Total Price: {{ cart.totalPrice|commerceCurrency(cart.currency) }}</h4>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">  {# Update Coupon form uses the single update controller action: #}
+                        {% if cart.getFirstError('couponCode') %}
+                            <span class="flash">{{ cart.getFirstError('couponCode') }}</span>
+                        {% endif %}
+
+                        <span class="{% if cart.getFirstError('couponCode') %}has-error{% endif %}">
+                    <input type="text" name="couponCode" width="11"
+                           class="{% if cart.getFirstError('couponCode') %}has-error{% endif %}"
+                           value="{{ cart.couponCode }}"
+                           placeholder="{{ "Coupon Code"|t }}">
+                    </span></td>
+                    <td class="text-right">
+                        <input class="right" type="submit" value="Update Cart"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-right">
+                        {% if not lineItemHasErrors %}
+                            <a class="checkout-button button button-primary" href="{{ url('shop/checkout') }}">Checkout</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            </tbody>
+            </form>
+        </table>
+    {% endif %}
+
+    {% if not cart.lineItems|length %}
+        <p>You have no items in your cart, add some on the <a href="{{ url('shop/products') }}">products page</a>.</p>
+    {% endif %}
+  {% js %}
+    var states = {{ craft.commerce.states.allEnabledStatesAsListGroupedByCountryId|json_encode|raw }};
+  {% endjs %}
+  {% js %}
+    var $estimateShippingMethodsContainer = $('.estimate-shipping-methods');
+    var $estimateFieldsContainer = $('.estimate-fields');
+    var $estimateShowFieldsButton = $('.estimate-show-fields');
+    var $estimateBilling = $('.estimate-billing');
+    var $estimateBillingSameAsShipping = $('input[name="estimatedBillingAddressSameAsShipping"]');
+    var $estimateCountrySelects = $('select.estimate-country');
+
+    // Setup "same as" checkbox
+    if ($estimateBillingSameAsShipping.prop('checked')) {
+        $estimateBilling.addClass('hidden').find('input,select').attr('disabled', 'disabled').prop('disabled', 'disabled');
+    }
+
+    // Handle the change event for the "same as" checkbox
+    $estimateBillingSameAsShipping.change(function(ev) {
+        var $this = $(this);
+        if ($this.prop('checked')) {
+            $estimateBilling.addClass('hidden').find('input,select').attr('disabled', 'disabled').prop('disabled', 'disabled');
+        } else {
+            $estimateBilling.removeClass('hidden').find('input,select').attr('disabled', '').prop('disabled', '');
+        }
+    });
+
+    // Setup initial state Showing/hiding of the shipping method selection
+    if ($estimateShippingMethodsContainer.find('.shipping-select').length) {
+        $estimateFieldsContainer.addClass('hidden');
+        $estimateFieldsContainer.find('input,select').attr('disabled', 'disabled').prop('disabled', 'disabled');
+    } else {
+        $estimateShippingMethodsContainer.addClass('hidden');
+        $estimateShippingMethodsContainer.find('input,select').attr('disabled', 'disabled').prop('disabled', 'disabled');;
+    }
+
+    // Handle click event for returning to the estimate fields
+    $estimateShowFieldsButton.click(function(ev) {
+        ev.preventDefault();
+
+        if ($estimateFieldsContainer.hasClass('hidden')) {
+            $estimateFieldsContainer.removeClass('hidden');
+            $estimateFieldsContainer.find('input,select').attr('disabled', '').prop('disabled', '');
+            $estimateShippingMethodsContainer.addClass('hidden');
+            $estimateShippingMethodsContainer.find('input,select').attr('disabled', 'disabled').prop('disabled', 'disabled');
+        } else {
+            $estimateFieldsContainer.addClass('hidden');
+            $estimateFieldsContainer.find('input,select').attr('disabled', 'disabled').prop('disabled', 'disabled');
+            $estimateShippingMethodsContainer.removeClass('hidden');
+            $estimateShippingMethodsContainer.find('input,select').attr('disabled', '').prop('disabled', '');
+        }
+    });
+
+    // Handle change event for country selection for both shipping and billing
+    $estimateCountrySelects.change(function () {
+        // get the value of the selected country.
+        var cid = $(this).val();
+        var $box = $('.estimate-state-box[data-modelname="'+$(this).data('modelname')+'"]');
+        var $states = $box.find('select.address-stateId');
+        var $stateName = $box.find('input.address-stateName');
+        $states.find('option').remove();
+
+        if (states.hasOwnProperty(cid))
+        {
+            // We have states for this country, show the states drop down.
+            $states.removeClass('hidden');
+            $states.attr('name', $states.data('modelname')+'[stateValue]');
+
+            // We have states for this country, hide the stateName input.
+            $stateName.removeAttr('name');
+            $stateName.addClass('hidden');
+            $stateName.val('');
+
+            // Add all states as options to drop down.
+            for (var id in states[cid])
+            {
+                var state = states[cid][id];
+                var $option = $('<option/>');
+                $option.attr('value', id).text(state);
+                $states.append($option);
+            }
+
+        }else{
+            // hide the states dropdown, since this country has none.
+            $states.addClass('hidden');
+            $states.removeAttr('name');
+
+            // show the stateName
+            $stateName.removeClass('hidden');
+            $stateName.attr('name', $stateName.data('modelname')+'[stateValue]');
+        }
+
+    });
+  {% endjs %}
+{% endblock %}

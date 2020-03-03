@@ -1,0 +1,50 @@
+{% set steps = [
+    {
+        label: "Email",
+        url: 'shop/checkout'
+    },
+    {
+        label: "Account",
+        url: 'shop/checkout/register-signin'
+    },
+    {
+        label: "Address",
+        url: 'shop/checkout/addresses'
+    },
+    {
+        label: "Shipping",
+        url: 'shop/checkout/shipping'
+    },
+    {
+        label: "Payment",
+        url: 'shop/checkout/payment'
+    }
+] %}
+
+{% if width is not defined %}
+    {% set width = 0 %}
+{% endif %}
+
+<div class="steps">
+    <ul>
+        {% for key, step in steps %}
+
+            {% set class = '' %}
+            {% if craft.app.request.pathInfo == step.url %}
+                {% set width = ((key + 1) * 100 / steps|length) - 20 %}
+                {% set class = "sel" %}
+                {% set currentStep = key %}
+            {% endif %}
+
+            {% if currentStep is not defined %}
+                {% set class = "done" %}
+            {% endif %}
+
+            <li class="{{ class }}"><a href="{{ url( step.url ) }}">{{ step.label }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <div class="meter">
+        <span style="width: {{ width }}%"></span>
+    </div>
+</div>

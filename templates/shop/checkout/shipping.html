@@ -1,0 +1,66 @@
+{% extends 'shop/_layouts/checkout' %}
+
+{% block content %}
+
+    <div class="flex -mx-8">
+        <div class="w-2/3 px-8">
+            <h1>How should your order be shipped?</h1>
+
+            {#    <div class="address-card">
+                    <h3 class="label mt-0">Shipping To</h3>
+                    {% if cart.shippingAddress %}
+                        {% include 'shop/_includes/addresses/address' with {'address': cart.shippingAddress} %}
+                    {% else %}
+                        <p>No shipping address selected.</p>
+                    {% endif %}
+                    {% if currentUser %}<a class="edit" href="{{ url('shop/checkout/addresses') }}">Edit</a>{% endif %}
+                </div>#}
+            {#
+                Choosing a shipping method.
+                Now that we know the cart's address, we need to show all available shipping methods. Only those that match
+                at least one rule contained in the shipping method are compatible with the order. `cart.shippingMethods` only returns
+                methods available to the order. If you require shipping and no methods are avaialable, create a catch all rule
+                in a method that matches all addresses.
+            #}
+
+            {% if cart.availableShippingMethods|length < 2 and cart.shippingMethod %}
+                {% redirect 'shop/checkout/payment' %}
+            {% endif %}
+
+            {% if not cart.availableShippingMethods|length %}
+                <p>No shipping methods available.<p><p> <a class="button button-primary" href="{{ url('shop/checkout/payment') }}">Continue to payment</a></p>
+            {% endif %}
+
+            {% if cart.availableShippingMethods|length %}
+                <form method="POST">
+                    <input type="hidden" name="action" value="commerce/cart/update-cart">
+                    {{ redirectInput('shop/checkout/payment') }}
+                    {{ csrfInput() }}
+
+                    {% for handle, method in cart.availableShippingMethods %}
+                        <div class="shipping-select">
+                            <label>
+
+                                <input type="radio" name="shippingMethodHandle" value="{{ handle }}"
+                                       {% if handle == cart.shippingMethodHandle %}checked{% endif %} />
+                                <strong>{{ method.name }}</strong>
+
+                                <span class="price">
+                        {{ method.priceForOrder(cart)|commerceCurrency(cart.currency) }}
+                    </span>
+                            </label>
+                        </div>
+                    {% endfor %}
+                    <span class="flash">{{ cart.getErrors('shippingMethod')|join }}</span>
+
+                    <p><input type="submit" class="button button-primary" value="Select Shipping Method"/></p>
+
+                </form>
+            {% endif %}
+        </div>
+        <div class="w-1/3 px-8 border-l border-grey-lighter">
+            {% include "shop/_includes/order-review" with { showShippingAddress: true } %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,154 @@
+{% extends 'shop/_layouts/checkout' %}
+
+{% block content %}
+
+    <div class="flex -mx-8">
+        <div class="w-2/3 px-8">
+            <h1>Payment</h1>
+
+{#
+            ╔══════════════════════════════════════════════════╗
+            ║  ┌───────────────────────────────────────────┐   ║
+            ║  │ Set up variables and check if we have any │   ║
+            ║  │             gateways set up.              │   ║
+            ║  └───────────────────────────────────────────┘   ║
+            ╚══════════════════════════════════════════════════╝
+#}
+
+            {# Get the available payment sources the user has to be used later in this page. #}
+            {% set storedCards = craft.commerce.paymentSources.allPaymentSourcesByUserId(currentUser.id ?? null) %}
+
+            {# Get the available gateways to be used later in this page #}
+            {% set availableGateways = craft.commerce.gateways.allCustomerEnabledGateways %}
+
+            {# If there are no gateway then payment sources wont work either, so lets #}
+            {% if availableGateways is empty %}
+                <p>No payment methods available.</p>
+            {% endif %}
+
+{#
+            ╔══════════════════════════════════════════════════╗
+            ║  ┌───────────────────────────────────────────┐   ║
+            ║  │   This form updates the order with the    │   ║
+            ║  │  preferred payment source or gateway, as  │   ║
+            ║  │well as allowing the selection of a payment│   ║
+            ║  │   currency if more than one is set up.    │   ║
+            ║  └───────────────────────────────────────────┘   ║
+            ╚══════════════════════════════════════════════════╝
+#}
+
+            {% if availableGateways|length %}
+                <form method="POST" id="paymentPreferenceForm" class="form-inline">
+                    <input type="hidden" name="action" value="commerce/cart/update-cart">
+                    {{ redirectInput('shop/checkout/payment') }}
+                    {{ csrfInput() }}
+
+                    <label for="paymentMethod">Select a payment method:</label>
+                    <select id="paymentMethod" class="form-control">
+                        {% if not cart.gatewayId and not cart.paymentSourceId %}<option value="">---</option>{% endif %}
+
+                        {% for storedCard in storedCards %}
+                            <option value="card:{{ storedCard.id }}" {% if storedCard.id == cart.paymentSourceId %}selected{% endif %}>{{ storedCard.description }}</option>
+                        {% endfor %}
+                        <option value="">---</option>
+                        {% for id,name in craft.commerce.gateways.allCustomerEnabledGateways %}
+                            <option value="gateway:{{ id }}" {% if id == cart.gatewayId %}selected{% endif %}>{{ name }}</option>
+                        {% endfor %}
+                    </select>
+
+                    {% set currencies = craft.commerce.paymentCurrencies.allPaymentCurrencies %}
+                    {% if currencies|length > 1 %}
+                        <select id="paymentCurrency" name="paymentCurrency"
+                                class="form-control">
+                            {% for currency in currencies %}
+                                <option value="{{ currency.iso }}" {% if currency.iso == cart.paymentCurrency %}selected{% endif %}>{{ currency.name }} {{  currency.iso }} - {{ cart.totalPrice|commerceCurrency(currency.iso,convert=true) }}</option>
+                            {% endfor %}
+                        </select>
+                    {% endif %}
+                </form>
+            {% endif %}
+
+            {% js %}
+                // If the payment currency changes, submit the form immediately
+                $('#paymentCurrency').change(function(){
+                    $('form#paymentPreferenceForm').submit();
+                });
+
+                $('#paymentMethod').change(function(ev){
+                    $select = $(ev.currentTarget);
+
+                    if ($select.val().length === 0) {
+                        return;
+                    }
+
+                    var parts = $select.val().split(':');
+                    var name = 'gatewayId';
+
+                    if (parts[0] === 'card') {
+                        name = 'paymentSourceId';
+                    }
+
+                    $select.prop('disabled', 'disabled');
+
+                    $('form#paymentPreferenceForm').append('<input type="hidden" name="' + name + '" value="' + parts[1] + '" />').submit();
+                });
+            {% endjs %}
+
+            {% if cart.gatewayId or cart.paymentSourceId %}
+                <form id="paymentForm" method="POST" class="form-horizontal paymentSource-form max-w-md">
+                    <input type="hidden" name="action" value="commerce/payments/pay"/>
+                    {{ redirectInput('/shop/customer/order?number='~cart.number~'&success=true') }}
+                    <input type="hidden" name="cancelUrl" value="{{ '/shop/checkout/payment'|hash }}"/>
+                    <input type="hidden" name="orderEmail" value="{{ cart.email }}"/>
+
+                    {{ csrfInput() }}
+
+                    <fieldset>
+                        {% if cart.gatewayId %}
+                            <input type="hidden" name="gatewayId" value="{{ cart.gatewayId }}"/>
+                            {{ cart.gateway.getPaymentFormHtml({})|raw }}
+
+                            {% if cart.gateway.supportsPaymentSources() and currentUser %}
+                                <div class="checkbox">
+                                    <label><input type="checkbox" name="savePaymentSource" value="1" /> {{ "Save card for future purchases"|t }}</label>
+                                </div><br />
+                            {% endif %}
+
+                        {% else %}
+                            {{ cart.gateway.getPaymentConfirmationFormHtml({})|raw }}
+                        {% endif %}
+
+                        {% set user = craft.users.email(cart.email).one() %}
+                        {% if not user %}
+                        <label for="registerUserOnOrderComplete">
+                            <input type="checkbox" id="registerUserOnOrderComplete" name="registerUserOnOrderComplete" value="1" /> {{ "Register me for a user account"|t }}
+                        </label>
+                        {% endif %}
+
+                        <button class="button button-primary" type="submit">Pay {{ cart.totalPrice|commerceCurrency(cart.paymentCurrency,convert=true) }}</button>
+                    </fieldset>
+                </form>
+            {% endif %}
+        </div>
+
+        <div class="w-1/3 px-8 border-l border-grey-lighter">
+            {% include "shop/_includes/order-review" with { showShippingAddress: true, showShippingMethod: true } %}
+        </div>
+    </div>
+
+
+
+    {% js %}
+        $('#paymentForm').on('submit', function (ev) {
+            $form = $(this);
+
+            if ($form.data('processing')) {
+                ev.preventDefault();
+
+                return false;
+            }
+
+            $form.data('processing', true);
+        });
+    {% endjs %}
+{% endblock %}

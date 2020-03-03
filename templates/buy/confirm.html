@@ -1,0 +1,26 @@
+{% extends 'buy/_layout/main' %}
+{% set purchasableId = craft.app.request.param('purchasableId') %}
+
+{% set number = craft.app.request.param('number') %}
+{% set order = craft.orders.number(number).one() %}
+
+{% if not order or order.isCompleted == false %}
+{% redirect 'buy/add' %}
+{% endif %}
+
+{% block title %}
+Thank-you for your order!
+{% endblock %}
+
+
+{% block content %}
+<div class="m-10">
+{% set item = order.lineItems|first %}
+    <h3>You ordered <span class="text-blue">{{ item.description}}</span> t-shirt. We have charged your card <span class="text-blue">{{ order.totalPrice|commerceCurrency(order.currency) }}</span>. Please check your email for your receipt.</h3>
+    <div class="mt-10">
+        <a href="/buy/add" class="text-blue">Buy Another</a>
+    </div>
+</div>
+{% endblock %}
+
+

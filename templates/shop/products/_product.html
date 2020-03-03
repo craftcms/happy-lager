@@ -1,0 +1,34 @@
+{% extends 'shop/_layouts/main' %}
+
+{% block main %}
+        <div class="mt-8">
+            <a href="{{ url('shop/products') }}">&larr; All products</a>
+        </div>
+
+        <div class="flex -mx-6 mt-8 product-details">
+            <div class="w-1/2 mx-6 p-8">
+                {% include "shop/_images/product" with { class: 'u-max-full-width', number: '3' } %}
+            </div>
+            <div class="w-1/2 mx-6 p-8">
+                <h1>{{ product.title }}</h1>
+
+                <form method="POST">
+                    <input type="hidden" name="action" value="commerce/cart/update-cart">
+                    {{ redirectInput('shop/cart') }}
+                    <input type="hidden" name="qty" value="1">
+                    {{ csrfInput() }}
+                    <div class="field">
+                        <select name="purchasableId">
+                            {% for purchasable in product.variants %}
+                                <option {% if purchasable.stock <= 0 and purchasable.hasUnlimitedStock == false %}disabled {% endif %}
+                                        value="{{ purchasable.id }}">{{ purchasable.sku }} {{ purchasable.description }} {{ purchasable.price|commerceCurrency(cart.currency) }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="buttons">
+                        <input type="submit" value="{{ "Add to cart"|t }}" class="button"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+{% endblock %}

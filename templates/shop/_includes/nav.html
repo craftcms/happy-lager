@@ -1,0 +1,39 @@
+<nav>
+    <ul class="list-reset">
+        {% set page = craft.app.request.getSegment(2) %}
+
+        {% if craft.commerce.plans.getAllPlans|length %}
+            <li>
+                <a class="{% if page == 'services' %}active{% endif %}" href="{{ url('shop/services') }}">
+                    {{ "Services"|t }}
+                </a>
+            </li>
+        {% endif %}
+
+        <li>
+            <a class="{% if page == 'products' %}active{% endif %}" href="{{ url('shop/products') }}">
+                {{ "Products"|t }}
+            </a>
+        </li>
+
+        <li>
+            <a class="{% if page == 'cart' %}active{% endif %}" href="{{ url('shop/cart') }}">
+                <i class="fa fa-shopping-cart"></i> {{ "Cart"|t }} <span class="badge">{{ craft.orders.number(cart.number).one().totalQty ?? 0}}</span>
+            </a>
+        </li>
+
+        {% if currentUser %}
+            <li class="account">
+                <a href="#"><i class="fas fa-user"></i> Account</a>
+                <ul class="list-reset">
+                    <li><a href="{{ url('shop/customer') }}">{{ "My Orders"|t }}</a></li>
+                    <li><a href="{{ url('shop/customer/addresses') }}">{{ "My Addresses"|t }}</a></li>
+                    <li><a href="{{ url('shop/customer/cards') }}">{{ "My Cards"|t }}</a></li>
+                    <li><a href="{{ logoutUrl }}">Logout</a></li>
+                </ul>
+            </li>
+        {% else %}
+            <li>{{ "Guest"|t }}</li>
+        {% endif %}
+    </ul>
+</nav>

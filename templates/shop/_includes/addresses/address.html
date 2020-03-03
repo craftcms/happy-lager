@@ -1,0 +1,72 @@
+<ul class="address-data">
+
+  {% if address.attention is not empty %}
+    <li><strong>Att: {{ address.attention }}</strong></li>
+  {% endif %}
+
+  {% if address.title is not empty %}
+    <li><strong>{{ address.title }}</strong></li>
+  {% endif %}
+
+  {% if address.firstName or address.lastName %}
+    <li>
+      {% if address.firstName is not empty %}
+        {{ address.firstName }}
+      {% endif %}
+
+      {% if address.lastName is not empty %}
+        {{ address.lastName }}
+      {% endif %}
+    </li>
+  {% endif %}
+
+  {% if address.fullName %}
+    <li>
+      {{ address.fullName }}
+    </li>
+  {% endif %}
+
+  {% if address.businessName is not empty %}
+    <li><strong>{{ address.businessName }}</strong></li>
+  {% endif %}
+
+  {% if address.businessTaxId is not empty %}
+    <li class="text-grey-dark"><strong>{{ address.businessTaxId }}</strong></li>
+  {% endif %}
+
+  {% if address.address1 is not empty %}
+    <li>{{ address.address1 }}</li>
+  {% endif %}
+
+  {% if address.address2 is not empty %}
+    <li>{{ address.address2 }}</li>
+  {% endif %}
+
+  {% if address.zipCode is not empty or address.city is not empty %}
+    <li>
+      {% if address.zipCode is not empty %}
+        {{ address.zipCode }}
+      {% endif %}
+
+      {% if address.city is not empty %}
+        {{ address.city }}
+      {% endif %}
+    </li>
+  {% endif %}
+
+  {% if address.countryText is defined %}
+    <li>{{ address.countryText }}</li>
+  {% endif %}
+
+  {% if address.stateText is defined %}
+    <li>{{ address.stateText }}</li>
+  {% endif %}
+
+  {% if address.phone is not empty %}
+    <li>{{ address.phone }}</li>
+  {% endif %}
+
+  {% if address.alternativePhone is not empty %}
+    <li>{{ address.alternativePhone }}</li>
+  {% endif %}
+</ul>

@@ -1,0 +1,41 @@
+{% extends 'buy/_layout/main' %}
+{% set purchasableId = craft.app.request.param('purchasableId') %}
+
+
+{% block title %}
+{% if purchasableId %}
+Adding to cart...{% include 'buy/_components/spinner' %}
+{% else %}
+Buy your hand-crafted free-range coastal artisan t-shirt.
+{% endif %}
+{% endblock %}
+
+
+{% block content %}
+    {% if purchasableId %}
+        {# if we have a purchasableId as a query param, just add it to cart and submit the form #}
+        <form method="POST" name="auto-add-to-cart" class="add-to-cart-form">
+            <input type="hidden" name="action" value="commerce/cart/update-cart">
+            {{ redirectInput('buy') }}
+            <input type="hidden" name="qty" value="1">
+            {{ csrfInput() }}
+            <input type="hidden" name="purchasableId" value="{{ purchasableId }}">
+            <input type="submit" hidden/>
+        </form>
+        <script>
+            window.onload = function(){
+                document.forms['auto-add-to-cart'].submit();
+            }
+        </script>
+    {% else %}
+        {% set product = craft.products.one() %}
+        <div class="m-10">
+        <a href="/buy/add?purchasableId={{product.defaultVariant.id}}"class="bg-blue-commerce text-white w-1/2 rounded px-3 py-3 ml-1 mt-6 text-sm hover:bg-blue-dark outline-0">
+            Buy {{ product.title }} ({{ product.defaultVariant.salePrice|commerceCurrency(cart.currency) }})
+        </a>
+        </div>
+    {% endif %}
+</form>
+{% endblock %}
+
+
