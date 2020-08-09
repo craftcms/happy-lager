@@ -2,16 +2,34 @@ fieldLayouts:
   ba0a8885-3474-4231-9827-b6a6da467937:
     tabs:
       -
-        fields:
-          5095500e-4962-429c-9b9c-7a4d0d4f930c:
-            required: false
-            sortOrder: 1
-          b75266c9-d8d2-42ae-9024-0fecb8bdc994:
-            required: false
-            sortOrder: 3
-          fcf41a5f-68b5-42dd-8ca1-cc457eb749f0:
-            required: false
-            sortOrder: 2
+        elements:
+          -
+            fieldUid: 5095500e-4962-429c-9b9c-7a4d0d4f930c
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: fcf41a5f-68b5-42dd-8ca1-cc457eb749f0
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: b75266c9-d8d2-42ae-9024-0fecb8bdc994
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
         name: Content
         sortOrder: 1
 handle: footer

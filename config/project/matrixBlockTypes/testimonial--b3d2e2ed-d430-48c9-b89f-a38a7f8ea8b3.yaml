@@ -3,16 +3,34 @@ fieldLayouts:
   569a9c10-0657-4dbf-87c9-005afb784b54:
     tabs:
       -
-        fields:
-          39b59166-9d91-4d17-baf9-229aca6174c2:
-            required: false
-            sortOrder: 1
-          4ed4bf91-bcf9-45a9-84f7-d5d768103a09:
-            required: false
-            sortOrder: 2
-          a418bde2-f4cc-4ed2-a358-44362a0cb3a9:
-            required: false
-            sortOrder: 3
+        elements:
+          -
+            fieldUid: 39b59166-9d91-4d17-baf9-229aca6174c2
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 4ed4bf91-bcf9-45a9-84f7-d5d768103a09
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: a418bde2-f4cc-4ed2-a358-44362a0cb3a9
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
         name: Content
         sortOrder: 1
 fields:
@@ -31,6 +49,7 @@ fields:
       initialRows: '4'
       multiline: ''
       placeholder: ''
+      uiMode: normal
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\PlainText
@@ -49,6 +68,7 @@ fields:
       initialRows: '4'
       multiline: ''
       placeholder: ''
+      uiMode: normal
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\PlainText
@@ -60,6 +80,7 @@ fields:
     name: Photo
     searchable: true
     settings:
+      allowSelfRelations: false
       allowedKinds: null
       defaultUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
       defaultUploadLocationSubpath: ''
@@ -67,6 +88,7 @@ fields:
       localizeRelations: false
       restrictFiles: ''
       selectionLabel: ''
+      showSiteMenu: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
       singleUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
@@ -76,7 +98,7 @@ fields:
         - 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
       targetSiteId: null
       useSingleFolder: false
-      validateRelatedElements: ''
+      validateRelatedElements: false
       viewMode: list
     translationKeyFormat: null
     translationMethod: site

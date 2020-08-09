@@ -3,16 +3,34 @@ fieldLayouts:
   65bf26e9-50b3-4580-88a4-7a622077d8fb:
     tabs:
       -
-        fields:
-          3285a611-4363-43f2-82b5-97e2d253cab3:
-            required: false
-            sortOrder: 1
-          9ce53ce9-939b-4760-97f4-545ef2c388eb:
-            required: false
-            sortOrder: 3
-          c9ccf068-4ace-4b21-9356-68f3faa96cf3:
-            required: false
-            sortOrder: 2
+        elements:
+          -
+            fieldUid: 3285a611-4363-43f2-82b5-97e2d253cab3
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: c9ccf068-4ace-4b21-9356-68f3faa96cf3
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 9ce53ce9-939b-4760-97f4-545ef2c388eb
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
         name: Content
         sortOrder: 1
 fields:
@@ -31,6 +49,7 @@ fields:
       initialRows: '4'
       multiline: ''
       placeholder: ''
+      uiMode: normal
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\PlainText
@@ -42,6 +61,7 @@ fields:
     name: Image
     searchable: true
     settings:
+      allowSelfRelations: false
       allowedKinds: null
       defaultUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
       defaultUploadLocationSubpath: ''
@@ -49,6 +69,7 @@ fields:
       localizeRelations: false
       restrictFiles: ''
       selectionLabel: ''
+      showSiteMenu: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
       singleUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
@@ -58,7 +79,7 @@ fields:
         - 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
       targetSiteId: null
       useSingleFolder: false
-      validateRelatedElements: ''
+      validateRelatedElements: false
       viewMode: list
     translationKeyFormat: null
     translationMethod: site
@@ -75,12 +96,19 @@ fields:
       availableVolumes: '*'
       cleanupHtml: true
       columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
       purifierConfig: ''
       purifyHtml: '1'
       redactorConfig: ''
       removeEmptyTags: '1'
       removeInlineStyles: '1'
       removeNbsp: '1'
+      showHtmlButtonForNonAdmins: false
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      uiMode: enlarged
     translationKeyFormat: null
     translationMethod: none
     type: craft\redactor\Field

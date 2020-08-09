@@ -4,17 +4,48 @@ fieldLayouts:
       -
         elements:
           -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            autofocus: false
+            class: null
+            disabled: false
+            id: null
             instructions: null
-            label: Title
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            required: false
+            size: null
+            step: null
+            tip: null
+            title: null
             type: craft\fieldlayoutelements\EntryTitleField
+            warning: null
+            width: 100
           -
             fieldUid: 9bb293f8-c659-4035-b5d3-e30dbf8d1c5b
-            required: false
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
             type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
           -
             fieldUid: 08f8ec90-f7ad-4d40-9880-3c96304f1e4e
-            required: false
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
             type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
         name: Content
         sortOrder: 1
 handle: servicesIndex
@@ -23,3 +54,5 @@ name: 'Services Index'
 section: 5fa323b7-9755-4174-bed2-0f2b11c05701
 sortOrder: 0
 titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

@@ -9,12 +9,19 @@ settings:
   availableVolumes: '*'
   cleanupHtml: true
   columnType: text
+  configSelectionMode: choose
+  defaultTransform: ''
+  manualConfig: ''
   purifierConfig: ''
   purifyHtml: '1'
   redactorConfig: ''
   removeEmptyTags: ''
   removeInlineStyles: ''
   removeNbsp: ''
+  showHtmlButtonForNonAdmins: false
+  showUnpermittedFiles: false
+  showUnpermittedVolumes: true
+  uiMode: enlarged
 translationKeyFormat: null
 translationMethod: none
 type: craft\redactor\Field

@@ -1,4 +1,5 @@
 baseUrl: $SITE_URL
+enabled: true
 handle: en
 hasUrls: true
 language: en

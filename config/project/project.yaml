@@ -1,13 +1,9 @@
-dateModified: 1596984562
+dateModified: 1596984672
 email:
   fromEmail: admin@happylager.dev
   fromName: Happylager
   template: null
   transportType: craft\mail\transportadapters\Sendmail
-graphql:
-  publicToken:
-    enabled: false
-    expiryDate: null
 plugins:
   redactor:
     enabled: '1'
@@ -20,3 +16,9 @@ system:
   name: 'Happy Lager'
   schemaVersion: 3.5.12
   timeZone: UTC
+users:
+  allowPublicRegistration: false
+  defaultGroup: null
+  photoSubpath: ''
+  photoVolumeUid: 1f0ea10d-2be0-4638-88da-105d232f4787
+  requireEmailVerification: true

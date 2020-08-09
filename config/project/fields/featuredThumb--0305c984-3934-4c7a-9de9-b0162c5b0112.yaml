@@ -5,6 +5,7 @@ instructions: 'Thumb image for use on home page or archives.'
 name: 'Featured Thumb'
 searchable: true
 settings:
+  allowSelfRelations: false
   allowedKinds: null
   defaultUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
   defaultUploadLocationSubpath: ''
@@ -12,6 +13,7 @@ settings:
   localizeRelations: false
   restrictFiles: ''
   selectionLabel: ''
+  showSiteMenu: true
   showUnpermittedFiles: false
   showUnpermittedVolumes: true
   singleUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
@@ -20,7 +22,7 @@ settings:
   sources: '*'
   targetSiteId: null
   useSingleFolder: false
-  validateRelatedElements: ''
+  validateRelatedElements: false
   viewMode: list
 translationKeyFormat: null
 translationMethod: site

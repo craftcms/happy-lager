@@ -3,16 +3,34 @@ fieldLayouts:
   327aba6f-b81c-4179-9e58-208d34322ced:
     tabs:
       -
-        fields:
-          7ca32393-f78c-4de0-9f8f-52b64e09584f:
-            required: false
-            sortOrder: 2
-          964a1aba-15ac-413f-86c1-03fbf37f30c7:
-            required: false
-            sortOrder: 1
-          f87a6243-5b7f-4456-9106-ccfb6e03b754:
-            required: false
-            sortOrder: 3
+        elements:
+          -
+            fieldUid: 964a1aba-15ac-413f-86c1-03fbf37f30c7
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 7ca32393-f78c-4de0-9f8f-52b64e09584f
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: f87a6243-5b7f-4456-9106-ccfb6e03b754
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
         name: Content
         sortOrder: 1
 fields:
@@ -28,12 +46,19 @@ fields:
       availableVolumes: '*'
       cleanupHtml: true
       columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
       purifierConfig: ''
       purifyHtml: '1'
       redactorConfig: Simple.json
       removeEmptyTags: '1'
       removeInlineStyles: '1'
       removeNbsp: '1'
+      showHtmlButtonForNonAdmins: false
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      uiMode: enlarged
     translationKeyFormat: null
     translationMethod: none
     type: craft\redactor\Field
@@ -45,6 +70,7 @@ fields:
     name: Image
     searchable: true
     settings:
+      allowSelfRelations: false
       allowedKinds:
         - image
       defaultUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
@@ -53,6 +79,7 @@ fields:
       localizeRelations: false
       restrictFiles: '1'
       selectionLabel: ''
+      showSiteMenu: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
       singleUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
@@ -62,7 +89,7 @@ fields:
         - 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
       targetSiteId: null
       useSingleFolder: false
-      validateRelatedElements: ''
+      validateRelatedElements: false
       viewMode: list
     translationKeyFormat: null
     translationMethod: site

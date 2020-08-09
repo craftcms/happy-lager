@@ -5,14 +5,16 @@ instructions: ''
 name: 'Services Performed'
 searchable: true
 settings:
+  allowSelfRelations: false
   limit: ''
   localizeRelations: false
   selectionLabel: ''
+  showSiteMenu: true
   source: null
   sources:
     - 'section:f6b0cb16-5df8-4b57-9856-c9c2d6b9699e'
   targetSiteId: null
-  validateRelatedElements: ''
+  validateRelatedElements: false
   viewMode: null
 translationKeyFormat: null
 translationMethod: site
