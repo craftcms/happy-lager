@@ -1,0 +1,82 @@
+field: 82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e
+fieldLayouts:
+  83f7b1de-657b-45bb-94e4-57d10973c78c:
+    tabs:
+      -
+        fields:
+          a88d73a8-c75f-4c72-aa70-a39dfbbff0fe:
+            required: false
+            sortOrder: 2
+          a8a6d843-bec1-4882-98ec-30cb74f5b16f:
+            required: false
+            sortOrder: 1
+        name: Content
+        sortOrder: 1
+fields:
+  a88d73a8-c75f-4c72-aa70-a39dfbbff0fe:
+    contentColumnType: string
+    fieldGroup: null
+    handle: position
+    instructions: ''
+    name: Position
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - Left
+            -
+              - value
+              - left
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Center
+            -
+              - value
+              - center
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Right
+            -
+              - value
+              - right
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+  a8a6d843-bec1-4882-98ec-30cb74f5b16f:
+    contentColumnType: text
+    fieldGroup: null
+    handle: pullQuote
+    instructions: ''
+    name: 'Pull Quote'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+handle: pullQuote
+name: 'Pull Quote'
+sortOrder: 4

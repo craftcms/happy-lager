@@ -1,0 +1,89 @@
+field: 9bf9e642-2881-44b4-99ff-2cbed3ccc2d7
+fieldLayouts:
+  65bf26e9-50b3-4580-88a4-7a622077d8fb:
+    tabs:
+      -
+        fields:
+          3285a611-4363-43f2-82b5-97e2d253cab3:
+            required: false
+            sortOrder: 1
+          9ce53ce9-939b-4760-97f4-545ef2c388eb:
+            required: false
+            sortOrder: 3
+          c9ccf068-4ace-4b21-9356-68f3faa96cf3:
+            required: false
+            sortOrder: 2
+        name: Content
+        sortOrder: 1
+fields:
+  3285a611-4363-43f2-82b5-97e2d253cab3:
+    contentColumnType: text
+    fieldGroup: null
+    handle: heading
+    instructions: ''
+    name: Heading
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  9ce53ce9-939b-4760-97f4-545ef2c388eb:
+    contentColumnType: string
+    fieldGroup: null
+    handle: image
+    instructions: ''
+    name: Image
+    searchable: true
+    settings:
+      allowedKinds: null
+      defaultUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
+      defaultUploadLocationSubpath: ''
+      limit: '1'
+      localizeRelations: false
+      restrictFiles: ''
+      selectionLabel: ''
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      singleUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
+      singleUploadLocationSubpath: ''
+      source: null
+      sources:
+        - 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
+      targetSiteId: null
+      useSingleFolder: false
+      validateRelatedElements: ''
+      viewMode: list
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
+  c9ccf068-4ace-4b21-9356-68f3faa96cf3:
+    contentColumnType: text
+    fieldGroup: null
+    handle: text
+    instructions: ''
+    name: Text
+    searchable: true
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      cleanupHtml: true
+      columnType: text
+      purifierConfig: ''
+      purifyHtml: '1'
+      redactorConfig: ''
+      removeEmptyTags: '1'
+      removeInlineStyles: '1'
+      removeNbsp: '1'
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+handle: servicesPoint
+name: 'Service Point'
+sortOrder: 1

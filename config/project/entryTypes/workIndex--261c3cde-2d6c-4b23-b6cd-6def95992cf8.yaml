@@ -1,0 +1,25 @@
+fieldLayouts:
+  e3a26917-97ba-4590-a8f3-bb08b01991f3:
+    tabs:
+      -
+        elements:
+          -
+            instructions: null
+            label: Title
+            type: craft\fieldlayoutelements\EntryTitleField
+          -
+            fieldUid: 9bb293f8-c659-4035-b5d3-e30dbf8d1c5b
+            required: false
+            type: craft\fieldlayoutelements\CustomField
+          -
+            fieldUid: 08f8ec90-f7ad-4d40-9880-3c96304f1e4e
+            required: false
+            type: craft\fieldlayoutelements\CustomField
+        name: Content
+        sortOrder: 1
+handle: workIndex
+hasTitleField: true
+name: 'Work Index'
+section: 1ff1d4d0-499c-41b9-b071-77031c901052
+sortOrder: 0
+titleFormat: null

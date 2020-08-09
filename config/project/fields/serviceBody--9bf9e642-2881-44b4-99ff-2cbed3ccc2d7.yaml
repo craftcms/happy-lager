@@ -1,0 +1,14 @@
+contentColumnType: string
+fieldGroup: 8b4aae04-76ef-48c2-a294-e81064a470ed
+handle: serviceBody
+instructions: ''
+name: 'Service Body'
+searchable: true
+settings:
+  contentTable: '{{%matrixcontent_servicebody}}'
+  maxBlocks: ''
+  minBlocks: ''
+  propagationMethod: all
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

@@ -1,0 +1,28 @@
+contentColumnType: string
+fieldGroup: 8b4aae04-76ef-48c2-a294-e81064a470ed
+handle: serviceIcon
+instructions: ''
+name: 'Service Icon'
+searchable: true
+settings:
+  allowedKinds: null
+  defaultUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
+  defaultUploadLocationSubpath: ''
+  limit: '1'
+  localizeRelations: false
+  restrictFiles: ''
+  selectionLabel: ''
+  showUnpermittedFiles: false
+  showUnpermittedVolumes: true
+  singleUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
+  singleUploadLocationSubpath: ''
+  source: null
+  sources:
+    - 'volume:3fc34ff2-8da7-4a35-8147-f0a2e01392b9'
+  targetSiteId: null
+  useSingleFolder: false
+  validateRelatedElements: ''
+  viewMode: list
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Assets

@@ -1,0 +1,17 @@
+contentColumnType: string(1020)
+fieldGroup: f7189ca2-4b93-4661-830a-a71aff8aa3cd
+handle: contactUsLabel
+instructions: ''
+name: 'Contact Us Label'
+searchable: true
+settings:
+  byteLimit: null
+  charLimit: 255
+  code: ''
+  columnType: null
+  initialRows: '4'
+  multiline: ''
+  placeholder: ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

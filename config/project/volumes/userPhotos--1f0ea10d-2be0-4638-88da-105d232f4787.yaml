@@ -1,0 +1,8 @@
+handle: userPhotos
+hasUrls: false
+name: 'User Photos'
+settings:
+  path: '@storage/userphotos'
+sortOrder: 4
+type: craft\volumes\Local
+url: null

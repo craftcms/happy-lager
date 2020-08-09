@@ -1,0 +1,8 @@
+handle: serviceIcons
+hasUrls: true
+name: 'Service Icons'
+settings:
+  path: '@assetBasePath/site/images/service-icons'
+sortOrder: 3
+type: craft\volumes\Local
+url: '@assetBaseUrl/images/service-icons'

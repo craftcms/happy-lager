@@ -1,0 +1,20 @@
+contentColumnType: text
+fieldGroup: 0d0b7e16-8d7c-4d6f-9059-d11c473058f4
+handle: shortDescription
+instructions: 'Short description for use in index regions.'
+name: 'Short Description'
+searchable: true
+settings:
+  availableTransforms: '*'
+  availableVolumes: '*'
+  cleanupHtml: true
+  columnType: text
+  purifierConfig: ''
+  purifyHtml: '1'
+  redactorConfig: Simple.json
+  removeEmptyTags: '1'
+  removeInlineStyles: '1'
+  removeNbsp: '1'
+translationKeyFormat: null
+translationMethod: none
+type: craft\redactor\Field

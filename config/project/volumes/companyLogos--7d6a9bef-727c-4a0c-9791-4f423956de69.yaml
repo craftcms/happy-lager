@@ -1,0 +1,8 @@
+handle: companyLogos
+hasUrls: true
+name: 'Company Logos'
+settings:
+  path: '@assetBasePath/logos'
+sortOrder: 2
+type: craft\volumes\Local
+url: '@assetBaseUrl/logos'

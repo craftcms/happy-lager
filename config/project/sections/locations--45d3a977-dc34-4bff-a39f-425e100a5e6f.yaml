@@ -1,0 +1,14 @@
+enableVersioning: true
+handle: locations
+name: Locations
+propagationMethod: all
+siteSettings:
+  06f4e499-3cdc-4d64-aec2-9a7d3a143c75:
+    enabledByDefault: true
+    hasUrls: false
+    template: null
+    uriFormat: null
+structure:
+  maxLevels: 1
+  uid: 3c13606e-11f9-4cbd-bbae-c29608750caf
+type: structure

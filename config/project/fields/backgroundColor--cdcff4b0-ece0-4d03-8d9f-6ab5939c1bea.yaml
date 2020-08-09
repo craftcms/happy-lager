@@ -1,0 +1,11 @@
+contentColumnType: string(7)
+fieldGroup: 0d0b7e16-8d7c-4d6f-9059-d11c473058f4
+handle: backgroundColor
+instructions: 'Hex value for alternate background color.'
+name: 'Background Color'
+searchable: true
+settings:
+  defaultColor: ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Color

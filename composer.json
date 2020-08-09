@@ -20,9 +20,9 @@
   },
   "require": {
     "php": ">=7.0.0",
-    "craftcms/cms": "^3.4.5",
+    "craftcms/cms": "^3.5.2",
     "vlucas/phpdotenv": "^2.4.0",
-    "craftcms/redactor": "^2.5.0"
+    "craftcms/redactor": "^2.7.0"
   },
   "autoload": {
     "psr-4": {

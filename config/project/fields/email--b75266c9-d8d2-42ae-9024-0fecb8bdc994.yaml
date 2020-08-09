@@ -1,0 +1,17 @@
+contentColumnType: string(1020)
+fieldGroup: 0815347a-8e73-45fd-93c9-2244ac562559
+handle: email
+instructions: ''
+name: Email
+searchable: true
+settings:
+  byteLimit: null
+  charLimit: 255
+  code: ''
+  columnType: null
+  initialRows: '4'
+  multiline: ''
+  placeholder: ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

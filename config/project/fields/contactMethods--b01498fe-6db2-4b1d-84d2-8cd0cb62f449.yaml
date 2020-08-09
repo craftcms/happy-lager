@@ -1,0 +1,14 @@
+contentColumnType: string
+fieldGroup: 0815347a-8e73-45fd-93c9-2244ac562559
+handle: contactMethods
+instructions: ''
+name: 'Contact Methods'
+searchable: true
+settings:
+  contentTable: '{{%matrixcontent_contactmethods}}'
+  maxBlocks: ''
+  minBlocks: ''
+  propagationMethod: all
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

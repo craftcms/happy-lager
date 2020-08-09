@@ -1,0 +1,92 @@
+field: 82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e
+fieldLayouts:
+  b82a12f2-e814-4b74-9b32-bd1a90497a65:
+    tabs:
+      -
+        fields:
+          35200549-df46-4092-994a-a8015c5810ba:
+            required: false
+            sortOrder: 1
+          41e6fac7-12d7-45c9-ac83-0aa59793d872:
+            required: false
+            sortOrder: 2
+          a5b4b046-1178-45f9-b4cf-3e3bef86e067:
+            required: false
+            sortOrder: 3
+        name: Content
+        sortOrder: 1
+fields:
+  35200549-df46-4092-994a-a8015c5810ba:
+    contentColumnType: text
+    fieldGroup: null
+    handle: quote
+    instructions: ''
+    name: Quote
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  41e6fac7-12d7-45c9-ac83-0aa59793d872:
+    contentColumnType: text
+    fieldGroup: null
+    handle: attribution
+    instructions: ''
+    name: Attribution
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  a5b4b046-1178-45f9-b4cf-3e3bef86e067:
+    contentColumnType: string
+    fieldGroup: null
+    handle: position
+    instructions: ''
+    name: Position
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - Center
+            -
+              - value
+              - center
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Full
+            -
+              - value
+              - full
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+handle: quote
+name: Quote
+sortOrder: 7

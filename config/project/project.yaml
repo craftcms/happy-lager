@@ -1,0 +1,22 @@
+dateModified: 1596984562
+email:
+  fromEmail: admin@happylager.dev
+  fromName: Happylager
+  template: null
+  transportType: craft\mail\transportadapters\Sendmail
+graphql:
+  publicToken:
+    enabled: false
+    expiryDate: null
+plugins:
+  redactor:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 2.3.0
+    settings: null
+system:
+  edition: pro
+  live: true
+  name: 'Happy Lager'
+  schemaVersion: 3.5.12
+  timeZone: UTC

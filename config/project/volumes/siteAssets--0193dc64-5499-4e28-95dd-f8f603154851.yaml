@@ -1,0 +1,18 @@
+fieldLayouts:
+  e4360fb7-190d-42c5-bde0-e01c03bd127c:
+    tabs:
+      -
+        fields:
+          aef80333-1412-4130-bb84-ac3bdbbcbbe2:
+            required: false
+            sortOrder: 1
+        name: Content
+        sortOrder: 1
+handle: siteAssets
+hasUrls: true
+name: 'Site Assets'
+settings:
+  path: '@assetBasePath/site'
+sortOrder: 1
+type: craft\volumes\Local
+url: '@assetBaseUrl/site'

@@ -1,0 +1,25 @@
+fieldLayouts:
+  423d0eb9-9236-47c9-a98a-30fc46947c71:
+    tabs:
+      -
+        elements:
+          -
+            instructions: null
+            label: Title
+            type: craft\fieldlayoutelements\EntryTitleField
+          -
+            fieldUid: 9bb293f8-c659-4035-b5d3-e30dbf8d1c5b
+            required: false
+            type: craft\fieldlayoutelements\CustomField
+          -
+            fieldUid: 08f8ec90-f7ad-4d40-9880-3c96304f1e4e
+            required: false
+            type: craft\fieldlayoutelements\CustomField
+        name: Content
+        sortOrder: 1
+handle: servicesIndex
+hasTitleField: true
+name: 'Services Index'
+section: 5fa323b7-9755-4174-bed2-0f2b11c05701
+sortOrder: 0
+titleFormat: null

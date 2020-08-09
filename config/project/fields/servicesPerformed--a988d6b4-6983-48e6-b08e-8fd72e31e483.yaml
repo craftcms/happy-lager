@@ -1,0 +1,19 @@
+contentColumnType: string
+fieldGroup: f00e1793-0757-46e5-99e9-016b21359ac7
+handle: servicesPerformed
+instructions: ''
+name: 'Services Performed'
+searchable: true
+settings:
+  limit: ''
+  localizeRelations: false
+  selectionLabel: ''
+  source: null
+  sources:
+    - 'section:f6b0cb16-5df8-4b57-9856-c9c2d6b9699e'
+  targetSiteId: null
+  validateRelatedElements: ''
+  viewMode: null
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Entries
