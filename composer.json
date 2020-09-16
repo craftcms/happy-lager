@@ -1,28 +1,9 @@
 {
-  "name": "craftcms/craft",
-  "description": "Craft CMS",
-  "keywords": [
-    "craft",
-    "cms",
-    "craftcms",
-    "project"
-  ],
-  "license": "MIT",
-  "homepage": "https://craftcms.com/",
-  "type": "project",
-  "support": {
-    "email": "support@craftcms.com",
-    "issues": "https://github.com/craftcms/cms/issues",
-    "forum": "https://craftcms.stackexchange.com/",
-    "source": "https://github.com/craftcms/cms",
-    "docs": "https://craftcms.com/docs",
-    "rss": "https://craftcms.com/changelog.rss"
-  },
   "require": {
     "php": ">=7.0.0",
-    "craftcms/cms": "^3.5.2",
+    "craftcms/cms": "^3.5.10.1",
     "vlucas/phpdotenv": "^2.4.0",
-    "craftcms/redactor": "^2.7.0"
+    "craftcms/redactor": "^2.7.4"
   },
   "autoload": {
     "psr-4": {
@@ -38,10 +19,6 @@
   "scripts": {
     "post-root-package-install": [
       "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-    ],
-    "post-create-project-cmd": [
-      "@composer dump-autoload -o",
-      "@php craft setup/welcome"
     ]
   }
 }

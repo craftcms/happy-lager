@@ -1,4 +1,4 @@
-dateModified: 1596984672
+dateModified: 1600294664
 email:
   fromEmail: admin@happylager.dev
   fromName: Happylager
@@ -14,7 +14,7 @@ system:
   edition: pro
   live: true
   name: 'Happy Lager'
-  schemaVersion: 3.5.12
+  schemaVersion: 3.5.13
   timeZone: UTC
 users:
   allowPublicRegistration: false

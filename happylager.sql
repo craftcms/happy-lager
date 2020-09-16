@@ -11,7 +11,7 @@
  Target Server Version : 50730
  File Encoding         : 65001
 
- Date: 09/08/2020 07:54:38
+ Date: 16/09/2020 15:18:17
 */
 
 SET NAMES utf8mb4;
@@ -4732,6 +4732,7 @@ CREATE TABLE `info` (
   `version` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `schemaVersion` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `maintenance` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `configVersion` char(12) COLLATE utf8_unicode_ci NOT NULL DEFAULT '000000000000',
   `fieldVersion` char(12) COLLATE utf8_unicode_ci DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
@@ -4743,7 +4744,7 @@ CREATE TABLE `info` (
 -- Records of info
 -- ----------------------------
 BEGIN;
-INSERT INTO `info` VALUES (1, '3.5.2', '3.5.12', 0, 'bsnuosuuyatm', '2019-12-17 22:20:51', '2020-08-09 14:53:09', 'a3dbe1b0-9219-4f3c-a463-15855bbe3567');
+INSERT INTO `info` VALUES (1, '3.5.10.1', '3.5.13', 0, 'ncimfsxyghdv', 'bsnuosuuyatm', '2019-12-17 22:20:51', '2020-09-16 22:17:44', 'a3dbe1b0-9219-4f3c-a463-15855bbe3567');
 COMMIT;
 
 -- ----------------------------
@@ -6850,7 +6851,7 @@ CREATE TABLE `migrations` (
   `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `migrations_track_name_unq_idx` (`track`,`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=265 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=266 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of migrations
@@ -7120,6 +7121,7 @@ INSERT INTO `migrations` VALUES (261, 'craft', 'm200715_113400_transform_index_e
 INSERT INTO `migrations` VALUES (262, 'craft', 'm200716_110900_replace_file_asset_permissions', '2020-08-09 14:49:24', '2020-08-09 14:49:24', '2020-08-09 14:49:24', '930e3047-c622-4bbd-aca7-2870ae27b9e5');
 INSERT INTO `migrations` VALUES (263, 'craft', 'm200716_153800_public_token_settings_in_project_config', '2020-08-09 14:49:24', '2020-08-09 14:49:24', '2020-08-09 14:49:24', 'ec3d94a4-78a4-4101-9c76-9538e36612bd');
 INSERT INTO `migrations` VALUES (264, 'craft', 'm200720_175543_drop_unique_constraints', '2020-08-09 14:49:24', '2020-08-09 14:49:24', '2020-08-09 14:49:24', '5c4cb06c-d378-4a78-8b3f-e0bafb907a4e');
+INSERT INTO `migrations` VALUES (265, 'craft', 'm200825_051217_project_config_version', '2020-09-16 22:17:43', '2020-09-16 22:17:43', '2020-09-16 22:17:43', 'c8a4a229-7e61-431f-81f3-24cb4024385c');
 COMMIT;
 
 -- ----------------------------
@@ -7145,7 +7147,7 @@ CREATE TABLE `plugins` (
 -- Records of plugins
 -- ----------------------------
 BEGIN;
-INSERT INTO `plugins` VALUES (1, 'redactor', '2.7.0', '2.3.0', 'unknown', NULL, '2018-02-16 22:20:38', '2018-02-16 22:20:38', '2020-08-09 14:49:19', '2466ee8f-7fab-45ad-b6ec-10d86c18543b');
+INSERT INTO `plugins` VALUES (1, 'redactor', '2.7.4', '2.3.0', 'unknown', NULL, '2018-02-16 22:20:38', '2018-02-16 22:20:38', '2020-09-16 22:17:40', '2466ee8f-7fab-45ad-b6ec-10d86c18543b');
 COMMIT;
 
 -- ----------------------------
@@ -7162,7 +7164,7 @@ CREATE TABLE `projectconfig` (
 -- Records of projectconfig
 -- ----------------------------
 BEGIN;
-INSERT INTO `projectconfig` VALUES ('dateModified', '1596984672');
+INSERT INTO `projectconfig` VALUES ('dateModified', '1600294664');
 INSERT INTO `projectconfig` VALUES ('email.fromEmail', '\"admin@happylager.dev\"');
 INSERT INTO `projectconfig` VALUES ('email.fromName', '\"Happylager\"');
 INSERT INTO `projectconfig` VALUES ('email.template', 'null');
@@ -9087,7 +9089,7 @@ INSERT INTO `projectconfig` VALUES ('sites.06f4e499-3cdc-4d64-aec2-9a7d3a143c75.
 INSERT INTO `projectconfig` VALUES ('system.edition', '\"pro\"');
 INSERT INTO `projectconfig` VALUES ('system.live', 'true');
 INSERT INTO `projectconfig` VALUES ('system.name', '\"Happy Lager\"');
-INSERT INTO `projectconfig` VALUES ('system.schemaVersion', '\"3.5.12\"');
+INSERT INTO `projectconfig` VALUES ('system.schemaVersion', '\"3.5.13\"');
 INSERT INTO `projectconfig` VALUES ('system.timeZone', '\"UTC\"');
 INSERT INTO `projectconfig` VALUES ('users.allowPublicRegistration', 'false');
 INSERT INTO `projectconfig` VALUES ('users.defaultGroup', 'null');
