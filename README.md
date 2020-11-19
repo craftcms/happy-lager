@@ -92,11 +92,13 @@ If you want to install the site locally, follow these instructions:
    - `vendor/*`
    - `web/cpresources/*`
 
-5. Create a new MySQL database called `happylager`, and import `happylager.sql` into it.
+5. Run this command in the CLI from your project's root to automatically generate a security key for the site: `php craft setup/security-key`
 
-6. Create a new virtual host with the hostname `happylager.test` that points to the `happylager.test/web/` folder.
+6. Create a new MySQL database called `happylager`, and import `happylager.sql` into it.
 
-7. Edit your `hosts` file to resolve `happylager.test` to `127.0.0.1`, if necessary.
+7. Create a new virtual host with the hostname `happylager.test` that points to the `happylager.test/web/` folder.
+
+8. Edit your `hosts` file to resolve `happylager.test` to `127.0.0.1`, if necessary.
 
 Now point your browser at `http://happylager.test`. You should see the Happy Lager homepage.
 
