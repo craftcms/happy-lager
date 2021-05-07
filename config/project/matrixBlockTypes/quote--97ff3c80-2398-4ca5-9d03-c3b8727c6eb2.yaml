@@ -1,0 +1,112 @@
+field: 82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e # Article Body
+fieldLayouts:
+  b82a12f2-e814-4b74-9b32-bd1a90497a65:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 35200549-df46-4092-994a-a8015c5810ba # Quote
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 41e6fac7-12d7-45c9-ac83-0aa59793d872 # Attribution
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: a5b4b046-1178-45f9-b4cf-3e3bef86e067 # Position
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  41e6fac7-12d7-45c9-ac83-0aa59793d872: # Attribution
+    contentColumnType: text
+    fieldGroup: null
+    handle: attribution
+    instructions: ''
+    name: Attribution
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  35200549-df46-4092-994a-a8015c5810ba: # Quote
+    contentColumnType: text
+    fieldGroup: null
+    handle: quote
+    instructions: ''
+    name: Quote
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  a5b4b046-1178-45f9-b4cf-3e3bef86e067: # Position
+    contentColumnType: string
+    fieldGroup: null
+    handle: position
+    instructions: ''
+    name: Position
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - Center
+            -
+              - value
+              - center
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Full
+            -
+              - value
+              - full
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+handle: quote
+name: Quote
+sortOrder: 7

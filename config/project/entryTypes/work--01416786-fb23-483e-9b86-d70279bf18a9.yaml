@@ -1,0 +1,114 @@
+fieldLayouts:
+  b3e92e12-b415-4a53-b67e-ade9f5fdf5dc:
+    tabs:
+      -
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            id: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\EntryTitleField
+            warning: null
+            width: 100
+          -
+            fieldUid: aef80333-1412-4130-bb84-ac3bdbbcbbe2 # Short Description
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 9bb293f8-c659-4035-b5d3-e30dbf8d1c5b # Heading
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 674e53a6-d62c-4322-ae09-349765f1ef17 # Subheading
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e # Article Body
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: a988d6b4-6983-48e6-b08e-8fd72e31e483 # Services Performed
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+      -
+        elements:
+          -
+            fieldUid: 0cbb9736-a84b-4e83-803c-5077f56394a9 # Featured Image
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 0305c984-3934-4c7a-9de9-b0162c5b0112 # Featured Thumb
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea # Background Color
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Design
+        sortOrder: 2
+handle: work
+hasTitleField: true
+name: Work
+section: b3a9eef3-9444-4995-84e2-6dc6b60aebd2 # Work
+sortOrder: 0
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

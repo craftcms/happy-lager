@@ -1,0 +1,6 @@
+siteUid: null
+sortOrder: '2'
+template: search/_results
+uriParts:
+  - search/results
+uriPattern: search/results

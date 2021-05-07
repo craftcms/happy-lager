@@ -1,0 +1,14 @@
+contentColumnType: string
+fieldGroup: ea8511ac-62ec-4393-a910-75e6c21f6986 # Products
+handle: shipstation
+instructions: ''
+name: ShipStation
+searchable: false
+settings:
+  contentTable: '{{%matrixcontent_shipstation}}'
+  maxBlocks: ''
+  minBlocks: ''
+  propagationMethod: all
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

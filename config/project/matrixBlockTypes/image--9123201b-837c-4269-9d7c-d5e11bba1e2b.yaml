@@ -1,0 +1,158 @@
+field: 82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e # Article Body
+fieldLayouts:
+  327aba6f-b81c-4179-9e58-208d34322ced:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 964a1aba-15ac-413f-86c1-03fbf37f30c7 # Image
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 7ca32393-f78c-4de0-9f8f-52b64e09584f # Caption
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: f87a6243-5b7f-4456-9106-ccfb6e03b754 # Position
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  7ca32393-f78c-4de0-9f8f-52b64e09584f: # Caption
+    contentColumnType: text
+    fieldGroup: null
+    handle: caption
+    instructions: ''
+    name: Caption
+    searchable: true
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      cleanupHtml: true
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: null
+      purifyHtml: '1'
+      redactorConfig: Simple.json
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      uiMode: enlarged
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+  964a1aba-15ac-413f-86c1-03fbf37f30c7: # Image
+    contentColumnType: string
+    fieldGroup: null
+    handle: image
+    instructions: ''
+    name: Image
+    searchable: true
+    settings:
+      allowSelfRelations: false
+      allowUploads: true
+      allowedKinds:
+        - image
+      defaultUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851' # Site Assets
+      defaultUploadLocationSubpath: ''
+      limit: '1'
+      localizeRelations: false
+      previewMode: full
+      restrictFiles: '1'
+      selectionLabel: null
+      showSiteMenu: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      singleUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851' # Site Assets
+      singleUploadLocationSubpath: ''
+      source: null
+      sources:
+        - 'volume:0193dc64-5499-4e28-95dd-f8f603154851' # Site Assets
+      targetSiteId: null
+      useSingleFolder: false
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
+  f87a6243-5b7f-4456-9106-ccfb6e03b754: # Position
+    contentColumnType: string
+    fieldGroup: null
+    handle: position
+    instructions: ''
+    name: Position
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - Left
+            -
+              - value
+              - left
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Center
+            -
+              - value
+              - center
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Right
+            -
+              - value
+              - right
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Full
+            -
+              - value
+              - full
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+handle: image
+name: Image
+sortOrder: 5

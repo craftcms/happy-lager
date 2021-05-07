@@ -1,0 +1,11 @@
+{
+  "Attr.AllowedFrameTargets": [
+    "_blank"
+  ],
+  "Attr.EnableID": true,
+  "HTML.AllowedComments": [
+    "pagebreak"
+  ],
+  "HTML.SafeIframe": true,
+  "URI.SafeIframeRegexp": "%^(https?:)?//(www.youtube.com/embed/|player.vimeo.com/video/)%"
+}

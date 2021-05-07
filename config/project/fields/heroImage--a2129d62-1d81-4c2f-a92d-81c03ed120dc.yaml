@@ -1,0 +1,32 @@
+contentColumnType: string
+fieldGroup: d58a1faa-0bf6-46b2-b880-b0c14bebca75 # Homepage
+handle: heroImage
+instructions: 'Choose the big homepage hero image. The image should be at least 1450×916 for best results.'
+name: 'Hero Image'
+searchable: true
+settings:
+  allowSelfRelations: false
+  allowUploads: true
+  allowedKinds: null
+  defaultUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851' # Site Assets
+  defaultUploadLocationSubpath: ''
+  limit: '1'
+  localizeRelations: false
+  previewMode: full
+  restrictFiles: ''
+  selectionLabel: null
+  showSiteMenu: true
+  showUnpermittedFiles: false
+  showUnpermittedVolumes: true
+  singleUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851' # Site Assets
+  singleUploadLocationSubpath: ''
+  source: null
+  sources:
+    - 'volume:0193dc64-5499-4e28-95dd-f8f603154851' # Site Assets
+  targetSiteId: null
+  useSingleFolder: false
+  validateRelatedElements: false
+  viewMode: null
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Assets

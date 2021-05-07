@@ -1,0 +1,32 @@
+isPublic: true
+name: 'Public Schema'
+scope:
+  - 'elements.drafts:read'
+  - 'elements.revisions:read'
+  - 'elements.inactive:read'
+  - 'sections.1a1f289d-3e32-4409-bfb2-03ec7e7d1b81:read' # About
+  - 'entrytypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4:read' # About
+  - 'sections.735318f3-e53c-4ce1-8dad-4c7a5c7c5bee:read' # Homepage
+  - 'entrytypes.1f72a359-0ce9-4415-82dc-88dc833073c3:read' # Homepage
+  - 'sections.45d3a977-dc34-4bff-a39f-425e100a5e6f:read' # Locations
+  - 'entrytypes.ae84d93c-8a94-4605-bf08-11ada918f964:read' # Locations
+  - 'sections.f5969f9a-8d3f-487e-9695-cc4e5fbe5efd:read' # News
+  - 'entrytypes.eba60966-6218-4985-b901-fff1e5f97a49:read' # Article
+  - 'entrytypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3:read' # Link
+  - 'sections.f6b0cb16-5df8-4b57-9856-c9c2d6b9699e:read' # Services
+  - 'entrytypes.c09d31ed-3004-484c-89ef-e9d262f31f00:read' # Services
+  - 'sections.5fa323b7-9755-4174-bed2-0f2b11c05701:read' # Services Index
+  - 'entrytypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f:read' # Services Index
+  - 'sections.b3a9eef3-9444-4995-84e2-6dc6b60aebd2:read' # Work
+  - 'entrytypes.01416786-fb23-483e-9b86-d70279bf18a9:read' # Work
+  - 'sections.1ff1d4d0-499c-41b9-b071-77031c901052:read' # Work Index
+  - 'entrytypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8:read' # Work Index
+  - 'volumes.0193dc64-5499-4e28-95dd-f8f603154851:read' # Site Assets
+  - 'volumes.7d6a9bef-727c-4a0c-9791-4f423956de69:read' # Company Logos
+  - 'volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9:read' # Service Icons
+  - 'volumes.1f0ea10d-2be0-4638-88da-105d232f4787:read' # User Photos
+  - 'globalsets.8dbeba09-2202-4eb4-8f3c-b15633a4830d:read' # Footer Content
+  - 'globalsets.dbe716bf-08f6-4302-9a3b-d3ba680d0dcd:read' # General
+  - 'usergroups.everyone:read'
+  - 'productTypes.3fa3d959-860f-4ad7-8e55-5d33ad17dbcd:read' # Clothing
+  - 'freeformForms.all:read'

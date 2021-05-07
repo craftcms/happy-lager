@@ -1,0 +1,104 @@
+field: 82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e # Article Body
+fieldLayouts:
+  4ade673e-0245-430b-b932-c8ea86e36773:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c # Text
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: cc6a4697-6d1c-4342-b9de-bce13295a885 # Position
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  cc6a4697-6d1c-4342-b9de-bce13295a885: # Position
+    contentColumnType: string
+    fieldGroup: null
+    handle: position
+    instructions: ''
+    name: Position
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - Left
+            -
+              - value
+              - left
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Center
+            -
+              - value
+              - center
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Right
+            -
+              - value
+              - right
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+  e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c: # Text
+    contentColumnType: text
+    fieldGroup: null
+    handle: text
+    instructions: ''
+    name: Text
+    searchable: true
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      cleanupHtml: true
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: null
+      purifyHtml: '1'
+      redactorConfig: Standard.json
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      uiMode: enlarged
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+handle: text
+name: Text
+sortOrder: 3

@@ -1,0 +1,34 @@
+contentColumnType: string
+fieldGroup: ea8511ac-62ec-4393-a910-75e6c21f6986 # Products
+handle: storeplace
+instructions: ''
+name: 'Store Place'
+searchable: false
+settings:
+  optgroups: true
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'Store A'
+        -
+          - value
+          - storeA
+        -
+          - default
+          - '1'
+    -
+      __assoc__:
+        -
+          - label
+          - 'Store B'
+        -
+          - value
+          - storeB
+        -
+          - default
+          - ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown
