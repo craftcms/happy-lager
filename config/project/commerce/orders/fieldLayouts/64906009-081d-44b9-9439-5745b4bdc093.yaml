@@ -1,0 +1,23 @@
+tabs:
+  -
+    elements:
+      -
+        fieldUid: f0dbb722-2ed2-4f96-b958-a4d157773829 # Store Place
+        instructions: null
+        label: null
+        required: '0'
+        tip: null
+        type: craft\fieldlayoutelements\CustomField
+        warning: null
+        width: 100
+      -
+        fieldUid: bc8e33c7-4a3a-4a74-8812-24c1c6ea4c5a # ShipStation
+        instructions: null
+        label: null
+        required: '0'
+        tip: null
+        type: craft\fieldlayoutelements\CustomField
+        warning: null
+        width: 100
+    name: Products
+    sortOrder: 1

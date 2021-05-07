@@ -1,0 +1,20 @@
+enableVersioning: true
+handle: about
+name: About
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
+propagationMethod: all
+siteSettings:
+  06f4e499-3cdc-4d64-aec2-9a7d3a143c75: # Happy Lager (en)
+    enabledByDefault: true
+    hasUrls: true
+    template: about
+    uriFormat: about
+type: single

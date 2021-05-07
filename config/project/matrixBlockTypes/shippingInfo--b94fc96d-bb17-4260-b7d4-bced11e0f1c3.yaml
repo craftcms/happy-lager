@@ -1,0 +1,96 @@
+field: bc8e33c7-4a3a-4a74-8812-24c1c6ea4c5a # ShipStation
+fieldLayouts:
+  f3383af4-d1c0-4503-ad79-9cd82c3b9ad4:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: e2bd07fa-f93f-4ddc-8da3-1d78a73ebdbb # Carrier
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: cfe45be8-1fb4-4ebe-ad22-15e49bbe1a12 # Service
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 5f142b1a-447c-4b86-acb0-b95d158e9884 # Tracking Number
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  5f142b1a-447c-4b86-acb0-b95d158e9884: # Tracking Number
+    contentColumnType: text
+    fieldGroup: null
+    handle: trackingNumber
+    instructions: ''
+    name: 'Tracking Number'
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  cfe45be8-1fb4-4ebe-ad22-15e49bbe1a12: # Service
+    contentColumnType: text
+    fieldGroup: null
+    handle: service
+    instructions: ''
+    name: Service
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  e2bd07fa-f93f-4ddc-8da3-1d78a73ebdbb: # Carrier
+    contentColumnType: text
+    fieldGroup: null
+    handle: carrier
+    instructions: ''
+    name: Carrier
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+handle: shippingInfo
+name: 'Shipping Info'
+sortOrder: 1

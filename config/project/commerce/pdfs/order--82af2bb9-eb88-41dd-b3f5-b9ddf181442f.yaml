@@ -1,0 +1,9 @@
+description: 'Default Order PDF'
+enabled: true
+fileNameFormat: 'Order-{number}'
+handle: order
+isDefault: true
+language: orderLanguage
+name: Default
+sortOrder: 9999
+templatePath: shop/special/receipt

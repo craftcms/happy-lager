@@ -1,0 +1,146 @@
+dateModified: 1620367412
+email:
+  fromEmail: admin@happylager.dev
+  fromName: Happylager
+  template: null
+  transportType: craft\mail\transportadapters\Sendmail
+plugins:
+  commerce:
+    edition: pro
+    enabled: true
+    licenseKey: D5D0UVO4IOGET56D4DZHMF77
+    schemaVersion: 3.3.2
+  freeform:
+    edition: pro
+    enabled: true
+    licenseKey: 732EU132BDA8FX6OS1I5I9H6
+    schemaVersion: 3.3.1
+    settings:
+      ajaxByDefault: true
+      alertNotificationRecipients: ''
+      autoScrollToErrors: true
+      badgeType: all
+      blockedEmails: null
+      blockedEmailsError: 'Invalid Email Address'
+      blockedIpAddresses: null
+      blockedKeywords: null
+      blockedKeywordsError: 'Invalid Entry Data'
+      clientDigestFrequency: 1
+      clientDigestRecipients: ''
+      customErrorMessage: null
+      customHoneypotName: null
+      defaultTemplates: true
+      defaultView: dashboard
+      digestFrequency: 1
+      digestOnlyOnProduction: false
+      digestRecipients: ''
+      displayFeed: true
+      emailTemplateDirectory: null
+      emailTemplateStorage: db
+      fieldDisplayOrder: name
+      fillWithGet: false
+      footerScripts: false
+      formFieldShowOnlyAllowedForms: false
+      formSubmitDisable: true
+      formSubmitExpiration: null
+      formTemplateDirectory: null
+      formattingTemplate: flexbox.html
+      freeformHoneypot: true
+      freeformHoneypotEnhancement: false
+      hideBannerDemo: true
+      hideBannerOldFreeform: false
+      minimumSubmitTime: null
+      pluginName: ''
+      purgableSpamAgeInDays: null
+      purgableSubmissionAgeInDays: null
+      purgableUnfinalizedAssetAgeInMinutes: 180
+      recaptchaBehaviour: display_error
+      recaptchaEnabled: false
+      recaptchaErrorMessage: 'Please verify that you are not a robot.'
+      recaptchaKey: null
+      recaptchaLazyLoad: false
+      recaptchaMinScore: 0.5
+      recaptchaSecret: null
+      recaptchaSize: normal
+      recaptchaTheme: light
+      recaptchaType: v2_checkbox
+      rememberPageSubmitOrder: true
+      removeNewlines: false
+      renderFormHtmlInCpViews: true
+      salesforce_client_id: null
+      salesforce_client_secret: null
+      salesforce_password: null
+      salesforce_username: null
+      scriptInsertLocation: footer
+      scriptInsertType: pointers
+      sessionEntryMaxCount: 50
+      sessionEntryTTL: 10800
+      showErrorsForBlockedEmails: false
+      showErrorsForBlockedKeywords: false
+      showTutorial: true
+      spamFolderEnabled: true
+      spamProtectionBehaviour: simulate_success
+      submissionThrottlingCount: null
+      submissionThrottlingTimeFrame: null
+      twigInHtml: true
+      twigInHtmlIsolatedMode: true
+      updateSearchIndexes: true
+  klaviyoconnect:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+    settings:
+      cartUrl: /shop/cart
+      eventPrefix: ''
+      klaviyoApiKey: $KLAVIYO_PRIVATE_KEY
+      klaviyoAvailableGroups:
+        - ''
+      klaviyoAvailableLists:
+        - ''
+        - Nwi5hZ
+      klaviyoDefaultProfileMapping: formdata_mapping
+      klaviyoListsAll: '0'
+      klaviyoSiteId: $KLAVIYO_SITE_ID
+      productImageField: productImage
+      productImageFieldTransformation: productThumbnail
+      trackCommerceCartUpdated: true
+      trackCommerceOrderCompleted: true
+      trackSaveUser: true
+  redactor:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 2.3.0
+    settings: null
+  shipstationconnect:
+    edition: standard
+    enabled: true
+    licenseKey: AR5GMKZS8SCEJNEJLS8UGXN9
+    schemaVersion: 1.0.1
+    settings:
+      billingSameAsShipping: '1'
+      blockTypeHandle: shippingInfo
+      carrierFieldHandle: carrier
+      matrixFieldHandle: shipstation
+      orderIdPrefix: ''
+      ordersPageSize: '25'
+      serviceFieldHandle: service
+      shipstationPassword: password
+      shipstationUsername: admin
+      storesFieldHandle: storeplace
+      trackingNumberFieldHandle: trackingNumber
+  twigpack:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+system:
+  edition: pro
+  live: true
+  name: 'Happy Lager'
+  schemaVersion: 3.6.8
+  timeZone: UTC
+users:
+  allowPublicRegistration: false
+  defaultGroup: null
+  photoSubpath: ''
+  photoVolumeUid: 1f0ea10d-2be0-4638-88da-105d232f4787 # User Photos
+  requireEmailVerification: true

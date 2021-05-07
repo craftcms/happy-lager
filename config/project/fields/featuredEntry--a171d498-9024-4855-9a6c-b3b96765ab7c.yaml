@@ -1,0 +1,13 @@
+contentColumnType: boolean
+fieldGroup: 0d0b7e16-8d7c-4d6f-9059-d11c473058f4 # General
+handle: featuredEntry
+instructions: 'Should this entry be featured on the listing page?'
+name: 'Featured?'
+searchable: true
+settings:
+  default: false
+  offLabel: null
+  onLabel: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

@@ -1,0 +1,40 @@
+fieldLayouts:
+  bd2eee22-d18f-437c-a9a7-35e471f83ef6:
+    tabs:
+      -
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            id: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\AssetTitleField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+handle: serviceIcons
+hasUrls: true
+name: 'Service Icons'
+settings:
+  path: '@assetBasePath/site/images/service-icons'
+sortOrder: 3
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+type: craft\volumes\Local
+url: '@assetBaseUrl/static/service-icons'

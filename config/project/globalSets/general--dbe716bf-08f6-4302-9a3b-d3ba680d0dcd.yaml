@@ -1,0 +1,18 @@
+fieldLayouts:
+  bd865b36-af79-4b80-a6b1-0b735d648197:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: bc9095b1-4905-4623-911c-1a32d8acec44 # My Klaviyo List
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: 'Tab 1'
+        sortOrder: 1
+handle: general
+name: General

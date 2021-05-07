@@ -1,0 +1,6 @@
+color: green
+default: true
+description: null
+handle: new
+name: New
+sortOrder: 99

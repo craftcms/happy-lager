@@ -1,0 +1,9 @@
+baseUrl: $SITE_URL
+enabled: true
+handle: en
+hasUrls: true
+language: en
+name: 'Happy Lager (en)'
+primary: true
+siteGroup: 268c3c49-6715-4b6a-a1b9-f27313adabd1 # Happy Lager (en)
+sortOrder: 1
