@@ -1,4 +1,4 @@
-dateModified: 1620367412
+dateModified: 1622091961
 email:
   fromEmail: admin@happylager.dev
   fromName: Happylager
@@ -20,15 +20,15 @@ plugins:
       alertNotificationRecipients: ''
       autoScrollToErrors: true
       badgeType: all
-      blockedEmails: null
+      blockedEmails: ''
       blockedEmailsError: 'Invalid Email Address'
-      blockedIpAddresses: null
-      blockedKeywords: null
+      blockedIpAddresses: ''
+      blockedKeywords: ''
       blockedKeywordsError: 'Invalid Entry Data'
       clientDigestFrequency: 1
       clientDigestRecipients: ''
-      customErrorMessage: null
-      customHoneypotName: null
+      customErrorMessage: ''
+      customHoneypotName: ''
       defaultTemplates: true
       defaultView: dashboard
       digestFrequency: 1
@@ -42,16 +42,16 @@ plugins:
       footerScripts: false
       formFieldShowOnlyAllowedForms: false
       formSubmitDisable: true
-      formSubmitExpiration: null
+      formSubmitExpiration: ''
       formTemplateDirectory: null
       formattingTemplate: flexbox.html
-      freeformHoneypot: true
-      freeformHoneypotEnhancement: false
+      freeformHoneypot: ''
+      freeformHoneypotEnhancement: ''
       hideBannerDemo: true
       hideBannerOldFreeform: false
-      minimumSubmitTime: null
+      minimumSubmitTime: ''
       pluginName: ''
-      purgableSpamAgeInDays: null
+      purgableSpamAgeInDays: '0'
       purgableSubmissionAgeInDays: null
       purgableUnfinalizedAssetAgeInMinutes: 180
       recaptchaBehaviour: display_error
@@ -75,13 +75,13 @@ plugins:
       scriptInsertType: pointers
       sessionEntryMaxCount: 50
       sessionEntryTTL: 10800
-      showErrorsForBlockedEmails: false
-      showErrorsForBlockedKeywords: false
+      showErrorsForBlockedEmails: ''
+      showErrorsForBlockedKeywords: ''
       showTutorial: true
-      spamFolderEnabled: true
+      spamFolderEnabled: '1'
       spamProtectionBehaviour: simulate_success
-      submissionThrottlingCount: null
-      submissionThrottlingTimeFrame: null
+      submissionThrottlingCount: ''
+      submissionThrottlingTimeFrame: m
       twigInHtml: true
       twigInHtmlIsolatedMode: true
       updateSearchIndexes: true
