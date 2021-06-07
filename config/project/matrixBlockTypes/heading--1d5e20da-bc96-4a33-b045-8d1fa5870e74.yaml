@@ -1,11 +1,11 @@
-field: 82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e
+field: 82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e # Article Body
 fieldLayouts:
   0189a187-131f-46a8-b494-cd94c82d6aae:
     tabs:
       -
         elements:
           -
-            fieldUid: 631f668a-3658-48a4-89fd-8da5af0a60cc
+            fieldUid: 631f668a-3658-48a4-89fd-8da5af0a60cc # Heading
             instructions: null
             label: null
             required: '0'
@@ -16,7 +16,7 @@ fieldLayouts:
         name: Content
         sortOrder: 1
 fields:
-  631f668a-3658-48a4-89fd-8da5af0a60cc:
+  631f668a-3658-48a4-89fd-8da5af0a60cc: # Heading
     contentColumnType: string(1020)
     fieldGroup: null
     handle: heading
@@ -30,7 +30,7 @@ fields:
       columnType: null
       initialRows: '4'
       multiline: ''
-      placeholder: ''
+      placeholder: null
       uiMode: normal
     translationKeyFormat: null
     translationMethod: none

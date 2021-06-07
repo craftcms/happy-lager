@@ -1,16 +1,18 @@
 contentColumnType: string
-fieldGroup: 8b4aae04-76ef-48c2-a294-e81064a470ed
+fieldGroup: 8b4aae04-76ef-48c2-a294-e81064a470ed # Services
 handle: serviceIcon
 instructions: ''
 name: 'Service Icon'
 searchable: true
 settings:
   allowSelfRelations: false
+  allowUploads: true
   allowedKinds: null
   defaultUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851' # Site Assets
   defaultUploadLocationSubpath: ''
   limit: '1'
   localizeRelations: false
+  previewMode: full
   restrictFiles: ''
   selectionLabel: ''
   showSiteMenu: true

@@ -1,17 +1,19 @@
 contentColumnType: string
-fieldGroup: 0d0b7e16-8d7c-4d6f-9059-d11c473058f4
+fieldGroup: 0d0b7e16-8d7c-4d6f-9059-d11c473058f4 # General
 handle: featuredImage
 instructions: ''
 name: 'Featured Image'
 searchable: true
 settings:
   allowSelfRelations: false
+  allowUploads: true
   allowedKinds:
     - image
   defaultUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851' # Site Assets
   defaultUploadLocationSubpath: ''
   limit: '2'
   localizeRelations: false
+  previewMode: full
   restrictFiles: '1'
   selectionLabel: ''
   showSiteMenu: true

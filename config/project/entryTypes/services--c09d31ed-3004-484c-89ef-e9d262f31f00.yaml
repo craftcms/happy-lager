@@ -7,7 +7,6 @@ fieldLayouts:
             autocapitalize: true
             autocomplete: false
             autocorrect: true
-            autofocus: false
             class: null
             disabled: false
             id: null
@@ -20,7 +19,6 @@ fieldLayouts:
             placeholder: null
             readonly: false
             requirable: false
-            required: false
             size: null
             step: null
             tip: null
@@ -29,7 +27,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: 0cbb9736-a84b-4e83-803c-5077f56394a9
+            fieldUid: 0cbb9736-a84b-4e83-803c-5077f56394a9 # Featured Image
             instructions: null
             label: null
             required: '0'
@@ -38,7 +36,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: d96355a7-1353-4097-bf08-3bd5c44821f8
+            fieldUid: d96355a7-1353-4097-bf08-3bd5c44821f8 # Service Icon
             instructions: null
             label: null
             required: '0'
@@ -47,7 +45,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: aef80333-1412-4130-bb84-ac3bdbbcbbe2
+            fieldUid: aef80333-1412-4130-bb84-ac3bdbbcbbe2 # Short Description
             instructions: null
             label: null
             required: '0'
@@ -56,7 +54,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: 82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e
+            fieldUid: 82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e # Article Body
             instructions: null
             label: null
             required: '0'
@@ -65,7 +63,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: 9bf9e642-2881-44b4-99ff-2cbed3ccc2d7
+            fieldUid: 9bf9e642-2881-44b4-99ff-2cbed3ccc2d7 # Service Body
             instructions: null
             label: null
             required: '0'
@@ -78,7 +76,7 @@ fieldLayouts:
 handle: services
 hasTitleField: true
 name: Services
-section: f6b0cb16-5df8-4b57-9856-c9c2d6b9699e
+section: f6b0cb16-5df8-4b57-9856-c9c2d6b9699e # Services
 sortOrder: 0
 titleFormat: null
 titleTranslationKeyFormat: null

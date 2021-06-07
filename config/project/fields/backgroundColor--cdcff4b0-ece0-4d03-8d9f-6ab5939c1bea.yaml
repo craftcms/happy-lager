@@ -1,5 +1,5 @@
 contentColumnType: string(7)
-fieldGroup: 0d0b7e16-8d7c-4d6f-9059-d11c473058f4
+fieldGroup: 0d0b7e16-8d7c-4d6f-9059-d11c473058f4 # General
 handle: backgroundColor
 instructions: 'Hex value for alternate background color.'
 name: 'Background Color'

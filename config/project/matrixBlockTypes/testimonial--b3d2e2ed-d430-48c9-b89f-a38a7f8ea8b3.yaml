@@ -1,11 +1,11 @@
-field: 8823155c-e84a-4a38-af30-2cb88b705e7b
+field: 8823155c-e84a-4a38-af30-2cb88b705e7b # Testimonials
 fieldLayouts:
   569a9c10-0657-4dbf-87c9-005afb784b54:
     tabs:
       -
         elements:
           -
-            fieldUid: 39b59166-9d91-4d17-baf9-229aca6174c2
+            fieldUid: 39b59166-9d91-4d17-baf9-229aca6174c2 # Quote
             instructions: null
             label: null
             required: '0'
@@ -14,7 +14,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: 4ed4bf91-bcf9-45a9-84f7-d5d768103a09
+            fieldUid: 4ed4bf91-bcf9-45a9-84f7-d5d768103a09 # Cite
             instructions: null
             label: null
             required: '0'
@@ -23,7 +23,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: a418bde2-f4cc-4ed2-a358-44362a0cb3a9
+            fieldUid: a418bde2-f4cc-4ed2-a358-44362a0cb3a9 # Photo
             instructions: null
             label: null
             required: '0'
@@ -34,7 +34,7 @@ fieldLayouts:
         name: Content
         sortOrder: 1
 fields:
-  4ed4bf91-bcf9-45a9-84f7-d5d768103a09:
+  4ed4bf91-bcf9-45a9-84f7-d5d768103a09: # Cite
     contentColumnType: text
     fieldGroup: null
     handle: cite
@@ -48,12 +48,12 @@ fields:
       columnType: text
       initialRows: '4'
       multiline: ''
-      placeholder: ''
+      placeholder: null
       uiMode: normal
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\PlainText
-  39b59166-9d91-4d17-baf9-229aca6174c2:
+  39b59166-9d91-4d17-baf9-229aca6174c2: # Quote
     contentColumnType: text
     fieldGroup: null
     handle: quote
@@ -67,12 +67,12 @@ fields:
       columnType: text
       initialRows: '4'
       multiline: ''
-      placeholder: ''
+      placeholder: null
       uiMode: normal
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\PlainText
-  a418bde2-f4cc-4ed2-a358-44362a0cb3a9:
+  a418bde2-f4cc-4ed2-a358-44362a0cb3a9: # Photo
     contentColumnType: string
     fieldGroup: null
     handle: photo
@@ -81,11 +81,13 @@ fields:
     searchable: true
     settings:
       allowSelfRelations: false
+      allowUploads: true
       allowedKinds: null
       defaultUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851' # Site Assets
       defaultUploadLocationSubpath: ''
       limit: '1'
       localizeRelations: false
+      previewMode: full
       restrictFiles: ''
       selectionLabel: ''
       showSiteMenu: true

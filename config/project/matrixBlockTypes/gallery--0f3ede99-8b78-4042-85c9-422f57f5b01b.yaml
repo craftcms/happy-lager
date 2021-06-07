@@ -1,11 +1,11 @@
-field: 82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e
+field: 82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e # Article Body
 fieldLayouts:
   0964c39a-7c91-4ac2-a9e6-584a7c845d32:
     tabs:
       -
         elements:
           -
-            fieldUid: ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7
+            fieldUid: ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7 # Images
             instructions: null
             label: null
             required: '0'
@@ -16,7 +16,7 @@ fieldLayouts:
         name: Content
         sortOrder: 1
 fields:
-  ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7:
+  ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7: # Images
     contentColumnType: string
     fieldGroup: null
     handle: images
@@ -25,11 +25,13 @@ fields:
     searchable: true
     settings:
       allowSelfRelations: false
+      allowUploads: true
       allowedKinds: null
       defaultUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851' # Site Assets
       defaultUploadLocationSubpath: ''
       limit: '3'
       localizeRelations: false
+      previewMode: full
       restrictFiles: ''
       selectionLabel: ''
       showSiteMenu: true

@@ -1,11 +1,11 @@
-field: b01498fe-6db2-4b1d-84d2-8cd0cb62f449
+field: b01498fe-6db2-4b1d-84d2-8cd0cb62f449 # Contact Methods
 fieldLayouts:
   3c4c697e-cb6b-4704-bee5-9a2bae9da8f7:
     tabs:
       -
         elements:
           -
-            fieldUid: aad31ad0-0405-41b5-aff0-4ec567b557a0
+            fieldUid: aad31ad0-0405-41b5-aff0-4ec567b557a0 # Label
             instructions: null
             label: null
             required: '0'
@@ -14,7 +14,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: 0275193a-3c51-46a3-afd0-49e55a93bfd3
+            fieldUid: 0275193a-3c51-46a3-afd0-49e55a93bfd3 # Value
             instructions: null
             label: null
             required: '0'
@@ -25,7 +25,7 @@ fieldLayouts:
         name: Content
         sortOrder: 1
 fields:
-  0275193a-3c51-46a3-afd0-49e55a93bfd3:
+  0275193a-3c51-46a3-afd0-49e55a93bfd3: # Value
     contentColumnType: string(1020)
     fieldGroup: null
     handle: methodValue
@@ -39,12 +39,12 @@ fields:
       columnType: null
       initialRows: '4'
       multiline: ''
-      placeholder: ''
+      placeholder: null
       uiMode: normal
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\PlainText
-  aad31ad0-0405-41b5-aff0-4ec567b557a0:
+  aad31ad0-0405-41b5-aff0-4ec567b557a0: # Label
     contentColumnType: string(1020)
     fieldGroup: null
     handle: label
@@ -58,7 +58,7 @@ fields:
       columnType: null
       initialRows: '4'
       multiline: ''
-      placeholder: ''
+      placeholder: null
       uiMode: normal
     translationKeyFormat: null
     translationMethod: none

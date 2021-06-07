@@ -1,5 +1,5 @@
 contentColumnType: string(1020)
-fieldGroup: 0815347a-8e73-45fd-93c9-2244ac562559
+fieldGroup: 0815347a-8e73-45fd-93c9-2244ac562559 # Contact Info
 handle: email
 instructions: ''
 name: Email
@@ -11,7 +11,7 @@ settings:
   columnType: null
   initialRows: '4'
   multiline: ''
-  placeholder: ''
+  placeholder: null
   uiMode: normal
 translationKeyFormat: null
 translationMethod: none

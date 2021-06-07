@@ -1,11 +1,11 @@
-field: 82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e
+field: 82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e # Article Body
 fieldLayouts:
   327aba6f-b81c-4179-9e58-208d34322ced:
     tabs:
       -
         elements:
           -
-            fieldUid: 964a1aba-15ac-413f-86c1-03fbf37f30c7
+            fieldUid: 964a1aba-15ac-413f-86c1-03fbf37f30c7 # Image
             instructions: null
             label: null
             required: '0'
@@ -14,7 +14,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: 7ca32393-f78c-4de0-9f8f-52b64e09584f
+            fieldUid: 7ca32393-f78c-4de0-9f8f-52b64e09584f # Caption
             instructions: null
             label: null
             required: '0'
@@ -23,7 +23,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: f87a6243-5b7f-4456-9106-ccfb6e03b754
+            fieldUid: f87a6243-5b7f-4456-9106-ccfb6e03b754 # Position
             instructions: null
             label: null
             required: '0'
@@ -34,7 +34,7 @@ fieldLayouts:
         name: Content
         sortOrder: 1
 fields:
-  7ca32393-f78c-4de0-9f8f-52b64e09584f:
+  7ca32393-f78c-4de0-9f8f-52b64e09584f: # Caption
     contentColumnType: text
     fieldGroup: null
     handle: caption
@@ -62,7 +62,7 @@ fields:
     translationKeyFormat: null
     translationMethod: none
     type: craft\redactor\Field
-  964a1aba-15ac-413f-86c1-03fbf37f30c7:
+  964a1aba-15ac-413f-86c1-03fbf37f30c7: # Image
     contentColumnType: string
     fieldGroup: null
     handle: image
@@ -71,12 +71,14 @@ fields:
     searchable: true
     settings:
       allowSelfRelations: false
+      allowUploads: true
       allowedKinds:
         - image
       defaultUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851' # Site Assets
       defaultUploadLocationSubpath: ''
       limit: '1'
       localizeRelations: false
+      previewMode: full
       restrictFiles: '1'
       selectionLabel: ''
       showSiteMenu: true
@@ -94,7 +96,7 @@ fields:
     translationKeyFormat: null
     translationMethod: site
     type: craft\fields\Assets
-  f87a6243-5b7f-4456-9106-ccfb6e03b754:
+  f87a6243-5b7f-4456-9106-ccfb6e03b754: # Position
     contentColumnType: string
     fieldGroup: null
     handle: position

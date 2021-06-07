@@ -1,5 +1,5 @@
 contentColumnType: text
-fieldGroup: 0d0b7e16-8d7c-4d6f-9059-d11c473058f4
+fieldGroup: 0d0b7e16-8d7c-4d6f-9059-d11c473058f4 # General
 handle: indexHeading
 instructions: 'Page heading for services structure index page.'
 name: 'Index Heading'

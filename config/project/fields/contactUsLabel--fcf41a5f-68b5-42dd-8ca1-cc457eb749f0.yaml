@@ -1,5 +1,5 @@
 contentColumnType: string(1020)
-fieldGroup: f7189ca2-4b93-4661-830a-a71aff8aa3cd
+fieldGroup: f7189ca2-4b93-4661-830a-a71aff8aa3cd # Footer
 handle: contactUsLabel
 instructions: ''
 name: 'Contact Us Label'
@@ -11,7 +11,7 @@ settings:
   columnType: null
   initialRows: '4'
   multiline: ''
-  placeholder: ''
+  placeholder: null
   uiMode: normal
 translationKeyFormat: null
 translationMethod: none

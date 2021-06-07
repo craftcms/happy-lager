@@ -1,11 +1,11 @@
-field: 82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e
+field: 82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e # Article Body
 fieldLayouts:
   b82a12f2-e814-4b74-9b32-bd1a90497a65:
     tabs:
       -
         elements:
           -
-            fieldUid: 35200549-df46-4092-994a-a8015c5810ba
+            fieldUid: 35200549-df46-4092-994a-a8015c5810ba # Quote
             instructions: null
             label: null
             required: '0'
@@ -14,7 +14,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: 41e6fac7-12d7-45c9-ac83-0aa59793d872
+            fieldUid: 41e6fac7-12d7-45c9-ac83-0aa59793d872 # Attribution
             instructions: null
             label: null
             required: '0'
@@ -23,7 +23,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: a5b4b046-1178-45f9-b4cf-3e3bef86e067
+            fieldUid: a5b4b046-1178-45f9-b4cf-3e3bef86e067 # Position
             instructions: null
             label: null
             required: '0'
@@ -34,7 +34,7 @@ fieldLayouts:
         name: Content
         sortOrder: 1
 fields:
-  41e6fac7-12d7-45c9-ac83-0aa59793d872:
+  41e6fac7-12d7-45c9-ac83-0aa59793d872: # Attribution
     contentColumnType: text
     fieldGroup: null
     handle: attribution
@@ -48,12 +48,12 @@ fields:
       columnType: text
       initialRows: '4'
       multiline: ''
-      placeholder: ''
+      placeholder: null
       uiMode: normal
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\PlainText
-  35200549-df46-4092-994a-a8015c5810ba:
+  35200549-df46-4092-994a-a8015c5810ba: # Quote
     contentColumnType: text
     fieldGroup: null
     handle: quote
@@ -67,12 +67,12 @@ fields:
       columnType: text
       initialRows: '4'
       multiline: ''
-      placeholder: ''
+      placeholder: null
       uiMode: normal
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\PlainText
-  a5b4b046-1178-45f9-b4cf-3e3bef86e067:
+  a5b4b046-1178-45f9-b4cf-3e3bef86e067: # Position
     contentColumnType: string
     fieldGroup: null
     handle: position

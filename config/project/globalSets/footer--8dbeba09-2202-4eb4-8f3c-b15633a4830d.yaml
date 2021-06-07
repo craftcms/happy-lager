@@ -4,7 +4,7 @@ fieldLayouts:
       -
         elements:
           -
-            fieldUid: 5095500e-4962-429c-9b9c-7a4d0d4f930c
+            fieldUid: 5095500e-4962-429c-9b9c-7a4d0d4f930c # Copyright Notice
             instructions: null
             label: null
             required: '0'
@@ -13,7 +13,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: fcf41a5f-68b5-42dd-8ca1-cc457eb749f0
+            fieldUid: fcf41a5f-68b5-42dd-8ca1-cc457eb749f0 # Contact Us Label
             instructions: null
             label: null
             required: '0'
@@ -22,7 +22,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: b75266c9-d8d2-42ae-9024-0fecb8bdc994
+            fieldUid: b75266c9-d8d2-42ae-9024-0fecb8bdc994 # Email
             instructions: null
             label: null
             required: '0'

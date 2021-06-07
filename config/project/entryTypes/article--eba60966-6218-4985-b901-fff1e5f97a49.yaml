@@ -7,7 +7,6 @@ fieldLayouts:
             autocapitalize: true
             autocomplete: false
             autocorrect: true
-            autofocus: false
             class: null
             disabled: false
             id: null
@@ -20,7 +19,6 @@ fieldLayouts:
             placeholder: null
             readonly: false
             requirable: false
-            required: false
             size: null
             step: null
             tip: null
@@ -29,7 +27,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: a171d498-9024-4855-9a6c-b3b96765ab7c
+            fieldUid: a171d498-9024-4855-9a6c-b3b96765ab7c # Featured?
             instructions: null
             label: null
             required: '0'
@@ -38,7 +36,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: 0cbb9736-a84b-4e83-803c-5077f56394a9
+            fieldUid: 0cbb9736-a84b-4e83-803c-5077f56394a9 # Featured Image
             instructions: null
             label: null
             required: '0'
@@ -47,7 +45,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: aef80333-1412-4130-bb84-ac3bdbbcbbe2
+            fieldUid: aef80333-1412-4130-bb84-ac3bdbbcbbe2 # Short Description
             instructions: null
             label: null
             required: '0'
@@ -56,7 +54,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: 9bb293f8-c659-4035-b5d3-e30dbf8d1c5b
+            fieldUid: 9bb293f8-c659-4035-b5d3-e30dbf8d1c5b # Heading
             instructions: null
             label: null
             required: '0'
@@ -65,7 +63,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: 674e53a6-d62c-4322-ae09-349765f1ef17
+            fieldUid: 674e53a6-d62c-4322-ae09-349765f1ef17 # Subheading
             instructions: null
             label: null
             required: '0'
@@ -74,7 +72,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: 82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e
+            fieldUid: 82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e # Article Body
             instructions: null
             label: null
             required: '0'
@@ -87,7 +85,7 @@ fieldLayouts:
 handle: article
 hasTitleField: true
 name: Article
-section: f5969f9a-8d3f-487e-9695-cc4e5fbe5efd
+section: f5969f9a-8d3f-487e-9695-cc4e5fbe5efd # News
 sortOrder: 0
 titleFormat: null
 titleTranslationKeyFormat: null

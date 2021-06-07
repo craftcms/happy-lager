@@ -1,16 +1,18 @@
 contentColumnType: string
-fieldGroup: d58a1faa-0bf6-46b2-b880-b0c14bebca75
+fieldGroup: d58a1faa-0bf6-46b2-b880-b0c14bebca75 # Homepage
 handle: clientLogos
 instructions: ''
 name: 'Client Logos'
 searchable: true
 settings:
   allowSelfRelations: false
+  allowUploads: true
   allowedKinds: null
   defaultUploadLocationSource: 'volume:7d6a9bef-727c-4a0c-9791-4f423956de69' # Company Logos
   defaultUploadLocationSubpath: ''
   limit: ''
   localizeRelations: false
+  previewMode: full
   restrictFiles: ''
   selectionLabel: ''
   showSiteMenu: true

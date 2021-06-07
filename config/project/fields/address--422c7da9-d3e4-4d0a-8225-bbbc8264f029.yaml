@@ -1,5 +1,5 @@
 contentColumnType: text
-fieldGroup: 0815347a-8e73-45fd-93c9-2244ac562559
+fieldGroup: 0815347a-8e73-45fd-93c9-2244ac562559 # Contact Info
 handle: address
 instructions: ''
 name: Address
@@ -11,7 +11,7 @@ settings:
   columnType: text
   initialRows: '4'
   multiline: '1'
-  placeholder: ''
+  placeholder: null
   uiMode: normal
 translationKeyFormat: null
 translationMethod: none
