@@ -33,7 +33,7 @@ hasUrls: true
 name: 'Company Logos'
 settings:
   path: '@assetBasePath/logos'
-sortOrder: 2
+sortOrder: 3
 titleTranslationKeyFormat: null
 titleTranslationMethod: site
 type: craft\volumes\Local
