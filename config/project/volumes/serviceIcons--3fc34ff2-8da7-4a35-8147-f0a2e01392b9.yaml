@@ -35,6 +35,6 @@ settings:
   path: '@assetBasePath/images/service-icons'
 sortOrder: 2
 titleTranslationKeyFormat: null
-titleTranslationMethod: null
+titleTranslationMethod: site
 type: craft\volumes\Local
 url: '@assetBaseUrl/images/service-icons'

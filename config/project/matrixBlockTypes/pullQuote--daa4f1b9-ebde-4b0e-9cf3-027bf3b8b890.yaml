@@ -8,7 +8,7 @@ fieldLayouts:
             fieldUid: a8a6d843-bec1-4882-98ec-30cb74f5b16f # Pull Quote
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -17,7 +17,7 @@ fieldLayouts:
             fieldUid: a88d73a8-c75f-4c72-aa70-a39dfbbff0fe # Position
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
