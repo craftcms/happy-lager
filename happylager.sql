@@ -11,7 +11,7 @@
  Target Server Version : 50733
  File Encoding         : 65001
 
- Date: 07/06/2021 15:20:19
+ Date: 07/06/2021 15:28:14
 */
 
 SET NAMES utf8mb4;
@@ -292,7 +292,7 @@ DROP TABLE IF EXISTS `changedattributes`;
 CREATE TABLE `changedattributes` (
   `elementId` int(11) NOT NULL,
   `siteId` int(11) NOT NULL,
-  `attribute` varchar(255) NOT NULL,
+  `attribute` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `propagated` tinyint(1) NOT NULL,
   `userId` int(11) DEFAULT NULL,
@@ -303,7 +303,7 @@ CREATE TABLE `changedattributes` (
   CONSTRAINT `changedattributes_elementId_fk` FOREIGN KEY (`elementId`) REFERENCES `elements` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `changedattributes_siteId_fk` FOREIGN KEY (`siteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `changedattributes_userId_fk` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of changedattributes
@@ -331,7 +331,7 @@ CREATE TABLE `changedfields` (
   CONSTRAINT `changedfields_fieldId_fk` FOREIGN KEY (`fieldId`) REFERENCES `fields` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `changedfields_siteId_fk` FOREIGN KEY (`siteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `changedfields_userId_fk` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of changedfields
@@ -484,15 +484,15 @@ DROP TABLE IF EXISTS `craftidtokens`;
 CREATE TABLE `craftidtokens` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) NOT NULL,
-  `accessToken` text NOT NULL,
+  `accessToken` text COLLATE utf8_unicode_ci NOT NULL,
   `expiryDate` datetime DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
-  `uid` char(36) NOT NULL DEFAULT '0',
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
   KEY `craft_craftidtokens_userId_fk` (`userId`) USING BTREE,
   CONSTRAINT `craft_craftidtokens_userId_fk` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of craftidtokens
@@ -534,8 +534,8 @@ CREATE TABLE `drafts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sourceId` int(11) DEFAULT NULL,
   `creatorId` int(11) DEFAULT NULL,
-  `name` varchar(255) NOT NULL,
-  `notes` text,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `notes` text COLLATE utf8_unicode_ci,
   `trackChanges` tinyint(1) NOT NULL DEFAULT '0',
   `dateLastMerged` datetime DEFAULT NULL,
   `saved` tinyint(1) NOT NULL DEFAULT '1',
@@ -545,7 +545,7 @@ CREATE TABLE `drafts` (
   KEY `idx_ymjrqqzqxjapbfmyzknxifzytkjehkbmqzlo` (`saved`),
   CONSTRAINT `drafts_creatorId_fk` FOREIGN KEY (`creatorId`) REFERENCES `users` (`id`) ON DELETE SET NULL,
   CONSTRAINT `drafts_sourceId_fk` FOREIGN KEY (`sourceId`) REFERENCES `elements` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of drafts
@@ -4743,15 +4743,15 @@ COMMIT;
 DROP TABLE IF EXISTS `gqlschemas`;
 CREATE TABLE `gqlschemas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `scope` text,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `scope` text COLLATE utf8_unicode_ci,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
-  `uid` char(36) NOT NULL DEFAULT '0',
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   `isPublic` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `gqlschemas_name_unq_idx` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of gqlschemas
@@ -4766,19 +4766,19 @@ COMMIT;
 DROP TABLE IF EXISTS `gqltokens`;
 CREATE TABLE `gqltokens` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `accessToken` varchar(255) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `accessToken` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `enabled` tinyint(1) NOT NULL DEFAULT '1',
   `expiryDate` datetime DEFAULT NULL,
   `lastUsed` datetime DEFAULT NULL,
   `schemaId` int(11) DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
-  `uid` char(36) NOT NULL DEFAULT '0',
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `gqltokens_schemaId_fk` (`schemaId`),
   CONSTRAINT `gqltokens_schemaId_fk` FOREIGN KEY (`schemaId`) REFERENCES `gqlschemas` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of gqltokens
@@ -4808,7 +4808,7 @@ CREATE TABLE `info` (
 -- Records of info
 -- ----------------------------
 BEGIN;
-INSERT INTO `info` VALUES (1, '3.6.16', '3.6.8', 0, 'xgzxnyblkbfl', 'bsnuosuuyatm', '2019-12-17 22:20:51', '2021-06-07 22:18:02', 'a3dbe1b0-9219-4f3c-a463-15855bbe3567');
+INSERT INTO `info` VALUES (1, '3.6.16', '3.6.8', 0, 'bwavedpvgofq', 'bsnuosuuyatm', '2019-12-17 22:20:51', '2021-06-07 22:27:01', 'a3dbe1b0-9219-4f3c-a463-15855bbe3567');
 COMMIT;
 
 -- ----------------------------
@@ -7228,16 +7228,16 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `projectconfig`;
 CREATE TABLE `projectconfig` (
-  `path` varchar(255) NOT NULL,
-  `value` text NOT NULL,
+  `path` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `value` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`path`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of projectconfig
 -- ----------------------------
 BEGIN;
-INSERT INTO `projectconfig` VALUES ('dateModified', '1623104281');
+INSERT INTO `projectconfig` VALUES ('dateModified', '1623104821');
 INSERT INTO `projectconfig` VALUES ('email.fromEmail', '\"admin@happylager.dev\"');
 INSERT INTO `projectconfig` VALUES ('email.fromName', '\"Happylager\"');
 INSERT INTO `projectconfig` VALUES ('email.template', 'null');
@@ -7245,7 +7245,6 @@ INSERT INTO `projectconfig` VALUES ('email.transportType', '\"craft\\\\mail\\\\t
 INSERT INTO `projectconfig` VALUES ('entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.elements.0.autocapitalize', 'true');
 INSERT INTO `projectconfig` VALUES ('entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.elements.0.autocomplete', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.elements.0.autocorrect', 'true');
-INSERT INTO `projectconfig` VALUES ('entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.elements.0.autofocus', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.elements.0.class', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.elements.0.disabled', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.elements.0.id', 'null');
@@ -7258,7 +7257,6 @@ INSERT INTO `projectconfig` VALUES ('entryTypes.01416786-fb23-483e-9b86-d70279bf
 INSERT INTO `projectconfig` VALUES ('entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.elements.0.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.elements.0.readonly', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.elements.0.requirable', 'false');
-INSERT INTO `projectconfig` VALUES ('entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.elements.0.required', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.elements.0.size', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.elements.0.step', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.01416786-fb23-483e-9b86-d70279bf18a9.fieldLayouts.b3e92e12-b415-4a53-b67e-ade9f5fdf5dc.tabs.0.elements.0.tip', 'null');
@@ -7345,7 +7343,6 @@ INSERT INTO `projectconfig` VALUES ('entryTypes.01416786-fb23-483e-9b86-d70279bf
 INSERT INTO `projectconfig` VALUES ('entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.fieldLayouts.31a1e163-6326-436a-9feb-53b372c086e3.tabs.0.elements.0.autocapitalize', 'true');
 INSERT INTO `projectconfig` VALUES ('entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.fieldLayouts.31a1e163-6326-436a-9feb-53b372c086e3.tabs.0.elements.0.autocomplete', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.fieldLayouts.31a1e163-6326-436a-9feb-53b372c086e3.tabs.0.elements.0.autocorrect', 'true');
-INSERT INTO `projectconfig` VALUES ('entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.fieldLayouts.31a1e163-6326-436a-9feb-53b372c086e3.tabs.0.elements.0.autofocus', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.fieldLayouts.31a1e163-6326-436a-9feb-53b372c086e3.tabs.0.elements.0.class', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.fieldLayouts.31a1e163-6326-436a-9feb-53b372c086e3.tabs.0.elements.0.disabled', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.fieldLayouts.31a1e163-6326-436a-9feb-53b372c086e3.tabs.0.elements.0.id', 'null');
@@ -7358,7 +7355,6 @@ INSERT INTO `projectconfig` VALUES ('entryTypes.1f72a359-0ce9-4415-82dc-88dc8330
 INSERT INTO `projectconfig` VALUES ('entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.fieldLayouts.31a1e163-6326-436a-9feb-53b372c086e3.tabs.0.elements.0.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.fieldLayouts.31a1e163-6326-436a-9feb-53b372c086e3.tabs.0.elements.0.readonly', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.fieldLayouts.31a1e163-6326-436a-9feb-53b372c086e3.tabs.0.elements.0.requirable', 'false');
-INSERT INTO `projectconfig` VALUES ('entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.fieldLayouts.31a1e163-6326-436a-9feb-53b372c086e3.tabs.0.elements.0.required', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.fieldLayouts.31a1e163-6326-436a-9feb-53b372c086e3.tabs.0.elements.0.size', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.fieldLayouts.31a1e163-6326-436a-9feb-53b372c086e3.tabs.0.elements.0.step', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.1f72a359-0ce9-4415-82dc-88dc833073c3.fieldLayouts.31a1e163-6326-436a-9feb-53b372c086e3.tabs.0.elements.0.tip', 'null');
@@ -7403,7 +7399,6 @@ INSERT INTO `projectconfig` VALUES ('entryTypes.1f72a359-0ce9-4415-82dc-88dc8330
 INSERT INTO `projectconfig` VALUES ('entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.fieldLayouts.e3a26917-97ba-4590-a8f3-bb08b01991f3.tabs.0.elements.0.autocapitalize', 'true');
 INSERT INTO `projectconfig` VALUES ('entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.fieldLayouts.e3a26917-97ba-4590-a8f3-bb08b01991f3.tabs.0.elements.0.autocomplete', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.fieldLayouts.e3a26917-97ba-4590-a8f3-bb08b01991f3.tabs.0.elements.0.autocorrect', 'true');
-INSERT INTO `projectconfig` VALUES ('entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.fieldLayouts.e3a26917-97ba-4590-a8f3-bb08b01991f3.tabs.0.elements.0.autofocus', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.fieldLayouts.e3a26917-97ba-4590-a8f3-bb08b01991f3.tabs.0.elements.0.class', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.fieldLayouts.e3a26917-97ba-4590-a8f3-bb08b01991f3.tabs.0.elements.0.disabled', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.fieldLayouts.e3a26917-97ba-4590-a8f3-bb08b01991f3.tabs.0.elements.0.id', 'null');
@@ -7416,7 +7411,6 @@ INSERT INTO `projectconfig` VALUES ('entryTypes.261c3cde-2d6c-4b23-b6cd-6def9599
 INSERT INTO `projectconfig` VALUES ('entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.fieldLayouts.e3a26917-97ba-4590-a8f3-bb08b01991f3.tabs.0.elements.0.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.fieldLayouts.e3a26917-97ba-4590-a8f3-bb08b01991f3.tabs.0.elements.0.readonly', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.fieldLayouts.e3a26917-97ba-4590-a8f3-bb08b01991f3.tabs.0.elements.0.requirable', 'false');
-INSERT INTO `projectconfig` VALUES ('entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.fieldLayouts.e3a26917-97ba-4590-a8f3-bb08b01991f3.tabs.0.elements.0.required', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.fieldLayouts.e3a26917-97ba-4590-a8f3-bb08b01991f3.tabs.0.elements.0.size', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.fieldLayouts.e3a26917-97ba-4590-a8f3-bb08b01991f3.tabs.0.elements.0.step', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.261c3cde-2d6c-4b23-b6cd-6def95992cf8.fieldLayouts.e3a26917-97ba-4590-a8f3-bb08b01991f3.tabs.0.elements.0.tip', 'null');
@@ -7453,7 +7447,6 @@ INSERT INTO `projectconfig` VALUES ('entryTypes.261c3cde-2d6c-4b23-b6cd-6def9599
 INSERT INTO `projectconfig` VALUES ('entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.fieldLayouts.4cc2a302-6fe7-4f8b-b01b-517ed624cdf7.tabs.0.elements.0.autocapitalize', 'true');
 INSERT INTO `projectconfig` VALUES ('entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.fieldLayouts.4cc2a302-6fe7-4f8b-b01b-517ed624cdf7.tabs.0.elements.0.autocomplete', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.fieldLayouts.4cc2a302-6fe7-4f8b-b01b-517ed624cdf7.tabs.0.elements.0.autocorrect', 'true');
-INSERT INTO `projectconfig` VALUES ('entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.fieldLayouts.4cc2a302-6fe7-4f8b-b01b-517ed624cdf7.tabs.0.elements.0.autofocus', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.fieldLayouts.4cc2a302-6fe7-4f8b-b01b-517ed624cdf7.tabs.0.elements.0.class', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.fieldLayouts.4cc2a302-6fe7-4f8b-b01b-517ed624cdf7.tabs.0.elements.0.disabled', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.fieldLayouts.4cc2a302-6fe7-4f8b-b01b-517ed624cdf7.tabs.0.elements.0.id', 'null');
@@ -7466,7 +7459,6 @@ INSERT INTO `projectconfig` VALUES ('entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd
 INSERT INTO `projectconfig` VALUES ('entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.fieldLayouts.4cc2a302-6fe7-4f8b-b01b-517ed624cdf7.tabs.0.elements.0.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.fieldLayouts.4cc2a302-6fe7-4f8b-b01b-517ed624cdf7.tabs.0.elements.0.readonly', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.fieldLayouts.4cc2a302-6fe7-4f8b-b01b-517ed624cdf7.tabs.0.elements.0.requirable', 'false');
-INSERT INTO `projectconfig` VALUES ('entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.fieldLayouts.4cc2a302-6fe7-4f8b-b01b-517ed624cdf7.tabs.0.elements.0.required', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.fieldLayouts.4cc2a302-6fe7-4f8b-b01b-517ed624cdf7.tabs.0.elements.0.size', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.fieldLayouts.4cc2a302-6fe7-4f8b-b01b-517ed624cdf7.tabs.0.elements.0.step', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd08d4.fieldLayouts.4cc2a302-6fe7-4f8b-b01b-517ed624cdf7.tabs.0.elements.0.tip', 'null');
@@ -7511,7 +7503,6 @@ INSERT INTO `projectconfig` VALUES ('entryTypes.6ef72b30-6af9-4545-81e9-b2c900cd
 INSERT INTO `projectconfig` VALUES ('entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.fieldLayouts.423d0eb9-9236-47c9-a98a-30fc46947c71.tabs.0.elements.0.autocapitalize', 'true');
 INSERT INTO `projectconfig` VALUES ('entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.fieldLayouts.423d0eb9-9236-47c9-a98a-30fc46947c71.tabs.0.elements.0.autocomplete', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.fieldLayouts.423d0eb9-9236-47c9-a98a-30fc46947c71.tabs.0.elements.0.autocorrect', 'true');
-INSERT INTO `projectconfig` VALUES ('entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.fieldLayouts.423d0eb9-9236-47c9-a98a-30fc46947c71.tabs.0.elements.0.autofocus', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.fieldLayouts.423d0eb9-9236-47c9-a98a-30fc46947c71.tabs.0.elements.0.class', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.fieldLayouts.423d0eb9-9236-47c9-a98a-30fc46947c71.tabs.0.elements.0.disabled', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.fieldLayouts.423d0eb9-9236-47c9-a98a-30fc46947c71.tabs.0.elements.0.id', 'null');
@@ -7524,7 +7515,6 @@ INSERT INTO `projectconfig` VALUES ('entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f
 INSERT INTO `projectconfig` VALUES ('entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.fieldLayouts.423d0eb9-9236-47c9-a98a-30fc46947c71.tabs.0.elements.0.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.fieldLayouts.423d0eb9-9236-47c9-a98a-30fc46947c71.tabs.0.elements.0.readonly', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.fieldLayouts.423d0eb9-9236-47c9-a98a-30fc46947c71.tabs.0.elements.0.requirable', 'false');
-INSERT INTO `projectconfig` VALUES ('entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.fieldLayouts.423d0eb9-9236-47c9-a98a-30fc46947c71.tabs.0.elements.0.required', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.fieldLayouts.423d0eb9-9236-47c9-a98a-30fc46947c71.tabs.0.elements.0.size', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.fieldLayouts.423d0eb9-9236-47c9-a98a-30fc46947c71.tabs.0.elements.0.step', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f110f.fieldLayouts.423d0eb9-9236-47c9-a98a-30fc46947c71.tabs.0.elements.0.tip', 'null');
@@ -7561,7 +7551,6 @@ INSERT INTO `projectconfig` VALUES ('entryTypes.7f0d6d70-ed28-45f1-88c0-4463e96f
 INSERT INTO `projectconfig` VALUES ('entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.elements.0.autocapitalize', 'true');
 INSERT INTO `projectconfig` VALUES ('entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.elements.0.autocomplete', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.elements.0.autocorrect', 'true');
-INSERT INTO `projectconfig` VALUES ('entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.elements.0.autofocus', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.elements.0.class', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.elements.0.disabled', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.elements.0.id', 'null');
@@ -7574,7 +7563,6 @@ INSERT INTO `projectconfig` VALUES ('entryTypes.ae84d93c-8a94-4605-bf08-11ada918
 INSERT INTO `projectconfig` VALUES ('entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.elements.0.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.elements.0.readonly', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.elements.0.requirable', 'false');
-INSERT INTO `projectconfig` VALUES ('entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.elements.0.required', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.elements.0.size', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.elements.0.step', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.ae84d93c-8a94-4605-bf08-11ada918f964.fieldLayouts.a8b59f73-6bdb-4ac9-901b-3894585018fb.tabs.0.elements.0.tip', 'null');
@@ -7627,7 +7615,6 @@ INSERT INTO `projectconfig` VALUES ('entryTypes.ae84d93c-8a94-4605-bf08-11ada918
 INSERT INTO `projectconfig` VALUES ('entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.elements.0.autocapitalize', 'true');
 INSERT INTO `projectconfig` VALUES ('entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.elements.0.autocomplete', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.elements.0.autocorrect', 'true');
-INSERT INTO `projectconfig` VALUES ('entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.elements.0.autofocus', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.elements.0.class', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.elements.0.disabled', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.elements.0.id', 'null');
@@ -7640,7 +7627,6 @@ INSERT INTO `projectconfig` VALUES ('entryTypes.b31c607b-b75a-4a78-b14b-d94bf8fa
 INSERT INTO `projectconfig` VALUES ('entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.elements.0.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.elements.0.readonly', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.elements.0.requirable', 'false');
-INSERT INTO `projectconfig` VALUES ('entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.elements.0.required', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.elements.0.size', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.elements.0.step', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.b31c607b-b75a-4a78-b14b-d94bf8faa0c3.fieldLayouts.b89ba12c-3f9b-4e8d-a190-073678e01175.tabs.0.elements.0.tip', 'null');
@@ -7685,7 +7671,6 @@ INSERT INTO `projectconfig` VALUES ('entryTypes.b31c607b-b75a-4a78-b14b-d94bf8fa
 INSERT INTO `projectconfig` VALUES ('entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.elements.0.autocapitalize', 'true');
 INSERT INTO `projectconfig` VALUES ('entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.elements.0.autocomplete', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.elements.0.autocorrect', 'true');
-INSERT INTO `projectconfig` VALUES ('entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.elements.0.autofocus', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.elements.0.class', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.elements.0.disabled', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.elements.0.id', 'null');
@@ -7698,7 +7683,6 @@ INSERT INTO `projectconfig` VALUES ('entryTypes.c09d31ed-3004-484c-89ef-e9d262f3
 INSERT INTO `projectconfig` VALUES ('entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.elements.0.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.elements.0.readonly', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.elements.0.requirable', 'false');
-INSERT INTO `projectconfig` VALUES ('entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.elements.0.required', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.elements.0.size', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.elements.0.step', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.c09d31ed-3004-484c-89ef-e9d262f31f00.fieldLayouts.c06e2a9b-cc41-4ff9-ac5e-0d463b45e764.tabs.0.elements.0.tip', 'null');
@@ -7759,7 +7743,6 @@ INSERT INTO `projectconfig` VALUES ('entryTypes.c09d31ed-3004-484c-89ef-e9d262f3
 INSERT INTO `projectconfig` VALUES ('entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.elements.0.autocapitalize', 'true');
 INSERT INTO `projectconfig` VALUES ('entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.elements.0.autocomplete', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.elements.0.autocorrect', 'true');
-INSERT INTO `projectconfig` VALUES ('entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.elements.0.autofocus', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.elements.0.class', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.elements.0.disabled', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.elements.0.id', 'null');
@@ -7772,7 +7755,6 @@ INSERT INTO `projectconfig` VALUES ('entryTypes.eba60966-6218-4985-b901-fff1e5f9
 INSERT INTO `projectconfig` VALUES ('entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.elements.0.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.elements.0.readonly', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.elements.0.requirable', 'false');
-INSERT INTO `projectconfig` VALUES ('entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.elements.0.required', 'false');
 INSERT INTO `projectconfig` VALUES ('entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.elements.0.size', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.elements.0.step', 'null');
 INSERT INTO `projectconfig` VALUES ('entryTypes.eba60966-6218-4985-b901-fff1e5f97a49.fieldLayouts.d45c4454-78e5-415c-8e08-700061feb9b4.tabs.0.elements.0.tip', 'null');
@@ -7852,10 +7834,12 @@ INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.searchable', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.allowedKinds', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.allowSelfRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.allowUploads', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.defaultUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.defaultUploadLocationSubpath', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.limit', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.localizeRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.previewMode', '\"full\"');
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.restrictFiles', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.selectionLabel', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.0305c984-3934-4c7a-9de9-b0162c5b0112.settings.showSiteMenu', 'true');
@@ -7906,10 +7890,12 @@ INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9
 INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.searchable', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.allowedKinds.0', '\"image\"');
 INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.allowSelfRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.allowUploads', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.defaultUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.defaultUploadLocationSubpath', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.limit', '\"2\"');
 INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.localizeRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.previewMode', '\"full\"');
 INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.restrictFiles', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.selectionLabel', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.0cbb9736-a84b-4e83-803c-5077f56394a9.settings.showSiteMenu', 'true');
@@ -7938,7 +7924,7 @@ INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029
 INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.settings.columnType', '\"text\"');
 INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.settings.multiline', '\"1\"');
-INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.settings.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.settings.uiMode', '\"normal\"');
 INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.422c7da9-d3e4-4d0a-8225-bbbc8264f029.translationMethod', '\"none\"');
@@ -7972,7 +7958,7 @@ INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c
 INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.settings.columnType', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.settings.multiline', '\"\"');
-INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.settings.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.settings.uiMode', '\"normal\"');
 INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.5095500e-4962-429c-9b9c-7a4d0d4f930c.translationMethod', '\"none\"');
@@ -7989,7 +7975,7 @@ INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17
 INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.settings.columnType', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.settings.multiline', '\"\"');
-INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.settings.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.settings.uiMode', '\"normal\"');
 INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.674e53a6-d62c-4322-ae09-349765f1ef17.translationMethod', '\"none\"');
@@ -8054,10 +8040,12 @@ INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.searchable', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.allowedKinds', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.allowSelfRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.allowUploads', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.defaultUploadLocationSource', '\"volume:7d6a9bef-727c-4a0c-9791-4f423956de69\"');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.defaultUploadLocationSubpath', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.limit', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.localizeRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.previewMode', '\"full\"');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.restrictFiles', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.selectionLabel', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.950b3c0e-9780-4487-a881-23d96d6075d5.settings.showSiteMenu', 'true');
@@ -8086,7 +8074,7 @@ INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b
 INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.settings.columnType', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.settings.multiline', '\"\"');
-INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.settings.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.settings.uiMode', '\"normal\"');
 INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.9bb293f8-c659-4035-b5d3-e30dbf8d1c5b.translationMethod', '\"none\"');
@@ -8110,7 +8098,9 @@ INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c
 INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c.instructions', '\"Should this entry be featured on the listing page?\"');
 INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c.name', '\"Featured?\"');
 INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c.searchable', 'true');
-INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c.settings.default', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c.settings.default', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c.settings.offLabel', 'null');
+INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c.settings.onLabel', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c.translationMethod', '\"none\"');
 INSERT INTO `projectconfig` VALUES ('fields.a171d498-9024-4855-9a6c-b3b96765ab7c.type', '\"craft\\\\fields\\\\Lightswitch\"');
@@ -8122,10 +8112,12 @@ INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.searchable', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.allowedKinds', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.allowSelfRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.allowUploads', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.defaultUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.defaultUploadLocationSubpath', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.limit', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.localizeRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.previewMode', '\"full\"');
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.restrictFiles', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.selectionLabel', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.a2129d62-1d81-4c2f-a92d-81c03ed120dc.settings.showSiteMenu', 'true');
@@ -8212,7 +8204,7 @@ INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994
 INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.settings.columnType', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.settings.multiline', '\"\"');
-INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.settings.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.settings.uiMode', '\"normal\"');
 INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.b75266c9-d8d2-42ae-9024-0fecb8bdc994.translationMethod', '\"none\"');
@@ -8235,10 +8227,12 @@ INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.searchable', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.allowedKinds', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.allowSelfRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.allowUploads', 'true');
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.defaultUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.defaultUploadLocationSubpath', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.limit', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.localizeRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.previewMode', '\"full\"');
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.restrictFiles', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.selectionLabel', '\"\"');
 INSERT INTO `projectconfig` VALUES ('fields.d96355a7-1353-4097-bf08-3bd5c44821f8.settings.showSiteMenu', 'true');
@@ -8267,7 +8261,7 @@ INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0
 INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.settings.columnType', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.settings.multiline', '\"\"');
-INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.settings.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.settings.uiMode', '\"normal\"');
 INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('fields.fcf41a5f-68b5-42dd-8ca1-cc457eb749f0.translationMethod', '\"none\"');
@@ -8426,10 +8420,12 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-42
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.searchable', 'true');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.allowedKinds', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.allowSelfRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.allowUploads', 'true');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.defaultUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.defaultUploadLocationSubpath', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.limit', '\"3\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.localizeRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.previewMode', '\"full\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.restrictFiles', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.selectionLabel', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.0f3ede99-8b78-4042-85c9-422f57f5b01b.fields.ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7.settings.showSiteMenu', 'true');
@@ -8472,7 +8468,7 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.settings.columnType', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.settings.multiline', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.settings.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.settings.uiMode', '\"normal\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.1d5e20da-bc96-4a33-b045-8d1fa5870e74.fields.631f668a-3658-48a4-89fd-8da5af0a60cc.translationMethod', '\"none\"');
@@ -8541,10 +8537,12 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.searchable', 'true');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.allowedKinds.0', '\"image\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.allowSelfRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.allowUploads', 'true');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.defaultUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.defaultUploadLocationSubpath', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.limit', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.localizeRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.previewMode', '\"full\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.restrictFiles', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.selectionLabel', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.9123201b-837c-4269-9d7c-d5e11bba1e2b.fields.964a1aba-15ac-413f-86c1-03fbf37f30c7.settings.showSiteMenu', 'true');
@@ -8637,7 +8635,7 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.settings.columnType', '\"text\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.settings.multiline', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.settings.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.settings.uiMode', '\"normal\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.35200549-df46-4092-994a-a8015c5810ba.translationMethod', '\"none\"');
@@ -8654,7 +8652,7 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.settings.columnType', '\"text\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.settings.multiline', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.settings.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.settings.uiMode', '\"normal\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.97ff3c80-2398-4ca5-9d03-c3b8727c6eb2.fields.41e6fac7-12d7-45c9-ac83-0aa59793d872.translationMethod', '\"none\"');
@@ -8723,7 +8721,7 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.settings.columnType', '\"text\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.settings.multiline', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.settings.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.settings.uiMode', '\"normal\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.3285a611-4363-43f2-82b5-97e2d253cab3.translationMethod', '\"none\"');
@@ -8736,10 +8734,12 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.searchable', 'true');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.allowedKinds', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.allowSelfRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.allowUploads', 'true');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.defaultUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.defaultUploadLocationSubpath', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.limit', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.localizeRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.previewMode', '\"full\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.restrictFiles', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.selectionLabel', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.aa39e3a4-2d2c-4ed2-a9b5-74122ece5947.fields.9ce53ce9-939b-4760-97f4-545ef2c388eb.settings.showSiteMenu', 'true');
@@ -8824,7 +8824,7 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a3
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.settings.columnType', '\"text\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.settings.multiline', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.settings.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.settings.uiMode', '\"normal\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.39b59166-9d91-4d17-baf9-229aca6174c2.translationMethod', '\"none\"');
@@ -8841,7 +8841,7 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a3
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.settings.columnType', '\"text\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.settings.multiline', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.settings.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.settings.uiMode', '\"normal\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.4ed4bf91-bcf9-45a9-84f7-d5d768103a09.translationMethod', '\"none\"');
@@ -8854,10 +8854,12 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a3
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.searchable', 'true');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.allowedKinds', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.allowSelfRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.allowUploads', 'true');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.defaultUploadLocationSource', '\"volume:0193dc64-5499-4e28-95dd-f8f603154851\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.defaultUploadLocationSubpath', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.limit', '\"1\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.localizeRelations', 'false');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.previewMode', '\"full\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.restrictFiles', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.selectionLabel', '\"\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3.fields.a418bde2-f4cc-4ed2-a358-44362a0cb3a9.settings.showSiteMenu', 'true');
@@ -8936,7 +8938,7 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-02
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.settings.columnType', '\"text\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.settings.multiline', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.settings.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.settings.uiMode', '\"normal\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890.fields.a8a6d843-bec1-4882-98ec-30cb74f5b16f.translationMethod', '\"none\"');
@@ -8967,7 +8969,7 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-93
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.settings.columnType', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.settings.multiline', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.settings.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.settings.uiMode', '\"normal\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.e1c6c95e-a19b-4cd8-9a83-935e91f862c0.fields.8cd6b011-5271-484d-85d9-6a6b731137e9.translationMethod', '\"none\"');
@@ -9006,7 +9008,7 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e7
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.settings.columnType', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.settings.multiline', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.settings.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.settings.uiMode', '\"normal\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.0275193a-3c51-46a3-afd0-49e55a93bfd3.translationMethod', '\"none\"');
@@ -9023,7 +9025,7 @@ INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e7
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.settings.columnType', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.settings.initialRows', '\"4\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.settings.multiline', '\"\"');
-INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.settings.placeholder', '\"\"');
+INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.settings.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.settings.uiMode', '\"normal\"');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.translationKeyFormat', 'null');
 INSERT INTO `projectconfig` VALUES ('matrixBlockTypes.ecd6fdce-8d11-4aa6-a167-e731757515c6.fields.aad31ad0-0405-41b5-aff0-4ec567b557a0.translationMethod', '\"none\"');
@@ -9172,7 +9174,6 @@ INSERT INTO `projectconfig` VALUES ('users.requireEmailVerification', 'true');
 INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.fieldLayouts.e4360fb7-190d-42c5-bde0-e01c03bd127c.tabs.0.elements.0.autocapitalize', 'true');
 INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.fieldLayouts.e4360fb7-190d-42c5-bde0-e01c03bd127c.tabs.0.elements.0.autocomplete', 'false');
 INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.fieldLayouts.e4360fb7-190d-42c5-bde0-e01c03bd127c.tabs.0.elements.0.autocorrect', 'true');
-INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.fieldLayouts.e4360fb7-190d-42c5-bde0-e01c03bd127c.tabs.0.elements.0.autofocus', 'false');
 INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.fieldLayouts.e4360fb7-190d-42c5-bde0-e01c03bd127c.tabs.0.elements.0.class', 'null');
 INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.fieldLayouts.e4360fb7-190d-42c5-bde0-e01c03bd127c.tabs.0.elements.0.disabled', 'false');
 INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.fieldLayouts.e4360fb7-190d-42c5-bde0-e01c03bd127c.tabs.0.elements.0.id', 'null');
@@ -9185,7 +9186,6 @@ INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f60315485
 INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.fieldLayouts.e4360fb7-190d-42c5-bde0-e01c03bd127c.tabs.0.elements.0.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.fieldLayouts.e4360fb7-190d-42c5-bde0-e01c03bd127c.tabs.0.elements.0.readonly', 'false');
 INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.fieldLayouts.e4360fb7-190d-42c5-bde0-e01c03bd127c.tabs.0.elements.0.requirable', 'false');
-INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.fieldLayouts.e4360fb7-190d-42c5-bde0-e01c03bd127c.tabs.0.elements.0.required', 'false');
 INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.fieldLayouts.e4360fb7-190d-42c5-bde0-e01c03bd127c.tabs.0.elements.0.size', 'null');
 INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.fieldLayouts.e4360fb7-190d-42c5-bde0-e01c03bd127c.tabs.0.elements.0.step', 'null');
 INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.fieldLayouts.e4360fb7-190d-42c5-bde0-e01c03bd127c.tabs.0.elements.0.tip', 'null');
@@ -9208,12 +9208,13 @@ INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f60315485
 INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.name', '\"Site Assets\"');
 INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.settings.path', '\"@assetBasePath/site\"');
 INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.sortOrder', '1');
+INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.titleTranslationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.titleTranslationMethod', '\"site\"');
 INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.type', '\"craft\\\\volumes\\\\Local\"');
 INSERT INTO `projectconfig` VALUES ('volumes.0193dc64-5499-4e28-95dd-f8f603154851.url', '\"@assetBaseUrl/site\"');
 INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.fieldLayouts.2d9fb3d5-a903-4ef4-81f3-9eb72e49e728.tabs.0.elements.0.autocapitalize', 'true');
 INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.fieldLayouts.2d9fb3d5-a903-4ef4-81f3-9eb72e49e728.tabs.0.elements.0.autocomplete', 'false');
 INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.fieldLayouts.2d9fb3d5-a903-4ef4-81f3-9eb72e49e728.tabs.0.elements.0.autocorrect', 'true');
-INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.fieldLayouts.2d9fb3d5-a903-4ef4-81f3-9eb72e49e728.tabs.0.elements.0.autofocus', 'false');
 INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.fieldLayouts.2d9fb3d5-a903-4ef4-81f3-9eb72e49e728.tabs.0.elements.0.class', 'null');
 INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.fieldLayouts.2d9fb3d5-a903-4ef4-81f3-9eb72e49e728.tabs.0.elements.0.disabled', 'false');
 INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.fieldLayouts.2d9fb3d5-a903-4ef4-81f3-9eb72e49e728.tabs.0.elements.0.id', 'null');
@@ -9226,7 +9227,6 @@ INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f478
 INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.fieldLayouts.2d9fb3d5-a903-4ef4-81f3-9eb72e49e728.tabs.0.elements.0.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.fieldLayouts.2d9fb3d5-a903-4ef4-81f3-9eb72e49e728.tabs.0.elements.0.readonly', 'false');
 INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.fieldLayouts.2d9fb3d5-a903-4ef4-81f3-9eb72e49e728.tabs.0.elements.0.requirable', 'false');
-INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.fieldLayouts.2d9fb3d5-a903-4ef4-81f3-9eb72e49e728.tabs.0.elements.0.required', 'false');
 INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.fieldLayouts.2d9fb3d5-a903-4ef4-81f3-9eb72e49e728.tabs.0.elements.0.size', 'null');
 INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.fieldLayouts.2d9fb3d5-a903-4ef4-81f3-9eb72e49e728.tabs.0.elements.0.step', 'null');
 INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.fieldLayouts.2d9fb3d5-a903-4ef4-81f3-9eb72e49e728.tabs.0.elements.0.tip', 'null');
@@ -9241,12 +9241,13 @@ INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f478
 INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.name', '\"User Photos\"');
 INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.settings.path', '\"@storage/userphotos\"');
 INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.sortOrder', '4');
+INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.titleTranslationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.titleTranslationMethod', '\"site\"');
 INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.type', '\"craft\\\\volumes\\\\Local\"');
 INSERT INTO `projectconfig` VALUES ('volumes.1f0ea10d-2be0-4638-88da-105d232f4787.url', 'null');
 INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.fieldLayouts.57038148-5c46-43e2-9c5b-9760e04375f2.tabs.0.elements.0.autocapitalize', 'true');
 INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.fieldLayouts.57038148-5c46-43e2-9c5b-9760e04375f2.tabs.0.elements.0.autocomplete', 'false');
 INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.fieldLayouts.57038148-5c46-43e2-9c5b-9760e04375f2.tabs.0.elements.0.autocorrect', 'true');
-INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.fieldLayouts.57038148-5c46-43e2-9c5b-9760e04375f2.tabs.0.elements.0.autofocus', 'false');
 INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.fieldLayouts.57038148-5c46-43e2-9c5b-9760e04375f2.tabs.0.elements.0.class', 'null');
 INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.fieldLayouts.57038148-5c46-43e2-9c5b-9760e04375f2.tabs.0.elements.0.disabled', 'false');
 INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.fieldLayouts.57038148-5c46-43e2-9c5b-9760e04375f2.tabs.0.elements.0.id', 'null');
@@ -9259,7 +9260,6 @@ INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b
 INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.fieldLayouts.57038148-5c46-43e2-9c5b-9760e04375f2.tabs.0.elements.0.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.fieldLayouts.57038148-5c46-43e2-9c5b-9760e04375f2.tabs.0.elements.0.readonly', 'false');
 INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.fieldLayouts.57038148-5c46-43e2-9c5b-9760e04375f2.tabs.0.elements.0.requirable', 'false');
-INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.fieldLayouts.57038148-5c46-43e2-9c5b-9760e04375f2.tabs.0.elements.0.required', 'false');
 INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.fieldLayouts.57038148-5c46-43e2-9c5b-9760e04375f2.tabs.0.elements.0.size', 'null');
 INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.fieldLayouts.57038148-5c46-43e2-9c5b-9760e04375f2.tabs.0.elements.0.step', 'null');
 INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.fieldLayouts.57038148-5c46-43e2-9c5b-9760e04375f2.tabs.0.elements.0.tip', 'null');
@@ -9274,12 +9274,13 @@ INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b
 INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.name', '\"Service Icons\"');
 INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.settings.path', '\"@assetBasePath/site/images/service-icons\"');
 INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.sortOrder', '3');
+INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.titleTranslationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.titleTranslationMethod', '\"site\"');
 INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.type', '\"craft\\\\volumes\\\\Local\"');
 INSERT INTO `projectconfig` VALUES ('volumes.3fc34ff2-8da7-4a35-8147-f0a2e01392b9.url', '\"@assetBaseUrl/images/service-icons\"');
 INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.fieldLayouts.da21546b-da53-49c7-8821-2685c67df6b4.tabs.0.elements.0.autocapitalize', 'true');
 INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.fieldLayouts.da21546b-da53-49c7-8821-2685c67df6b4.tabs.0.elements.0.autocomplete', 'false');
 INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.fieldLayouts.da21546b-da53-49c7-8821-2685c67df6b4.tabs.0.elements.0.autocorrect', 'true');
-INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.fieldLayouts.da21546b-da53-49c7-8821-2685c67df6b4.tabs.0.elements.0.autofocus', 'false');
 INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.fieldLayouts.da21546b-da53-49c7-8821-2685c67df6b4.tabs.0.elements.0.class', 'null');
 INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.fieldLayouts.da21546b-da53-49c7-8821-2685c67df6b4.tabs.0.elements.0.disabled', 'false');
 INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.fieldLayouts.da21546b-da53-49c7-8821-2685c67df6b4.tabs.0.elements.0.id', 'null');
@@ -9292,7 +9293,6 @@ INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de6
 INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.fieldLayouts.da21546b-da53-49c7-8821-2685c67df6b4.tabs.0.elements.0.placeholder', 'null');
 INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.fieldLayouts.da21546b-da53-49c7-8821-2685c67df6b4.tabs.0.elements.0.readonly', 'false');
 INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.fieldLayouts.da21546b-da53-49c7-8821-2685c67df6b4.tabs.0.elements.0.requirable', 'false');
-INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.fieldLayouts.da21546b-da53-49c7-8821-2685c67df6b4.tabs.0.elements.0.required', 'false');
 INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.fieldLayouts.da21546b-da53-49c7-8821-2685c67df6b4.tabs.0.elements.0.size', 'null');
 INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.fieldLayouts.da21546b-da53-49c7-8821-2685c67df6b4.tabs.0.elements.0.step', 'null');
 INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.fieldLayouts.da21546b-da53-49c7-8821-2685c67df6b4.tabs.0.elements.0.tip', 'null');
@@ -9307,6 +9307,8 @@ INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de6
 INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.name', '\"Company Logos\"');
 INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.settings.path', '\"@assetBasePath/logos\"');
 INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.sortOrder', '2');
+INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.titleTranslationKeyFormat', 'null');
+INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.titleTranslationMethod', '\"site\"');
 INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.type', '\"craft\\\\volumes\\\\Local\"');
 INSERT INTO `projectconfig` VALUES ('volumes.7d6a9bef-727c-4a0c-9791-4f423956de69.url', '\"@assetBaseUrl/logos\"');
 COMMIT;
@@ -9316,19 +9318,102 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `projectconfignames`;
 CREATE TABLE `projectconfignames` (
-  `uid` char(36) NOT NULL DEFAULT '0',
-  `name` varchar(255) NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of projectconfignames
 -- ----------------------------
 BEGIN;
+INSERT INTO `projectconfignames` VALUES ('01416786-fb23-483e-9b86-d70279bf18a9', 'Work');
 INSERT INTO `projectconfignames` VALUES ('0193dc64-5499-4e28-95dd-f8f603154851', 'Site Assets');
+INSERT INTO `projectconfignames` VALUES ('0275193a-3c51-46a3-afd0-49e55a93bfd3', 'Value');
+INSERT INTO `projectconfignames` VALUES ('0305c984-3934-4c7a-9de9-b0162c5b0112', 'Featured Thumb');
+INSERT INTO `projectconfignames` VALUES ('06f4e499-3cdc-4d64-aec2-9a7d3a143c75', 'Happy Lager (en)');
+INSERT INTO `projectconfignames` VALUES ('070be8db-f9b0-4605-98ae-e9b54b1af3f6', 'Text');
+INSERT INTO `projectconfignames` VALUES ('0815347a-8e73-45fd-93c9-2244ac562559', 'Contact Info');
+INSERT INTO `projectconfignames` VALUES ('08f8ec90-f7ad-4d40-9880-3c96304f1e4e', 'Body');
+INSERT INTO `projectconfignames` VALUES ('0cbb9736-a84b-4e83-803c-5077f56394a9', 'Featured Image');
+INSERT INTO `projectconfignames` VALUES ('0d0b7e16-8d7c-4d6f-9059-d11c473058f4', 'General');
+INSERT INTO `projectconfignames` VALUES ('0f3ede99-8b78-4042-85c9-422f57f5b01b', 'Gallery');
+INSERT INTO `projectconfignames` VALUES ('0f910d7c-0ba2-476a-a7c9-fa489255e601', 'Thumb');
+INSERT INTO `projectconfignames` VALUES ('1a1f289d-3e32-4409-bfb2-03ec7e7d1b81', 'About');
+INSERT INTO `projectconfignames` VALUES ('1d5e20da-bc96-4a33-b045-8d1fa5870e74', 'Heading');
 INSERT INTO `projectconfignames` VALUES ('1f0ea10d-2be0-4638-88da-105d232f4787', 'User Photos');
+INSERT INTO `projectconfignames` VALUES ('1f72a359-0ce9-4415-82dc-88dc833073c3', 'Homepage');
+INSERT INTO `projectconfignames` VALUES ('1ff1d4d0-499c-41b9-b071-77031c901052', 'Work Index');
+INSERT INTO `projectconfignames` VALUES ('261c3cde-2d6c-4b23-b6cd-6def95992cf8', 'Work Index');
+INSERT INTO `projectconfignames` VALUES ('268c3c49-6715-4b6a-a1b9-f27313adabd1', 'Happy Lager (en)');
+INSERT INTO `projectconfignames` VALUES ('3285a611-4363-43f2-82b5-97e2d253cab3', 'Heading');
+INSERT INTO `projectconfignames` VALUES ('35200549-df46-4092-994a-a8015c5810ba', 'Quote');
+INSERT INTO `projectconfignames` VALUES ('36f99c8f-0ba4-4e4c-af7d-a07dee715ac1', 'Medium');
+INSERT INTO `projectconfignames` VALUES ('39b59166-9d91-4d17-baf9-229aca6174c2', 'Quote');
 INSERT INTO `projectconfignames` VALUES ('3fc34ff2-8da7-4a35-8147-f0a2e01392b9', 'Service Icons');
+INSERT INTO `projectconfignames` VALUES ('41e6fac7-12d7-45c9-ac83-0aa59793d872', 'Attribution');
+INSERT INTO `projectconfignames` VALUES ('422c7da9-d3e4-4d0a-8225-bbbc8264f029', 'Address');
+INSERT INTO `projectconfignames` VALUES ('45d3a977-dc34-4bff-a39f-425e100a5e6f', 'Locations');
+INSERT INTO `projectconfignames` VALUES ('4ca9d3b8-ff02-403a-9010-45763fcdea9f', 'Link URL');
+INSERT INTO `projectconfignames` VALUES ('4ed4bf91-bcf9-45a9-84f7-d5d768103a09', 'Cite');
+INSERT INTO `projectconfignames` VALUES ('5095500e-4962-429c-9b9c-7a4d0d4f930c', 'Copyright Notice');
+INSERT INTO `projectconfignames` VALUES ('5fa323b7-9755-4174-bed2-0f2b11c05701', 'Services Index');
+INSERT INTO `projectconfignames` VALUES ('631f668a-3658-48a4-89fd-8da5af0a60cc', 'Heading');
+INSERT INTO `projectconfignames` VALUES ('674e53a6-d62c-4322-ae09-349765f1ef17', 'Subheading');
+INSERT INTO `projectconfignames` VALUES ('67ff16f0-04e2-492b-b999-a7d364331d80', 'Index Heading');
+INSERT INTO `projectconfignames` VALUES ('6ef72b30-6af9-4545-81e9-b2c900cd08d4', 'About');
+INSERT INTO `projectconfignames` VALUES ('726664b6-90aa-4fa9-9d03-23be4ba628bc', 'Small');
+INSERT INTO `projectconfignames` VALUES ('735318f3-e53c-4ce1-8dad-4c7a5c7c5bee', 'Homepage');
+INSERT INTO `projectconfignames` VALUES ('7ca32393-f78c-4de0-9f8f-52b64e09584f', 'Caption');
 INSERT INTO `projectconfignames` VALUES ('7d6a9bef-727c-4a0c-9791-4f423956de69', 'Company Logos');
+INSERT INTO `projectconfignames` VALUES ('7f0d6d70-ed28-45f1-88c0-4463e96f110f', 'Services Index');
+INSERT INTO `projectconfignames` VALUES ('82ac4aa6-3b63-4cb9-a1f6-6cb6a5210a2e', 'Article Body');
+INSERT INTO `projectconfignames` VALUES ('8823155c-e84a-4a38-af30-2cb88b705e7b', 'Testimonials');
+INSERT INTO `projectconfignames` VALUES ('8b4aae04-76ef-48c2-a294-e81064a470ed', 'Services');
+INSERT INTO `projectconfignames` VALUES ('8cd6b011-5271-484d-85d9-6a6b731137e9', 'Section Heading');
+INSERT INTO `projectconfignames` VALUES ('8dbeba09-2202-4eb4-8f3c-b15633a4830d', 'Footer Content');
+INSERT INTO `projectconfignames` VALUES ('9123201b-837c-4269-9d7c-d5e11bba1e2b', 'Image');
+INSERT INTO `projectconfignames` VALUES ('950b3c0e-9780-4487-a881-23d96d6075d5', 'Client Logos');
+INSERT INTO `projectconfignames` VALUES ('964a1aba-15ac-413f-86c1-03fbf37f30c7', 'Image');
+INSERT INTO `projectconfignames` VALUES ('97ff3c80-2398-4ca5-9d03-c3b8727c6eb2', 'Quote');
+INSERT INTO `projectconfignames` VALUES ('992fb441-6b13-4051-aacd-e39943354507', 'Public Schema');
+INSERT INTO `projectconfignames` VALUES ('9bb293f8-c659-4035-b5d3-e30dbf8d1c5b', 'Heading');
+INSERT INTO `projectconfignames` VALUES ('9bf9e642-2881-44b4-99ff-2cbed3ccc2d7', 'Service Body');
+INSERT INTO `projectconfignames` VALUES ('9ce53ce9-939b-4760-97f4-545ef2c388eb', 'Image');
+INSERT INTO `projectconfignames` VALUES ('a171d498-9024-4855-9a6c-b3b96765ab7c', 'Featured?');
+INSERT INTO `projectconfignames` VALUES ('a2129d62-1d81-4c2f-a92d-81c03ed120dc', 'Hero Image');
+INSERT INTO `projectconfignames` VALUES ('a418bde2-f4cc-4ed2-a358-44362a0cb3a9', 'Photo');
+INSERT INTO `projectconfignames` VALUES ('a5b4b046-1178-45f9-b4cf-3e3bef86e067', 'Position');
+INSERT INTO `projectconfignames` VALUES ('a88d73a8-c75f-4c72-aa70-a39dfbbff0fe', 'Position');
+INSERT INTO `projectconfignames` VALUES ('a8a6d843-bec1-4882-98ec-30cb74f5b16f', 'Pull Quote');
+INSERT INTO `projectconfignames` VALUES ('a988d6b4-6983-48e6-b08e-8fd72e31e483', 'Services Performed');
+INSERT INTO `projectconfignames` VALUES ('aa39e3a4-2d2c-4ed2-a9b5-74122ece5947', 'Service Point');
+INSERT INTO `projectconfignames` VALUES ('aad31ad0-0405-41b5-aff0-4ec567b557a0', 'Label');
+INSERT INTO `projectconfignames` VALUES ('ae84d93c-8a94-4605-bf08-11ada918f964', 'Locations');
+INSERT INTO `projectconfignames` VALUES ('aef80333-1412-4130-bb84-ac3bdbbcbbe2', 'Short Description');
+INSERT INTO `projectconfignames` VALUES ('b01498fe-6db2-4b1d-84d2-8cd0cb62f449', 'Contact Methods');
+INSERT INTO `projectconfignames` VALUES ('b31c607b-b75a-4a78-b14b-d94bf8faa0c3', 'Link');
+INSERT INTO `projectconfignames` VALUES ('b3a9eef3-9444-4995-84e2-6dc6b60aebd2', 'Work');
+INSERT INTO `projectconfignames` VALUES ('b3d2e2ed-d430-48c9-b89f-a38a7f8ea8b3', 'Testimonial');
+INSERT INTO `projectconfignames` VALUES ('b75266c9-d8d2-42ae-9024-0fecb8bdc994', 'Email');
+INSERT INTO `projectconfignames` VALUES ('ba8a1276-24c8-43eb-94d4-b2a19c0c1bf7', 'Images');
+INSERT INTO `projectconfignames` VALUES ('c09d31ed-3004-484c-89ef-e9d262f31f00', 'Services');
+INSERT INTO `projectconfignames` VALUES ('c9ccf068-4ace-4b21-9356-68f3faa96cf3', 'Text');
+INSERT INTO `projectconfignames` VALUES ('cc6a4697-6d1c-4342-b9de-bce13295a885', 'Position');
+INSERT INTO `projectconfignames` VALUES ('cdcff4b0-ece0-4d03-8d9f-6ab5939c1bea', 'Background Color');
+INSERT INTO `projectconfignames` VALUES ('d58a1faa-0bf6-46b2-b880-b0c14bebca75', 'Homepage');
+INSERT INTO `projectconfignames` VALUES ('d96355a7-1353-4097-bf08-3bd5c44821f8', 'Service Icon');
+INSERT INTO `projectconfignames` VALUES ('daa4f1b9-ebde-4b0e-9cf3-027bf3b8b890', 'Pull Quote');
+INSERT INTO `projectconfignames` VALUES ('e03a8ea1-0b9b-4e8c-bbf5-f7197caad45c', 'Text');
+INSERT INTO `projectconfignames` VALUES ('e1c6c95e-a19b-4cd8-9a83-935e91f862c0', 'New Section');
+INSERT INTO `projectconfignames` VALUES ('eba60966-6218-4985-b901-fff1e5f97a49', 'Article');
+INSERT INTO `projectconfignames` VALUES ('ecd6fdce-8d11-4aa6-a167-e731757515c6', 'Contact Method');
+INSERT INTO `projectconfignames` VALUES ('f00e1793-0757-46e5-99e9-016b21359ac7', 'Work');
+INSERT INTO `projectconfignames` VALUES ('f5969f9a-8d3f-487e-9695-cc4e5fbe5efd', 'News');
+INSERT INTO `projectconfignames` VALUES ('f6b0cb16-5df8-4b57-9856-c9c2d6b9699e', 'Services');
+INSERT INTO `projectconfignames` VALUES ('f7189ca2-4b93-4661-830a-a71aff8aa3cd', 'Footer');
+INSERT INTO `projectconfignames` VALUES ('f87a6243-5b7f-4456-9106-ccfb6e03b754', 'Position');
+INSERT INTO `projectconfignames` VALUES ('fcf41a5f-68b5-42dd-8ca1-cc457eb749f0', 'Contact Us Label');
 COMMIT;
 
 -- ----------------------------
@@ -9337,9 +9422,9 @@ COMMIT;
 DROP TABLE IF EXISTS `queue`;
 CREATE TABLE `queue` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `channel` varchar(255) NOT NULL DEFAULT 'queue',
+  `channel` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'queue',
   `job` longblob NOT NULL,
-  `description` text,
+  `description` text COLLATE utf8_unicode_ci,
   `timePushed` int(11) NOT NULL,
   `ttr` int(11) NOT NULL,
   `delay` int(11) NOT NULL DEFAULT '0',
@@ -9347,15 +9432,15 @@ CREATE TABLE `queue` (
   `dateReserved` datetime DEFAULT NULL,
   `timeUpdated` int(11) DEFAULT NULL,
   `progress` smallint(6) NOT NULL DEFAULT '0',
-  `progressLabel` varchar(255) DEFAULT NULL,
+  `progressLabel` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `attempt` int(11) DEFAULT NULL,
   `fail` tinyint(1) DEFAULT '0',
   `dateFailed` datetime DEFAULT NULL,
-  `error` text,
+  `error` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `queue_channel_fail_timeUpdated_timePushed_idx` (`channel`,`fail`,`timeUpdated`,`timePushed`),
   KEY `queue_channel_fail_timeUpdated_delay_idx` (`channel`,`fail`,`timeUpdated`,`delay`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of queue
@@ -10023,10 +10108,10 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `resourcepaths`;
 CREATE TABLE `resourcepaths` (
-  `hash` varchar(255) NOT NULL,
-  `path` varchar(255) NOT NULL,
+  `hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `path` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`hash`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of resourcepaths
@@ -10043,13 +10128,13 @@ CREATE TABLE `revisions` (
   `sourceId` int(11) NOT NULL,
   `creatorId` int(11) DEFAULT NULL,
   `num` int(11) NOT NULL,
-  `notes` text,
+  `notes` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`),
   UNIQUE KEY `revisions_sourceId_num_unq_idx` (`sourceId`,`num`),
   KEY `revisions_creatorId_fk` (`creatorId`),
   CONSTRAINT `revisions_creatorId_fk` FOREIGN KEY (`creatorId`) REFERENCES `users` (`id`) ON DELETE SET NULL,
   CONSTRAINT `revisions_sourceId_fk` FOREIGN KEY (`sourceId`) REFERENCES `elements` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of revisions
@@ -11124,10 +11209,10 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `sequences`;
 CREATE TABLE `sequences` (
-  `name` varchar(255) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `next` int(11) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of sequences
@@ -11189,15 +11274,15 @@ COMMIT;
 DROP TABLE IF EXISTS `sitegroups`;
 CREATE TABLE `sitegroups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `dateDeleted` datetime DEFAULT NULL,
-  `uid` char(36) NOT NULL DEFAULT '0',
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
   KEY `sitegroups_dateDeleted_idx` (`dateDeleted`),
   KEY `sitegroups_name_idx` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sitegroups
@@ -11215,23 +11300,23 @@ CREATE TABLE `sites` (
   `groupId` int(11) NOT NULL,
   `primary` tinyint(1) NOT NULL DEFAULT '0',
   `enabled` tinyint(1) NOT NULL DEFAULT '1',
-  `name` varchar(255) NOT NULL,
-  `handle` varchar(255) NOT NULL,
-  `language` varchar(12) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `handle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `language` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
   `hasUrls` tinyint(1) unsigned DEFAULT NULL,
-  `baseUrl` varchar(255) DEFAULT NULL,
+  `baseUrl` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `sortOrder` smallint(6) unsigned DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `dateDeleted` datetime DEFAULT NULL,
-  `uid` char(36) NOT NULL DEFAULT '0',
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
   KEY `craft_sites_sortOrder_idx` (`sortOrder`) USING BTREE,
   KEY `craft_sites_groupId_fk` (`groupId`) USING BTREE,
   KEY `sites_dateDeleted_idx` (`dateDeleted`),
   KEY `sites_handle_idx` (`handle`),
   CONSTRAINT `craft_sites_groupId_fk` FOREIGN KEY (`groupId`) REFERENCES `sitegroups` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sites
@@ -11605,11 +11690,11 @@ COMMIT;
 DROP TABLE IF EXISTS `userpreferences`;
 CREATE TABLE `userpreferences` (
   `userId` int(11) NOT NULL,
-  `preferences` text,
+  `preferences` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`userId`) USING BTREE,
   UNIQUE KEY `craft_userpreferences_userId_unq_idx` (`userId`) USING BTREE,
   CONSTRAINT `craft_userpreferences_userId_fk` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of userpreferences
