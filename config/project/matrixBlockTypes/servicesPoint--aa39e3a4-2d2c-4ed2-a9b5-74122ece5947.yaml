@@ -34,6 +34,37 @@ fieldLayouts:
         name: Content
         sortOrder: 1
 fields:
+  9ce53ce9-939b-4760-97f4-545ef2c388eb:
+    contentColumnType: string
+    fieldGroup: null
+    handle: image
+    instructions: ''
+    name: Image
+    searchable: true
+    settings:
+      allowSelfRelations: false
+      allowedKinds: null
+      defaultUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851' # Site Assets
+      defaultUploadLocationSubpath: ''
+      limit: '1'
+      localizeRelations: false
+      restrictFiles: ''
+      selectionLabel: ''
+      showSiteMenu: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      singleUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851' # Site Assets
+      singleUploadLocationSubpath: ''
+      source: null
+      sources:
+        - 'volume:0193dc64-5499-4e28-95dd-f8f603154851' # Site Assets
+      targetSiteId: null
+      useSingleFolder: false
+      validateRelatedElements: false
+      viewMode: list
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
   3285a611-4363-43f2-82b5-97e2d253cab3:
     contentColumnType: text
     fieldGroup: null
@@ -53,37 +84,6 @@ fields:
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\PlainText
-  9ce53ce9-939b-4760-97f4-545ef2c388eb:
-    contentColumnType: string
-    fieldGroup: null
-    handle: image
-    instructions: ''
-    name: Image
-    searchable: true
-    settings:
-      allowSelfRelations: false
-      allowedKinds: null
-      defaultUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
-      defaultUploadLocationSubpath: ''
-      limit: '1'
-      localizeRelations: false
-      restrictFiles: ''
-      selectionLabel: ''
-      showSiteMenu: true
-      showUnpermittedFiles: false
-      showUnpermittedVolumes: true
-      singleUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
-      singleUploadLocationSubpath: ''
-      source: null
-      sources:
-        - 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
-      targetSiteId: null
-      useSingleFolder: false
-      validateRelatedElements: false
-      viewMode: list
-    translationKeyFormat: null
-    translationMethod: site
-    type: craft\fields\Assets
   c9ccf068-4ace-4b21-9356-68f3faa96cf3:
     contentColumnType: text
     fieldGroup: null

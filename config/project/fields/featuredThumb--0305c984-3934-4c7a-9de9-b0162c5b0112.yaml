@@ -7,7 +7,7 @@ searchable: true
 settings:
   allowSelfRelations: false
   allowedKinds: null
-  defaultUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
+  defaultUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851' # Site Assets
   defaultUploadLocationSubpath: ''
   limit: '1'
   localizeRelations: false
@@ -16,7 +16,7 @@ settings:
   showSiteMenu: true
   showUnpermittedFiles: false
   showUnpermittedVolumes: true
-  singleUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
+  singleUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851' # Site Assets
   singleUploadLocationSubpath: ''
   source: null
   sources: '*'

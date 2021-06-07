@@ -25,6 +25,25 @@ fieldLayouts:
         name: Content
         sortOrder: 1
 fields:
+  a8a6d843-bec1-4882-98ec-30cb74f5b16f:
+    contentColumnType: text
+    fieldGroup: null
+    handle: pullQuote
+    instructions: ''
+    name: 'Pull Quote'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: ''
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
   a88d73a8-c75f-4c72-aa70-a39dfbbff0fe:
     contentColumnType: string
     fieldGroup: null
@@ -71,25 +90,6 @@ fields:
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\Dropdown
-  a8a6d843-bec1-4882-98ec-30cb74f5b16f:
-    contentColumnType: text
-    fieldGroup: null
-    handle: pullQuote
-    instructions: ''
-    name: 'Pull Quote'
-    searchable: true
-    settings:
-      byteLimit: null
-      charLimit: null
-      code: ''
-      columnType: text
-      initialRows: '4'
-      multiline: ''
-      placeholder: ''
-      uiMode: normal
-    translationKeyFormat: null
-    translationMethod: none
-    type: craft\fields\PlainText
 handle: pullQuote
 name: 'Pull Quote'
 sortOrder: 4

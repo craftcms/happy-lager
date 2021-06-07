@@ -34,12 +34,12 @@ fieldLayouts:
         name: Content
         sortOrder: 1
 fields:
-  35200549-df46-4092-994a-a8015c5810ba:
+  41e6fac7-12d7-45c9-ac83-0aa59793d872:
     contentColumnType: text
     fieldGroup: null
-    handle: quote
+    handle: attribution
     instructions: ''
-    name: Quote
+    name: Attribution
     searchable: true
     settings:
       byteLimit: null
@@ -53,12 +53,12 @@ fields:
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\PlainText
-  41e6fac7-12d7-45c9-ac83-0aa59793d872:
+  35200549-df46-4092-994a-a8015c5810ba:
     contentColumnType: text
     fieldGroup: null
-    handle: attribution
+    handle: quote
     instructions: ''
-    name: Attribution
+    name: Quote
     searchable: true
     settings:
       byteLimit: null

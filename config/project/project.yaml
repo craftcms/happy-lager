@@ -1,4 +1,4 @@
-dateModified: 1600294664
+dateModified: 1623104281
 email:
   fromEmail: admin@happylager.dev
   fromName: Happylager
@@ -14,11 +14,11 @@ system:
   edition: pro
   live: true
   name: 'Happy Lager'
-  schemaVersion: 3.5.13
+  schemaVersion: 3.6.8
   timeZone: UTC
 users:
   allowPublicRegistration: false
   defaultGroup: null
   photoSubpath: ''
-  photoVolumeUid: 1f0ea10d-2be0-4638-88da-105d232f4787
+  photoVolumeUid: 1f0ea10d-2be0-4638-88da-105d232f4787 # User Photos
   requireEmailVerification: true

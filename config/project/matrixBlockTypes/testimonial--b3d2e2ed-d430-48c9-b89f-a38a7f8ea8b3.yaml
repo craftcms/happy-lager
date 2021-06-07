@@ -34,12 +34,12 @@ fieldLayouts:
         name: Content
         sortOrder: 1
 fields:
-  39b59166-9d91-4d17-baf9-229aca6174c2:
+  4ed4bf91-bcf9-45a9-84f7-d5d768103a09:
     contentColumnType: text
     fieldGroup: null
-    handle: quote
+    handle: cite
     instructions: ''
-    name: Quote
+    name: Cite
     searchable: true
     settings:
       byteLimit: null
@@ -53,12 +53,12 @@ fields:
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\PlainText
-  4ed4bf91-bcf9-45a9-84f7-d5d768103a09:
+  39b59166-9d91-4d17-baf9-229aca6174c2:
     contentColumnType: text
     fieldGroup: null
-    handle: cite
+    handle: quote
     instructions: ''
-    name: Cite
+    name: Quote
     searchable: true
     settings:
       byteLimit: null
@@ -82,7 +82,7 @@ fields:
     settings:
       allowSelfRelations: false
       allowedKinds: null
-      defaultUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
+      defaultUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851' # Site Assets
       defaultUploadLocationSubpath: ''
       limit: '1'
       localizeRelations: false
@@ -91,11 +91,11 @@ fields:
       showSiteMenu: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
-      singleUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
+      singleUploadLocationSource: 'volume:0193dc64-5499-4e28-95dd-f8f603154851' # Site Assets
       singleUploadLocationSubpath: ''
       source: null
       sources:
-        - 'volume:0193dc64-5499-4e28-95dd-f8f603154851'
+        - 'volume:0193dc64-5499-4e28-95dd-f8f603154851' # Site Assets
       targetSiteId: null
       useSingleFolder: false
       validateRelatedElements: false
