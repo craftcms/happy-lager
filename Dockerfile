@@ -8,7 +8,7 @@ FROM craftcms/nginx:8.0
 
 # switch to the root user to install mysql tools
 USER root
-RUN apk add --no-cache mysql-client libpng libpng-dev libjpeg libjpeg-turbo freetype-dev libjpeg-turbo-dev && docker-php-ext-install gd docker-php-ext-configure gd --with-freetype --with-jpeg && apk del libpng-dev
+RUN apk add --no-cache mysql-client libpng libpng-dev libjpeg libjpeg-turbo freetype-dev libjpeg-turbo-dev && docker-php-ext-install gd && docker-php-ext-configure gd --with-freetype --with-jpeg && apk del libpng-dev
 USER www-data
 
 # the user is `www-data`, so we copy the files using the user and group
