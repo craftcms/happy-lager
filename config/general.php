@@ -1,4 +1,5 @@
 <?php
+
 /**
  * General Configuration
  *
@@ -36,7 +37,7 @@ return [
     'disallowRobots' => !$isProd,
 
     'aliases' => [
-        '@assetBasePath' => getenv('ASSET_BASE_PATH'),
-        '@assetBaseUrl' => getenv('ASSET_BASE_URL'),
+        '@assetBasePath' => App::env('ASSET_BASE_PATH') ?: "./assets",
+        '@assetBaseUrl' => App::env('ASSET_BASE_URL') ?: "/assets",
     ],
 ];
