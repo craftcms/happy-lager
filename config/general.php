@@ -33,6 +33,9 @@ return [
     // Whether administrative changes should be allowed
     'allowAdminChanges' => true,
 
+    // Whether updates should be allowed
+    'allowUpdates' => $isDev,
+
     // Whether crawlers should be allowed to index pages and following links
     'disallowRobots' => !$isProd,
 
