@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e01c34054919f8d62f44f60a14885f54",
+    "content-hash": "42349e50317ba2af05989909eb91e1a4",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -539,16 +539,16 @@
         },
         {
             "name": "craftcms/cms",
-            "version": "3.6.16",
+            "version": "3.6.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/craftcms/cms.git",
-                "reference": "e393adc8419f39c2047b211289eb813b5e1869b3"
+                "reference": "4497db8b89474a68fc43ee1d7f8b78beff9dc6f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craftcms/cms/zipball/e393adc8419f39c2047b211289eb813b5e1869b3",
-                "reference": "e393adc8419f39c2047b211289eb813b5e1869b3",
+                "url": "https://api.github.com/repos/craftcms/cms/zipball/4497db8b89474a68fc43ee1d7f8b78beff9dc6f2",
+                "reference": "4497db8b89474a68fc43ee1d7f8b78beff9dc6f2",
                 "shasum": ""
             },
             "require": {
@@ -623,6 +623,12 @@
             "license": [
                 "proprietary"
             ],
+            "authors": [
+                {
+                    "name": "Pixel & Tonic",
+                    "homepage": "https://pixelandtonic.com/"
+                }
+            ],
             "description": "Craft CMS",
             "homepage": "https://craftcms.com",
             "keywords": [
@@ -638,7 +644,7 @@
                 "rss": "https://github.com/craftcms/cms/releases.atom",
                 "source": "https://github.com/craftcms/cms"
             },
-            "time": "2021-06-01T18:14:34+00:00"
+            "time": "2021-06-15T15:59:20+00:00"
         },
         {
             "name": "craftcms/oauth2-craftid",

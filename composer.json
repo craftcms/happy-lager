@@ -1,9 +1,9 @@
 {
   "require": {
     "php": ">=7.0.0",
-    "craftcms/cms": "^3.6.16",
+    "craftcms/cms": "^3.6.17",
     "vlucas/phpdotenv": "^2.4.0",
-    "craftcms/redactor": "^2.7.4"
+    "craftcms/redactor": "^2.8.7"
   },
   "autoload": {
     "psr-4": {
