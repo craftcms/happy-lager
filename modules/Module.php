@@ -1,30 +1,15 @@
 <?php
 namespace modules;
 
+use yii\base\Event;
+use yii\base\ActionEvent;
+
 use Craft;
 
-/**
- * Custom module class.
- *
- * This class will be available throughout the system via:
- * `Craft::$app->getModule('my-module')`.
- *
- * You can change its module ID ("my-module") to something else from
- * config/app.php.
- *
- * If you want the module to get loaded on every request, uncomment this line
- * in config/app.php:
- *
- *     'bootstrap' => ['my-module']
- *
- * Learn more about Yii module development in Yii's documentation:
- * http://www.yiiframework.com/doc-2.0/guide-structure-modules.html
- */
+use Solspace\Freeform\Controllers\ApiController;
+
 class Module extends \yii\base\Module
 {
-    /**
-     * Initializes the module.
-     */
     public function init()
     {
         // Set a @modules alias pointed to the modules/ directory
@@ -39,6 +24,21 @@ class Module extends \yii\base\Module
 
         parent::init();
 
-        // Custom initialization code goes here...
+    // Allow submitting Freeform forms from any origin
+    Event::on(
+        ApiController::class,
+        ApiController::EVENT_BEFORE_ACTION,
+        function (ActionEvent $actionEvent) {
+            if ($actionEvent->action->id == 'form') {
+                Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
+                Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Headers', '*');
+                if (Craft::$app->getRequest()->getIsOptions()) {
+                    Craft::$app->getResponse()->setStatusCode(200);
+                    Craft::$app->getResponse()->send();
+                    exit;
+                }
+            }
+        }
+    );
     }
 }

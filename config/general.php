@@ -42,4 +42,7 @@ return [
 
     // The path to the root directory that should store published CP resources
     'resourceBasePath' => dirname(__DIR__) . '/web/cpresources',
+
+    // This is a playground anyway
+    'enableCsrfProtection' => false,
 ];
