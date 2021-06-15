@@ -44,5 +44,5 @@ return [
     'resourceBasePath' => dirname(__DIR__) . '/web/cpresources',
 
     // This is a playground anyway
-    'enableCsrfProtection' => false,
+    // 'enableCsrfProtection' => false,
 ];
