@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c77115a222302549e11735cacf6e75df",
+    "content-hash": "d9cd462d3a336efcee1ff1c055fc2e64",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -543,12 +543,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/craftcms/cms.git",
-                "reference": "eab4ee48c5c7ba935a55835e2b8ac0b7ab301454"
+                "reference": "7988b0508ef3b2c34d08a8fdee87a4504928b7e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craftcms/cms/zipball/eab4ee48c5c7ba935a55835e2b8ac0b7ab301454",
-                "reference": "eab4ee48c5c7ba935a55835e2b8ac0b7ab301454",
+                "url": "https://api.github.com/repos/craftcms/cms/zipball/7988b0508ef3b2c34d08a8fdee87a4504928b7e3",
+                "reference": "7988b0508ef3b2c34d08a8fdee87a4504928b7e3",
                 "shasum": ""
             },
             "require": {
@@ -623,6 +623,12 @@
             "license": [
                 "proprietary"
             ],
+            "authors": [
+                {
+                    "name": "Pixel & Tonic",
+                    "homepage": "https://pixelandtonic.com/"
+                }
+            ],
             "description": "Craft CMS",
             "homepage": "https://craftcms.com",
             "keywords": [
@@ -638,7 +644,7 @@
                 "rss": "https://github.com/craftcms/cms/releases.atom",
                 "source": "https://github.com/craftcms/cms"
             },
-            "time": "2021-06-07T22:39:29+00:00"
+            "time": "2021-06-15T16:56:01+00:00"
         },
         {
             "name": "craftcms/oauth2-craftid",
@@ -5730,8 +5736,8 @@
         {
             "package": "craftcms/cms",
             "version": "3.7.9999999.9999999-dev",
-            "alias": "3.6.0-alpha",
-            "alias_normalized": "3.6.0.0-alpha"
+            "alias": "3.7.0-beta.1",
+            "alias_normalized": "3.7.0.0-beta1"
         }
     ],
     "minimum-stability": "stable",
@@ -5740,9 +5746,7 @@
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": {
-        "php": ">=7.0.0"
-    },
+    "platform": [],
     "platform-dev": [],
     "platform-overrides": {
         "php": "8.0"

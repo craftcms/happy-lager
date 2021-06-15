@@ -34,3 +34,4 @@ fieldLayouts:
         sortOrder: 1
 handle: footer
 name: 'Footer Content'
+sortOrder: 1
