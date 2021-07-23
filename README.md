@@ -1,4 +1,4 @@
-# Craft demo site
+# Happy Lager Craft CMS Demo Site
 
 This repo contains all of the templates, front-end resources, and a MySQL database backup for “Happy Lager”, a Craft demo site.
 
