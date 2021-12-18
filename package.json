@@ -8,7 +8,7 @@
     "grunt-contrib-jshint": "latest",
     "grunt-contrib-concat": "latest",
     "grunt-contrib-uglify": "0.3.2",
-    "grunt-contrib-watch": "latest",
+    "grunt-contrib-watch": "1.1.0",
     "grunt-imageoptim": "latest"
   }
 }
