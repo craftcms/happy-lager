@@ -5,7 +5,7 @@
   "devDependencies": {
     "grunt": "latest",
     "grunt-contrib-sass": "latest",
-    "grunt-contrib-jshint": "latest",
+    "grunt-contrib-jshint": "3.1.0",
     "grunt-contrib-concat": "latest",
     "grunt-contrib-uglify": "0.3.2",
     "grunt-contrib-watch": "latest",
