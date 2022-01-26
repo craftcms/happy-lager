@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
-    "grunt": "latest",
+    "grunt": "1.0.3",
     "grunt-contrib-sass": "latest",
     "grunt-contrib-jshint": "latest",
     "grunt-contrib-concat": "latest",
