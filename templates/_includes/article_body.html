@@ -8,10 +8,10 @@
 -#}
 
 {% macro getPosition(block) %}
-	{%- spaceless %}
+	{%- apply spaceless %}
 		{% set positionedTypes = ['text', 'pullQuote', 'image', 'quote'] %}
 		{{ block.type.handle in positionedTypes and block.position ? block.position : 'center' }}
-	{% endspaceless -%}
+	{% endapply -%}
 {% endmacro %}
 
 {% from _self import getPosition %}
@@ -21,9 +21,9 @@
 {% set nextType = null %}
 {% set nextPosition = null %}
 {% set closedLastRow = true %}
-{% set blocks = entry.articleBody %}
+{% set blocks = entry.articleBody.all() %}
 
-{% for i, block in blocks.all() %}
+{% for i, block in blocks %}
 
 	{% set type = (nextType ?: block.type.handle) %}
 	{% set position = (nextPosition ?: getPosition(block)~'') %}
