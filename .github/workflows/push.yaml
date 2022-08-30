@@ -4,6 +4,9 @@ on:
   push:
     branches: [main, beta]
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
